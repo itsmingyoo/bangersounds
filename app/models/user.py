@@ -15,13 +15,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    # Additional Columns - Nullable / Not Unique / Meant for Edit Profile Page Modal
-    first_name = db.Column(db.String(40), nullable=False)
-    last_name = db.Column(db.String(40), nullable=False)
-    profile_image = db.Column(db.String(255), nullable=False)
-    profile_bio = db.Column(db.String(255), nullable=False)
-    profile_city = db.Column(db.String(255), nullable=False)
-    profile_country = db.Column(db.String(255), nullable=False)
+    # Additional Columns - Nullable / Not Unique / Not required for Signup / Meant for Edit Profile Page Modal
+    first_name = db.Column(db.String(40), nullable=True)
+    last_name = db.Column(db.String(40), nullable=True)
+    profile_image = db.Column(db.String(255), nullable=True)
+    profile_bio = db.Column(db.String(255), nullable=True)
+    profile_city = db.Column(db.String(255), nullable=True)
+    profile_country = db.Column(db.String(255), nullable=True)
 
     @property
     def password(self):
