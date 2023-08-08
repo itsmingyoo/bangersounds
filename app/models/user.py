@@ -9,10 +9,22 @@ class User(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
+    # Required Columns
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    # Additional Columns - Nullable / Not Unique / Not required for Signup / Meant for Edit Profile Page Modal
+    first_name = db.Column(db.String(40), nullable=True)
+    last_name = db.Column(db.String(40), nullable=True)
+    profile_image = db.Column(db.String(255), nullable=True)
+    profile_bio = db.Column(db.String(255), nullable=True)
+    profile_city = db.Column(db.String(255), nullable=True)
+    profile_country = db.Column(db.String(255), nullable=True)
+
+    # Relationship to Songs
+    songs = db.relationship('Songs', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
