@@ -1,8 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod #this method is for foreign keys
+# from .user import User
 
 
 class Song(db.Model):
-    __tablename__ = 'songs'
+    __tablename__ = 'song'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -20,10 +21,19 @@ class Song(db.Model):
     preview_imageURL = db.Column(db.String(255), nullable=True)
 
     # Song-User Relationship FK Column
-    artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), nullable=False))
+    artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("user.id")))
 
-    # One to Many - Many side
-    user = db.relationship("User", back_populates="songs", foreign_keys=[artistId])
+    # # One to Many - Many side
+    user = db.relationship("User", back_populates="song")
+
+    # Nate's code
+    # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+
+
+
+
+
+
 
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
@@ -38,7 +48,7 @@ class Song(db.Model):
             "song_url": self.song_url,
             "description": self.description,
             "private": self.private,
-            "artistId": self.artistId,
+            # "artistId": self.artistId,
 
             # Nullable
             "caption": self.caption,

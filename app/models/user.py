@@ -1,11 +1,12 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+# from .song import Song
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
-
+    __tablename__ = 'user'
+#
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
@@ -25,7 +26,7 @@ class User(db.Model, UserMixin):
 
     # Relationship to Songs
     # Target Relationship = db.r('Model', back_populates="current model")
-    # songs = db.relationship('Song', back_populates='user', cascade='all, delete-orphan')
+    song = db.relationship('Song', backref='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
