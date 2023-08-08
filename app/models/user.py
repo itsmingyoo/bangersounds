@@ -24,7 +24,8 @@ class User(db.Model, UserMixin):
     profile_country = db.Column(db.String(255), nullable=True)
 
     # Relationship to Songs
-    songs = db.relationship('Songs', back_populates='user', cascade='all, delete-orphan')
+    # Target Relationship = db.r('Model', back_populates="current model")
+    songs = db.relationship('Song', back_populates='artist', cascade='all, delete-orphan')
 
     @property
     def password(self):
