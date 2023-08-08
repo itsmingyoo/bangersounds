@@ -9,10 +9,19 @@ class User(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
+    # Required Columns
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    # Additional Columns - Nullable / Not Unique / Meant for Edit Profile Page Modal
+    first_name = db.Column(db.String(40), nullable=False)
+    last_name = db.Column(db.String(40), nullable=False)
+    profile_image = db.Column(db.String(255), nullable=False)
+    profile_bio = db.Column(db.String(255), nullable=False)
+    profile_city = db.Column(db.String(255), nullable=False)
+    profile_country = db.Column(db.String(255), nullable=False)
 
     @property
     def password(self):
