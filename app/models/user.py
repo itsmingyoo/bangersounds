@@ -23,6 +23,9 @@ class User(db.Model, UserMixin):
     profile_city = db.Column(db.String(255), nullable=True)
     profile_country = db.Column(db.String(255), nullable=True)
 
+    # Relationship to Songs
+    songs = db.relationship('Songs', back_populates='user', cascade='all, delete-orphan')
+
     @property
     def password(self):
         return self.hashed_password

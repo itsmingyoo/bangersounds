@@ -22,10 +22,6 @@ class Song(db.Model):
     # Song-User Relationship FK Column
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), nullable=False))
 
-    # sellerId = db.Column(
-    #     db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
-    # )
-
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
     # createdAt = db.Column(db.DateTime, default=db.func.now())
