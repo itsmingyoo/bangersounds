@@ -23,7 +23,7 @@ class Song(db.Model):
     artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), nullable=False))
 
     # One to Many - Many side
-    artist = db.relationship("User", back_populates="songs", foreign_keys=[artistId])
+    user = db.relationship("User", back_populates="songs", foreign_keys=[artistId])
 
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'

@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
 
     # Relationship to Songs
     # Target Relationship = db.r('Model', back_populates="current model")
-    songs = db.relationship('Song', back_populates='artist', cascade='all, delete-orphan')
+    songs = db.relationship('Song', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password(self):
