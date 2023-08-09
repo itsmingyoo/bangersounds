@@ -4,6 +4,7 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Song
+from .auth_routes import validation_errors_to_error_messages
 from pprint import pprint
 
 # PREFIX '/api/songs'
@@ -46,10 +47,31 @@ def get_song_id(songId):
     return song  # Returns song as a dictionary
 
 
-@songs_routes.route("/new")
+# prefix /api/songs/new
+@songs_routes.route("/new", methods=["POST"])
+@login_required
 def post_song():
-    pass
+    # pass
     """
     Once a user clicks the upload button, they are redirected to this route where they can post a new song.
     Returns a dictionary of the songs information, and AWS link
     """
+    user_id = current_user.to_dict()["id"]
+    print("this is the user id", user_id)
+    form = SignUpForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        song = Song(
+            title=form.data["title"],
+            genre=form.data["genre"],
+            song_url=form.data["song_url"],
+            description=form.data["description"],
+            private=form.data["private"],
+            caption=form.data["caption"],
+            preview_imageURL=form.data["preview_imageURL"],
+            artistId=user_id,
+        )
+        db.session.add(song)
+        db.session.commit()
+        return song.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
