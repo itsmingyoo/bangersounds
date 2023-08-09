@@ -64,7 +64,7 @@ def seed_songs():
             "caption": "No caption, you caption",
             "artistId": 3,
             "preview_imageURL": "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
-        },
+        }
         # {
         #     "title": ,
         #     "genre": ,

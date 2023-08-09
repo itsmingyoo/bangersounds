@@ -5,7 +5,7 @@ from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 #
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -26,7 +26,7 @@ class User(db.Model, UserMixin):
 
     # Relationship to Songs
     # Target Relationship = db.r('Model', back_populates="current model")
-    song = db.relationship('Song', backref='user', cascade='all, delete-orphan')
+    song_users = db.relationship('Song', backref='users', cascade='all, delete-orphan')
 
     @property
     def password(self):
