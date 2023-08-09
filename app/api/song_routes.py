@@ -17,9 +17,12 @@ def get_home():
     """
     This route takes you to the home page which returns all the songs
     """
-    all_songs = Song.query.all()  # query.all returns an array
-    print("THIS IS ALL SONGS", all_songs)
-    return {all_songs}
+    songs = Song.query.all()  # query.all returns an array
+    all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+    pprint(all_songs)
+    return {
+        "Songs": {song["id"]: song for song in all_songs}
+    }  # this returns a dictionary of normalized data
 
 
 # Maybe don't need this route because we have the home route
@@ -27,7 +30,7 @@ def get_home():
 def get_discover():
     pass
     """
-    This route takes you to the discover page kind of similar to the home page
+    This route takes you to the discover page kind of similar to the home page / Query/Filter by genre and "trending" somehow
     """
 
 
