@@ -1,14 +1,15 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
 # from .song import Song
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
-#
+    __tablename__ = "users"
+    #
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     # Required Columns
     id = db.Column(db.Integer, primary_key=True)
@@ -26,7 +27,7 @@ class User(db.Model, UserMixin):
 
     # Relationship to Songs
     # Target Relationship = db.r('Model', back_populates="current model")
-    song_users = db.relationship('Song', backref='users', cascade='all, delete-orphan')
+    song_users = db.relationship("Song", backref="users", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -41,7 +42,13 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "profile_image": self.profile_image,
+            "profile_bio": self.profile_bio,
+            "profile_city": self.profile_city,
+            "profile_country": self.profile_country,
         }

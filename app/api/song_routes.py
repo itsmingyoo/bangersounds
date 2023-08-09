@@ -3,6 +3,8 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.models import Song
+from pprint import pprint
 
 # PREFIX '/api/songs'
 songs_routes = Blueprint("songs", __name__)
@@ -11,10 +13,13 @@ songs_routes = Blueprint("songs", __name__)
 # Home and Discover are okay here as we will make custom links in the frontend anyway
 @songs_routes.route("/home")
 def get_home():
-    pass
+    # pass
     """
     This route takes you to the home page which returns all the songs
     """
+    all_songs = Song.query.all()  # query.all returns an array
+    print("THIS IS ALL SONGS", all_songs)
+    return {all_songs}
 
 
 # Maybe don't need this route because we have the home route

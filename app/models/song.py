@@ -1,12 +1,18 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod #this method is for foreign keys
+from .db import (
+    db,
+    environment,
+    SCHEMA,
+    add_prefix_for_prod,
+)  # this method is for foreign keys
+
 # from .user import User
 
 
 class Song(db.Model):
-    __tablename__ = 'songs'
+    __tablename__ = "songs"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     # Required Columns
     id = db.Column(db.Integer, primary_key=True)
@@ -14,10 +20,12 @@ class Song(db.Model):
     genre = db.Column(db.String(255), nullable=False)
     song_url = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    private = db.Column(db.Boolean, nullable=False) # Default on frontend should be 'false'
+    private = db.Column(
+        db.Boolean, nullable=False
+    )  # Default on frontend should be 'false'
 
     # Not Required / Nullable Columns
-    caption = db.Column(db.String(255), nullable=True) # Nullable
+    caption = db.Column(db.String(255), nullable=True)  # Nullable
     preview_imageURL = db.Column(db.String(255), nullable=True)
 
     # Song-User Relationship FK Column
@@ -28,12 +36,6 @@ class Song(db.Model):
 
     # Nate's code
     # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-
-
-
-
-
-
 
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
@@ -49,11 +51,9 @@ class Song(db.Model):
             "description": self.description,
             "private": self.private,
             # "artistId": self.artistId,
-
             # Nullable
             "caption": self.caption,
             "preview_imageURL": self.preview_imageURL,
-
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
