@@ -3,7 +3,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod #this method is for
 
 
 class Song(db.Model):
-    __tablename__ = 'song'
+    __tablename__ = 'songs'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -21,10 +21,10 @@ class Song(db.Model):
     preview_imageURL = db.Column(db.String(255), nullable=True)
 
     # Song-User Relationship FK Column
-    artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("user.id")))
+    artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
     # # One to Many - Many side
-    user = db.relationship("User", back_populates="song")
+    user_songs = db.relationship("User", back_populates="song_users")
 
     # Nate's code
     # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
