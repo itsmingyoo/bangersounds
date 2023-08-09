@@ -1,5 +1,6 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from app.models import Song
 
 
 # Adds a demo user, you can add other users here if you want
@@ -118,7 +119,12 @@ def seed_songs():
     ]
 
 
-    db.session.commit()
+    for song in songs:
+        each_song = Song(**song)
+        print(each_song)
+        db.session.add(each_song)
+        db.session.commit()
+    return songs
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -127,10 +133,10 @@ def seed_songs():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_songs():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM songs"))
 
     db.session.commit()
