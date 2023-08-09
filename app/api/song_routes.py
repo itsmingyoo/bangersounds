@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import NewSongForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import Song
 from .auth_routes import validation_errors_to_error_messages
@@ -57,8 +58,8 @@ def post_song():
     Returns a dictionary of the songs information, and AWS link
     """
     user_id = current_user.to_dict()["id"]
-    print("this is the user id", user_id)
-    form = SignUpForm()
+    print("this is the user id", user_id, isinstance(user_id, int))
+    form = NewSongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         song = Song(
@@ -73,5 +74,6 @@ def post_song():
         )
         db.session.add(song)
         db.session.commit()
-        return song.to_dict()
+        return jsonify(song.to_dict())
+    return {"errors": form.errors}
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
