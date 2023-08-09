@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import * as songActions from "./store/songs";
+import LandingPage from "./components/LandingPage";
 // import { thunkGetAllSongs } from "./store/songs";
 
 function App() {
@@ -22,11 +23,14 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route>
+            <LandingPage />
           </Route>
         </Switch>
       )}
