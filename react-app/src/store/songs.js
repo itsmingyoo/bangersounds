@@ -2,6 +2,7 @@
 const GET_ALL_SONGS_ACTION = "songs/GET_ALL_SONGS_ACTION";
 const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
+const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 //*  ===================end of types ===================//
 
 //? =====================  actions ===========================//
@@ -24,6 +25,13 @@ const postNewSongAction = (newSong) => {
   return {
     type: POST_NEW_SONG_ACTION,
     newSong,
+  };
+};
+
+const editSongByIdAction = (updatedSong) => {
+  return {
+    type: EDIT_SONG_BY_ID_ACTION,
+    updatedSong,
   };
 };
 
@@ -69,10 +77,25 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
   dispatch(postNewSongAction(newSong));
   return newSong;
 };
+
+export const thunkEditSongById =
+  (songId, updatedSongFormData) => async (dispatch) => {
+    let updatedSong = await fetch(`/api/songs/${songId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedSongFormData),
+    });
+    updatedSong = await updatedSong.json();
+    dispatch(editSongByIdAction(updatedSong));
+    return updatedSong;
+  };
+
 //*  ======================= end of thunks ===================//
 
 //? ================== reducer================================//
-let initialState = { Songs: {}, SongDetails: {} };
+let initialState = { Songs: {}, SongDetails: {}, UserSongs: {} };
 export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
@@ -89,6 +112,11 @@ export default function reducer(state = initialState, action) {
     case POST_NEW_SONG_ACTION: {
       newState = { ...state };
       newState.Songs[action.newSong.id] = action.newSong;
+      return newState;
+    }
+    case EDIT_SONG_BY_ID_ACTION: {
+      newState = { ...state };
+      newState.Songs[action.updatedSong.id] = { ...action.updatedSong };
       return newState;
     }
     default:

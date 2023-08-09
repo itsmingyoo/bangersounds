@@ -31,6 +31,16 @@ if (process.env.NODE_ENV !== "production") {
 //   "private": "false"
 // }))
 
+// EDIT SONG COPY PASTA - ADDED PREVIEW IMAGE KEY TO TEST IF IT WORKS
+// window.store.dispatch(window.songActions.thunkEditSongById(7, {
+//   "title": "Test Route",
+//   "genre": "TestGenre",
+//   "song_url": "TestLink",
+//   "description": "Test description",
+//   "private": "false",
+//   "preview_imageURL": "test image test thunk"
+// }))
+
 // Wrap the application with the Modal provider and render the Modal component
 // after the App component so that all the Modal content will be layered as
 // HTML elements on top of the all the other HTML elements:
