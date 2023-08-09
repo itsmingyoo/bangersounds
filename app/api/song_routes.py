@@ -52,7 +52,6 @@ def get_song_id(songId):
 @songs_routes.route("/new", methods=["POST"])
 @login_required
 def post_song():
-    # pass
     """
     Once a user clicks the upload button, they are redirected to this route where they can post a new song.
     Returns a dictionary of the songs information, and AWS link
@@ -75,5 +74,41 @@ def post_song():
         db.session.add(song)
         db.session.commit()
         return jsonify(song.to_dict())
-    return {"errors": form.errors}
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+
+@songs_routes.route("/<int:songId>", methods=["PUT"])
+@login_required
+def edit_song(songId):
+    """
+    When a user is on their song details page and clicks the edit button (assuming the song belongs to them), they are able to edit the song
+    Returns a dictionary of the songs UPDATED information, and AWS link
+    """
+    user_id = current_user.to_dict()["id"]
+    print("this is the user id", user_id, isinstance(user_id, int))
+
+    song = Song.query.get(songId)
+
+    print("this is the song from the query", song)
+
+    if not song:
+        return {"message": "Song not found"}
+
+    if user_id != song.artistId:
+        return {"message": "You do not have the authority to edit this song."}
+
+    form = NewSongForm()
+    pprint(form.data)
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        song.title = form.data["title"]
+        song.genre = form.data["genre"]
+        song.song_url = form.data["song_url"]
+        song.description = form.data["description"]
+        song.private = form.data["private"]
+        song.caption = form.data["caption"]
+        song.preview_imageURL = form.data["preview_imageURL"]
+        song.artistId = user_id
+        db.session.commit()
+        return jsonify(song.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401

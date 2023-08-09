@@ -50,7 +50,7 @@ class Song(db.Model):
             "song_url": self.song_url,
             "description": self.description,
             "private": self.private,
-            # "artistId": self.artistId,
+            "artistId": self.artistId,
             # Nullable
             "caption": self.caption,
             "preview_imageURL": self.preview_imageURL,
