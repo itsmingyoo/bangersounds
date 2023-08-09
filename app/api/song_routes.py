@@ -12,10 +12,10 @@ songs_routes = Blueprint("songs", __name__)
 
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
-@songs_routes.route("/home")
-def get_home():
+@songs_routes.route("/")
+def get_songs():
     """
-    This route takes you to the home page which returns all the songs
+    This route returns all the songs
     """
     songs = Song.query.all()  # query.all returns an array
     all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
