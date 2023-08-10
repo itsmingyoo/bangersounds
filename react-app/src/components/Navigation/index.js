@@ -6,13 +6,13 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (
     <div id="main-nav__container">
       {isLoaded && (
-        <div>
+        <ul id="profile-button__main-container">
           <ProfileButton user={sessionUser} />
-        </div>
+        </ul>
       )}
       <div className="nav-bar__element">
         <NavLink to="/">BangerSounds(Icon)</NavLink>
@@ -42,14 +42,17 @@ function Navigation({ isLoaded }) {
       <div className="nav-bar__element">
         <NavLink to="/">Upload</NavLink>
       </div>
-      <div className="nav-bar__element">
-        <NavLink to="/">Profile PFP Dropdown Menu</NavLink>
-      </div>
-      <div className="nav-bar__element">
-        <NavLink to="/">Alerts (bell icon)</NavLink>
-      </div>
-      <div className="nav-bar__element">
-        <NavLink to="/">Messages (mail icon)</NavLink>
+      {/* User Nav */}
+      <div>
+        <div className="nav-bar__element">
+          <NavLink to="/">Profile PFP Dropdown Menu</NavLink>
+        </div>
+        <div className="nav-bar__element">
+          <NavLink to="/">Alerts (bell icon)</NavLink>
+        </div>
+        <div className="nav-bar__element">
+          <NavLink to="/">Messages (mail icon)</NavLink>
+        </div>
       </div>
       <div className="nav-bar__element">
         <NavLink to="/">Options (3 dots icon)</NavLink>
