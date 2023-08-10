@@ -20,6 +20,7 @@ def get_songs():
     """
     songs = Song.query.all()  # query.all returns an array
     all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+
     pprint(all_songs)
     return {
         "Songs": {song["id"]: song for song in all_songs}

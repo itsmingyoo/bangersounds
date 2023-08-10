@@ -51,4 +51,6 @@ class User(db.Model, UserMixin):
             "profile_bio": self.profile_bio,
             "profile_city": self.profile_city,
             "profile_country": self.profile_country,
+            # "songsOwned": [song.to_dict() for song in self.song_users]
+            #this should be on the parent side and it will to_dict() all the songs that belong to this user due to the relationship
         }
