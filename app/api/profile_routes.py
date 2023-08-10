@@ -36,6 +36,7 @@ def edit_song_id():
     """
 
 
+# Adjusting this into the /songs/:songId route
 @profile_routes.route("/api/profile/songs/:songId")
 def delete_song_id():
     pass

@@ -24,7 +24,10 @@ function Navigation({ isLoaded }) {
       </div>
 
       {navNames.map((nav) => (
-        <div className="nav-bar__element">
+        <div
+          className="nav-bar__element"
+          key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+        >
           <NavLink to={nav.to}>{nav.name}</NavLink>
         </div>
       ))}

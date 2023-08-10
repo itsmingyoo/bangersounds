@@ -3,6 +3,7 @@ const GET_ALL_SONGS_ACTION = "songs/GET_ALL_SONGS_ACTION";
 const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
+const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 //*  ===================end of types ===================//
 
 //? =====================  actions ===========================//
@@ -32,6 +33,13 @@ const editSongByIdAction = (updatedSong) => {
   return {
     type: EDIT_SONG_BY_ID_ACTION,
     updatedSong,
+  };
+};
+
+const deleteSongByIdAction = (songId) => {
+  return {
+    type: DELETE_SONG_BY_ID_ACTION,
+    songId,
   };
 };
 
@@ -92,6 +100,18 @@ export const thunkEditSongById =
     return updatedSong;
   };
 
+export const thunkDeleteUserSong = (songId) => async (dispatch) => {
+  let deleted = await fetch(`/api/songs/${songId}`, {
+    method: "DELETE",
+  });
+  if (deleted.ok) {
+    deleted = deleted.json();
+    dispatch(deleteSongByIdAction(songId));
+    return deleted.errors;
+  }
+  return deleted;
+};
+
 //*  ======================= end of thunks ===================//
 
 //? ================== reducer================================//
@@ -117,6 +137,12 @@ export default function reducer(state = initialState, action) {
     case EDIT_SONG_BY_ID_ACTION: {
       newState = { ...state };
       newState.Songs[action.updatedSong.id] = { ...action.updatedSong };
+      return newState;
+    }
+    case DELETE_SONG_BY_ID_ACTION: {
+      newState = { ...state };
+      newState.Songs = { ...newState.Songs };
+      delete newState.Songs[action.songId];
       return newState;
     }
     default:

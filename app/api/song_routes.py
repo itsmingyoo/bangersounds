@@ -42,7 +42,10 @@ def get_song_id(songId):
     This route takes you to a song's ID detail page.
     Returns a dictionary of the song's info and comments
     """
-    song = Song.query.get(songId).to_dict()
+    songQuery = Song.query.get(songId)
+    if not songQuery:
+        return {"message": "Song couldn't be found."}
+    song = songQuery.to_dict()
     print(
         isinstance(songId, int)
     )  # True => <int:songId> turns it into an int within the url
@@ -113,3 +116,29 @@ def edit_song(songId):
         db.session.commit()
         return jsonify(song.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+
+# Delete will be on /profile/songs/:songId but altering it to /songs/:songId
+@songs_routes.route("/<int:songId>", methods=['DELETE'])
+def delete_song_id(songId):
+    # pass
+    """
+    If a song belongs to a user, they are able to delete it.
+    """
+    user_id = current_user.to_dict()['id']
+    song = Song.query.get(songId)
+
+    # needs to be before the 'to_dict' method
+    if not song:
+        return {"message": "Product couldn't be found"}
+    song_artist_id = song.to_dict()['artistInfo']['id']
+
+    # print(song['artistInfo']['id']) # artist id for the song
+    print('query result for song', song)
+    print('userId:', user_id, '|','artistId', song_artist_id)
+
+    if user_id != song_artist_id: #song doesnt belong to user, return error
+        return jsonify({"errors": "You don't have permission to delete this song"}), 401
+    else:
+        db.session.delete(song)
+        db.session.commit()
+        return jsonify({'message': 'Song with id has been successfully deleted', 'song': song.to_dict()})

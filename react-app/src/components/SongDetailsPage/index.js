@@ -6,7 +6,7 @@ import "./SongDetailsPage.css";
 function SongDetailsPage() {
   const { songId } = useParams();
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
-  console.log(song);
+  // console.log(song);
   if (!song) return null;
   return (
     <>
