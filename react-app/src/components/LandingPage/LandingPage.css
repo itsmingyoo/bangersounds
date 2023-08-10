@@ -1,0 +1,13 @@
+#recently-played__container {
+    display: flex;
+    flex-direction: column;
+}
+#recently-played__songs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.recently-played__images {
+    width: 100px;
+    height: 100px;
+}
