@@ -11,7 +11,7 @@ function SongDetailsPage() {
   return (
     <>
       {/* TOP MAIN - MEDIA PLAYER AND SONG CONTENT */}
-      <div id="song-details__main-container">
+      <div id="song-details__top-container">
         {/* Left side = Song Content at the top, and waveforms at the bottom */}
         <div id="song-details__left-side">
           {/* top = song content */}
@@ -33,29 +33,39 @@ function SongDetailsPage() {
       </div>
 
       {/* BOT MAIN - COMMENTS AND SONG NAV BAR AND SUGGESTIONS SIDE BAR*/}
-      <div>
-        {/* COMMENT INPUT BOX & LIKE/REPOST/SHARE/DELETE NAV BAR */}
+      <div id="song-details__bot-container">
         <div>
-          <input type="text" placeholder="Make a comment here" />
-          <div id="song-details__nav-bar">
-            <div id="song-details__nav-bar-buttons">
-              <button>Like</button>
-              <button>Reposted</button>
-              <button>Share</button>
-              <button>Copy Link</button>
-              <button>More</button>
-              <button>Free Download</button>
+          <div>
+            {/* COMMENT INPUT BOX & LIKE/REPOST/SHARE/DELETE NAV BAR */}
+            <input type="text" placeholder="Make a comment here" />
+            <div id="song-details__nav-bar">
+              <div id="song-details__nav-bar-buttons">
+                <button>Like</button>
+                <button>Reposted</button>
+                <button>Share</button>
+                <button>Copy Link</button>
+                <button>More</button>
+                <button>Free Download</button>
+              </div>
+              <div id="song-details__stats">
+                <span>1 Play(s)</span>
+                <span>1 Like(s)</span>
+                <span>1 Repost(s)</span>
+              </div>
             </div>
-            <div id="song-details__stats">
-              <span>1 Play(s)</span>
-              <span>1 Like(s)</span>
-              <span>1 Repost(s)</span>
-            </div>
+          </div>
+          {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
+          <div id="song-details__description-comments">
+            <div>Song Description Here with Ads</div>
+            <div>All comments on this song will show here</div>
           </div>
         </div>
 
         {/* RELATED TRACKS AND SUGGESTIONS SIDE BAR */}
-        <div></div>
+        <div id="song-details__side-bar">
+          Side
+          Barrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+        </div>
       </div>
     </>
   );
