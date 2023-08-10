@@ -14,6 +14,7 @@ function LandingPage() {
       <div id="recently-played__container">
         <h2>Recently Played</h2>
         <div id="recently-played__songs">
+          {/* START of loop */}
           {allSongs &&
             allSongs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
@@ -44,6 +45,7 @@ function LandingPage() {
                 <div>{s.artistInfo.displayName}</div>
               </div>
             ))}
+          {/* END of loop */}
         </div>
       </div>
     </>

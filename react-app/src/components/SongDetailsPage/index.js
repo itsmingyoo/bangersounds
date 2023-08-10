@@ -1,13 +1,27 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import DropDown from "../DropDown";
+import addToQueue from "../../images/AddToQueue.png";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage() {
   const { songId } = useParams();
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
+  const user = useSelector((u) => u.session.user);
+  // console.log(user);
   // console.log(song);
-  if (!song) return null;
+  const isUserSong = song?.artistId === user?.id;
+  // console.log(isUserSong);
+
+  if (!song || !user) return null;
+
+  const list = [
+    { name: "Add to Next Up", to: "#" },
+    { name: "Add to Playlist", to: "#" },
+    { name: "Station", to: "#" },
+    { name: "Report", to: "#" },
+  ];
   return (
     <>
       {/* TOP MAIN - MEDIA PLAYER AND SONG CONTENT */}
@@ -45,7 +59,13 @@ function SongDetailsPage() {
                 <button>Reposted</button>
                 <button>Share</button>
                 <button>Copy Link</button>
-                <button>More</button>
+                {/* <button>More</button> */}
+                <DropDown
+                  iconClassName={addToQueue}
+                  list={list}
+                  songId={songId}
+                  isUserSong={isUserSong}
+                />
                 <button>Free Download</button>
               </div>
               <div id="song-details__stats">
