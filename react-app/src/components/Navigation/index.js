@@ -29,7 +29,25 @@ function Navigation({ isLoaded }) {
         </div>
       ))}
       {/* Home button actually leads to discover on the real soundcloud */}
-      {/* <div className="nav-bar__element">
+      {/* User Nav */}
+      <div id="user-nav">
+        {isLoaded && <ProfileButton user={sessionUser} />}
+
+        <div className="nav-bar__element">
+          <NavLink to="/">Alerts (bell icon)</NavLink>
+        </div>
+
+        <div className="nav-bar__element">
+          <NavLink to="/">Messages (mail icon)</NavLink>
+        </div>
+      </div>
+
+      <div className="nav-bar__element">
+        <NavLink to="/">Options (3 dots icon)</NavLink>
+      </div>
+    </div>
+    // old code before mapping
+    /* <div className="nav-bar__element">
         <NavLink exact to="/discover">
           Home 'Discover'
         </NavLink>
@@ -53,24 +71,7 @@ function Navigation({ isLoaded }) {
       <div className="nav-bar__element">
         <NavLink to="/">Upload</NavLink>
       </div>
-      */}
-      {/* User Nav */}
-      <div id="user-nav">
-        {isLoaded && <ProfileButton user={sessionUser} />}
-
-        <div className="nav-bar__element">
-          <NavLink to="/">Alerts (bell icon)</NavLink>
-        </div>
-
-        <div className="nav-bar__element">
-          <NavLink to="/">Messages (mail icon)</NavLink>
-        </div>
-      </div>
-
-      <div className="nav-bar__element">
-        <NavLink to="/">Options (3 dots icon)</NavLink>
-      </div>
-    </div>
+      */
   );
 }
 

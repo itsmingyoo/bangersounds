@@ -16,13 +16,12 @@
   gap: 7px;
 }
 
-
 .nav-bar__element {
   font-size: 13px;
 }
 
 .dropdown-button {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   /* z-index: 1; make button on top */
 }
 
