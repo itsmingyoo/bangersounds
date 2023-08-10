@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+// import { Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -15,11 +17,19 @@ function LandingPage() {
           {allSongs &&
             allSongs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
-                <img
-                  src={s.previewImageURL}
-                  className="recently-played__images"
-                  alt={`p-image__${s.id}`}
-                />
+                <div>
+                  {/* Play button should play song when clicked */}
+                  <button>Play Btn</button>
+                  {/* Image should link to song id page */}
+                  <NavLink to={`/songs/${s.id}`}>
+                    <img
+                      src={s.previewImageURL}
+                      className="recently-played__images"
+                      alt={`p-image__${s.id}`}
+                      // onClick={() => Redirect(`/home`)}
+                    />
+                  </NavLink>
+                </div>
                 <div>
                   {/* need to change this later bc its not the real 'artist - song name' format from the AWS file link */}
                   {/* <div>
