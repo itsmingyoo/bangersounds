@@ -129,7 +129,7 @@ def delete_song_id(songId):
 
     # needs to be before the 'to_dict' method
     if not song:
-        return {"message": "Song couldn't be found"}
+        return {"message": "Song couldn't be found"}, 404
     song_artist_id = song.to_dict()['artistInfo']['id']
 
     # print(song['artistInfo']['id']) # artist id for the song
@@ -142,4 +142,4 @@ def delete_song_id(songId):
         db.session.delete(song)
         db.session.commit()
         # PYTHON STRING INTERPOLATION - ADD THE 'f'
-        return jsonify({'message': f'Song with id: {songId} has been successfully deleted', 'song': song.to_dict()})
+        return jsonify({'message': f'Song with id: {songId} has been successfully deleted', 'song': song.to_dict()}), 200

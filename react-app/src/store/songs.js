@@ -36,10 +36,11 @@ const editSongByIdAction = (updatedSong) => {
   };
 };
 
-const deleteSongByIdAction = (songId) => {
+const deleteSongByIdAction = (songId, res) => {
   return {
     type: DELETE_SONG_BY_ID_ACTION,
     songId,
+    res,
   };
 };
 
@@ -105,11 +106,11 @@ export const thunkDeleteUserSong = (songId) => async (dispatch) => {
     method: "DELETE",
   });
   if (deleted.ok) {
-    deleted = deleted.json();
-    dispatch(deleteSongByIdAction(songId));
-    return deleted.errors;
+    deleted = await deleted.json();
+    dispatch(deleteSongByIdAction(songId, deleted));
+    return deleted;
   }
-  return deleted;
+  return deleted.errors;
 };
 
 //*  ======================= end of thunks ===================//
