@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import * as songActions from "./store/songs";
 import LandingPage from "./components/LandingPage";
+import SongDetailsPage from "./components/SongDetailsPage";
 // import { thunkGetAllSongs } from "./store/songs";
 
 function App() {
@@ -29,8 +30,11 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route>
+          <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route exact path="/songs/:songId">
+            <SongDetailsPage />
           </Route>
         </Switch>
       )}
