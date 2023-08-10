@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # Additional Columns - Nullable / Not Unique / Not required for Signup / Meant for Edit Profile Page Modal
+    display_name = db.Column(db.String(40), nullable=True)
     first_name = db.Column(db.String(40), nullable=True)
     last_name = db.Column(db.String(40), nullable=True)
     profile_image = db.Column(db.String(255), nullable=True)
