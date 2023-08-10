@@ -11,41 +11,36 @@
   font-size: 13px;
 }
 
-.profile-dropdown {
-  position: relative;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-}
-
 .dropdown-button {
-  background: none;
-  border: none;
-  cursor: pointer;
+  border: 2px solid red;
+  /* z-index: 1; make button on top */
 }
 
-.dropdown-menu {
+.dropdown-list {
+  /* put absolute so the entire div pops up */
   position: absolute;
-  top: 100%;
-  left: 0;
-  display: none;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1; /* Ensure the dropdown is above other elements */
+  top: 50px;
+  text-decoration: white;
+  background-color: gray;
+  box-shadow: 3px 3px 3px black;
+  /* border: 3px solid green; */
 }
 
-.profile-dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown-nav {
+  list-style-type: none;
+  padding: 10px;
 }
-/*
-#profile-button__main-container {
+
+.dropdown-nav > li > a{
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown-nav > li {
+  margin-bottom: 5px;
+}
+
+.profile-dropdown {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  margin-right: 1rem;
-} */
+  flex-direction: column;
+}

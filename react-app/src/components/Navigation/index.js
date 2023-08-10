@@ -9,11 +9,8 @@ function Navigation({ isLoaded }) {
   // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (
     <div id="main-nav__container">
-      {isLoaded && (
-        <ul id="profile-button__main-container">
-          <ProfileButton user={sessionUser} />
-        </ul>
-      )}
+      {isLoaded && <ProfileButton user={sessionUser} />}
+
       <div className="nav-bar__element">
         <NavLink to="/">BangerSounds(Icon)</NavLink>
       </div>

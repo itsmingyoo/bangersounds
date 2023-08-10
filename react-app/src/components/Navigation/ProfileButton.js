@@ -36,20 +36,27 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = showMenu ? "" : " hidden";
   const closeMenu = () => setShowMenu(false);
 
   return (
     <div className="profile-dropdown">
-      <button onClick={openMenu} className="dropdown-button">
-        <i className="fas fa-user-circle" />
+      <button
+        onClick={openMenu}
+        className="dropdown-button"
+        style={{ "background-color": showMenu ? "black" : "" }}
+      >
+        <i
+          className="fas fa-user-circle"
+          style={{ color: showMenu ? "white" : "" }}
+        />
       </button>
-      <div>
-        <ul className={`${ulClassName} dropdown-list`} ref={ulRef}>
+      <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
+        <ul className="dropdown-nav">
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              {/* <li>{user.username}</li> */}
+              {/* <li>{user.email}</li> */}
               <li>
                 <NavLink to="/profile">Profile</NavLink>
               </li>

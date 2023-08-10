@@ -11,6 +11,7 @@ function SongDetailsPage() {
   return (
     <>
       {/* TOP MAIN - MEDIA PLAYER AND SONG CONTENT */}
+      {/* make left side one component and right side one component */}
       <div id="song-details__top-container">
         {/* Left side = Song Content at the top, and waveforms at the bottom */}
         <div id="song-details__left-side">
