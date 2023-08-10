@@ -5,3 +5,12 @@
 .hidden {
   display: none;
 }
+
+#main-nav__container {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-bar__element {
+  font-size: 13px;
+}

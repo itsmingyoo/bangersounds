@@ -4,7 +4,7 @@ import "./LandingPage.css";
 
 function LandingPage() {
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log(allSongs); // allSongs.artistInfo.display_name
+  // console.log(allSongs); // allSongs.artistInfo.display_name
 
   return (
     <>
@@ -18,6 +18,7 @@ function LandingPage() {
                 <img
                   src={s.previewImageURL}
                   className="recently-played__images"
+                  alt={`p-image__${s.id}`}
                 />
                 <div>
                   {/* need to change this later bc its not the real 'artist - song name' format from the AWS file link */}
