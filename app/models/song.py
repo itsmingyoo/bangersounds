@@ -47,13 +47,14 @@ class Song(db.Model):
             "id": self.id,
             "title": self.title,
             "genre": self.genre,
-            "song_url": self.song_url,
+            "songURL": self.song_url,
             "description": self.description,
             "private": self.private,
             "artistId": self.artistId,
             # Nullable
             "caption": self.caption,
-            "preview_imageURL": self.preview_imageURL,
+            "previewImageURL": self.preview_imageURL,
+            "artistInfo": self.user_songs.to_dict()
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }

@@ -1,7 +1,55 @@
-.profile-dropdown {
-  position: absolute;
-}
-
 .hidden {
   display: none;
+}
+
+#main-nav__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+#user-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.nav-bar__element {
+  font-size: 13px;
+}
+
+.dropdown-button {
+  /* border: 2px solid red; */
+  /* z-index: 1; make button on top */
+}
+
+.dropdown-list {
+  /* put absolute so the entire div pops up */
+  position: absolute;
+  top: 30px;
+  text-decoration: white;
+  background-color: gray;
+  box-shadow: 3px 3px 3px black;
+  /* border: 3px solid green; */
+}
+
+.dropdown-nav {
+  list-style-type: none;
+  padding: 10px;
+}
+
+.dropdown-nav > li > a{
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown-nav > li {
+  margin-bottom: 5px;
+}
+
+.profile-dropdown {
+  display: flex;
+  flex-direction: column;
 }

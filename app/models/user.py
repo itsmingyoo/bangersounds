@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # Additional Columns - Nullable / Not Unique / Not required for Signup / Meant for Edit Profile Page Modal
+    display_name = db.Column(db.String(40), nullable=True)
     first_name = db.Column(db.String(40), nullable=True)
     last_name = db.Column(db.String(40), nullable=True)
     profile_image = db.Column(db.String(255), nullable=True)
@@ -45,10 +46,13 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "profile_image": self.profile_image,
-            "profile_bio": self.profile_bio,
-            "profile_city": self.profile_city,
-            "profile_country": self.profile_country,
+            "displayName": self.display_name,
+            "firstName": self.first_name,
+            "lastName": self.last_name,
+            "profileImage": self.profile_image,
+            "profileBio": self.profile_bio,
+            "profileCity": self.profile_city,
+            "profileCountry": self.profile_country,
+            # "songsOwned": [song.to_dict() for song in self.song_users]
+            #this should be on the parent side and it will to_dict() all the songs that belong to this user due to the relationship
         }

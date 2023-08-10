@@ -1,0 +1,8 @@
+.hidden {
+    display: none;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+}

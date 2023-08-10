@@ -1,0 +1,20 @@
+#recently-played__container {
+    display: flex;
+    flex-direction: column;
+}
+#recently-played__songs {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.recently-played__images {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#recently-played__each-song-container {
+    margin: 10px;
+    width: 100px;
+}
