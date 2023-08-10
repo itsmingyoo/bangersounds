@@ -44,19 +44,19 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
   // function to close menu by changing state to false
   const closeMenu = () => setShowMenu(false);
 
-  let isClassName;
-  if (iconClassName.includes("fa")) {
-    isClassName = true;
-  } else {
-    isClassName = false;
-  }
-  console.log(isClassName);
-  console.log("this is iconclassname", iconClassName);
+  let isClassName = false;
+  // if (iconClassName.includes("fa")) {
+  //   isClassName = true;
+  // } else {
+  //   isClassName = false;
+  // }
+  // console.log(isClassName);
+  // console.log("this is iconclassname", iconClassName);
 
-  let ill = iconClassName.split("/")[3].split(".");
-  ill.splice(1, 1);
-  ill = ill.join(".");
-  console.log(ill);
+  // let ill = iconClassName.split("/")[3].split(".");
+  // ill.splice(1, 1);
+  // ill = ill.join(".");
+  // console.log(ill);
 
   return (
     <div className="dropdown">
@@ -72,9 +72,9 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
           />
         ) : (
           <div>
-            <i className={ill} style={{ color: showMenu ? "white" : "" }} />
+            {/* <img src={`/${ill}`} alt="this kaefkljl" /> */}
+            <img src={window.location.origin + "../../images/AddToQueue.png"} />
           </div>
-          // <img src={`../../images/${ill}`} alt="alallalalal" />
           // <Helmet>
           //   <link
           //     rel="icon"
@@ -91,6 +91,7 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
               <NavLink to={item.to}>{item.name}</NavLink>
             </li>
           ))}
+          {/* insert MODAL here */}
           {isUserSong && <li onClick={handleDelete}>Delete</li>}
         </ul>
       </div>
