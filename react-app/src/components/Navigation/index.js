@@ -6,16 +6,30 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+
+  const navNames = [
+    { name: "Home", to: "/discover" },
+    { name: "Feed", to: "/feed" },
+    { name: "Library", to: "/library" },
+    { name: "Try Go", to: "#" },
+    { name: "Try Next Pro", to: "#" },
+    { name: "For Artists", to: "#" },
+    { name: "Upload", to: "/new" },
+  ];
   // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (
     <div id="main-nav__container">
-      {isLoaded && <ProfileButton user={sessionUser} />}
-
       <div className="nav-bar__element">
         <NavLink to="/">BangerSounds(Icon)</NavLink>
       </div>
-      <div className="nav-bar__element">
-        {/* Home button actually leads to discover on the real soundcloud */}
+
+      {navNames.map((nav) => (
+        <div className="nav-bar__element">
+          <NavLink to={nav.to}>{nav.name}</NavLink>
+        </div>
+      ))}
+      {/* Home button actually leads to discover on the real soundcloud */}
+      {/* <div className="nav-bar__element">
         <NavLink exact to="/discover">
           Home 'Discover'
         </NavLink>
@@ -39,18 +53,20 @@ function Navigation({ isLoaded }) {
       <div className="nav-bar__element">
         <NavLink to="/">Upload</NavLink>
       </div>
+      */}
       {/* User Nav */}
-      <div>
-        <div className="nav-bar__element">
-          <NavLink to="/">Profile PFP Dropdown Menu</NavLink>
-        </div>
+      <div id="user-nav">
+        {isLoaded && <ProfileButton user={sessionUser} />}
+
         <div className="nav-bar__element">
           <NavLink to="/">Alerts (bell icon)</NavLink>
         </div>
+
         <div className="nav-bar__element">
           <NavLink to="/">Messages (mail icon)</NavLink>
         </div>
       </div>
+
       <div className="nav-bar__element">
         <NavLink to="/">Options (3 dots icon)</NavLink>
       </div>

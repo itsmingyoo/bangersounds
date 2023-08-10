@@ -5,7 +5,17 @@
 #main-nav__container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 7px;
 }
+
+#user-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
 
 .nav-bar__element {
   font-size: 13px;
@@ -19,7 +29,7 @@
 .dropdown-list {
   /* put absolute so the entire div pops up */
   position: absolute;
-  top: 50px;
+  top: 30px;
   text-decoration: white;
   background-color: gray;
   box-shadow: 3px 3px 3px black;

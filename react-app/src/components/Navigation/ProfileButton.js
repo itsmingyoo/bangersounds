@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
       <button
         onClick={openMenu}
         className="dropdown-button"
-        style={{ "background-color": showMenu ? "black" : "" }}
+        style={{ backgroundColor: showMenu ? "black" : "" }}
       >
         <i
           className="fas fa-user-circle"
