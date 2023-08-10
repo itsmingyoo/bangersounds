@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: c214c24123de
-Revises:
-Create Date: 2023-08-09 16:14:24.546283
+Revision ID: 9077ac5f139a
+Revises: 
+Create Date: 2023-08-09 18:23:12.028878
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'c214c24123de'
+revision = '9077ac5f139a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,6 +23,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('display_name', sa.String(length=40), nullable=True),
     sa.Column('first_name', sa.String(length=40), nullable=True),
     sa.Column('last_name', sa.String(length=40), nullable=True),
     sa.Column('profile_image', sa.String(length=255), nullable=True),
@@ -49,10 +47,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['artistId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

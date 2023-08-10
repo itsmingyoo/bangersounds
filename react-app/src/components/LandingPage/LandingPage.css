@@ -4,10 +4,16 @@
 }
 #recently-played__songs {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 20px;
 }
 
 .recently-played__images {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+}
+
+#recently-played__each-song-container {
+    margin: 15px;
 }
