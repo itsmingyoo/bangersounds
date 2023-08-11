@@ -38,6 +38,27 @@
     align-items: center;
 }
 
+#new-song__submit {
+    display: flex;
+    gap: 10px;
+}
+
+.new-song__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.select-container {
+    position: relative;
+}
+
+.select__dropdown {
+    position: static;
+    cursor: pointer;
+}
+
 /** Can use this globally */
 .orange-btn-outline-txt {
     color: #f50;
@@ -49,9 +70,8 @@
     color: white;
 }
 
-.new-song__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
+.white-btn-black-txt {
+    background-color: white;
+    color: black;
+    border: none;
 }

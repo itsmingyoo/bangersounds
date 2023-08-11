@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { thunkGetSongById, thunkPostNewSong } from "../../store/songs";
+import React from "react";
+// import { useDispatch } from "react-redux";
+// import { useHistory } from "react-router-dom";
+// import { thunkGetSongById, thunkPostNewSong } from "../../store/songs";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import "./PostNewSong.css";
 
