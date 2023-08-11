@@ -7,10 +7,11 @@ import { Helmet } from "react-helmet";
 import "./DropDown.css";
 import DeleteSongModal from "../DeleteSongModal";
 
-function DropDown({ iconClassName, list, songId, isUserSong }) {
+function DropDown({ iconClassName, list, songId, isUserSong, user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  console.log("user in the dropdown comp", user);
 
   // Change state of showMenu to True or False
   const openMenu = () => {
@@ -34,10 +35,10 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
   }, [showMenu]);
 
   // Custom Function onClick Handler
-  const handleDelete = (e) => {
-    e.preventDefault();
-    dispatch(thunkDeleteUserSong(songId));
-  };
+  // const handleDelete = (e) => {
+  //   e.preventDefault();
+  //   dispatch(thunkDeleteUserSong(songId));
+  // };
 
   // ul element class name listens to the showMenu state
   const ulClassName = showMenu ? "" : " hidden";
@@ -98,7 +99,7 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
             <OpenModalButton
               buttonText="Delete"
               onItemClick={closeMenu}
-              modalComponent={<DeleteSongModal songId={songId} />}
+              modalComponent={<DeleteSongModal songId={songId} user={user} />}
             />
           )}
         </ul>

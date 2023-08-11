@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./DeleteSongModal.css";
 import { useHistory } from "react-router-dom";
 import { thunkDeleteUserSong } from "../../store/songs";
 
-function DeleteSongModal({ songId }) {
+// forgot why i passed in user props... feature coming soon
+function DeleteSongModal({ songId, user }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
+  console.log("user in the modal", user);
 
   const handleClick = async (e) => {
     e.preventDefault();

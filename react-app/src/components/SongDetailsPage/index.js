@@ -65,6 +65,7 @@ function SongDetailsPage() {
                   list={list}
                   songId={songId}
                   isUserSong={isUserSong}
+                  user={user}
                 />
                 <button>Free Download</button>
               </div>
