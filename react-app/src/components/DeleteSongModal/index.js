@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { login } from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./DeleteSongModal.css";
 import { useHistory } from "react-router-dom";

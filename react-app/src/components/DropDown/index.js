@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
-import { thunkDeleteUserSong } from "../../store/songs";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import "./DropDown.css";
 import DeleteSongModal from "../DeleteSongModal";
 
 function DropDown({ iconClassName, list, songId, isUserSong, user }) {
-  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   console.log("user in the dropdown comp", user);
@@ -33,12 +30,6 @@ function DropDown({ iconClassName, list, songId, isUserSong, user }) {
 
     return () => document.removeEventListener("click", closeMenuOnClickOutside);
   }, [showMenu]);
-
-  // Custom Function onClick Handler
-  // const handleDelete = (e) => {
-  //   e.preventDefault();
-  //   dispatch(thunkDeleteUserSong(songId));
-  // };
 
   // ul element class name listens to the showMenu state
   const ulClassName = showMenu ? "" : " hidden";
@@ -75,7 +66,10 @@ function DropDown({ iconClassName, list, songId, isUserSong, user }) {
         ) : (
           <div>
             {/* <img src={`/${ill}`} alt="this kaefkljl" /> */}
-            <img src={window.location.origin + "../../images/AddToQueue.png"} />
+            <img
+              src={window.location.origin + "../../images/AddToQueue.png"}
+              alt="test"
+            />
           </div>
           // <Helmet>
           //   <link
