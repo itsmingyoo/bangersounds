@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import { thunkDeleteUserSong } from "../../store/songs";
 import { Helmet } from "react-helmet";
 import "./DropDown.css";
+import DeleteSongModal from "../DeleteSongModal";
 
 function DropDown({ iconClassName, list, songId, isUserSong }) {
   const dispatch = useDispatch();
@@ -92,7 +93,14 @@ function DropDown({ iconClassName, list, songId, isUserSong }) {
             </li>
           ))}
           {/* insert MODAL here */}
-          {isUserSong && <li onClick={handleDelete}>Delete</li>}
+          {/* {isUserSong && <li onClick={handleDelete}>Delete</li>} */}
+          {isUserSong && (
+            <OpenModalButton
+              buttonText="Delete"
+              onItemClick={closeMenu}
+              modalComponent={<DeleteSongModal songId={songId} />}
+            />
+          )}
         </ul>
       </div>
     </div>

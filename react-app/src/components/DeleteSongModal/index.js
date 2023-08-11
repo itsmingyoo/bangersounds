@@ -3,20 +3,28 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./DeleteSongModal.css";
+import { useHistory } from "react-router-dom";
 import { thunkDeleteUserSong } from "../../store/songs";
 
 function DeleteSongModal({ songId }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
 
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(thunkDeleteUserSong(songId));
+    dispatch(thunkDeleteUserSong(songId)).then(() => history.push("/profile"));
+    closeModal();
+  };
+
+  const learnMore = async (e) => {
+    e.preventDefault();
+    alert("Feature coming soon!");
   };
 
   return (
-    <>
-      {/* TOP */}
+    <div id="delete-modal__container">
+      {/* TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP TOP */}
       <div id="delete-modal__top">
         <div id="delete-modal__top-left">PROFILE PICTURE</div>
         <div id="delete-modal__top-right">
@@ -27,12 +35,12 @@ function DeleteSongModal({ songId }) {
       {/*  */}
       {/*  */}
       {/*  */}
-      {/* BOTTOM */}
+      {/* BOTTOM BOTTOM BOTTOM BOTTOM BOTTOM BOTTOM BOTTOM BOTTOM */}
       <div id="delete-modal__bot">
         {/*  */}
         {/*  */}
         {/*  */}
-        {/* LEFT */}
+        {/* LEFT LEFT LEFT LEFT LEFT LEFT LEFT LEFT LEFT LEFT LEFT */}
         <div id="delete-modal__bot-left">
           {/* SLIGHTLY LARGER FONT THAN THE P TAGS */}
           <div>Permanently delete this track?</div>
@@ -41,23 +49,27 @@ function DeleteSongModal({ songId }) {
             likes and comments for this track with no way to get them back.
           </p>
           {/* BUTTONS NO BG - COLOR BLK - NO BORDER */}
-          <button>Cancel</button>
-          <button>Delete forever</button>
+          <div id="delete-modal__bot-left-buttons">
+            <button onClick={() => closeModal()}>Cancel</button>
+            <button onClick={handleClick}>Delete forever</button>
+          </div>
         </div>
         {/*  */}
         {/*  */}
         {/*  */}
-        {/* RIGHT */}
+        {/* RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT */}
         <div id="delete-modal__bot-right">
           <p>
             Never have to delete a track again. Unlock limitless upload time and
             the ability to replace tracks with a Pro plan.
           </p>
           {/* ORANGE BUTTON WHITE TEXT */}
-          <button>Learn More</button>
+          <div id="delete-modal_bot-right-button">
+            <button onClick={learnMore}>Learn More</button>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

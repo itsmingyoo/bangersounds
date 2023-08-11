@@ -1,0 +1,55 @@
+#delete-modal__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/** TOP SIDE */
+#delete-modal__top {
+    display: flex;
+    justify-content: center;
+    gap: 300px;
+    padding: 20px;
+
+
+    border: 3px solid blue;
+}
+
+#delete-modal__top-left {
+    padding: 30px;
+    border: 2px dotted green;
+}
+
+#delete-modal__top-right {
+    border: 2px dotted green;
+}
+
+
+/** BOT SIDE  */
+#delete-modal__bot {
+    display: flex;
+    padding: 10px;
+    border: 3px solid green;
+}
+
+#delete-modal__bot-left {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid yellow;
+}
+
+#delete-modal__bot-right{
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid yellow;
+}
+
+#delete-modal_bot-right-button {
+    text-align: right;
+}
+
+#delete-modal__bot-left-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
