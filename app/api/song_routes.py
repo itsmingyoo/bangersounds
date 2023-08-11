@@ -70,10 +70,22 @@ def post_song():
     form = NewSongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        song = form.data["song"]
+        song.filename = get_unique_filename(song.filename)
+        upload = upload_file_to_s3(song)
+        print('this is upload this is upload this is upload this is upload ', upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return jsonify(upload), 400
+
+        url = upload["url"]
         song = Song(
             title=form.data["title"],
             genre=form.data["genre"],
-            song_url=form.data["song_url"],
+            song_url=url,
             description=form.data["description"],
             private=form.data["private"],
             caption=form.data["caption"],
@@ -82,6 +94,23 @@ def post_song():
         )
         db.session.add(song)
         db.session.commit()
+
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        pprint(song.to_dict())
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+
         return jsonify(song.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 

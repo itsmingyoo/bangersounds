@@ -49,13 +49,14 @@ function PostNewSong() {
     // FORMDATA APPEND VALIDATED DATA BEFORE SENDING IT OFF
     // AWS Form data - APPEND TAKES TWO ARGS ("KEY IN QUOTES", VALUE)
     const formData = new FormData();
-    formData.append("song", song);
     formData.append("title", title);
-    formData.append("song_url", songURL);
+    formData.append("genre", genre);
     formData.append("description", description);
     formData.append("private", privated);
     formData.append("caption", caption);
     formData.append("preview_imageURL", previewImageURL);
+    formData.append("song", song);
+    formData.append("song_url", songURL);
 
     // let song = {
     //   title,
@@ -68,7 +69,7 @@ function PostNewSong() {
     //   song,
     // };
 
-    let res = await dispatchEvent(thunkPostNewSong(formData));
+    let res = await dispatch(thunkPostNewSong(formData));
 
     console.log("this is res after post new song dispatch", res);
 
@@ -201,7 +202,11 @@ function PostNewSong() {
         {console.log("this is song after user chooses a file", song)}
         {console.log("privated ? ", privated)}
         <div>
-          <form className="new-song__form">
+          <form
+            className="new-song__form"
+            onSubmit={onSubmit}
+            encType="multipart/form-data"
+          >
             {inputs.map((el, index) => (
               <div key={el.name}>
                 <div>{el.title}</div>
@@ -229,8 +234,11 @@ function PostNewSong() {
               >
                 <option value="">Select Genre</option>
                 {genres.map((el) => (
-                  <option value={el.name}>{el.name}</option>
+                  <option value={el.name} key={`${el.name}-one`}>
+                    {el.name}
+                  </option>
                 ))}
+                {console.log(genre)}
               </select>
             </div>
             <div id="new-song__radio-btns">
@@ -257,8 +265,14 @@ function PostNewSong() {
               <div className="errors">{errors.genre}</div>
             )}
             <div id="new-song__submit">
-              <button className="white-btn-black-txt">Cancel</button>
+              <button
+                className="white-btn-black-txt"
+                onClick={(e) => history.push("/")}
+              >
+                Cancel
+              </button>
               <button className="orange-btn-white-txt">Save</button>
+              {songLoading && <p>Loading . . .</p>}
             </div>
           </form>
         </div>
