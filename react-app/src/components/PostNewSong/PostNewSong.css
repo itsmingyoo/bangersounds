@@ -48,3 +48,10 @@
     background-color: #f50;
     color: white;
 }
+
+.new-song__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
