@@ -3,14 +3,52 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import NewSongForm
+from app.forms import SongUploadForm #aws
 from flask_login import current_user, login_user, logout_user, login_required
+from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from app.models import Song
+from app.models.test import NewSong #aws
 from .auth_routes import validation_errors_to_error_messages
 from pprint import pprint
 
 # PREFIX '/api/songs'
 songs_routes = Blueprint("songs", __name__)
 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# AWS Test Route
+# @songs_routes.route("/test", methods=["POST"])
+# @login_required
+# def upload_image():
+#     form = SongUploadForm()
+
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+#     if form.validate_on_submit():
+
+#         song = form.data["song"]
+#         song.filename = get_unique_filename(song.filename)
+#         upload = upload_file_to_s3(song)
+#         print('this is upload this is upload this is upload this is upload ', upload)
+
+#         if "url" not in upload:
+#         # if the dictionary doesn't have a url key
+#         # it means that there was an error when you tried to upload
+#         # so you send back that error message (and you printed it above)
+#             return jsonify(upload), 400
+
+#         url = upload["url"]
+#         new_song = NewSong(song=url)
+#         db.session.add(new_song)
+#         db.session.commit()
+#         print(new_song.to_dict())
+#         nstd = new_song.to_dict()
+#         return jsonify(nstd)
+#         return {"message": 'this is working'}, 200
+
+#     if form.errors:
+#         print(form.errors)
+#         return form.errors
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
 @songs_routes.route("/")
@@ -80,6 +118,9 @@ def post_song():
         return jsonify(song.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
+# upload song route - validate the first part when they submit a song - then it will lead to the top route for phase 2 and validate the other data
+# this will return a url to you, you can pass it into your NewSongForm through saved state
+# in post man you use form-data option with key of 'song' and you can select a media file
 
 @songs_routes.route("/<int:songId>", methods=["PUT"])
 @login_required

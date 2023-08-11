@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DropDown from "../DropDown";
-// import addToQueue from window.location.origin + "/AddToQueue.png";
+// import addToQueue from "/AddToQueue.png";
+import addToQueue from "../../images/AddToQueue.ico";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage() {
@@ -61,11 +62,12 @@ function SongDetailsPage() {
                 <button>Copy Link</button>
                 {/* <button>More</button> */}
                 <DropDown
-                  // iconClassName={addToQueue}
+                  iconClassName={addToQueue}
                   list={list}
                   songId={songId}
                   isUserSong={isUserSong}
                   user={user}
+                  isClassName={false}
                 />
                 <button>Free Download</button>
               </div>

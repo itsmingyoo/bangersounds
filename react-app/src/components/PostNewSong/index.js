@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkGetSongById, thunkPostNewSong } from "../../store/songs";
+// IMPORT TO TEST AWS
+// import { thunkTestAws } from "../../store/songs";
+
 import { NavLink } from "react-router-dom";
 import TopNavBar from "./TopNavBar";
 import "./PostNewSong.css";
@@ -150,68 +153,115 @@ function PostNewSong() {
   //   }
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  if (submitted === false) {
-    return (
-      <div id="new-song__main-container">
-        <TopNavBar />
-        <UploadNavBar />
-        {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
-        {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
-        <div id="new-song__upload-container">
-          <div id="new-song__upload-button">
-            <h1>Drag and drop your tracks & albums here</h1>
-            <button className="orange-btn-white-txt" onClick={handleClick}>
-              or choose files to upload
-            </button>
+  // TEST ROUTE FOR AWS
+  const [song, setSong] = useState(null);
+  const [songLoading, setSongLoading] = useState(false);
 
-            <label>
-              <input type="checkbox" name="multiple-files" />
-              Make a playlist when multiple files are selected
-            </label>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    // append the state to the formData
+    formData.append("song", song);
+
+    // aws uploads can be a bit slow—displaying
+    // some sort of loading message is a good idea
+
+    // change state of loading
+    setSongLoading(true);
+
+    // TEST AWS
+    // dispatch, save result, log response
+    // console.log("you hit submit! now waiting for dispatch response");
+    // let res = await dispatch(thunkTestAws(formData));
+    // console.log(
+    //   "back in the component! its completed the dispatch; this is the res from that dispatch",
+    //   res
+    // );
+    // history.push("/images");
+  };
+  return (
+    <>
+      <div>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <div>
+            <input
+              type="file"
+              accept="audio/*"
+              onChange={(e) => setSong(e.target.files[0])}
+            />
+            <button type="submit" style={{ "font-size": "100px" }}>
+              PRESS THIS TO TEST
+            </button>
+            {songLoading && <p>Loading...</p>}
           </div>
-        </div>
+        </form>
       </div>
-    );
-  }
-  if (submitted === true) {
-    return (
-      <>
-        <div>
-          <form className="new-song__form">
-            {inputs.map((el) => (
-              <div key={el.title}>
-                <div>{el.title}</div>
-                <input
-                  type="text"
-                  name={el.name}
-                  placeholder={el.placeHolder}
-                  value={`${el.value}`}
-                  onChange={(e) => el.onChange(e.target.value)}
-                />
-                {submitted && errors[el.name] && (
-                  <div className="errors">{errors[el.name]}</div>
-                )}
-              </div>
-            ))}
-            <div>Genre</div>
-            <select
-              name="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-            >
-              <option value="">Select Genre</option>
-              {genres.map((el) => (
-                <option value={el.name}>{el.name}</option>
-              ))}
-            </select>
-            {submitted && errors.genre && (
-              <div className="errors">{errors.genre}</div>
-            )}
-          </form>
-        </div>
-      </>
-    );
-  }
+    </>
+  );
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // if (submitted === false) {
+  //   return (
+  //     <div id="new-song__main-container">
+  //       <TopNavBar />
+  //       <UploadNavBar />
+  //       {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
+  //       {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
+  //       <div id="new-song__upload-container">
+  //         <div id="new-song__upload-button">
+  //           <h1>Drag and drop your tracks & albums here</h1>
+  //           <button className="orange-btn-white-txt" onClick={handleClick}>
+  //             or choose files to upload
+  //           </button>
+
+  //           <label>
+  //             <input type="checkbox" name="multiple-files" />
+  //             Make a playlist when multiple files are selected
+  //           </label>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+  // if (submitted === true) {
+  //   return (
+  //     <>
+  //       <div>
+  //         <form className="new-song__form">
+  //           {inputs.map((el) => (
+  //             <div key={el.title}>
+  //               <div>{el.title}</div>
+  //               <input
+  //                 type="text"
+  //                 name={el.name}
+  //                 placeholder={el.placeHolder}
+  //                 value={`${el.value}`}
+  //                 onChange={(e) => el.onChange(e.target.value)}
+  //               />
+  //               {submitted && errors[el.name] && (
+  //                 <div className="errors">{errors[el.name]}</div>
+  //               )}
+  //             </div>
+  //           ))}
+  //           <div>Genre</div>
+  //           <select
+  //             name="genre"
+  //             value={genre}
+  //             onChange={(e) => setGenre(e.target.value)}
+  //           >
+  //             <option value="">Select Genre</option>
+  //             {genres.map((el) => (
+  //               <option value={el.name}>{el.name}</option>
+  //             ))}
+  //           </select>
+  //           {submitted && errors.genre && (
+  //             <div className="errors">{errors.genre}</div>
+  //           )}
+  //         </form>
+  //       </div>
+  //     </>
+  //   );
+  // }
 }
 
 export default PostNewSong;
