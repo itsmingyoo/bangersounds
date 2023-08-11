@@ -36,7 +36,7 @@ function DropDown({ iconClassName, list, songId, isUserSong, user }) {
 
   // function to close menu by changing state to false
   const closeMenu = () => setShowMenu(false);
-
+  console.log(iconClassName);
   let isClassName = false;
   // if (iconClassName.includes("fa")) {
   //   isClassName = true;
@@ -65,11 +65,12 @@ function DropDown({ iconClassName, list, songId, isUserSong, user }) {
           />
         ) : (
           <div>
+            {/* <img src={iconClassName} /> */}
             {/* <img src={`/${ill}`} alt="this kaefkljl" /> */}
-            <img
+            {/* <img
               src={window.location.origin + "../../images/AddToQueue.png"}
               alt="test"
-            />
+            /> */}
           </div>
           // <Helmet>
           //   <link

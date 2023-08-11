@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DropDown from "../DropDown";
-// import addToQueue from "/AddToQueue.png";
+// import addToQueue from window.location.origin + "/AddToQueue.png";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage() {
