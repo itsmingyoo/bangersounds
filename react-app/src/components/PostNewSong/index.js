@@ -7,8 +7,8 @@ import { thunkPostNewSong } from "../../store/songs";
 // IMPORT TO TEST AWS
 // import { thunkTestAws } from "../../store/songs";
 import TopNavBar from "./TopNavBar";
-import "./PostNewSong.css";
 import UploadNavBar from "./UploadNavBar";
+import "./PostNewSong.css";
 
 function PostNewSong() {
   const dispatch = useDispatch();
@@ -117,6 +117,7 @@ function PostNewSong() {
     { name: "Trap" },
     { name: "Triphop" },
     { name: "World" },
+    // audio etc stuff
     { name: "Audiobooks" },
     { name: "Business" },
     { name: "Comedy" },

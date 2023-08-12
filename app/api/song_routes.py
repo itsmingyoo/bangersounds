@@ -69,11 +69,13 @@ def post_song():
     print("this is the user id", user_id, isinstance(user_id, int))
     form = NewSongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+
     if form.validate_on_submit():
+
         song = form.data["song"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        print('this is upload this is upload this is upload this is upload ', upload)
+        # print('this is upload this is upload this is upload this is upload ', upload)
 
         if "url" not in upload:
         # if the dictionary doesn't have a url key
