@@ -55,8 +55,8 @@ function ProfileButton({ user }) {
         <ul className="dropdown-nav">
           {user ? (
             <>
-              {/* <li>{user.username}</li> */}
-              {/* <li>{user.email}</li> */}
+              <li>{user.username}</li>
+              <li>{user.email}</li>
               <li>
                 <NavLink to="/profile">Profile</NavLink>
               </li>

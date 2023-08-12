@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
     { name: "Try Go", to: "#" },
     { name: "Try Next Pro", to: "#" },
     { name: "For Artists", to: "#" },
-    { name: "Upload", to: "/new" },
+    { name: "Upload", to: "/upload" },
   ];
   // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import * as songActions from "./store/songs";
 import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
+import PostNewSong from "./components/PostNewSong";
 // import { thunkGetAllSongs } from "./store/songs";
 
 function App() {
@@ -30,11 +31,14 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/">
-            <LandingPage />
+          <Route exact path="/upload">
+            <PostNewSong />
           </Route>
           <Route exact path="/songs/:songId">
             <SongDetailsPage />
+          </Route>
+          <Route exact path="/">
+            <LandingPage />
           </Route>
         </Switch>
       )}

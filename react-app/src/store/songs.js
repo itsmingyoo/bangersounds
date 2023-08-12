@@ -4,6 +4,8 @@ const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
+// TEST AWS
+// const TEST_AWS_ROUTE_ACTION = "songs/TEST_AWS_ROUTE_ACTION";
 //*  ===================end of types ===================//
 
 //? =====================  actions ===========================//
@@ -36,12 +38,22 @@ const editSongByIdAction = (updatedSong) => {
   };
 };
 
-const deleteSongByIdAction = (songId) => {
+const deleteSongByIdAction = (songId, res) => {
   return {
     type: DELETE_SONG_BY_ID_ACTION,
     songId,
+    res,
   };
 };
+
+// TEST AWS
+// const testAws = (test) => {
+//   console.log("in the testAws action -- dispatched from thunk", test);
+//   return {
+//     type: TEST_AWS_ROUTE_ACTION,
+//     test,
+//   };
+// };
 
 //?  ======================= end of actions ===================//
 
@@ -76,14 +88,19 @@ export const thunkGetSongById = (songId) => async (dispatch) => {
 export const thunkPostNewSong = (songFormData) => async (dispatch) => {
   let newSong = await fetch(`/api/songs/new`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(songFormData),
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: songFormData,
   });
-  newSong = await newSong.json();
-  dispatch(postNewSongAction(newSong));
-  return newSong;
+  if (newSong) {
+    newSong = await newSong.json();
+    dispatch(postNewSongAction(newSong));
+    return newSong;
+  } else {
+    // console.log("error: Song not okay");
+    return;
+  }
 };
 
 export const thunkEditSongById =
@@ -105,12 +122,32 @@ export const thunkDeleteUserSong = (songId) => async (dispatch) => {
     method: "DELETE",
   });
   if (deleted.ok) {
-    deleted = deleted.json();
-    dispatch(deleteSongByIdAction(songId));
-    return deleted.errors;
+    deleted = await deleted.json();
+    dispatch(deleteSongByIdAction(songId, deleted));
+    return deleted;
   }
-  return deleted;
+  return deleted.errors;
 };
+
+// TEST AWS THUNK
+// export const thunkTestAws = (formData) => async (dispatch) => {
+//   console.log("thunk executed -- pre-fetch");
+//   let song = await fetch(`/api/songs/test`, {
+//     method: "POST",
+//     body: formData,
+//   });
+
+//   if (song.ok) {
+//     // const { song } = await res.json();
+//     song = await song.json();
+//     console.log("song ok--this is song from song.json()", song);
+//     dispatch(testAws(song));
+//     return song;
+//   } else {
+//     console.log("ERRRORRRRR MESSAAAAGE");
+//     return;
+//   }
+// };
 
 //*  ======================= end of thunks ===================//
 
@@ -145,6 +182,12 @@ export default function reducer(state = initialState, action) {
       delete newState.Songs[action.songId];
       return newState;
     }
+    // TEST AWS
+    // case TEST_AWS_ROUTE_ACTION: {
+    //   newState = {};
+    //   console.log("action.test in the reducer", action.test);
+    //   newState.awsURL = action.test;
+    // }
     default:
       return state;
   }

@@ -3,13 +3,18 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import NewSongForm
+from app.forms import SongUploadForm #aws
 from flask_login import current_user, login_user, logout_user, login_required
+from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from app.models import Song
+# from app.models.test import NewSong #aws
 from .auth_routes import validation_errors_to_error_messages
 from pprint import pprint
 
 # PREFIX '/api/songs'
 songs_routes = Blueprint("songs", __name__)
+
+
 
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
@@ -65,10 +70,22 @@ def post_song():
     form = NewSongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        song = form.data["song"]
+        song.filename = get_unique_filename(song.filename)
+        upload = upload_file_to_s3(song)
+        print('this is upload this is upload this is upload this is upload ', upload)
+
+        if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return jsonify(upload), 400
+
+        url = upload["url"]
         song = Song(
             title=form.data["title"],
             genre=form.data["genre"],
-            song_url=form.data["song_url"],
+            song_url=url,
             description=form.data["description"],
             private=form.data["private"],
             caption=form.data["caption"],
@@ -77,9 +94,29 @@ def post_song():
         )
         db.session.add(song)
         db.session.commit()
+
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        pprint(song.to_dict())
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
+
         return jsonify(song.to_dict())
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
+# upload song route - validate the first part when they submit a song - then it will lead to the top route for phase 2 and validate the other data
+# this will return a url to you, you can pass it into your NewSongForm through saved state
+# in post man you use form-data option with key of 'song' and you can select a media file
 
 @songs_routes.route("/<int:songId>", methods=["PUT"])
 @login_required
@@ -129,7 +166,7 @@ def delete_song_id(songId):
 
     # needs to be before the 'to_dict' method
     if not song:
-        return {"message": "Product couldn't be found"}
+        return {"message": "Song couldn't be found"}, 404
     song_artist_id = song.to_dict()['artistInfo']['id']
 
     # print(song['artistInfo']['id']) # artist id for the song
@@ -141,4 +178,40 @@ def delete_song_id(songId):
     else:
         db.session.delete(song)
         db.session.commit()
-        return jsonify({'message': 'Song with id has been successfully deleted', 'song': song.to_dict()})
+        # PYTHON STRING INTERPOLATION - ADD THE 'f'
+        return jsonify({'message': f'Song with id: {songId} has been successfully deleted', 'song': song.to_dict()}), 200
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# AWS Test Route
+# @songs_routes.route("/test", methods=["POST"])
+# @login_required
+# def upload_image():
+#     form = SongUploadForm()
+
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+#     if form.validate_on_submit():
+
+#         song = form.data["song"]
+#         song.filename = get_unique_filename(song.filename)
+#         upload = upload_file_to_s3(song)
+#         print('this is upload this is upload this is upload this is upload ', upload)
+
+#         if "url" not in upload:
+#         # if the dictionary doesn't have a url key
+#         # it means that there was an error when you tried to upload
+#         # so you send back that error message (and you printed it above)
+#             return jsonify(upload), 400
+
+#         url = upload["url"]
+#         new_song = NewSong(song=url)
+#         db.session.add(new_song)
+#         db.session.commit()
+#         print(new_song.to_dict())
+#         nstd = new_song.to_dict()
+#         return jsonify(nstd)
+#         return {"message": 'this is working'}, 200
+
+#     if form.errors:
+#         print(form.errors)
+#         return form.errors
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

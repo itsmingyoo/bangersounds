@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+// import { Helmet } from "react-helmet";
 import "./DropDown.css";
+import DeleteSongModal from "../DeleteSongModal";
 
-function DropDown(iconClassName, list, isUserSong) {
-  const dispatch = useDispatch();
+function DropDown({
+  iconClassName,
+  list,
+  songId,
+  isUserSong,
+  user,
+  isClassName,
+}) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  // console.log("user in the dropdown comp", user);
 
   // Change state of showMenu to True or False
   const openMenu = () => {
@@ -30,17 +38,17 @@ function DropDown(iconClassName, list, isUserSong) {
     return () => document.removeEventListener("click", closeMenuOnClickOutside);
   }, [showMenu]);
 
-  // Custom Function onClick Handler
-  const handleDelete = (e) => {
-    e.preventDefault();
-    dispatch(logout());
-  };
-
   // ul element class name listens to the showMenu state
   const ulClassName = showMenu ? "" : " hidden";
 
   // function to close menu by changing state to false
   const closeMenu = () => setShowMenu(false);
+  // console.log(iconClassName);
+
+  // let ill = iconClassName.split("/")[3].split(".");
+  // ill.splice(1, 1);
+  // ill = ill.join(".");
+  // console.log(ill);
 
   return (
     <div className="dropdown">
@@ -48,19 +56,34 @@ function DropDown(iconClassName, list, isUserSong) {
         onClick={openMenu}
         style={{ backgroundColor: showMenu ? "black" : "" }}
       >
-        <i
-          className={iconClassName}
-          style={{ color: showMenu ? "white" : "" }}
-        />
+        More
+        {isClassName ? (
+          <i
+            className={iconClassName}
+            style={{ color: showMenu ? "white" : "" }}
+          />
+        ) : (
+          <div>
+            <img src={iconClassName} alt={`this is ${iconClassName}`} />
+          </div>
+        )}
       </button>
       <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
         <ul className="dropdown-nav">
-          {list.map((item) => (
-            <li>
+          {list?.map((item) => (
+            <li key={item.name}>
               <NavLink to={item.to}>{item.name}</NavLink>
             </li>
           ))}
-          {isUserSong && <li onClick={handleDelete}>Delete</li>}
+          {/* insert MODAL here */}
+          {/* {isUserSong && <li onClick={handleDelete}>Delete</li>} */}
+          {isUserSong && (
+            <OpenModalButton
+              buttonText="Delete"
+              onItemClick={closeMenu}
+              modalComponent={<DeleteSongModal songId={songId} user={user} />}
+            />
+          )}
         </ul>
       </div>
     </div>

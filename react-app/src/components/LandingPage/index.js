@@ -14,6 +14,7 @@ function LandingPage() {
       <div id="recently-played__container">
         <h2>Recently Played</h2>
         <div id="recently-played__songs">
+          {/* START of loop */}
           {allSongs &&
             allSongs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
@@ -23,7 +24,11 @@ function LandingPage() {
                   {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>
                     <img
-                      src={s.previewImageURL}
+                      src={
+                        s.previewImageURL
+                          ? s.previewImageURL
+                          : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
+                      }
                       className="recently-played__images"
                       alt={`p-image__${s.id}`}
                       // onClick={() => Redirect(`/home`)}
@@ -40,6 +45,7 @@ function LandingPage() {
                 <div>{s.artistInfo.displayName}</div>
               </div>
             ))}
+          {/* END of loop */}
         </div>
       </div>
     </>
