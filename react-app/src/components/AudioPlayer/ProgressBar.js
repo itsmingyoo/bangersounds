@@ -31,7 +31,7 @@ function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
   return (
     <div className="progress-bar">
       {/* CURRENT TIME OF THE SONG */}
-      <span className="time current">{formatTime({ timeProgress })}</span>
+      <span className="time current">{formatTime(timeProgress)}</span>
       <input
         type="range"
         ref={progressBarRef}
@@ -40,7 +40,7 @@ function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
       />
 
       {/* TOTAL TIME OF THE SONG */}
-      <span className="time">{formatTime({ duration })}</span>
+      <span className="time">{formatTime(duration)}</span>
     </div>
   );
 }

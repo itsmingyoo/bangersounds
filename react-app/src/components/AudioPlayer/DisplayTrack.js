@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./AudioPlayer.css";
 
-function DisplayTrack({ currentSong, audioRef, setDuration, progressBarRef }) {
+function DisplayTrack({
+  currentSong,
+  audioRef,
+  duration,
+  setDuration,
+  progressBarRef,
+}) {
   // console.log("this is song in displaytrack", currentSong);
   const [loadedMetaData, setLoadedMetaData] = useState(false);
 
@@ -13,7 +19,12 @@ function DisplayTrack({ currentSong, audioRef, setDuration, progressBarRef }) {
     setDuration(seconds);
     progressBarRef.current.max = seconds;
     // console.log("this is progressbarref max", progressBarRef.current.max);
+    // console.log(duration);
   }
+
+  const metaData = () => {
+    if (loadedMetaData === false) setLoadedMetaData(true);
+  };
 
   if (!audioRef || !progressBarRef) return null;
 
@@ -25,7 +36,7 @@ function DisplayTrack({ currentSong, audioRef, setDuration, progressBarRef }) {
       <audio
         src={currentSong.songURL}
         ref={audioRef}
-        onLoadedMetadata={() => setLoadedMetaData(true)} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
+        onLoadedMetadata={metaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
       />
       {/* THUMBNAIL */}
       <div className="audio-info">

@@ -27,11 +27,13 @@ function AudioPlayer({ songs }) {
     return;
   }
   // console.log("this is current song", currentSong);
+
+  // console.log(duration);
   return (
     <div className="audio-player">
       <div className="inner">
         <DisplayTrack
-          {...{ currentSong, audioRef, setDuration, progressBarRef }}
+          {...{ currentSong, audioRef, duration, setDuration, progressBarRef }}
         />
         <Controls
           {...{ audioRef, progressBarRef, duration, setTimeProgress }}
