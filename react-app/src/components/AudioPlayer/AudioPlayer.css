@@ -1,0 +1,13 @@
+input[type="range"] {
+    --range-progress: 0;
+}
+
+input[type="range"]::before {
+    background-color: #f50;
+    width: var(--range-progress);
+}
+
+.audio-image > img {
+    width: 100px;
+    height: 100px;
+}

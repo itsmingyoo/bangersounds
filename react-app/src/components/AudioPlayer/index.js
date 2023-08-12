@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import DisplayTrack from "./DisplayTrack";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
+import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
   const [currentSong, setCurrentSong] = useState(null);
@@ -11,8 +12,10 @@ function AudioPlayer({ songs }) {
   // console.log("this is audioRef", audioRef);
 
   if (songs.length === 0) return null;
+  console.log("this is state of currentSong", currentSong);
   if (test === false) {
-    setCurrentSong(songs[2]["songURL"]);
+    setCurrentSong(songs[2]);
+    // setCurrentSong(songs[2]["songURL"]);
     setTest(true);
     return;
   }

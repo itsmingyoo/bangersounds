@@ -63,7 +63,7 @@ def seed_songs():
             "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/%24uicideboy%24+-+Kill+Yourself+(Part+III).mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
-            "caption": "Bangers All Around""Bangers All Around",
+            "caption": "Bangers All Around",
             "artistId": 3,
             "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/33+-+unlucky+me+suicide+boys.jpg"
         },
@@ -75,7 +75,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?prefix=thumbnails-to-seed%2F4.jpg&region=us-west-1#"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
         },
         {
             "title": "Chicane vs Natasha Bedingfield - Bruised Water (Adam K & Soha Club Mix)",
@@ -85,7 +85,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/7.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
         },
         {
             "title": "CRVE U - A$AP Rocky Ft. Skepta - Praise The Lord (CRVE U & SKUM Remix)",
@@ -105,7 +105,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 1,
-            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/17.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
         },
         {
             "title": "CRVE U - Please Don't Go",

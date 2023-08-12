@@ -11,6 +11,12 @@ function LandingPage() {
   return (
     <>
       <h1>Hello, this is the landing page</h1>
+      {/* MAP TO TEST ALL AWS SONG LINKS */}
+      {/* {allSongs.map((s) => (
+        <a href={s.songURL} id="test-links" target="_blank">
+          Test Link - {s.title}
+        </a>
+      ))} */}
       <div id="recently-played__container">
         <h2>Recently Played</h2>
         <div id="recently-played__songs">
@@ -21,7 +27,7 @@ function LandingPage() {
                 <div>
                   {/* Play button should play song when clicked */}
                   <button>
-                    <i class="fa-solid fas fa-play"></i>
+                    <i className="fa-solid fas fa-play"></i>
                   </button>
                   {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>

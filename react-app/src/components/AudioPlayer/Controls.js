@@ -7,6 +7,7 @@ import {
   IoPlaySharp,
   IoPauseSharp,
 } from "react-icons/io5";
+import "./AudioPlayer.css";
 
 const Controls = ({ audioRef }) => {
   const [isPlaying, setIsPlaying] = useState(false);
