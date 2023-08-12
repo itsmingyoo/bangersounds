@@ -1,7 +1,7 @@
 import React from "react";
 
 function DisplayTrack({ currentSong, audioRef }) {
-  console.log("this is song in displaytrack", currentSong);
+  // console.log("this is song in displaytrack", currentSong);
   return (
     <div>
       <audio src={currentSong} ref={audioRef} />

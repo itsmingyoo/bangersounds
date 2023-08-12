@@ -22,7 +22,7 @@ function App() {
   }, [dispatch]);
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log(songs);
+  // console.log(songs);
 
   return (
     <>

@@ -53,7 +53,7 @@ class Song(db.Model):
             "artistId": self.artistId,
             # Nullable
             "caption": self.caption,
-            "previewImageURL": self.preview_imageURL,
+            "thumbnail": self.thumbnail,
             "artistInfo": self.user_songs.to_dict()
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,

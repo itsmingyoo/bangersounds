@@ -6,9 +6,9 @@ import Controls from "./Controls";
 function AudioPlayer({ songs }) {
   const [currentSong, setCurrentSong] = useState(null);
   const [test, setTest] = useState(false);
-  console.log("this is songs in audioplayer", songs);
+  // console.log("this is songs in audioplayer", songs);
   const audioRef = useRef();
-  console.log("this is audioRef", audioRef);
+  // console.log("this is audioRef", audioRef);
 
   if (songs.length === 0) return null;
   if (test === false) {
@@ -16,7 +16,7 @@ function AudioPlayer({ songs }) {
     setTest(true);
     return;
   }
-  console.log("this is current song", currentSong);
+  // console.log("this is current song", currentSong);
   return (
     <div className="audio-player">
       <div className="inner">
