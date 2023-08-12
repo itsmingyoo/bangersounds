@@ -10,7 +10,7 @@ function DeleteSongModal({ songId, user }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
-  console.log("user in the modal", user);
+  // console.log("user in the modal", user);
 
   const handleClick = async (e) => {
     e.preventDefault();

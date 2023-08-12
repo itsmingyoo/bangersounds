@@ -98,7 +98,7 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
     dispatch(postNewSongAction(newSong));
     return newSong;
   } else {
-    console.log("error: Song not okay");
+    // console.log("error: Song not okay");
     return;
   }
 };

@@ -3,11 +3,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { thunkGetSongById, thunkPostNewSong } from "../../store/songs";
+import { thunkPostNewSong } from "../../store/songs";
 // IMPORT TO TEST AWS
 // import { thunkTestAws } from "../../store/songs";
-
-import { NavLink } from "react-router-dom";
 import TopNavBar from "./TopNavBar";
 import "./PostNewSong.css";
 import UploadNavBar from "./UploadNavBar";
@@ -27,13 +25,15 @@ function PostNewSong() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [submittedForm, setSubmittedForm] = useState(false);
-  const testData = new FormData();
-  let test = "test text";
-  testData.append("test", test);
-  console.log("this is testData", testData);
-  for (const [key, value] of testData.entries()) {
-    console.log(key, value);
-  }
+
+  // Testing class FormData - can only append, no dot or bracket notation, and append accepts two args ('key', value)
+  // const testData = new FormData();
+  // let test = "test text";
+  // testData.append("test", test);
+  // console.log("this is testData", testData);
+  // for (const [key, value] of testData.entries()) {
+  //   console.log(key, value);
+  // }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +71,7 @@ function PostNewSong() {
 
     let res = await dispatch(thunkPostNewSong(formData));
 
-    console.log("this is res after post new song dispatch", res);
+    // console.log("this is res after post new song dispatch", res);
 
     if (!res.errors) {
       setSongLoading(true);
@@ -199,8 +199,8 @@ function PostNewSong() {
   if (submitted === true) {
     return (
       <>
-        {console.log("this is song after user chooses a file", song)}
-        {console.log("privated ? ", privated)}
+        {/* {console.log("this is song after user chooses a file", song)} */}
+        {/* {console.log("privated ? ", privated)} */}
         <div>
           <form
             className="new-song__form"
@@ -238,7 +238,7 @@ function PostNewSong() {
                     {el.name}
                   </option>
                 ))}
-                {console.log(genre)}
+                {/* {console.log(genre)} */}
               </select>
             </div>
             <div id="new-song__radio-btns">

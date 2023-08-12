@@ -15,7 +15,7 @@ function DropDown({
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
-  console.log("user in the dropdown comp", user);
+  // console.log("user in the dropdown comp", user);
 
   // Change state of showMenu to True or False
   const openMenu = () => {
@@ -64,7 +64,7 @@ function DropDown({
           />
         ) : (
           <div>
-            <img src={iconClassName} />
+            <img src={iconClassName} alt={`this is ${iconClassName}`} />
           </div>
         )}
       </button>
