@@ -12,7 +12,7 @@ function AudioPlayer({ songs }) {
 
   if (songs.length === 0) return null;
   if (test === false) {
-    setCurrentSong(songs[6]["songURL"]);
+    setCurrentSong(songs[2]["songURL"]);
     setTest(true);
     return;
   }

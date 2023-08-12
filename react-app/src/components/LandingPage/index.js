@@ -25,12 +25,12 @@ function LandingPage() {
                   <NavLink to={`/songs/${s.id}`}>
                     <img
                       src={
-                        s.previewImageURL
-                          ? s.previewImageURL
+                        s.thumbnail
+                          ? s.thumbnail
                           : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
                       }
                       className="recently-played__images"
-                      alt={`p-image__${s.id}`}
+                      alt={`p-image__${s.title}`}
                       // onClick={() => Redirect(`/home`)}
                     />
                   </NavLink>

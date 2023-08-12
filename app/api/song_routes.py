@@ -81,6 +81,13 @@ def post_song():
         # if the dictionary doesn't have a url key
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print(jsonify(upload))
             return jsonify(upload), 400
 
         url = upload["url"]
@@ -91,7 +98,7 @@ def post_song():
             description=form.data["description"],
             private=form.data["private"],
             caption=form.data["caption"],
-            preview_imageURL=form.data["preview_imageURL"],
+            thumbnail=form.data["thumbnail"],
             artistId=user_id,
         )
         db.session.add(song)
@@ -114,6 +121,13 @@ def post_song():
         print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
 
         return jsonify(song.to_dict())
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 # upload song route - validate the first part when they submit a song - then it will lead to the top route for phase 2 and validate the other data
