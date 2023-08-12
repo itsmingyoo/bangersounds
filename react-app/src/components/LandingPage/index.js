@@ -20,7 +20,9 @@ function LandingPage() {
               <div key={s.id} id="recently-played__each-song-container">
                 <div>
                   {/* Play button should play song when clicked */}
-                  <button>Play Btn</button>
+                  <button>
+                    <i class="fa-solid fas fa-play"></i>
+                  </button>
                   {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>
                     <img
