@@ -30,6 +30,7 @@ function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
 
   return (
     <div className="progress-bar">
+      {/* CURRENT TIME OF THE SONG */}
       <span className="time current">{formatTime({ timeProgress })}</span>
       <input
         type="range"
@@ -37,6 +38,8 @@ function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
         defaultValue="0"
         onChange={handleProgressChange} // dynamically finds the value of the current time of the song, now take this value and assign it to the currentTime property of the audio playback -- returns as seconds -- to get currentime property, we need to pass audioRef as a prop
       />
+
+      {/* TOTAL TIME OF THE SONG */}
       <span className="time">{formatTime({ duration })}</span>
     </div>
   );

@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AudioPlayer.css";
 
 function DisplayTrack({ currentSong, audioRef, setDuration, progressBarRef }) {
   // console.log("this is song in displaytrack", currentSong);
+  const [loadedMetaData, setLoadedMetaData] = useState(false);
 
-  const onLoadedMetaData = () => {
-    // console.log("this is onloadedmetadata", audioRef.current.duration); // didnt log anything not sure why
+  if (loadedMetaData) {
+    // console.log("meta data firing");
+    // console.log("this is onloadedmetadata", audioRef.current.duration); // should be 155.715918
     const seconds = audioRef.current.duration;
+    // console.log("this is seconds", seconds);
     setDuration(seconds);
     progressBarRef.current.max = seconds;
-  };
+    // console.log("this is progressbarref max", progressBarRef.current.max);
+  }
+
+  if (!audioRef || !progressBarRef) return null;
+
+  // console.log("AUDIOREFFFF", audioRef);
+  // console.log("PROGRESSBARREF", progressBarRef);
   return (
     <div>
+      {/* AUDIO PLAYER */}
       <audio
         src={currentSong.songURL}
         ref={audioRef}
-        onLoadedMetaData={onLoadedMetaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
+        onLoadedMetadata={() => setLoadedMetaData(true)} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
       />
+      {/* THUMBNAIL */}
       <div className="audio-info">
         <div className="audio-image">
           {currentSong.thumbnail ? (
@@ -28,6 +39,7 @@ function DisplayTrack({ currentSong, audioRef, setDuration, progressBarRef }) {
           )}
         </div>
       </div>
+      {/* TITLE */}
       <div className="audio-text">
         <p className="title">{currentSong.title}</p>
         <p>{currentSong.artistInfo.displayName}</p>
