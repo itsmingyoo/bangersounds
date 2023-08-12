@@ -75,7 +75,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnaiil": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?prefix=thumbnails-to-seed%2F4.jpg&region=us-west-1#"
+            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?prefix=thumbnails-to-seed%2F4.jpg&region=us-west-1#"
         },
         {
             "title": "Chicane vs Natasha Bedingfield - Bruised Water (Adam K & Soha Club Mix)",
@@ -85,7 +85,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnaiil": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/7.jpg"
+            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/7.jpg"
         },
         {
             "title": "CRVE U - A$AP Rocky Ft. Skepta - Praise The Lord (CRVE U & SKUM Remix)",
@@ -95,7 +95,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 9,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/16.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/16.jpg"
         },
         {
             "title": "CRVE U - Lil Xan - Xanarchy (CRVE U Remix)",
@@ -105,7 +105,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 1,
-            "thumbnaiil": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/17.jpg"
+            "thumbnail": "https://s3.console.aws.amazon.com/s3/object/soundbangersimagesbucket?region=us-west-1&prefix=thumbnails-to-seed/17.jpg"
         },
         {
             "title": "CRVE U - Please Don't Go",
@@ -115,7 +115,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 4,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/18.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/18.jpg"
         },
         {
             "title": "Fragma - Toca's Miracle (In Petto 2008 Remix)",
@@ -125,7 +125,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/19.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/19.jpg"
         },
         {
             "title": "Gallant - Gentleman (feat. T-Pain) [Remix]",
@@ -135,7 +135,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/29+-+zephure+gallant.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/29+-+zephure+gallant.jpg"
         },
         {
             "title": "GUDFELLA - Say My Name (GUDFELLA Remix)",
@@ -145,7 +145,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 6,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/3.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/3.jpg"
         },
         {
             "title": "Hex Cougar - Afterlife (feat. Jarell Perry)",
@@ -155,7 +155,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/31.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/31.jpg"
         },
         {
             "title": "Hex Cougar - anythingUwant",
@@ -165,7 +165,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/32.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/32.jpg"
         },
         {
             "title": "Hex Cougar - How Does It Feel",
@@ -175,7 +175,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/30.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/30.jpg"
         },
         {
             "title": "illenium - blanke - all together - hollow - gorgeous (extended edit)",
@@ -185,7 +185,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 1,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/5+-+illenium.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/5+-+illenium.jpg"
         },
         {
             "title": "Jai Wolf - Lost ft. Chelsea Jade (Foxen Remix)",
@@ -195,7 +195,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/20.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/20.jpg"
         },
         {
             "title": "juice wrld - lucid dreams (xo sad cover)",
@@ -205,7 +205,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/20.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/20.jpg"
         },
         {
             "title": "Kaskade & Deadmau5 - Move For Me (AVE & EFX x Varun Remix)",
@@ -215,7 +215,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/9+-+Kaskade+Deadmau5.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/9+-+Kaskade+Deadmau5.jpg"
         },
         {
             "title": "keshi - drunk",
@@ -225,7 +225,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - 2 soon",
@@ -235,7 +235,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 2,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - alright",
@@ -245,7 +245,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - less of you",
@@ -255,7 +255,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 9,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - skeletons",
@@ -265,7 +265,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - somebody",
@@ -275,7 +275,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 10,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "keshi - xoxosos",
@@ -285,7 +285,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
         },
         {
             "title": "LUCA LUSH - ALL GIRLS ARE THE SAME FT. KID TRAVIS",
@@ -295,7 +295,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/27.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/27.jpg"
         },
         {
             "title": "Luminary - Amsterdam (Super8 & Tab Remix)",
@@ -305,7 +305,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 4,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/26.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/26.jpg"
         },
         {
             "title": "M'Black - Heartbreak (Bare Noize Remix)",
@@ -315,7 +315,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/24.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/24.jpg"
         },
         {
             "title": "Maazel - Fire",
@@ -325,7 +325,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 8,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/8+-+Maazel.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/8+-+Maazel.jpg"
         },
         {
             "title": "marshmello - Here With Me (ft. CHVRCHES)",
@@ -335,7 +335,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 3,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/6+-+marshmellow+churches.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/6+-+marshmellow+churches.jpg"
         },
         {
             "title": "Massive Attack - Paradise Circus (Zeds Dead Remix)",
@@ -345,7 +345,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 2,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/21.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/21.jpg"
         },
         {
             "title": "Motorcycle - As The Rush Comes (Gabriel & Dresden Chillout Mix Radio Edit)",
@@ -355,7 +355,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
         },
         {
             "title": "Post Malone - i fall apart (xo sad cover)",
@@ -365,7 +365,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 10,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/25+-+lucid+dreams+juice+wrld.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/25+-+lucid+dreams+juice+wrld.jpg"
         },
         {
             "title": "RL Grime X Utada Hikaru - Simple And Clean X I Wanna Know (Flipboitamidles Mashup)",
@@ -375,7 +375,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 7,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/2+-+rl+grime+hikaru.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/2+-+rl+grime+hikaru.jpg"
         },
         {
             "title": "Shotgun Radio - A Bad Place feat. Mimi Page (Minnesota Remix)",
@@ -385,7 +385,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 5,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
         },
         {
             "title": "stwo - Haunted (ft. Sevdaliza)",
@@ -395,7 +395,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 1,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/10+-+Destinys+Child+Say+my+name.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/10+-+Destinys+Child+Say+my+name.jpg"
         },
         {
             "title": "Whethan - So Good (feat. bülow)",
@@ -405,7 +405,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 4,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/28+-+blackbear+ocean+eyes.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/28+-+blackbear+ocean+eyes.jpg"
         },
         {
             "title": "Zephure - Gallant - Open Up (Zephure Remix)",
@@ -415,7 +415,7 @@ def seed_songs():
             "private": False,
             "caption": "Bangers All Around",
             "artistId": 3,
-            "thumbnaiil": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/14+-+crve+u.jpg"
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/14+-+crve+u.jpg"
         },
 
     ]
