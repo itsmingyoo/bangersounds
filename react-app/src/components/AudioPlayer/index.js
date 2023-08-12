@@ -9,10 +9,17 @@ function AudioPlayer({ songs }) {
   const [test, setTest] = useState(false);
   // console.log("this is songs in audioplayer", songs);
   const audioRef = useRef();
-  // console.log("this is audioRef", audioRef);
+  console.log("this is audioRef", audioRef);
+  const progressBarRef = useRef();
+
+  const [timeProgress, setTimeProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   if (songs.length === 0) return null;
+
   console.log("this is state of currentSong", currentSong);
+
+  // Testing a hardcoded song to play
   if (test === false) {
     setCurrentSong(songs[2]);
     // setCurrentSong(songs[2]["songURL"]);
@@ -23,9 +30,18 @@ function AudioPlayer({ songs }) {
   return (
     <div className="audio-player">
       <div className="inner">
-        <DisplayTrack currentSong={currentSong} audioRef={audioRef} />
+        <DisplayTrack
+          {...{ currentSong, audioRef, setDuration, progressBarRef }}
+        />
+        <Controls {...{ audioRef }} />
+        <ProgressBar
+          {...{ progressBarRef, audioRef, timeProgress, duration }}
+        />
+
+        {/* Refactored version with spread above */}
+        {/* <DisplayTrack currentSong={currentSong} audioRef={audioRef} />
         <Controls audioRef={audioRef} />
-        <ProgressBar />
+        <ProgressBar progressBarRef={progressBarRef} /> */}
       </div>
     </div>
   );
