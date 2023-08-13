@@ -7,6 +7,7 @@ function DisplayTrack({
   duration,
   setDuration,
   progressBarRef,
+  handleNext,
 }) {
   // console.log("this is song in displaytrack", currentSong);
   const [loadedMetaData, setLoadedMetaData] = useState(false);
@@ -26,17 +27,24 @@ function DisplayTrack({
     if (loadedMetaData === false) setLoadedMetaData(true);
   };
 
-  if (!audioRef || !progressBarRef) return null;
-
+  if (
+    !audioRef ||
+    !progressBarRef ||
+    currentSong === undefined ||
+    Object.values(currentSong).length === 0
+  )
+    return null;
+  // console.log("currentsong in displaysong comp", currentSong.songURL);
   // console.log("AUDIOREFFFF", audioRef);
   // console.log("PROGRESSBARREF", progressBarRef);
   return (
     <div className="display-song__container">
       {/* AUDIO PLAYER */}
       <audio
-        src={currentSong.songURL}
+        src={currentSong?.songURL}
         ref={audioRef}
         onLoadedMetadata={metaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
+        onEnded={() => handleNext()}
       />
       {/* THUMBNAIL */}
       <div className="audio-info">

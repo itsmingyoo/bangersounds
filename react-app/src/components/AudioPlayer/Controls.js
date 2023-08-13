@@ -20,8 +20,11 @@ const Controls = ({
   songIndex,
   setSongIndex,
   setCurrentSong,
+  handleNext,
+  isPlaying,
+  setIsPlaying,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(40);
   const [mute, setMute] = useState(false);
 
@@ -32,7 +35,7 @@ const Controls = ({
 
   // useCallback hook is used to memoize the function and optimize performance by preventing unnecessary re-renders when the component updates. The [] empty dependency array indicates that this callback doesn't depend on any external variables, so it won't change across renders
   const repeat = useCallback(() => {
-    // console.log("run"); // didnt work
+    // console.log("run");
     const currentTime = audioRef.current.currentTime;
     setTimeProgress(currentTime);
     progressBarRef.current.value = currentTime;
@@ -71,6 +74,12 @@ const Controls = ({
     //   cancelAnimationFrame(playAnimationRef.current);
     // }
   }, [isPlaying, audioRef, repeat]);
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
+      audioRef.current.muted = mute;
+    }
+  }, [volume, audioRef, mute]);
 
   // BUTTON FUNCTIONS
   const togglePlayPause = () => {
@@ -92,25 +101,17 @@ const Controls = ({
       setCurrentSong(songs[songIndex - 1]);
     }
   };
-  const handleNext = () => {
-    // Default the index to 0 if we've went past all our existing songs
-    if (songIndex >= songs.length - 1) {
-      setSongIndex(0);
-      setCurrentSong(songs[0]);
-    }
-    // Increment the index and the songindex for current song because we want to go to the next song
-    else {
-      setSongIndex((prev) => prev + 1);
-      setCurrentSong(songs[songIndex + 1]);
-    }
-  };
-
-  useEffect(() => {
-    if (audioRef) {
-      audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
-      audioRef.current.muted = mute;
-    }
-  }, [volume, audioRef, mute]);
+  //   // Default the index to 0 if we've went past all our existing songs
+  //   if (songIndex >= songs.length - 1) {
+  //     setSongIndex(0);
+  //     setCurrentSong(songs[0]);
+  //   }
+  //   // Increment the index and the songindex for current song because we want to go to the next song
+  //   else {
+  //     setSongIndex((prev) => prev + 1);
+  //     setCurrentSong(songs[songIndex + 1]);
+  //   }
+  // };
 
   return (
     <div className="controls-container">

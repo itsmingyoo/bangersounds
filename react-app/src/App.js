@@ -23,6 +23,7 @@ function App() {
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   // console.log(songs);
+  if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
 
   return (
     <>
