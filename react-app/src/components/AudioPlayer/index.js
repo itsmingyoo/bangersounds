@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
+import VolumeBar from "./VolumeBar";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
@@ -72,6 +73,7 @@ function AudioPlayer({ songs }) {
         <ProgressBar
           {...{ progressBarRef, audioRef, timeProgress, duration }}
         />
+        <VolumeBar {...{ audioRef }} />
 
         {/* Refactored version with spread above */}
         {/* <DisplayTrack currentSong={currentSong} audioRef={audioRef} />

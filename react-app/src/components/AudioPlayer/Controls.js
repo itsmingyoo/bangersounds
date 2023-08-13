@@ -26,16 +26,17 @@ const Controls = ({
   setIsPlaying,
 }) => {
   // const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(40);
-  const [mute, setMute] = useState(false);
+  // const [volume, setVolume] = useState(40);
+  // const [mute, setMute] = useState(false);
   const song = useSelector((s) => s.songs.CurrentlyPlaying);
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
   // Trigger the api once the playback is ongoing in the useEffect hook
   const playAnimationRef = useRef();
 
-  // useCallback hook is used to memoize the function and optimize performance by preventing unnecessary re-renders when the component updates. The [] empty dependency array indicates that this callback doesn't depend on any external variables, so it won't change across renders
+  //! useCallback hook is used to memoize the function and optimize performance by preventing unnecessary re-renders when the component updates. The [] empty dependency array indicates that this callback doesn't depend on any external variables, so it won't change across renders
 
+  //* REPEAT FUNCTION HANDLES THE PROGRESS / TIME BAR
   const repeat = useCallback(() => {
     if (Object.values(currentSong) > 0) {
       // Object.values(currentSong).length > 0 returns a bug for some reason, so we just check if there are any values.
@@ -77,12 +78,12 @@ const Controls = ({
     //   cancelAnimationFrame(playAnimationRef.current);
     // }
   }, [isPlaying, audioRef, repeat]);
-  useEffect(() => {
-    if (audioRef) {
-      audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
-      audioRef.current.muted = mute;
-    }
-  }, [volume, audioRef, mute]);
+  // useEffect(() => {
+  //   if (audioRef) {
+  //     audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
+  //     audioRef.current.muted = mute;
+  //   }
+  // }, [volume, audioRef, mute]);
 
   // BUTTON FUNCTIONS
   const togglePlayPause = () => {
@@ -150,7 +151,8 @@ const Controls = ({
           <IoPlaySkipForwardSharp />
         </button>
       </div>
-      <div className="volume">
+
+      {/* <div className="volume">
         <button onClick={() => setMute((prev) => !prev)}>
           {mute || volume < 5 ? (
             <IoMdVolumeOff />
@@ -170,7 +172,7 @@ const Controls = ({
             background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`,
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

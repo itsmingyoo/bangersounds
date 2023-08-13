@@ -1,3 +1,18 @@
+.audio-player {
+    position: sticky;
+    bottom: 0;
+}
+
+.inner {
+    display: flex;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 input[type="range"] {
     -webkit-appearance: none; /* THIS MAKES IT SO YOUR SLIDER BAR DEFAULT CSS GOES AWAY AND YOU CAN STYLE IT ANY COLOR YOU WANT */
     appearance: none;

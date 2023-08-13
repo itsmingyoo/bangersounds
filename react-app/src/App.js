@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <AudioPlayer isLoaded={isLoaded} songs={songs} />
+      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/login">
@@ -49,7 +49,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
+      <AudioPlayer isLoaded={isLoaded} songs={songs} />
     </>
   );
 }
