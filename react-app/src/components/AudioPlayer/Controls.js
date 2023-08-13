@@ -38,6 +38,7 @@ const Controls = ({
 
   const repeat = useCallback(() => {
     if (Object.values(currentSong) > 0) {
+      // Object.values(currentSong).length > 0 returns a bug for some reason, so we just check if there are any values.
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
       progressBarRef.current.value = currentTime;

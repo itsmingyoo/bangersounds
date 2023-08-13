@@ -7,20 +7,23 @@ import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
   const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const playSong = null; // test
+  const audioRef = useRef();
+  const progressBarRef = useRef();
 
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef();
-  const progressBarRef = useRef();
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  // Eliminates Infinite Loop
   useEffect(() => {
-    if (playSong) setCurrentSong(playSong);
+    if (Object.values(playSong) > 0) setCurrentSong(playSong);
+    else setCurrentSong(songs[songIndex]);
   }, [playSong]);
 
-  if (songs.length === 0) return null;
+  if (songs.length === 0 || Object.values(playSong) === 0) return null;
 
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs
