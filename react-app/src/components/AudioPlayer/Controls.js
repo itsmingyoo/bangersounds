@@ -27,7 +27,6 @@ const Controls = ({
   // const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(40);
   const [mute, setMute] = useState(false);
-
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
   // Trigger the api once the playback is ongoing in the useEffect hook
@@ -83,8 +82,13 @@ const Controls = ({
 
   // BUTTON FUNCTIONS
   const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    console.log("before", isPlaying);
+    setIsPlaying((prev) => !prev);
   };
+  // can only console log the new state after a useeffect, bc you're still in the same render state.
+  useEffect(() => {
+    // console.log("after", isPlaying);
+  }, [isPlaying]);
   const skipForward = () => {
     audioRef.current.currentTime += 10;
   };

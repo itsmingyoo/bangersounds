@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import AudioPlayButton from "../AudioContext";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -26,9 +27,10 @@ function LandingPage() {
               <div key={s.id} id="recently-played__each-song-container">
                 <div>
                   {/* Play button should play song when clicked */}
-                  <button>
+                  {/* <button>
                     <i className="fa-solid fas fa-play"></i>
-                  </button>
+                  </button> */}
+                  <AudioPlayButton song={s} />
                   {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>
                     <img

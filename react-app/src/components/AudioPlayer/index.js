@@ -2,35 +2,22 @@ import React, { useState, useRef } from "react";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
+import { useSong } from "../AudioContext";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
-  // const [test, setTest] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef();
-  // console.log("this is audioRef", audioRef);
   const progressBarRef = useRef();
-
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const song = useSong();
+  console.log(song);
 
-  if (songs.length === 0) return null;
+  if (songs.length === 0 || !song) return null;
 
-  // console.log("this is state of currentSong", currentSong);
-  // console.log("this is songs in audioplayer", songs); // array
-
-  // Testing a hardcoded song to play
-  // if (test === false) {
-  //   setCurrentSong(songs[2]);
-  //   // setCurrentSong(songs[2]["songURL"]);
-  //   setTest(true);
-  //   return;
-  // }
-  // console.log("this is current song", currentSong);
-
-  // console.log(duration);
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs
     if (songIndex >= songs.length - 1) {
@@ -43,6 +30,7 @@ function AudioPlayer({ songs }) {
       setCurrentSong(songs[songIndex + 1]);
     }
   };
+
   return (
     <div className="audio-player">
       <div className="inner">
