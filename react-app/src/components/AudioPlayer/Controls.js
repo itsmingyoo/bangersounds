@@ -9,6 +9,7 @@ import {
 } from "react-icons/io5";
 import { IoMdVolumeHigh, IoMdVolumeOff, IoMdVolumeLow } from "react-icons/io";
 import "./AudioPlayer.css";
+import { useSelector } from "react-redux";
 
 const Controls = ({
   songs,
@@ -27,6 +28,7 @@ const Controls = ({
   // const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(40);
   const [mute, setMute] = useState(false);
+  const song = useSelector((s) => s.songs.CurrentlyPlaying);
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
   // Trigger the api once the playback is ongoing in the useEffect hook
@@ -35,7 +37,7 @@ const Controls = ({
   // useCallback hook is used to memoize the function and optimize performance by preventing unnecessary re-renders when the component updates. The [] empty dependency array indicates that this callback doesn't depend on any external variables, so it won't change across renders
 
   const repeat = useCallback(() => {
-    if (currentSong) {
+    if (Object.values(currentSong) > 0) {
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
       progressBarRef.current.value = currentTime;
@@ -91,7 +93,7 @@ const Controls = ({
     // console.log("after", isPlaying);
   }, [isPlaying]);
 
-  if (!currentSong || currentSong === null) return null;
+  if (!currentSong || currentSong === null || !song) return null;
   // console.log("audioref", audioRef);
   // console.log("current", audioRef.current);
   // console.log("current time", audioRef.current.currentTime);
