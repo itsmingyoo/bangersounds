@@ -1,27 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AudioPlayer.css";
 
-function DisplayTrack({
+function DisplaySong({
   currentSong,
   audioRef,
-  duration,
   setDuration,
   progressBarRef,
   handleNext,
 }) {
-  // console.log("this is song in displaytrack", currentSong);
   const [loadedMetaData, setLoadedMetaData] = useState(false);
 
-  if (loadedMetaData) {
-    // console.log("meta data firing");
-    // console.log("this is onloadedmetadata", audioRef.current.duration); // should be 155.715918
-    const seconds = audioRef.current.duration;
-    // console.log("this is seconds", seconds);
-    setDuration(seconds);
-    progressBarRef.current.max = seconds;
-    // console.log("this is progressbarref max", progressBarRef.current.max);
-    // console.log(duration);
-  }
+  // NOTE * Anytime youre setting a new state that is imported as a prop 'setState' for example here, you must use it in a useEffect else you will get warnings in the dev console.
+  useEffect(() => {
+    if (loadedMetaData) {
+      // console.log("meta data firing");
+      // console.log("this is onloadedmetadata", audioRef.current.duration); // should be 155.715918
+      const seconds = audioRef.current.duration;
+      // console.log("this is seconds", seconds);
+      setDuration(seconds);
+      progressBarRef.current.max = seconds;
+      // console.log("this is progressbarref max", progressBarRef.current.max);
+      // console.log(duration);
+    }
+  }, [loadedMetaData]);
 
   const metaData = () => {
     if (loadedMetaData === false) setLoadedMetaData(true);
@@ -66,4 +67,4 @@ function DisplayTrack({
     </div>
   );
 }
-export default DisplayTrack;
+export default DisplaySong;

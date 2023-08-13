@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import DisplayTrack from "./DisplaySong";
+import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import "./AudioPlayer.css";
@@ -46,11 +46,10 @@ function AudioPlayer({ songs }) {
   return (
     <div className="audio-player">
       <div className="inner">
-        <DisplayTrack
+        <DisplaySong
           {...{
             currentSong,
             audioRef,
-            duration,
             setDuration,
             progressBarRef,
             handleNext,
