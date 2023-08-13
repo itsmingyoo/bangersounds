@@ -33,21 +33,22 @@ const Controls = ({
   const playAnimationRef = useRef();
 
   // useCallback hook is used to memoize the function and optimize performance by preventing unnecessary re-renders when the component updates. The [] empty dependency array indicates that this callback doesn't depend on any external variables, so it won't change across renders
-  const repeat = useCallback(() => {
-    // console.log("run");
-    const currentTime = audioRef.current.currentTime;
-    setTimeProgress(currentTime);
-    progressBarRef.current.value = currentTime;
-    progressBarRef.current.style.setProperty(
-      "--range-progress",
-      `${(progressBarRef.current.value / duration) * 100}%`
-    );
 
-    //! instantiating an animation loop using requestAnimationFrame function in react
-    //! playAnimationRef.current holds the request animation frame
-    //! requestAnimationFrame takes a callback 'repeat' and schedules a single animation frame to be executed before the next repaint
-    // ***requestAnimationFrame returns the request-id to assign to playAnimationRef.current which will allow us to cancel the request once we pause the playback
-    playAnimationRef.current = requestAnimationFrame(repeat);
+  const repeat = useCallback(() => {
+    if (currentSong) {
+      const currentTime = audioRef.current.currentTime;
+      setTimeProgress(currentTime);
+      progressBarRef.current.value = currentTime;
+      progressBarRef.current.style.setProperty(
+        "--range-progress",
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
+      //! instantiating an animation loop using requestAnimationFrame function in react
+      //! playAnimationRef.current holds the request animation frame
+      //! requestAnimationFrame takes a callback 'repeat' and schedules a single animation frame to be executed before the next repaint
+      // ***requestAnimationFrame returns the request-id to assign to playAnimationRef.current which will allow us to cancel the request once we pause the playback
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
   }, []);
 
   // USE EFFECT FOR PLAY / PAUSE TO CONTINUE / CANCEL PROGRESS BAR ANIMATION
@@ -89,6 +90,12 @@ const Controls = ({
   useEffect(() => {
     // console.log("after", isPlaying);
   }, [isPlaying]);
+
+  if (!currentSong || currentSong === null) return null;
+  // console.log("audioref", audioRef);
+  // console.log("current", audioRef.current);
+  // console.log("current time", audioRef.current.currentTime);
+
   const skipForward = () => {
     audioRef.current.currentTime += 10;
   };

@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
-import { useSong } from "../AudioContext";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
+  const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
+
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -13,10 +15,12 @@ function AudioPlayer({ songs }) {
   const progressBarRef = useRef();
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const song = useSong();
-  console.log(song);
 
-  if (songs.length === 0 || !song) return null;
+  useEffect(() => {
+    if (playSong) setCurrentSong(playSong);
+  }, [playSong]);
+
+  if (songs.length === 0) return null;
 
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs

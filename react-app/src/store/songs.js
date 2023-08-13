@@ -4,6 +4,7 @@ const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
+const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
 // TEST AWS
 // const TEST_AWS_ROUTE_ACTION = "songs/TEST_AWS_ROUTE_ACTION";
 //*  ===================end of types ===================//
@@ -43,6 +44,13 @@ const deleteSongByIdAction = (songId, res) => {
     type: DELETE_SONG_BY_ID_ACTION,
     songId,
     res,
+  };
+};
+
+export const playUserSongAction = (song) => {
+  return {
+    type: PLAY_CURRENT_USER_SONG_ACTION,
+    song,
   };
 };
 
@@ -152,7 +160,12 @@ export const thunkDeleteUserSong = (songId) => async (dispatch) => {
 //*  ======================= end of thunks ===================//
 
 //? ================== reducer================================//
-let initialState = { Songs: {}, SongDetails: {}, UserSongs: {} };
+let initialState = {
+  Songs: {},
+  SongDetails: {},
+  UserSongs: {},
+  CurrentlyPlaying: {},
+};
 export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
@@ -182,6 +195,13 @@ export default function reducer(state = initialState, action) {
       delete newState.Songs[action.songId];
       return newState;
     }
+    case PLAY_CURRENT_USER_SONG_ACTION: {
+      newState = { ...state };
+      newState.CurrentlyPlaying = {};
+      newState.CurrentlyPlaying = { ...action.song };
+      return newState;
+    }
+
     // TEST AWS
     // case TEST_AWS_ROUTE_ACTION: {
     //   newState = {};

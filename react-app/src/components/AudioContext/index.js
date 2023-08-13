@@ -1,27 +1,24 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
+import { playUserSongAction } from "../../store/songs";
 import "./AudioContext.css";
 
-// Define the context
-export const SongContext = createContext();
-
-// Custom hook to use the context
-export const useSong = () => useContext(SongContext);
-
-const AudioPlayButton = ({ song }) => {
+const SongProvider = ({ song }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const dispatch = useDispatch();
 
+  // Btn Func
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
+    dispatch(playUserSongAction(song));
   };
 
   return (
-    <SongContext.Provider value={{ song }}>
-      <button onClick={togglePlayPause}>
-        {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
-      </button>
-    </SongContext.Provider>
+    <button onClick={togglePlayPause}>
+      {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+    </button>
   );
 };
 
-export default AudioPlayButton;
+export default SongProvider;
