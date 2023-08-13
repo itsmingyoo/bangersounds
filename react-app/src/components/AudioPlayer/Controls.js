@@ -38,8 +38,8 @@ const Controls = ({
 
   //* REPEAT FUNCTION HANDLES THE PROGRESS / TIME BAR
   const repeat = useCallback(() => {
-    if (Object.values(currentSong) > 0) {
-      // Object.values(currentSong).length > 0 returns a bug for some reason, so we just check if there are any values.
+    if (Object.values(currentSong).length > 0) {
+      //! Object.values(currentSong).length > 0 returns a bug for some reason, so we just check if there are any values. -- its not breaking anymore, 'Object.values(currentSong) > 0' broke my progress bar, so it never hit this if statement so i have to add .length, but it did fix the error of when it was just '(currentSong) ...code to execute' it would break at the next line 'const currentTime = audioRef.current.currentTime'
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
       progressBarRef.current.value = currentTime;
@@ -47,11 +47,12 @@ const Controls = ({
         "--range-progress",
         `${(progressBarRef.current.value / duration) * 100}%`
       );
+
+      playAnimationRef.current = requestAnimationFrame(repeat);
+      // ***requestAnimationFrame returns the request-id to assign to playAnimationRef.current which will allow us to cancel the request once we pause the playback
       //! instantiating an animation loop using requestAnimationFrame function in react
       //! playAnimationRef.current holds the request animation frame
       //! requestAnimationFrame takes a callback 'repeat' and schedules a single animation frame to be executed before the next repaint
-      // ***requestAnimationFrame returns the request-id to assign to playAnimationRef.current which will allow us to cancel the request once we pause the playback
-      playAnimationRef.current = requestAnimationFrame(repeat);
     }
   }, []);
 
@@ -152,6 +153,7 @@ const Controls = ({
         </button>
       </div>
 
+      {/* REFACTORED INTO ITS OWN COMPONENT */}
       {/* <div className="volume">
         <button onClick={() => setMute((prev) => !prev)}>
           {mute || volume < 5 ? (
