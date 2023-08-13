@@ -63,8 +63,10 @@ function DisplaySong({
         </div>
         {/* TITLE */}
         <div className="audio-text">
-          <p className="displayName">{currentSong.artistInfo.displayName}</p>
-          <p className="title">{currentSong.title}</p>
+          <span className="displayName">
+            {currentSong.artistInfo.displayName}
+          </span>
+          <span className="title">{currentSong.title}</span>
         </div>
       </div>
     </div>
