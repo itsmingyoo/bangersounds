@@ -131,6 +131,7 @@ const Controls = ({
 
   return (
     <div className="controls-container">
+      {/* CONTROL BUTTONS */}
       <div className="controls">
         <button onClick={handlePrevious}>
           <IoPlaySkipBackSharp />

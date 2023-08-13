@@ -39,30 +39,32 @@ function DisplaySong({
   // console.log("AUDIOREFFFF", audioRef);
   // console.log("PROGRESSBARREF", progressBarRef);
   return (
-    <div className="display-song__container">
-      {/* AUDIO PLAYER */}
-      <audio
-        src={currentSong?.songURL}
-        ref={audioRef}
-        onLoadedMetadata={metaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
-        onEnded={() => handleNext()}
-      />
-      {/* THUMBNAIL */}
-      <div className="audio-info">
-        <div className="audio-image">
-          {currentSong.thumbnail ? (
-            <img src={currentSong.thumbnail} alt="audio thumb" />
-          ) : (
-            <div className="icon-container">
-              <span className="audio-icon">{/* insert icon here */}</span>
-            </div>
-          )}
+    <div className="display-song__main-container">
+      <div className="display-song__container">
+        {/* AUDIO PLAYER */}
+        <audio
+          src={currentSong?.songURL}
+          ref={audioRef}
+          onLoadedMetadata={metaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
+          onEnded={() => handleNext()}
+        />
+        {/* THUMBNAIL */}
+        <div className="audio-info">
+          <div className="audio-image">
+            {currentSong.thumbnail ? (
+              <img src={currentSong.thumbnail} alt="audio thumb" />
+            ) : (
+              <div className="icon-container">
+                <span className="audio-icon">{/* insert icon here */}</span>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      {/* TITLE */}
-      <div className="audio-text">
-        <p className="title">{currentSong.title}</p>
-        <p>{currentSong.artistInfo.displayName}</p>
+        {/* TITLE */}
+        <div className="audio-text">
+          <p className="displayName">{currentSong.artistInfo.displayName}</p>
+          <p className="title">{currentSong.title}</p>
+        </div>
       </div>
     </div>
   );

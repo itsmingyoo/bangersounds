@@ -45,15 +45,6 @@ function AudioPlayer({ songs }) {
   return (
     <div className="audio-player">
       <div className="inner">
-        <DisplaySong
-          {...{
-            currentSong,
-            audioRef,
-            setDuration,
-            progressBarRef,
-            handleNext,
-          }}
-        />
         <Controls
           {...{
             songs,
@@ -74,6 +65,15 @@ function AudioPlayer({ songs }) {
           {...{ progressBarRef, audioRef, timeProgress, duration }}
         />
         <VolumeBar {...{ audioRef }} />
+        <DisplaySong
+          {...{
+            currentSong,
+            audioRef,
+            setDuration,
+            progressBarRef,
+            handleNext,
+          }}
+        />
 
         {/* Refactored version with spread above */}
         {/* <DisplayTrack currentSong={currentSong} audioRef={audioRef} />

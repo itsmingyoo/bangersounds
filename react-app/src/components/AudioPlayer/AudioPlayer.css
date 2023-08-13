@@ -1,16 +1,118 @@
+/** NOTE FOR MARGIN PARAMETERS  */
+/* top | right | bottom | left */
+
+
+/** Audio Player Main Container */
 .audio-player {
     position: sticky;
     bottom: 0;
+    background-color: lightgray;
+    height: 50px;
+    z-index: 999;
 }
 
+/*! wrapper of the components in the index.js (audioplayer component) */
 .inner {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
+
+
+/** wrapper for the controls */
 .controls-container {
     display: flex;
     justify-content: space-between;
 }
+
+/* container for all the control buttons */
+.controls {
+    margin-right: 10px;
+
+}
+.controls > button {
+   border: none;
+   margin-right: 5px;
+}
+
+/* container for the volume bar and button icon */
+.volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 20px;
+    margin: 0 10px 0 10px;
+}
+
+.volume-button {
+    border: none;
+}
+
+/* container for the current time and duration of the song */
+.progress-bar {
+    display: flex;
+    max-height: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    font-size: 12px;
+}
+
+
+
+/** display song container for everything below this line*/
+.display-song__main-container {
+    max-height: 20px;
+    width: 340px;
+    padding: 0 10px;
+}
+
+.display-song__container{
+    display: flex;
+    height: 100%;
+    align-items: center
+}
+
+/* ! THIS IS LITERALLY THE CONTAINER WRAPPING THE DIV THATS WRAPPING THE IMAGE */
+.audio-info {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+/* ! BUT THIS DOESNT WORK - IT DID BEFORE BUT NOT ANYMORE - WHY???? */
+.audio-image > img {
+    max-width: 20px;
+    max-height: 20px;
+    object-fit: contain;
+    margin: 0 10px 0 0; /* adds margin right to space between img and text' */
+}
+
+/* wrappper for title and displayname */
+.audio-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-left: 8px;
+    /* flex-grow: 1;
+    line-height: 1.5em; */
+}
+.displayName{
+    max-height: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+.title {
+    max-height: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    /* overflow: hidden; */
+}
+
 
 
 input[type="range"] {
@@ -19,6 +121,7 @@ input[type="range"] {
     outline: none;
     background-color: #f50;
     --range-progress: 0;
+    height: 1px;
 }
 
 input[type="range"]::before {
@@ -32,27 +135,17 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: black;
 
     /* Set the dimensions */
-    width: 16px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 
+
     /* Override the default thumb styles */
+    -webkit-color: #f50;
     -webkit-appearance: none;
     appearance: none;
 }
 
 
-/* ! THIS IS LITERALLY THE DIV WRAPPING THE DIV THATS WRAPPING THE IMAGE */
-.audio-info {
-    max-width: 200px;
-    max-height: 200px;
-}
-
-/* ! BUT THIS DOESNT WORK - IT DID BEFORE BUT NOT ANYMORE - WHY???? */
-.audio-image > img {
-    max-width: 100px;
-    max-height: 100px;
-    object-fit: contain;
-}
 
 /* ******************************** */

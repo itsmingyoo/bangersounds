@@ -15,7 +15,10 @@ const VolumeBar = ({ audioRef }) => {
   return (
     <>
       <div className="volume">
-        <button onClick={() => setMute((prev) => !prev)}>
+        <button
+          onClick={() => setMute((prev) => !prev)}
+          className="volume-button"
+        >
           {mute || volume < 5 ? (
             <IoMdVolumeOff />
           ) : volume < 40 ? (
