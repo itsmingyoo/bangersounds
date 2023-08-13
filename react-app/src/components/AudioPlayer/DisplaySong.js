@@ -9,6 +9,7 @@ function DisplaySong({
   handleNext,
 }) {
   const [loadedMetaData, setLoadedMetaData] = useState(false);
+  console.log("this is currentsong prop in displaysong", currentSong);
 
   // NOTE * Anytime youre setting a new state that is imported as a prop 'setState' for example here, you must use it in a useEffect else you will get warnings in the dev console.
   useEffect(() => {

@@ -15,6 +15,12 @@ function AudioPlayer({ songs }) {
   // Default song to bangersounds library of songs
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
+  console.log(
+    "this is the playSong from selector",
+    playSong,
+    "currentSong:",
+    currentSong
+  );
 
   // States that audio player components depend on to render up-to-date progress-bar/meta data
   const [isPlaying, setIsPlaying] = useState(false);
@@ -23,19 +29,30 @@ function AudioPlayer({ songs }) {
 
   // Eliminates Infinite Loop
   useEffect(() => {
-    if (Object.values(playSong) > 0) setCurrentSong(playSong);
+    if (Object.values(playSong).length > 0) setCurrentSong(playSong);
     else setCurrentSong(songs[songIndex]);
+    console.log(
+      "this is the playSong after UE",
+      playSong,
+      "currentSong:",
+      currentSong
+    );
   }, [playSong]);
 
   if (songs.length === 0 || Object.values(playSong) === 0) return null;
-
+  console.log(
+    "this is playSong after returning null",
+    playSong,
+    "currentSong:",
+    currentSong
+  );
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs
     if (songIndex >= songs.length - 1) {
       setSongIndex(0);
       setCurrentSong(songs[0]);
     }
-    // Increment the index and the songindex for current song because we want to go to the next song
+    // Increment the index and the songindex for playSong because we want to go to the next song
     else {
       setSongIndex((prev) => prev + 1);
       setCurrentSong(songs[songIndex + 1]);
