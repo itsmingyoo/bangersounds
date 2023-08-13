@@ -5,9 +5,10 @@
 /** Audio Player Main Container */
 .audio-player {
     position: sticky;
+    margin-bottom: 0;
     bottom: 0;
-    background-color: lightgray;
-    height: 50px;
+    background-color: #999;
+    white-space: nowrap;
     z-index: 999;
 }
 
@@ -17,6 +18,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    bottom: 0;
 }
 
 
@@ -35,6 +37,7 @@
 .controls > button {
    border: none;
    margin-right: 5px;
+   background-color: #999;
 }
 
 /* container for the volume bar and button icon */
@@ -48,6 +51,7 @@
 
 .volume-button {
     border: none;
+    background-color: #999;
 }
 
 /* container for the current time and duration of the song */
@@ -66,7 +70,6 @@
 
 /** display song container for everything below this line*/
 .display-song__main-container {
-    max-height: 20px;
     width: 340px;
     padding: 0 10px;
 }
@@ -102,15 +105,15 @@
 }
 .displayName{
     max-height: 10px;
-    font-size: 12px;
+    font-size: 8px;
     color: #666;
 }
 
 .title {
     max-height: 10px;
-    font-size: 12px;
-    line-height: 16px;
-    /* overflow: hidden; */
+    font-size: 10px;
+    /* line-height: 2px; */
+    overflow: hidden;
 }
 
 
