@@ -7,13 +7,23 @@ import {
   IoPlaySharp,
   IoPauseSharp,
 } from "react-icons/io5";
+import { IoMdVolumeHigh, IoMdVolumeOff, IoMdVolumeLow } from "react-icons/io";
 import "./AudioPlayer.css";
 
-const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
+const Controls = ({
+  songs,
+  audioRef,
+  progressBarRef,
+  duration,
+  setTimeProgress,
+  currentSong,
+  songIndex,
+  setSongIndex,
+  setCurrentSong,
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const [volume, setVolume] = useState(40);
+  const [mute, setMute] = useState(false);
 
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
@@ -62,24 +72,89 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress }) => {
     // }
   }, [isPlaying, audioRef, repeat]);
 
+  // BUTTON FUNCTIONS
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+  const skipForward = () => {
+    audioRef.current.currentTime += 10;
+  };
+  const skipBackward = () => {
+    audioRef.current.currentTime -= 10;
+  };
+  const handlePrevious = () => {
+    if (songIndex === 0) {
+      let lastSongIndex = songs.length - 1;
+      setSongIndex(lastSongIndex);
+      setCurrentSong(songs[lastSongIndex]);
+    } else {
+      setSongIndex((prev) => prev - 1);
+      setCurrentSong(songs[songIndex - 1]);
+    }
+  };
+  const handleNext = () => {
+    // Default the index to 0 if we've went past all our existing songs
+    if (songIndex >= songs.length - 1) {
+      setSongIndex(0);
+      setCurrentSong(songs[0]);
+    }
+    // Increment the index and the songindex for current song because we want to go to the next song
+    else {
+      setSongIndex((prev) => prev + 1);
+      setCurrentSong(songs[songIndex + 1]);
+    }
+  };
+
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
+      audioRef.current.muted = mute;
+    }
+  }, [volume, audioRef, mute]);
+
   return (
     <div className="controls-container">
       <div className="controls">
-        <button>
+        <button onClick={handlePrevious}>
           <IoPlaySkipBackSharp />
         </button>
-        <button>
+
+        <button onClick={skipBackward}>
           <IoPlayBackSharp />
         </button>
+
         <button onClick={togglePlayPause}>
           {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
         </button>
-        <button>
+
+        <button onClick={skipForward}>
           <IoPlayForwardSharp />
         </button>
-        <button>
+
+        <button onClick={handleNext}>
           <IoPlaySkipForwardSharp />
         </button>
+      </div>
+      <div className="volume">
+        <button onClick={() => setMute((prev) => !prev)}>
+          {mute || volume < 5 ? (
+            <IoMdVolumeOff />
+          ) : volume < 40 ? (
+            <IoMdVolumeLow />
+          ) : (
+            <IoMdVolumeHigh />
+          )}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
+          style={{
+            background: `linear-gradient(to right, #f50 ${volume}%, #ccc ${volume}%)`,
+          }}
+        />
       </div>
     </div>
   );

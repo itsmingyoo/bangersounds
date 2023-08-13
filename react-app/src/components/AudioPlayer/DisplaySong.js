@@ -31,7 +31,7 @@ function DisplayTrack({
   // console.log("AUDIOREFFFF", audioRef);
   // console.log("PROGRESSBARREF", progressBarRef);
   return (
-    <div>
+    <div className="display-song__container">
       {/* AUDIO PLAYER */}
       <audio
         src={currentSong.songURL}
