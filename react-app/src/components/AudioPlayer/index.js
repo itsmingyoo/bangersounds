@@ -11,8 +11,11 @@ function AudioPlayer({ songs }) {
   const audioRef = useRef();
   const progressBarRef = useRef();
 
+  // Default song to bangersounds library of songs
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
+
+  // States that audio player components depend on to render up-to-date progress-bar/meta data
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
