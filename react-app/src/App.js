@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -9,6 +9,7 @@ import * as songActions from "./store/songs";
 import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
 import PostNewSong from "./components/PostNewSong";
+import AudioPlayer from "./components/AudioPlayer";
 // import { thunkGetAllSongs } from "./store/songs";
 
 function App() {
@@ -20,9 +21,14 @@ function App() {
       .then(() => dispatch(songActions.thunkGetAllSongs()));
   }, [dispatch]);
 
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  // console.log(songs);
+  if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <AudioPlayer isLoaded={isLoaded} songs={songs} />
       {isLoaded && (
         <Switch>
           <Route exact path="/login">
@@ -42,6 +48,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
     </>
   );
 }

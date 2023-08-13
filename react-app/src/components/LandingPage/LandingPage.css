@@ -18,3 +18,8 @@
     margin: 10px;
     width: 100px;
 }
+
+#test-links {
+    display: flex;
+    flex-direction: column;
+}

@@ -26,7 +26,7 @@ class Song(db.Model):
 
     # Not Required / Nullable Columns
     caption = db.Column(db.String(255), nullable=True)  # Nullable
-    preview_imageURL = db.Column(db.String(255), nullable=True)
+    thumbnail = db.Column(db.String(255), nullable=True)
 
     # Song-User Relationship FK Column
     artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
@@ -53,7 +53,7 @@ class Song(db.Model):
             "artistId": self.artistId,
             # Nullable
             "caption": self.caption,
-            "previewImageURL": self.preview_imageURL,
+            "thumbnail": self.thumbnail,
             "artistInfo": self.user_songs.to_dict()
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,

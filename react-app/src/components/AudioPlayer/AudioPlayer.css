@@ -1,0 +1,43 @@
+input[type="range"] {
+    -webkit-appearance: none; /* THIS MAKES IT SO YOUR SLIDER BAR DEFAULT CSS GOES AWAY AND YOU CAN STYLE IT ANY COLOR YOU WANT */
+    appearance: none;
+    outline: none;
+    background-color: #f50;
+    --range-progress: 0;
+}
+
+input[type="range"]::before {
+    background-color: #f50;
+    width: var(--range-progress);
+}
+
+/** Style the slider's "THUMB" */
+input[type="range"]::-webkit-slider-thumb {
+    /* Set the thumb color */
+    background-color: black;
+
+    /* Set the dimensions */
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+
+    /* Override the default thumb styles */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* ! THIS IS LITERALLY THE DIV WRAPPING THE DIV THATS WRAPPING THE IMAGE */
+.audio-info {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+/* ! BUT THIS DOESNT WORK - IT DID BEFORE BUT NOT ANYMORE - WHY???? */
+.audio-image > img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+/* ******************************** */

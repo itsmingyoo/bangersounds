@@ -15,4 +15,4 @@ class NewSongForm(FlaskForm):
         "private", validators=[InputRequired()]
     )  # Must use InputRequired() because sending "false" or false is a falsey value for DataRequired(), which will raise an error
     caption = StringField("profile_image")
-    preview_imageURL = StringField("preview_imageURL")
+    thumbnail = StringField("thumbnail")

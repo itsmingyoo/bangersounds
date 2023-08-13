@@ -69,16 +69,25 @@ def post_song():
     print("this is the user id", user_id, isinstance(user_id, int))
     form = NewSongForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+
     if form.validate_on_submit():
+
         song = form.data["song"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        print('this is upload this is upload this is upload this is upload ', upload)
+        # print('this is upload this is upload this is upload this is upload ', upload)
 
         if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
+            print(jsonify(upload))
             return jsonify(upload), 400
 
         url = upload["url"]
@@ -89,7 +98,7 @@ def post_song():
             description=form.data["description"],
             private=form.data["private"],
             caption=form.data["caption"],
-            preview_imageURL=form.data["preview_imageURL"],
+            thumbnail=form.data["thumbnail"],
             artistId=user_id,
         )
         db.session.add(song)
@@ -112,6 +121,13 @@ def post_song():
         print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
 
         return jsonify(song.to_dict())
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
+    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 # upload song route - validate the first part when they submit a song - then it will lead to the top route for phase 2 and validate the other data

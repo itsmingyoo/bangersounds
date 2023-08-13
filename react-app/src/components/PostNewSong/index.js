@@ -7,8 +7,8 @@ import { thunkPostNewSong } from "../../store/songs";
 // IMPORT TO TEST AWS
 // import { thunkTestAws } from "../../store/songs";
 import TopNavBar from "./TopNavBar";
-import "./PostNewSong.css";
 import UploadNavBar from "./UploadNavBar";
+import "./PostNewSong.css";
 
 function PostNewSong() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function PostNewSong() {
   const [description, setDescription] = useState("");
   const [privated, setPrivated] = useState(false);
   const [caption, setCaption] = useState("");
-  const [previewImageURL, setPreviewImageURL] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
   const [song, setSong] = useState(null);
   const [songLoading, setSongLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -54,20 +54,9 @@ function PostNewSong() {
     formData.append("description", description);
     formData.append("private", privated);
     formData.append("caption", caption);
-    formData.append("preview_imageURL", previewImageURL);
+    formData.append("thumbnail", thumbnail);
     formData.append("song", song);
     formData.append("song_url", songURL);
-
-    // let song = {
-    //   title,
-    //   genre,
-    //   song_url: songURL,
-    //   description,
-    //   private: privated,
-    //   caption,
-    //   preview_imageURL: previewImageURL,
-    //   song,
-    // };
 
     let res = await dispatch(thunkPostNewSong(formData));
 
@@ -117,6 +106,7 @@ function PostNewSong() {
     { name: "Trap" },
     { name: "Triphop" },
     { name: "World" },
+    // audio etc stuff
     { name: "Audiobooks" },
     { name: "Business" },
     { name: "Comedy" },
@@ -158,11 +148,11 @@ function PostNewSong() {
       title: "Caption",
     },
     {
-      name: "previewImageURL",
-      value: previewImageURL,
-      placeHolder: "Preview Image URL",
-      onChange: setPreviewImageURL,
-      title: "Preview Image URL",
+      name: "thumbnail",
+      value: thumbnail,
+      placeHolder: "Thumbnail URL",
+      onChange: setThumbnail,
+      title: "Thumbnail",
     },
   ];
 
