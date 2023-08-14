@@ -9,9 +9,11 @@ import "./LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
+
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  // const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
+
   const [prevSong, setPrevSong] = useState(null);
   const [test, setTest] = useState(false);
   const [curSong, setCurSong] = useState(null);
@@ -30,20 +32,63 @@ function LandingPage() {
     console.log("this is the prop song", song);
     console.log("this is prop songid", song.id);
 
-    // PASS CURRENT SONG INTO STATE, ALWAYS
-    dispatch(playUserSongAction(song));
-    console.log("dispatched song");
+    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
+    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
+    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
+    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
+    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
+    //!!! TEST BELOW
 
+    dispatch(playUserSongAction(song));
     setCurSong(song.id); // synchronizes mapped components play buttons to this local state
     setTest(!test); // fixes button toggling
-    if (prevSong === null || prevSong !== curSong) {
-      // if prevsong !== cursong means that the user has clicked a different song, so we want to set the cursong value as well
-      setPrevSong(song.id); // set initial songId value for prevSong
-      dispatch(setPlayingState(true));
-      console.log(
-        "after dispatching state to true if prevsong = null, prevsong != cursong"
-      );
-    }
+    console.log("DISPATCHED SONG");
+    // if (prevSong === null) {
+    //   setPrevSong(song.id);
+
+    //   dispatch(setPlayingState(true)); // Start playing the song since there's no previous song
+
+    //   console.log("set initial prevSong and started playing");
+    // } else if (curSong && isPlayingState) {
+    //   dispatch(setPlayingState(!isPlayingState)); // Toggle play/pause if it's the same song
+
+    //   console.log("toggled play/pause");
+    // } else {
+    //   setPrevSong(curSong); // Update prevSong since a different song is selected
+    //   dispatch(setPlayingState(true)); // Start playing the new song
+    //   console.log("changed song and started playing");
+    // }
+
+    // if (cur)
+    //!!! TEST ABOVE
+
+    //* PASS CURRENT SONG INTO STATE, ALWAYS
+    // dispatch(playUserSongAction(song));
+    // setCurSong(song.id); // synchronizes mapped components play buttons to this local state
+    // setTest(!test); // fixes button toggling
+    // console.log("DISPATCHED SONG");
+
+    // //* STORE SONG AS PREVSONG AS INITIAL VALUE
+    // if (prevSong === null) {
+    //   setPrevSong(song.id); // set initial songId value for prevSong
+    // }
+
+    // //* KEEPS PLAYING STATE TRUE BECAUSE USER WANTS TO CHOOSE A DIFFERENT SONG
+    // if (prevSong !== curSong) {
+    //   dispatch(setPlayingState(true));
+    //   console.log("after dispatching state to true if prevsong != cursong");
+    // }
+
+    // //* HANDLE PLAY/PAUSE
+    // if (curSong === prevSong && isPlayingState === true) {
+    //   dispatch(setPlayingState(!isPlayingState));
+    //   console.log("PAUSE SONG IF BLOCK - CUR = PREV && PLAYING = TRUE");
+    // }
+
+    // if (curSong === prevSong && isPlayingState === false) {
+    //   dispatch(setPlayingState(true));
+    //   console.log("PLAY SONG IF BLOCK - CUR = PREV && PLAYING = FALSE");
+    // }
 
     console.log("-----------END CURRENT STATE-------------");
 
@@ -57,14 +102,6 @@ function LandingPage() {
     //   );
     //   return;
     // }
-
-    // // PAUSE SONG
-    // // if curr songId = prevSongId then pause by dispatching
-    if (curSong === prevSong && isPlayingState === true) {
-      dispatch(setPlayingState(false));
-      console.log("PAUSE SONG IF BLOCK - CUR = PREV && PLAYING = TRUE");
-      // return;
-    }
 
     // if (isPlayingState === false) {
     //   let res = await dispatch(setPlayingState(true));
