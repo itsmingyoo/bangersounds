@@ -7,26 +7,26 @@ import { playUserSongAction, setPlayingState } from "../../store/songs";
 
 import "./LandingPage.css";
 
-function LandingPage() {
+function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
   const dispatch = useDispatch();
 
-  const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
-  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  // const allSongs = useSelector((s) => Object.values(s.songs.Songs));
+  // const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const isPlayingState = useSelector((s) => s.songs.isPlaying);
 
   const [test, setTest] = useState(false);
   const [prevSong, setPrevSong] = useState(null);
   const [curSong, setCurSong] = useState(null);
 
   // ************************************ USE EFFECT LOGS ***************************************** //
-  useEffect(() => {
-    console.log("-------------USE EFFECT------------");
-    // console.log("prevSong ==>", prevSong);
-    // console.log("curSong ==>", curSong);
-    console.log("currentSong from State ==>", currentSong);
-    console.log("isPlayingState ==>", isPlayingState);
-    console.log("-----------END USE EFFECT-----------");
-  });
+  // useEffect(() => {
+  console.log("-------------USE EFFECT------------");
+  // console.log("prevSong ==>", prevSong);
+  // console.log("curSong ==>", curSong);
+  console.log("currentSong from State ==>", currentlyPlaying);
+  console.log("isPlayingState ==>", isPlayingState);
+  console.log("-----------END USE EFFECT-----------");
+  // });
 
   // ************************************ TOGGLE FUNCTION ***************************************** //
   const togglePlayPause = async (song) => {
@@ -68,9 +68,9 @@ function LandingPage() {
     // !! TEST 1 END
     // **********************************************************************************************
     // !!! TEST 2 START
-    console.log("currentSong before Use Effect", currentSong); // returns empty object until useEffect runs
+    console.log("currentSong before Use Effect", currentlyPlaying); // returns empty object until useEffect runs
     console.log("isPlayingState before Use Effect", isPlayingState); // returns initial store state: false
-    if (currentSong) {
+    if (currentlyPlaying) {
       // this is grabbing the new song thats updated in the state when a user plays their first song;
 
       // fat console log
@@ -82,7 +82,7 @@ function LandingPage() {
       );
 
       // do the thing
-      if (currentSong.id === song.id)
+      if (currentlyPlaying.id === song.id)
         dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
 
@@ -143,38 +143,25 @@ function LandingPage() {
   return (
     <>
       <h1>Hello, this is the landing page</h1>
-      {/* MAP TO TEST ALL AWS SONG LINKS */}
-      {/* {allSongs.map((s) => (
-        <a href={s.songURL} id="test-links" target="_blank">
-          Test Link - {s.title}
-        </a>
-      ))} */}
       <div id="recently-played__container">
         <h2>Recently Played</h2>
         <div id="recently-played__songs">
           {/* START of loop */}
-          {allSongs &&
-            allSongs.map((s) => (
+          {songs &&
+            songs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
                 <div>
-                  {/* Play button should play song when clicked */}
-                  {/* <button>
-                    <i className="fa-solid fas fa-play"></i>
-                  </button> */}
-
                   <button
                     onClick={() => togglePlayPause(s)}
                     className="orange-btn-white-txt play-btn"
                   >
-                    {/* if song id matches what is playing AND test = true, render the different buttons */}
-                    {currentSong.id === s.id && isPlayingState ? (
+                    {currentlyPlaying.id === s.id && isPlayingState ? (
                       <IoPauseSharp />
                     ) : (
                       <IoPlaySharp />
                     )}
                   </button>
 
-                  {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>
                     <img
                       src={
@@ -184,7 +171,6 @@ function LandingPage() {
                       }
                       className="recently-played__images"
                       alt={`p-image__${s.title}`}
-                      // onClick={() => Redirect(`/home`)}
                     />
                   </NavLink>
                 </div>

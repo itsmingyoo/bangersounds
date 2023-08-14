@@ -22,12 +22,13 @@ const Controls = ({
   setSongIndex,
   setCurrentSong,
   handleNext,
-  isPlaying,
+  // isPlaying,
   setIsPlaying,
   isPlayingState,
   prevSong,
   setPrevSong,
-  playSong,
+  // playSong,
+  currentlyPlaying,
 }) => {
   const dispatch = useDispatch();
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -70,7 +71,7 @@ const Controls = ({
       audioRef.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [playSong, isPlayingState, audioRef, repeat, isPlaying]);
+  }, [currentlyPlaying, isPlayingState, audioRef, repeat]);
 
   if (!currentSong || currentSong === null) return null;
 
