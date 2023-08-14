@@ -6,8 +6,6 @@ const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
-// TEST AWS
-// const TEST_AWS_ROUTE_ACTION = "songs/TEST_AWS_ROUTE_ACTION";
 //*  ===================end of types ===================//
 
 //? =====================  actions ===========================//
@@ -62,15 +60,6 @@ export const setPlayingState = (boolean) => {
   };
 };
 
-// TEST AWS
-// const testAws = (test) => {
-//   console.log("in the testAws action -- dispatched from thunk", test);
-//   return {
-//     type: TEST_AWS_ROUTE_ACTION,
-//     test,
-//   };
-// };
-
 //?  ======================= end of actions ===================//
 
 //*  =====================  thunks ===========================//
@@ -104,9 +93,6 @@ export const thunkGetSongById = (songId) => async (dispatch) => {
 export const thunkPostNewSong = (songFormData) => async (dispatch) => {
   let newSong = await fetch(`/api/songs/new`, {
     method: "POST",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
     body: songFormData,
   });
   if (newSong) {
@@ -144,26 +130,6 @@ export const thunkDeleteUserSong = (songId) => async (dispatch) => {
   }
   return deleted.errors;
 };
-
-// TEST AWS THUNK
-// export const thunkTestAws = (formData) => async (dispatch) => {
-//   console.log("thunk executed -- pre-fetch");
-//   let song = await fetch(`/api/songs/test`, {
-//     method: "POST",
-//     body: formData,
-//   });
-
-//   if (song.ok) {
-//     // const { song } = await res.json();
-//     song = await song.json();
-//     console.log("song ok--this is song from song.json()", song);
-//     dispatch(testAws(song));
-//     return song;
-//   } else {
-//     console.log("ERRRORRRRR MESSAAAAGE");
-//     return;
-//   }
-// };
 
 //*  ======================= end of thunks ===================//
 
