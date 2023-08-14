@@ -10,11 +10,7 @@ import "./AudioPlayer.css";
 function AudioPlayer({ songs }) {
   const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
-  console.log(
-    "AudioPlayer - after useSelector - isPlayingState",
-    isPlayingState
-  );
-  // const playSong = null; // test
+
   const audioRef = useRef();
   const progressBarRef = useRef();
 
@@ -23,18 +19,19 @@ function AudioPlayer({ songs }) {
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
 
   // States that audio player components depend on to render up-to-date progress-bar/meta data
-  // const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
   // Eliminates Infinite Loop
-  // useEffect(() => {
-  //   if (Object.values(playSong).length > 0) setCurrentSong(playSong);
-  //   else setCurrentSong(songs[songIndex]);
+  useEffect(() => {
+    // if playSong exists, set currentSong prop -- else set default to first song in library
+    if (Object.values(playSong).length > 0) setCurrentSong(playSong);
+    else setCurrentSong(songs[songIndex]);
 
-  //   if (Object.values(isPlayingState).length > 0) setIsPlaying(isPlayingState);
-  //   else setIsPlaying(false);
-  // }, [playSong, isPlayingState]);
+    if (isPlayingState) setIsPlaying(isPlayingState);
+    else setIsPlaying(isPlayingState);
+  }, [playSong, isPlayingState]);
 
   if (songs.length === 0 || Object.values(playSong) === 0) return null;
 
