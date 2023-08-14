@@ -172,7 +172,32 @@ let initialState = {
   Songs: {},
   SongDetails: {},
   UserSongs: {},
-  CurrentlyPlaying: {},
+  CurrentlyPlaying: {
+    artistId: 1,
+    artistInfo: {
+      displayName: "Enter your display name here",
+      email: "demo@aa.io",
+      firstName: "Demo",
+      id: 1,
+      lastName: "FiftyNine",
+      profileBio: "This is a demo account for demo users",
+      profileCity: "",
+      profileCountry: "",
+      profileImage:
+        "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
+      username: "Demo",
+    },
+    caption: "Bangers All Around",
+    description: "Default Description From BangerSounds",
+    genre: "Dance & EDM",
+    id: 1,
+    private: false,
+    songURL:
+      "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
+    title: "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
+    thumbnail:
+      "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
+  },
   isPlaying: false,
 };
 export default function reducer(state = initialState, action) {
