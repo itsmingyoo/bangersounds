@@ -1,12 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
+import AudioPlayButton from "../AudioContext";
+
 import "./LandingPage.css";
 
 function LandingPage() {
+  const dispatch = useDispatch();
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  // console.log(allSongs); // allSongs.artistInfo.display_name
+  const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const isPlayingState = useSelector((s) => s.songs.isPlayingState);
+
+  const [isPlaying, setIsPlaying] = useState(null);
+
+  const togglePlayPause = async (song) => {
+    setIsPlaying(song.id);
+    await dispatch(playUserSongAction(song));
+  };
+
+  useEffect(() => {
+    console.log(`Landing Page UseEffect - stateSong===`, currentSong);
+  });
 
   return (
     <>
@@ -26,9 +43,17 @@ function LandingPage() {
               <div key={s.id} id="recently-played__each-song-container">
                 <div>
                   {/* Play button should play song when clicked */}
-                  <button>
+                  {/* <button>
                     <i className="fa-solid fas fa-play"></i>
+                  </button> */}
+
+                  <button
+                    onClick={() => togglePlayPause(s)}
+                    className="orange-btn-white-txt play-btn"
+                  >
+                    {isPlaying === s.id ? <IoPauseSharp /> : <IoPlaySharp />}
                   </button>
+
                   {/* Image should link to song id page */}
                   <NavLink to={`/songs/${s.id}`}>
                     <img

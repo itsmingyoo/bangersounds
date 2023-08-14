@@ -24,11 +24,12 @@ function App() {
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   // console.log(songs);
   if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
+  // if (isLoaded === false) return null;
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <AudioPlayer isLoaded={isLoaded} songs={songs} />
+      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/login">
@@ -48,7 +49,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
+      <AudioPlayer isLoaded={isLoaded} songs={songs} />
     </>
   );
 }
