@@ -70,13 +70,13 @@ const Controls = ({
       audioRef.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [playSong, isPlaying, audioRef, repeat]);
+  }, [playSong, isPlayingState, audioRef, repeat, isPlaying]);
 
   if (!currentSong || currentSong === null) return null;
 
   // BUTTON FUNCTIONS
   const togglePlayPause = async () => {
-    if (isPlaying) setIsPlaying(false);
+    if (isPlayingState) dispatch(setPlayingState(false));
     else setIsPlaying(true);
     // await dispatch(playUserSongAction(currentSong));
     // await dispatch(setPlayingState(!isPlayingState));
@@ -129,7 +129,7 @@ const Controls = ({
         </button>
       </div>
 
-      {/* REFACTORED INTO ITS OWN COMPONENT */}
+      {/* VOLUME REFACTORED INTO ITS OWN COMPONENT */}
       {/* <div className="volume">
         <button onClick={() => setMute((prev) => !prev)}>
           {mute || volume < 5 ? (
