@@ -70,7 +70,6 @@ const Controls = ({
   const togglePlayPause = async () => {
     if (isPlayingState) dispatch(setPlayingState(false));
     else dispatch(setPlayingState(true));
-    dispatch(setPlayingState(!isPlayingState));
   };
   const skipForward = () => {
     audioRef.current.currentTime += 10;
