@@ -101,9 +101,7 @@ const Controls = ({
         </button>
 
         <button onClick={togglePlayPause}>
-          {/* {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />} */}
           {isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}
-          {/* {isPlayingState ? "PAUSE" : "PLAY"} */}
         </button>
 
         <button onClick={skipForward}>
