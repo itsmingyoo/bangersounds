@@ -4,7 +4,6 @@ import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import VolumeBar from "./VolumeBar";
-import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {

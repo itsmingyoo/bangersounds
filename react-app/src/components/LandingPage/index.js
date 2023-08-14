@@ -4,23 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
-import AudioPlayButton from "../AudioContext";
 
 import "./LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const [test, setTest] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(null);
 
   const togglePlayPause = async (song) => {
-    console.log("this is current play state", isPlayingState);
-    const reverseState = !isPlayingState;
-    console.log("this is reverseState", reverseState);
     setIsPlaying(song.id);
     setTest(!test);
     await dispatch(playUserSongAction(song));
