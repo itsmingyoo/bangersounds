@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -11,14 +11,19 @@ import "./LandingPage.css";
 function LandingPage() {
   const dispatch = useDispatch();
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  // console.log(allSongs); // allSongs.artistInfo.display_name
+  const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const isPlayingState = useSelector((s) => s.songs.isPlayingState);
+
   const [isPlaying, setIsPlaying] = useState(null);
 
   const togglePlayPause = async (song) => {
     setIsPlaying(song.id);
     await dispatch(playUserSongAction(song));
-    await dispatch(setPlayingState(!isPlaying));
   };
+
+  useEffect(() => {
+    console.log(`Landing Page UseEffect - stateSong===`, currentSong);
+  });
 
   return (
     <>

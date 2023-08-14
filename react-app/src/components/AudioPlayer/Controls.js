@@ -22,16 +22,16 @@ const Controls = ({
   setSongIndex,
   setCurrentSong,
   handleNext,
-  // isPlaying,
-  // setIsPlaying,
+  isPlaying,
+  setIsPlaying,
   isPlayingState,
 }) => {
   const dispatch = useDispatch();
   // const [isPlaying, setIsPlaying] = useState(false);
   // const [volume, setVolume] = useState(40);
   // const [mute, setMute] = useState(false);
-  const song = useSelector((s) => s.songs.CurrentlyPlaying);
-  const isPlayingStateSelector = useSelector((s) => s.songs.isPlayingState);
+  // const song = useSelector((s) => s.songs.CurrentlyPlaying);
+  // const isPlayingStateSelector = useSelector((s) => s.songs.isPlayingState);
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
   // Trigger the api once the playback is ongoing in the useEffect hook
@@ -61,51 +61,23 @@ const Controls = ({
 
   // USE EFFECT FOR PLAY / PAUSE TO CONTINUE / CANCEL PROGRESS BAR ANIMATION
   useEffect(() => {
-    console.log("isPlayingState", isPlayingState);
-    if (isPlayingState || isPlayingStateSelector) {
+    if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
-    // if (isPlaying) {
-    //   audioRef.current.play();
-    // } else {
-    //   audioRef.current.pause();
-    // }
-    // I'm assuming in this refactor (since it works the same as below) it will hit the 'if' or the 'else' and apply this request animation to be the current reference for the playanimation
     playAnimationRef.current = requestAnimationFrame(repeat);
-
-    // * INITIAL SETUP - NOW WE CAN REFACTOR TO THE ABOVE
-    //   //! instantiating an animation loop using requestAnimationFrame function in react
-    //   //! playAnimationRef.current holds the request animation frame
-    //   //! requestAnimationFrame takes a callback 'repeat' and schedules a single animation frame to be executed before the next repaint
-    //   // ***requestAnimationFrame returns the request-id to assign to playAnimationRef.current which will allow us to cancel the request once we pause the playback
-    //   playAnimationRef.current = requestAnimationFrame(repeat);
-    // } else {
-    //   audioRef.current.pause();
-
-    //   //! cancel the previous scheduled animation request - by request-id
-    //   cancelAnimationFrame(playAnimationRef.current);
-    // }
-  }, [/*isPlaying,*/ audioRef, repeat, isPlayingState]);
-  // useEffect(() => {
-  //   if (audioRef) {
-  //     audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
-  //     audioRef.current.muted = mute;
-  //   }
-  // }, [volume, audioRef, mute]);
+  }, [isPlaying, audioRef, repeat]);
 
   // BUTTON FUNCTIONS
   const togglePlayPause = async () => {
-    // setIsPlaying((prev) => !prev);
-    await dispatch(playUserSongAction(song));
-    await dispatch(setPlayingState(!isPlayingState));
+    if (isPlaying) setIsPlaying(false);
+    else setIsPlaying(true);
+    // await dispatch(playUserSongAction(currentSong));
+    // await dispatch(setPlayingState(!isPlayingState));
   };
 
-  if (!currentSong || currentSong === null || !song) return null;
-  // console.log("audioref", audioRef);
-  // console.log("current", audioRef.current);
-  // console.log("current time", audioRef.current.currentTime);
+  if (!currentSong || currentSong === null) return null;
 
   const skipForward = () => {
     audioRef.current.currentTime += 10;
@@ -123,18 +95,6 @@ const Controls = ({
       setCurrentSong(songs[songIndex - 1]);
     }
   };
-  //   // Default the index to 0 if we've went past all our existing songs
-  //   if (songIndex >= songs.length - 1) {
-  //     setSongIndex(0);
-  //     setCurrentSong(songs[0]);
-  //   }
-  //   // Increment the index and the songindex for current song because we want to go to the next song
-  //   else {
-  //     setSongIndex((prev) => prev + 1);
-  //     setCurrentSong(songs[songIndex + 1]);
-  //   }
-  // };
-
   return (
     <div className="controls-container">
       {/* CONTROL BUTTONS */}
@@ -148,7 +108,7 @@ const Controls = ({
         </button>
 
         <button onClick={togglePlayPause}>
-          {isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}
+          {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
         </button>
 
         <button onClick={skipForward}>
