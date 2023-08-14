@@ -15,7 +15,7 @@ function SongDetailsPage() {
   const isUserSong = song?.artistId === user?.id;
   // console.log(isUserSong);
 
-  if (!song || !user) return null;
+  if (!song) return null;
 
   const list = [
     { name: "Add to Next Up", to: "#" },

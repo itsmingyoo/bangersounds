@@ -12,24 +12,66 @@ function LandingPage() {
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
   // const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const [prevSong, setPrevSong] = useState(null);
   const [test, setTest] = useState(false);
-
-  const [isPlaying, setIsPlaying] = useState(null);
-
-  const togglePlayPause = async (song) => {
-    setIsPlaying(song.id);
-    setTest(!test);
-    await dispatch(playUserSongAction(song));
-    let res = await dispatch(setPlayingState(!isPlayingState));
-    console.log(
-      "this is res of playingstate after you clicked the song play button",
-      res.boolean
-    );
-  };
+  const [curSong, setCurSong] = useState(null);
 
   useEffect(() => {
-    // console.log(`Landing Page UseEffect - stateSong===`, currentSong);
+    console.log("-------------USE EFFECT------------");
+    console.log("prevSong ==>", prevSong);
+    console.log("curSong ==>", curSong);
+    console.log("isPlayingState ==>", isPlayingState);
+    console.log("-----------END USE EFFECT-----------");
   });
+
+  const togglePlayPause = async (song) => {
+    console.log("-----------START-------------");
+    console.log("CURRENT STATE - BUTTON IS CLICKED");
+    console.log("this is the prop song", song);
+    console.log("this is prop songid", song.id);
+
+    // PASS CURRENT SONG INTO STATE, ALWAYS
+    dispatch(playUserSongAction(song));
+    console.log("dispatched song");
+
+    setCurSong(song.id); // synchronizes mapped components play buttons to this local state
+    setTest(!test); // fixes button toggling
+    if (prevSong === null || prevSong !== curSong) {
+      // if prevsong !== cursong means that the user has clicked a different song, so we want to set the cursong value as well
+      setPrevSong(song.id); // set initial songId value for prevSong
+      dispatch(setPlayingState(true));
+      console.log(
+        "after dispatching state to true if prevsong = null, prevsong != cursong"
+      );
+    }
+
+    console.log("-----------END CURRENT STATE-------------");
+
+    // KEEP SONG PLAYING IF STATE IS TRUE, THEN STORE CURR SONG AS PREV SONG
+    // if (curSong !== prevSong && isPlayingState === true) {
+    //   setPrevSong(song.id);
+
+    //   console.log(
+    //     "IF - prevSong value when different song is played",
+    //     prevSong
+    //   );
+    //   return;
+    // }
+
+    // // PAUSE SONG
+    // // if curr songId = prevSongId then pause by dispatching
+    if (curSong === prevSong && isPlayingState === true) {
+      dispatch(setPlayingState(false));
+      console.log("PAUSE SONG IF BLOCK - CUR = PREV && PLAYING = TRUE");
+      // return;
+    }
+
+    // if (isPlayingState === false) {
+    //   let res = await dispatch(setPlayingState(true));
+    //   console.log("isplayingstate when condition is false", res);
+    //   return;
+    // }
+  };
 
   return (
     <>
@@ -58,7 +100,7 @@ function LandingPage() {
                     className="orange-btn-white-txt play-btn"
                   >
                     {/* if song id matches what is playing AND test = true, render the different buttons */}
-                    {isPlaying === s.id && test ? (
+                    {curSong === s.id && test ? (
                       <IoPauseSharp />
                     ) : (
                       <IoPlaySharp />

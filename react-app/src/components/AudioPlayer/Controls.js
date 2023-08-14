@@ -64,7 +64,7 @@ const Controls = ({
 
   // USE EFFECT FOR PLAY / PAUSE TO CONTINUE / CANCEL PROGRESS BAR ANIMATION
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlayingState) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
