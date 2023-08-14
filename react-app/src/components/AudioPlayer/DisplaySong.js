@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./AudioPlayer.css";
 
 function DisplaySong({
@@ -9,19 +10,13 @@ function DisplaySong({
   handleNext,
 }) {
   const [loadedMetaData, setLoadedMetaData] = useState(false);
-  console.log("this is currentsong prop in displaysong", currentSong);
-
+  const song = useSelector((s) => s.songs.CurrentlyPlaying);
   // NOTE * Anytime youre setting a new state that is imported as a prop 'setState' for example here, you must use it in a useEffect else you will get warnings in the dev console.
   useEffect(() => {
     if (loadedMetaData) {
-      // console.log("meta data firing");
-      // console.log("this is onloadedmetadata", audioRef.current.duration); // should be 155.715918
       const seconds = audioRef.current.duration;
-      // console.log("this is seconds", seconds);
       setDuration(seconds);
       progressBarRef.current.max = seconds;
-      // console.log("this is progressbarref max", progressBarRef.current.max);
-      // console.log(duration);
     }
   }, [loadedMetaData]);
 
@@ -36,9 +31,6 @@ function DisplaySong({
     Object.values(currentSong).length === 0
   )
     return null;
-  // console.log("currentsong in displaysong comp", currentSong.songURL);
-  // console.log("AUDIOREFFFF", audioRef);
-  // console.log("PROGRESSBARREF", progressBarRef);
   return (
     <div className="display-song__main-container">
       <div className="display-song__container">

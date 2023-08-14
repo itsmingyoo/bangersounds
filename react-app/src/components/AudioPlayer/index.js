@@ -4,10 +4,16 @@ import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import VolumeBar from "./VolumeBar";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
   const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  console.log(
+    "AudioPlayer - after useSelector - isPlayingState",
+    isPlayingState
+  );
   // const playSong = null; // test
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -15,37 +21,23 @@ function AudioPlayer({ songs }) {
   // Default song to bangersounds library of songs
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
-  console.log(
-    "this is the playSong from selector",
-    playSong,
-    "currentSong:",
-    currentSong
-  );
 
   // States that audio player components depend on to render up-to-date progress-bar/meta data
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
   // Eliminates Infinite Loop
-  useEffect(() => {
-    if (Object.values(playSong).length > 0) setCurrentSong(playSong);
-    else setCurrentSong(songs[songIndex]);
-    console.log(
-      "this is the playSong after UE",
-      playSong,
-      "currentSong:",
-      currentSong
-    );
-  }, [playSong]);
+  // useEffect(() => {
+  //   if (Object.values(playSong).length > 0) setCurrentSong(playSong);
+  //   else setCurrentSong(songs[songIndex]);
+
+  //   if (Object.values(isPlayingState).length > 0) setIsPlaying(isPlayingState);
+  //   else setIsPlaying(false);
+  // }, [playSong, isPlayingState]);
 
   if (songs.length === 0 || Object.values(playSong) === 0) return null;
-  console.log(
-    "this is playSong after returning null",
-    playSong,
-    "currentSong:",
-    currentSong
-  );
+
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs
     if (songIndex >= songs.length - 1) {
@@ -74,8 +66,9 @@ function AudioPlayer({ songs }) {
             setSongIndex,
             setCurrentSong,
             handleNext,
-            isPlaying,
-            setIsPlaying,
+            // isPlaying,
+            // setIsPlaying,
+            isPlayingState,
           }}
         />
         <ProgressBar

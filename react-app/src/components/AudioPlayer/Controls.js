@@ -7,9 +7,9 @@ import {
   IoPlaySharp,
   IoPauseSharp,
 } from "react-icons/io5";
-import { IoMdVolumeHigh, IoMdVolumeOff, IoMdVolumeLow } from "react-icons/io";
 import "./AudioPlayer.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
 
 const Controls = ({
   songs,
@@ -22,13 +22,16 @@ const Controls = ({
   setSongIndex,
   setCurrentSong,
   handleNext,
-  isPlaying,
-  setIsPlaying,
+  // isPlaying,
+  // setIsPlaying,
+  isPlayingState,
 }) => {
+  const dispatch = useDispatch();
   // const [isPlaying, setIsPlaying] = useState(false);
   // const [volume, setVolume] = useState(40);
   // const [mute, setMute] = useState(false);
   const song = useSelector((s) => s.songs.CurrentlyPlaying);
+  const isPlayingStateSelector = useSelector((s) => s.songs.isPlayingState);
   // Trigger a reanimation change to update the state/browser to display the current time and the range progress -- setInterval() can be used but, requestAnimatonFrame is much more efficient and smoother for repeated animations
 
   // Trigger the api once the playback is ongoing in the useEffect hook
@@ -58,11 +61,17 @@ const Controls = ({
 
   // USE EFFECT FOR PLAY / PAUSE TO CONTINUE / CANCEL PROGRESS BAR ANIMATION
   useEffect(() => {
-    if (isPlaying) {
+    console.log("isPlayingState", isPlayingState);
+    if (isPlayingState || isPlayingStateSelector) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
+    // if (isPlaying) {
+    //   audioRef.current.play();
+    // } else {
+    //   audioRef.current.pause();
+    // }
     // I'm assuming in this refactor (since it works the same as below) it will hit the 'if' or the 'else' and apply this request animation to be the current reference for the playanimation
     playAnimationRef.current = requestAnimationFrame(repeat);
 
@@ -78,7 +87,7 @@ const Controls = ({
     //   //! cancel the previous scheduled animation request - by request-id
     //   cancelAnimationFrame(playAnimationRef.current);
     // }
-  }, [isPlaying, audioRef, repeat]);
+  }, [/*isPlaying,*/ audioRef, repeat, isPlayingState]);
   // useEffect(() => {
   //   if (audioRef) {
   //     audioRef.current.volume = volume / 100; // dividing by 100 here bc the max value of the property in audioRef is 1, so this is to make it in sync
@@ -87,14 +96,11 @@ const Controls = ({
   // }, [volume, audioRef, mute]);
 
   // BUTTON FUNCTIONS
-  const togglePlayPause = () => {
-    console.log("before", isPlaying);
-    setIsPlaying((prev) => !prev);
+  const togglePlayPause = async () => {
+    // setIsPlaying((prev) => !prev);
+    await dispatch(playUserSongAction(song));
+    await dispatch(setPlayingState(!isPlayingState));
   };
-  // can only console log the new state after a useeffect, bc you're still in the same render state.
-  useEffect(() => {
-    // console.log("after", isPlaying);
-  }, [isPlaying]);
 
   if (!currentSong || currentSong === null || !song) return null;
   // console.log("audioref", audioRef);
@@ -142,7 +148,7 @@ const Controls = ({
         </button>
 
         <button onClick={togglePlayPause}>
-          {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+          {isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}
         </button>
 
         <button onClick={skipForward}>

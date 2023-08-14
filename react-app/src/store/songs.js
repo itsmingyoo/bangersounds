@@ -5,6 +5,7 @@ const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
+const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
 // TEST AWS
 // const TEST_AWS_ROUTE_ACTION = "songs/TEST_AWS_ROUTE_ACTION";
 //*  ===================end of types ===================//
@@ -51,6 +52,13 @@ export const playUserSongAction = (song) => {
   return {
     type: PLAY_CURRENT_USER_SONG_ACTION,
     song,
+  };
+};
+
+export const setPlayingState = (boolean) => {
+  return {
+    type: IS_PLAYING_BOOLEAN_ACTION,
+    boolean,
   };
 };
 
@@ -165,6 +173,7 @@ let initialState = {
   SongDetails: {},
   UserSongs: {},
   CurrentlyPlaying: {},
+  isPlaying: {},
 };
 export default function reducer(state = initialState, action) {
   let newState;
@@ -199,6 +208,11 @@ export default function reducer(state = initialState, action) {
       newState = { ...state };
       newState.CurrentlyPlaying = {};
       newState.CurrentlyPlaying = { ...action.song };
+      return newState;
+    }
+    case IS_PLAYING_BOOLEAN_ACTION: {
+      newState = { ...state };
+      newState.isPlaying = action.boolean;
       return newState;
     }
 

@@ -41,6 +41,7 @@
    border: none;
    margin-right: 5px;
    background-color: #999;
+   cursor: pointer;
 }
 
 /* container for the volume bar and button icon */
