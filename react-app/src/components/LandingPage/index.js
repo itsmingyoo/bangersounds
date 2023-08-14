@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
@@ -9,89 +8,30 @@ import "./LandingPage.css";
 
 function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
   const dispatch = useDispatch();
-
-  // const allSongs = useSelector((s) => Object.values(s.songs.Songs));
-  // const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
-  // const isPlayingState = useSelector((s) => s.songs.isPlaying);
-
   const [test, setTest] = useState(false);
-  const [prevSong, setPrevSong] = useState(null);
-  const [curSong, setCurSong] = useState(null);
 
-  // ************************************ USE EFFECT LOGS ***************************************** //
-  // useEffect(() => {
-  console.log("-------------USE EFFECT------------");
-  // console.log("prevSong ==>", prevSong);
-  // console.log("curSong ==>", curSong);
-  console.log("currentSong from State ==>", currentlyPlaying);
-  console.log("isPlayingState ==>", isPlayingState);
-  console.log("-----------END USE EFFECT-----------");
-  // });
-
-  // ************************************ TOGGLE FUNCTION ***************************************** //
   const togglePlayPause = async (song) => {
-    console.log("-----------START-------------");
-    console.log("CURRENT STATE - BUTTON IS CLICKED");
-
-    // these two will always exist because they are props
-    console.log("this is the prop song", song);
-    console.log("this is prop songid", song.id);
-
-    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
-    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
-    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
-    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
-    //!!!!! THIS IS A REMINDER THAT ALL THESE CHECKS ARE AFTER A USE CLICKS ANY PLAY BUTTON
-    //!!! TEST BELOW
-
     dispatch(playUserSongAction(song));
-    setCurSong(song.id); // synchronizes mapped components play buttons to this local state
     setTest(!test); // fixes button toggling
-    console.log("DISPATCHED SONG");
 
-    // !!! TEST 1 START
-    // if (prevSong === null) {
-    //   setPrevSong(song.id);
-
-    //   dispatch(setPlayingState(true)); // Start playing the song since there's no previous song
-
-    //   console.log("set initial prevSong and started playing");
-    // } else if (curSong && isPlayingState) {
-    //   dispatch(setPlayingState(!isPlayingState)); // Toggle play/pause if it's the same song
-
-    //   console.log("toggled play/pause");
-    // } else {
-    //   setPrevSong(curSong); // Update prevSong since a different song is selected
-    //   dispatch(setPlayingState(true)); // Start playing the new song
-    //   console.log("changed song and started playing");
-    // }
-    // !! TEST 1 END
-    // **********************************************************************************************
-    // !!! TEST 2 START
-    console.log("currentSong before Use Effect", currentlyPlaying); // returns empty object until useEffect runs
-    console.log("isPlayingState before Use Effect", isPlayingState); // returns initial store state: false
     if (currentlyPlaying) {
       // this is grabbing the new song thats updated in the state when a user plays their first song;
 
       // fat console log
-      console.log(
-        `dispatching state toggle from current: ` +
-          `(${isPlayingState})` +
-          " to " +
-          `(${!isPlayingState})`
-      );
+      // console.log(
+      //   `dispatching state toggle from current: ` +
+      //     `(${isPlayingState})` +
+      //     " to " +
+      //     `(${!isPlayingState})`
+      // );
 
       // do the thing
       if (currentlyPlaying.id === song.id)
         dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
-
-      // dispatch a toggle to the state
-      // dispatch(setPlayingState(!isPlayingState));
     }
-    // !!! TEST 2 END
-    //!!! TEST ABOVE
 
+    // ! Keeping this code for reference
     //* PASS CURRENT SONG INTO STATE, ALWAYS
     // dispatch(playUserSongAction(song));
     // setCurSong(song.id); // synchronizes mapped components play buttons to this local state
@@ -120,7 +60,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
     //   console.log("PLAY SONG IF BLOCK - CUR = PREV && PLAYING = FALSE");
     // }
 
-    console.log("-----------END CURRENT STATE-------------");
+    // console.log("-----------END CURRENT STATE-------------");
 
     // KEEP SONG PLAYING IF STATE IS TRUE, THEN STORE CURR SONG AS PREV SONG
     // if (curSong !== prevSong && isPlayingState === true) {

@@ -2,17 +2,8 @@ import React from "react";
 import "./AudioPlayer.css";
 
 function ProgressBar({ progressBarRef, audioRef, timeProgress, duration }) {
+  // updating the '0' from audioRef --TO-- '1' from progressBarRef
   const handleProgressChange = () => {
-    // console.log(
-    //   "this is progressBarRef.current.value",
-    //   progressBarRef.current.value
-    // ); // logs current value of the progress bar - starts at 1 on change
-    // console.log(
-    //   "this is audioRef.current.currentTime",
-    //   audioRef.current.currentTime
-    // ); // starts at 0 on change
-
-    // updating the '0' from audioRef --TO-- '1' from progressBarRef
     audioRef.current.currentTime = progressBarRef.current.value;
   };
 

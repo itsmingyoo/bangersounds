@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import "./AudioPlayer.css";
 
 function DisplaySong({
-  currentSong,
   audioRef,
   setDuration,
   progressBarRef,
@@ -11,8 +9,7 @@ function DisplaySong({
   currentlyPlaying,
 }) {
   const [loadedMetaData, setLoadedMetaData] = useState(false);
-  const song = useSelector((s) => s.songs.CurrentlyPlaying);
-  // NOTE * Anytime youre setting a new state that is imported as a prop 'setState' for example here, you must use it in a useEffect else you will get warnings in the dev console.
+
   useEffect(() => {
     if (loadedMetaData) {
       const seconds = audioRef.current.duration;
