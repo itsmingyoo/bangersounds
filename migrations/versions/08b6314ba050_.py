@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: db90184ddc45
+Revision ID: 08b6314ba050
 Revises:
-Create Date: 2023-08-12 19:58:53.304074
+Create Date: 2023-08-13 23:02:53.952094
 
 """
 from alembic import op
@@ -12,7 +12,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'db90184ddc45'
+revision = '08b6314ba050'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -49,6 +49,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['artistId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
