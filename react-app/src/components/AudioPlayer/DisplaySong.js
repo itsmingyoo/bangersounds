@@ -8,6 +8,7 @@ function DisplaySong({
   setDuration,
   progressBarRef,
   handleNext,
+  currentlyPlaying,
 }) {
   const [loadedMetaData, setLoadedMetaData] = useState(false);
   const song = useSelector((s) => s.songs.CurrentlyPlaying);
@@ -27,8 +28,8 @@ function DisplaySong({
   if (
     !audioRef ||
     !progressBarRef ||
-    currentSong === undefined ||
-    Object.values(currentSong).length === 0
+    currentlyPlaying === undefined ||
+    Object.values(currentlyPlaying).length === 0
   )
     return null;
   return (
@@ -36,7 +37,7 @@ function DisplaySong({
       <div className="display-song__container">
         {/* AUDIO PLAYER */}
         <audio
-          src={currentSong?.songURL}
+          src={currentlyPlaying?.songURL}
           ref={audioRef}
           onLoadedMetadata={metaData} // onLoadedMeta data is an event on the <audio /> which will help us display the track duration as soon as the audio metadata loads
           onEnded={() => handleNext()}
@@ -44,8 +45,8 @@ function DisplaySong({
         {/* THUMBNAIL */}
         <div className="audio-info">
           <div className="audio-image">
-            {currentSong.thumbnail ? (
-              <img src={currentSong.thumbnail} alt="audio thumb" />
+            {currentlyPlaying.thumbnail ? (
+              <img src={currentlyPlaying.thumbnail} alt="audio thumb" />
             ) : (
               <div className="icon-container">
                 <span className="audio-icon">{/* insert icon here */}</span>
@@ -56,9 +57,9 @@ function DisplaySong({
         {/* TITLE */}
         <div className="audio-text">
           <span className="displayName">
-            {currentSong.artistInfo.displayName}
+            {currentlyPlaying.artistInfo.displayName}
           </span>
-          <span className="title">{currentSong.title}</span>
+          <span className="title">{currentlyPlaying.title}</span>
         </div>
       </div>
     </div>

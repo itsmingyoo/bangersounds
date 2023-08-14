@@ -42,6 +42,21 @@ def login():
         user = User.query.filter(User.email == form.data["email"]).first()
         login_user(user)
         return user.to_dict()
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print('LOOK AT THIS BELOW')
+    print(form.errors) # {'email': ['Email provided not found.'], 'password': ['No such user exists.']}
+    print('LOOK AT THIS ABOVE')
+    print('LOOK AT THIS ABOVE')
+    print('LOOK AT THIS ABOVE')
+    print('LOOK AT THIS ABOVE')
+    print('LOOK AT THIS ABOVE')
+    print('LOOK AT THIS ABOVE')
+    #this method if we look above at the function for validation_errors_to_error_messages, it actually returns an array, this is how the errors are mapped in the frontend
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 

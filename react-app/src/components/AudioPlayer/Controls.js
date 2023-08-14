@@ -22,12 +22,13 @@ const Controls = ({
   setSongIndex,
   setCurrentSong,
   handleNext,
-  isPlaying,
+  // isPlaying,
   setIsPlaying,
   isPlayingState,
   prevSong,
   setPrevSong,
-  playSong,
+  // playSong,
+  currentlyPlaying,
 }) => {
   const dispatch = useDispatch();
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -64,19 +65,19 @@ const Controls = ({
 
   // USE EFFECT FOR PLAY / PAUSE TO CONTINUE / CANCEL PROGRESS BAR ANIMATION
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlayingState) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [playSong, isPlaying, audioRef, repeat]);
+  }, [currentlyPlaying, isPlayingState, audioRef, repeat]);
 
   if (!currentSong || currentSong === null) return null;
 
   // BUTTON FUNCTIONS
   const togglePlayPause = async () => {
-    if (isPlaying) setIsPlaying(false);
+    if (isPlayingState) dispatch(setPlayingState(false));
     else setIsPlaying(true);
     // await dispatch(playUserSongAction(currentSong));
     // await dispatch(setPlayingState(!isPlayingState));
@@ -129,7 +130,7 @@ const Controls = ({
         </button>
       </div>
 
-      {/* REFACTORED INTO ITS OWN COMPONENT */}
+      {/* VOLUME REFACTORED INTO ITS OWN COMPONENT */}
       {/* <div className="volume">
         <button onClick={() => setMute((prev) => !prev)}>
           {mute || volume < 5 ? (

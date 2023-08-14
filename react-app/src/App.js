@@ -17,14 +17,16 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate())
-      .then(() => setIsLoaded(true))
-      .then(() => dispatch(songActions.thunkGetAllSongs()));
+      .then(() => dispatch(songActions.thunkGetAllSongs()))
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
   // console.log(songs);
   if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
-  // if (isLoaded === false) return null;
+  if (isLoaded === false) return null;
 
   return (
     <>
@@ -45,11 +47,20 @@ function App() {
             <SongDetailsPage />
           </Route>
           <Route exact path="/">
-            <LandingPage />
+            <LandingPage
+              songs={songs}
+              isPlayingState={isPlayingState}
+              currentlyPlaying={currentlyPlaying}
+            />
           </Route>
         </Switch>
       )}
-      <AudioPlayer isLoaded={isLoaded} songs={songs} />
+      <AudioPlayer
+        isLoaded={isLoaded}
+        songs={songs}
+        isPlayingState={isPlayingState}
+        currentlyPlaying={currentlyPlaying}
+      />
     </>
   );
 }
