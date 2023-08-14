@@ -25,6 +25,9 @@ const Controls = ({
   isPlaying,
   setIsPlaying,
   isPlayingState,
+  prevSong,
+  setPrevSong,
+  playSong,
 }) => {
   const dispatch = useDispatch();
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -67,7 +70,9 @@ const Controls = ({
       audioRef.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlaying, audioRef, repeat]);
+  }, [playSong, isPlaying, audioRef, repeat]);
+
+  if (!currentSong || currentSong === null) return null;
 
   // BUTTON FUNCTIONS
   const togglePlayPause = async () => {
@@ -75,10 +80,12 @@ const Controls = ({
     else setIsPlaying(true);
     // await dispatch(playUserSongAction(currentSong));
     // await dispatch(setPlayingState(!isPlayingState));
+    let res = await dispatch(setPlayingState(!isPlayingState));
+    console.log(
+      "this is res of playingstate after you clicked the audio player play button",
+      res.boolean
+    );
   };
-
-  if (!currentSong || currentSong === null) return null;
-
   const skipForward = () => {
     audioRef.current.currentTime += 10;
   };
@@ -108,7 +115,9 @@ const Controls = ({
         </button>
 
         <button onClick={togglePlayPause}>
-          {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+          {/* {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />} */}
+          {isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}
+          {/* {isPlayingState ? "PAUSE" : "PLAY"} */}
         </button>
 
         <button onClick={skipForward}>

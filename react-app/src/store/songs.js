@@ -173,7 +173,7 @@ let initialState = {
   SongDetails: {},
   UserSongs: {},
   CurrentlyPlaying: {},
-  isPlaying: {},
+  isPlaying: false,
 };
 export default function reducer(state = initialState, action) {
   let newState;
