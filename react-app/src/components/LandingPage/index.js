@@ -12,17 +12,27 @@ function LandingPage() {
   const dispatch = useDispatch();
   const allSongs = useSelector((s) => Object.values(s.songs.Songs));
   const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
-  // const isPlayingState = useSelector((s) => s.songs.isPlayingState);
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const [test, setTest] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(null);
 
   const togglePlayPause = async (song) => {
+    console.log("this is current play state", isPlayingState);
+    const reverseState = !isPlayingState;
+    console.log("this is reverseState", reverseState);
     setIsPlaying(song.id);
+    setTest(!test);
     await dispatch(playUserSongAction(song));
+    let res = await dispatch(setPlayingState(!isPlayingState));
+    console.log(
+      "this is res of playingstate after you clicked the song play button",
+      res.boolean
+    );
   };
 
   useEffect(() => {
-    console.log(`Landing Page UseEffect - stateSong===`, currentSong);
+    // console.log(`Landing Page UseEffect - stateSong===`, currentSong);
   });
 
   return (
@@ -51,7 +61,12 @@ function LandingPage() {
                     onClick={() => togglePlayPause(s)}
                     className="orange-btn-white-txt play-btn"
                   >
-                    {isPlaying === s.id ? <IoPauseSharp /> : <IoPlaySharp />}
+                    {/* if song id matches what is playing AND test = true, render the different buttons */}
+                    {isPlaying === s.id && test ? (
+                      <IoPauseSharp />
+                    ) : (
+                      <IoPlaySharp />
+                    )}
                   </button>
 
                   {/* Image should link to song id page */}

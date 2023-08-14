@@ -9,7 +9,7 @@ import "./AudioPlayer.css";
 
 function AudioPlayer({ songs }) {
   const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
-  // const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
 
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -17,6 +17,7 @@ function AudioPlayer({ songs }) {
   // Default song to bangersounds library of songs
   const [songIndex, setSongIndex] = useState(0);
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
+  const [prevSong, setPrevSong] = useState(null);
 
   // LOCAL STATE
   // States that audio player components depend on to render up-to-date progress-bar/meta data
@@ -33,7 +34,7 @@ function AudioPlayer({ songs }) {
     } else {
       setCurrentSong(songs[songIndex]);
     }
-    console.log("use effect currentsong", currentSong);
+    // console.log("use effect currentsong", currentSong);
 
     // if (isPlayingState) setIsPlaying(isPlayingState);
     // else setIsPlaying(isPlayingState);
@@ -42,10 +43,10 @@ function AudioPlayer({ songs }) {
   if (songs.length === 0 || Object.values(playSong) === 0) return null;
 
   // ALL CONSOLE LOGS GO here
-  console.log("currentSong: ", currentSong);
-  console.log("playSong: ", playSong);
+  // console.log("currentSong: ", currentSong);
+  // console.log("playSong: ", playSong);
   // console.log("isPlayingState: ", isPlayingState); // no longer listening to this state
-  console.log("currentSong: ", currentSong);
+  // console.log("currentSong: ", currentSong);
 
   const handleNext = () => {
     // Default the index to 0 if we've went past all our existing songs
@@ -77,6 +78,10 @@ function AudioPlayer({ songs }) {
             handleNext,
             isPlaying,
             setIsPlaying,
+            prevSong,
+            setPrevSong,
+            playSong,
+            isPlayingState,
           }}
         />
         <ProgressBar
