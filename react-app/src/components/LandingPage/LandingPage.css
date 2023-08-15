@@ -1,23 +1,122 @@
+/* .landing-page__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+    max-width: 1100px;
+} */
+
+.landing-page__main-container {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #recently-played__container {
     display: flex;
     flex-direction: column;
+    width: 70%;
+    background-color: white;
 }
+
+#recently-played__container > h2 {
+    margin-left: 30px;
+}
+
+#recently-played__each-song-container {
+    /* margin: 20px; */
+    flex-basis: 13.5%;
+    padding: 20px;
+
+}
+
 #recently-played__songs {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
     row-gap: 20px;
+    padding-left: 15px;
 }
 
 .recently-played__images {
     max-width: 100%;
     max-height: 100%;
+
 }
 
-#recently-played__each-song-container {
-    margin: 10px;
-    width: 100px;
+.song-image__container {
+
 }
+
+
+/** buttons */
+.recently-played__btn-link {
+    position: relative;
+}
+
+.song-button {
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.song-btn {
+    /* display: none; */
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.song-btn:hover {
+    display: block;
+}
+
+.icon-container {
+    /* display: none; */
+}
+
+.icon-container:hover {
+    display: block;
+}
+
+.play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/**********************************/
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+.centered-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/**********************************/
+
+/**********************************/
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/**********************************/
 
 #test-links {
     display: flex;
@@ -29,10 +128,4 @@
     color: white;
     border-radius: 50%;
     border: none;
-}
-
-.play-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

@@ -4,13 +4,27 @@
 
 #main-nav__container {
   display: flex;
-  position: sticky;
-  top: 0;
   justify-content: center;
   align-items: center;
-  gap: 7px;
+  position: sticky;
+  top: 0;
+  gap: 10px;
   background-color: #333;
-  margin-bottom: 30px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  /* margin-bottom: 30px; */
+  z-index: 9999;
+}
+
+#nav-element__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-ad {
+  color: #f50 !important;
+  /* white-space: nowrap; */
 }
 
 #user-nav {
@@ -21,12 +35,20 @@
 }
 
 .nav-bar__element {
-  font-size: 13px;
+  font-size: 15px;
+  margin: 0 15px;
+
 }
+
 .nav-bar__element > a {
   text-decoration: none;
+  color: #ccc;
+}
+
+.nav-bar__element > a:hover {
   color: white;
 }
+
 
 .dropdown-button {
   /* border: 2px solid red; */
@@ -60,4 +82,29 @@
 .profile-dropdown {
   display: flex;
   flex-direction: column;
+}
+
+/** SEARCH */
+.search {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+
+
+  /* border: 5px solid yellow; */
+}
+
+.search-bar {
+  width: 230px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.search-button {
+  position: absolute;
+  margin-right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

@@ -1,19 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useRef } from "react";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import VolumeBar from "./VolumeBar";
-import { setPlayingState } from "../../store/songs";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
-  const dispatch = useDispatch();
-
-  // STATE FOR SONG INFO & IF ITS PLAYING
-  // const playSong = useSelector((s) => s.songs.CurrentlyPlaying);
-  // const isPlayingState = useSelector((s) => s.songs.isPlaying);
-
   // USEREF
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -23,26 +15,9 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
   const [currentSong, setCurrentSong] = useState(songs[songIndex]);
   const [prevSong, setPrevSong] = useState(null);
 
-  // LOCAL STATE
-  // States that audio player components depend on to render up-to-date progress-bar/meta data
-  // const [isPlaying, setIsPlaying] = useState(false); // converted to state
+  // LOCAL STATE - States that audio player components depend on to render up-to-date progress-bar/meta data
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-
-  // Eliminates Infinite Loop
-  // useEffect(() => {
-  //   if (Object.values(currentlyPlaying).length > 0) {
-  //     setCurrentSong(currentlyPlaying);
-  //     // setIsPlaying(true);
-  //     dispatch(setPlayingState(true));
-  //   } else {
-  //     setCurrentSong(songs[songIndex]);
-  //   }
-  //   // console.log("use effect currentsong", currentSong);
-
-  //   // if (isPlayingState) setIsPlaying(isPlayingState);
-  //   // else setIsPlaying(isPlayingState);
-  // }, [currentlyPlaying, isPlayingState]);
 
   if (songs.length === 0 || Object.values(currentlyPlaying) === 0) return null;
 
@@ -74,11 +49,8 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
             setSongIndex,
             setCurrentSong,
             handleNext,
-            // isPlaying,
-            // setIsPlaying,
             prevSong,
             setPrevSong,
-            // playSong,
             currentlyPlaying,
             isPlayingState,
           }}

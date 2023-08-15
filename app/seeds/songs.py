@@ -417,6 +417,36 @@ def seed_songs():
             "artistId": 3,
             "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/14+-+crve+u.jpg"
         },
+        {
+            "title": "Alan Walker & Sasha Alex Sloan - Hero",
+            "genre": "Dance & EDM",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/Alan+Walker+%26+Sasha+Alex+Sloan+-+Hero.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 7,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg"
+        },
+        {
+            "title": "keshi - always",
+            "genre": "Alternative",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/keshi+-+always.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 7,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/13+-+keshi.jpg"
+        },
+        {
+            "title": "Sarude - Dandstorm",
+            "genre": "Dancehall",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/Sarude+-+Dandstorm.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 11,
+            "thumbnail": "https://mixmag.net/assets/uploads/images/_full/darudesandstorm.jpg"
+        },
 
     ]
 

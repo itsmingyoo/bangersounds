@@ -10,7 +10,6 @@ import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
 import PostNewSong from "./components/PostNewSong";
 import AudioPlayer from "./components/AudioPlayer";
-// import { thunkGetAllSongs } from "./store/songs";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,17 +20,20 @@ function App() {
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  // Grab all states and send them as props
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
-  // console.log(songs);
+
+  // Fix render issues
   if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
   if (isLoaded === false) return null;
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* <AudioPlayer isLoaded={isLoaded} songs={songs} /> */}
+      {/* <div id="inner-root">
+        <div id="inner-root-wrapper"> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/login">
@@ -44,17 +46,16 @@ function App() {
             <PostNewSong />
           </Route>
           <Route exact path="/songs/:songId">
-            <SongDetailsPage />
+            <SongDetailsPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
           </Route>
           <Route exact path="/">
-            <LandingPage
-              songs={songs}
-              isPlayingState={isPlayingState}
-              currentlyPlaying={currentlyPlaying}
-            />
+            <LandingPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
           </Route>
         </Switch>
       )}
+      {/* </div>
+      </div> */}
+
       <AudioPlayer
         isLoaded={isLoaded}
         songs={songs}
