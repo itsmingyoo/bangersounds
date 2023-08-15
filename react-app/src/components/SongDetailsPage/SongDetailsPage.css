@@ -12,7 +12,7 @@
 
 #song-details__bot-container {
     display: flex;
-
+    flex-direction: column;
 }
 
 #song-details__content {
@@ -23,8 +23,14 @@ flex-direction: column;
 #song-details__nav-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
 }
+
+#song-details__nav-bar-buttons {
+    display: flex;
+}
+
 
 #song-details__description-comments {
     /* display: flex;
@@ -62,4 +68,13 @@ flex-direction: column;
     display: flex;
     align-items: center;
     margin: 30px;
+}
+
+.song-details__input {
+
+}
+
+.btn-container > img {
+    width: 25px;
+    height: 25px;
 }

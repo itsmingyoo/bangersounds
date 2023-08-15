@@ -2,20 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 // import { Helmet } from "react-helmet";
-import "./DropDown.css";
 import DeleteSongModal from "../DeleteSongModal";
+import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 
-function DropDown({
-  iconClassName,
-  list,
-  songId,
-  isUserSong,
-  user,
-  isClassName,
-}) {
+import "./DropDown.css";
+
+function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, icon1, icon2 }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
-  // console.log("user in the dropdown comp", user);
 
   // Change state of showMenu to True or False
   const openMenu = () => {
@@ -43,30 +37,28 @@ function DropDown({
 
   // function to close menu by changing state to false
   const closeMenu = () => setShowMenu(false);
-  // console.log(iconClassName);
-
-  // let ill = iconClassName.split("/")[3].split(".");
-  // ill.splice(1, 1);
-  // ill = ill.join(".");
-  // console.log(ill);
 
   return (
     <div className="dropdown">
-      <button
-        onClick={openMenu}
-        style={{ backgroundColor: showMenu ? "black" : "" }}
-      >
+      <button onClick={openMenu} style={{ backgroundColor: showMenu ? "black" : "" }}>
+        <IoEllipsisHorizontalSharp />
         More
-        {isClassName ? (
-          <i
-            className={iconClassName}
-            style={{ color: showMenu ? "white" : "" }}
-          />
+        {iconClassName ? (
+          isClassName ? (
+            <i className={iconClassName} style={{ color: showMenu ? "white" : "" }} />
+          ) : (
+            <div>
+              <img src={iconClassName} alt={`this is ${iconClassName}`} />
+            </div>
+          )
+        ) : null}
+        {/* {iconClassName ? (isClassName ? (
+          <i className={iconClassName} style={{ color: showMenu ? "white" : "" }} />
         ) : (
           <div>
             <img src={iconClassName} alt={`this is ${iconClassName}`} />
           </div>
-        )}
+        ))} */}
       </button>
       <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
         <ul className="dropdown-nav">

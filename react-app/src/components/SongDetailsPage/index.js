@@ -6,7 +6,7 @@ import { setPlayingState, playUserSongAction } from "../../store/songs";
 import PlayContent from "./PlayContent";
 import WaveForm from "./WaveForm";
 import ProfilePicture from "./ProfilePicture";
-import SongStats from "./SongStats";
+import SongStats from "./SongStatsNavBar";
 import "./SongDetailsPage.css";
 import AddComment from "./AddComment";
 
@@ -44,8 +44,8 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
           <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
         </div>
 
-        <div id="song-details__bot-container">
-          <div>
+        <div>
+          <div id="song-details__bot-container">
             <div>
               <AddComment song={song} />
               <SongStats {...{ song, songId, isUserSong, user }} />
