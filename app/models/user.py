@@ -30,6 +30,9 @@ class User(db.Model, UserMixin):
     # Target Relationship = db.r('Model', back_populates="current model")
     song_users = db.relationship("Song", backref="users", cascade="all, delete-orphan")
 
+    # Relationship to Comments
+    user_comments = db.relationship("Comment", back_populates="comment_user")
+
     @property
     def password(self):
         return self.hashed_password
@@ -53,6 +56,7 @@ class User(db.Model, UserMixin):
             "profileBio": self.profile_bio,
             "profileCity": self.profile_city,
             "profileCountry": self.profile_country,
+            "comments": [comment.to_dict() for comment in self.user_comments]
             # "songsOwned": [song.to_dict() for song in self.song_users]
             #this should be on the parent side and it will to_dict() all the songs that belong to this user due to the relationship
         }
