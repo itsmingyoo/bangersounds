@@ -1,3 +1,8 @@
+.landing-page__container {
+    display: flex;
+    flex-direction: column;
+}
+
 #recently-played__container {
     display: flex;
     flex-direction: column;
@@ -16,8 +21,75 @@
 
 #recently-played__each-song-container {
     margin: 10px;
-    width: 100px;
+    flex-basis: 13%;
 }
+
+/** buttons */
+.recently-played__btn-link {
+    position: relative;
+}
+
+.song-button {
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.song-btn {
+    /* display: none; */
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.song-btn:hover {
+    display: block;
+}
+
+.icon-container {
+    display: none;
+}
+
+.icon-container:hover {
+    display: block;
+}
+
+.play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/**********************************/
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+.centered-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/* !!! CENTERED BUTTON GLOBAL USE */
+/**********************************/
+
+/**********************************/
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/* !!! CENTERED ICON GLOBAL USE */
+/**********************************/
 
 #test-links {
     display: flex;
@@ -29,10 +101,4 @@
     color: white;
     border-radius: 50%;
     border: none;
-}
-
-.play-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

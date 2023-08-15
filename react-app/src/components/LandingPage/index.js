@@ -15,17 +15,6 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
     setTest(!test); // fixes button toggling
 
     if (currentlyPlaying) {
-      // this is grabbing the new song thats updated in the state when a user plays their first song;
-
-      // fat console log
-      // console.log(
-      //   `dispatching state toggle from current: ` +
-      //     `(${isPlayingState})` +
-      //     " to " +
-      //     `(${!isPlayingState})`
-      // );
-
-      // do the thing
       if (currentlyPlaying.id === song.id)
         dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
@@ -81,7 +70,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
   };
 
   return (
-    <>
+    <div className="landing-page__container">
       <h1>Hello, this is the landing page</h1>
       <div id="recently-played__container">
         <h2>Recently Played</h2>
@@ -90,16 +79,18 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
           {songs &&
             songs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
-                <div>
+                <div className="recently-played__btn-link">
                   <button
                     onClick={() => togglePlayPause(s)}
-                    className="orange-btn-white-txt play-btn"
+                    className="orange-btn-white-txt play-btn centered-button"
                   >
-                    {currentlyPlaying.id === s.id && isPlayingState ? (
-                      <IoPauseSharp />
-                    ) : (
-                      <IoPlaySharp />
-                    )}
+                    <div className="icon-container">
+                      {currentlyPlaying.id === s.id && isPlayingState ? (
+                        <IoPauseSharp className="song-btn" />
+                      ) : (
+                        <IoPlaySharp className="song-btn" />
+                      )}
+                    </div>
                   </button>
 
                   <NavLink to={`/songs/${s.id}`}>
@@ -127,7 +118,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
           {/* END of loop */}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
