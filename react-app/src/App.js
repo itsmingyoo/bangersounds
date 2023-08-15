@@ -32,7 +32,8 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-
+      {/* <div id="inner-root">
+        <div id="inner-root-wrapper"> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/login">
@@ -48,14 +49,12 @@ function App() {
             <SongDetailsPage />
           </Route>
           <Route exact path="/">
-            <LandingPage
-              songs={songs}
-              isPlayingState={isPlayingState}
-              currentlyPlaying={currentlyPlaying}
-            />
+            <LandingPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
           </Route>
         </Switch>
       )}
+      {/* </div>
+      </div> */}
 
       <AudioPlayer
         isLoaded={isLoaded}

@@ -10,17 +10,20 @@
 .landing-page__main-container {
     width: 100%;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #recently-played__container {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 70%;
 }
 
 #recently-played__each-song-container {
     /* margin: 20px; */
-    flex-basis: 13%;
+    flex-basis: 15%;
     padding: 20px;
 
 }
@@ -29,6 +32,7 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 20px;
+    padding-left: 15px;
 }
 
 .recently-played__images {

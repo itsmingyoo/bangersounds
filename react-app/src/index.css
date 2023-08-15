@@ -20,3 +20,18 @@ body {
 a {
     white-space: nowrap;
 }
+
+#inner-root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-root-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    align-content: center;
+    width: 80%;
+}
