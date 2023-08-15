@@ -15,8 +15,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
     setTest(!test); // fixes button toggling
 
     if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id)
-        dispatch(setPlayingState(!isPlayingState));
+      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
     }
 
@@ -79,10 +78,8 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
             songs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
                 <div className="recently-played__btn-link">
-                  <button
-                    onClick={() => togglePlayPause(s)}
-                    className="orange-btn-white-txt play-btn centered-button"
-                  >
+                  {/* RESPONSIVE PLAY/PAUSE BUTTON */}
+                  <button onClick={() => togglePlayPause(s)} className="orange-btn-white-txt play-btn centered-button">
                     <div className="icon-container">
                       {currentlyPlaying.id === s.id && isPlayingState ? (
                         <IoPauseSharp className="song-btn" />

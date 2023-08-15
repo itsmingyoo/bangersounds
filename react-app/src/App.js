@@ -46,7 +46,7 @@ function App() {
             <PostNewSong />
           </Route>
           <Route exact path="/songs/:songId">
-            <SongDetailsPage />
+            <SongDetailsPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
           </Route>
           <Route exact path="/">
             <LandingPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
