@@ -35,6 +35,10 @@
     max-height: 40px;
 }
 
+.song-details__title {
+    font-size: 24px;
+}
+
 .song-details__title, .song-details__display-name {
     background: black;
     color: white;
@@ -48,10 +52,11 @@
     -webkit-hyphens: auto;
     -webkit-word-break: break-all;
 }
+
 .song-details__display-name {
     color: #ccc !important;
     font-weight: 100;
-
+    font-size: 16px;
 }
 
 .song-details__thumbnail > img {
@@ -60,6 +65,7 @@
     /* margin: 15px; */
     padding: 20px;
 }
+
 .song-details__waveform > img {
     width: 800px;
     margin-left: 30px;
