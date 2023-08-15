@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import SearchBar from "./SearchBar";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -11,42 +12,72 @@ function Navigation({ isLoaded }) {
     { name: "Home", to: "/discover" },
     { name: "Feed", to: "/feed" },
     { name: "Library", to: "/library" },
-    { name: "Try Go", to: "#" },
-    { name: "Try Next Pro", to: "#" },
-    { name: "For Artists", to: "#" },
-    { name: "Upload", to: "/upload" },
+  ];
+
+  const navNames2 = [
+    { name: "For Artists", to: "#", className: "" },
+    { name: "Upload", to: "/upload", className: "" },
   ];
   // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (
     <div id="main-nav__container">
-      <div className="nav-bar__element">
-        <NavLink to="/">BangerSounds(Icon)</NavLink>
-      </div>
-
-      {navNames.map((nav) => (
-        <div
-          className="nav-bar__element"
-          key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
-        >
-          <NavLink to={nav.to}>{nav.name}</NavLink>
+      <div id="nav-element__container">
+        <div className="nav-bar__element">
+          <NavLink to="/">BangerSounds(Icon)</NavLink>
         </div>
-      ))}
-      {/* Home button actually leads to discover on the real soundcloud */}
-      {/* User Nav */}
-      <div id="user-nav">
-        {isLoaded && <ProfileButton user={sessionUser} />}
+
+        {navNames.map((nav) => (
+          <>
+            <div
+              className="nav-bar__element"
+              key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+            >
+              <NavLink to={nav.to}>{nav.name}</NavLink>
+            </div>
+          </>
+        ))}
+        <SearchBar />
+        <div className="nav-bar__element">
+          <div className="nav-bar__element">
+            <a href="" className="nav-ad">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        <div className="nav-bar__element">
+          <div className="nav-bar__element">
+            <a href="https://github.com/itsmingyoo" className="nav-ad">
+              GitHub
+            </a>
+          </div>
+        </div>
+        {navNames2.map((nav) => (
+          <div
+            className={`nav-bar__element`}
+            key={`navMapEl2-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+          >
+            <NavLink to={nav.to} className={`${nav.className}`}>
+              {nav.name}
+            </NavLink>
+          </div>
+        ))}
+        {/* Home button actually leads to discover on the real soundcloud */}
+        {/* User Nav */}
+        <div id="user-nav">
+          {isLoaded && <ProfileButton user={sessionUser} />}
+
+          <div className="nav-bar__element">
+            <NavLink to="/">Alerts (bell icon)</NavLink>
+          </div>
+
+          <div className="nav-bar__element">
+            <NavLink to="/">Messages (mail icon)</NavLink>
+          </div>
+        </div>
 
         <div className="nav-bar__element">
-          <NavLink to="/">Alerts (bell icon)</NavLink>
+          <NavLink to="/">Options (3 dots icon)</NavLink>
         </div>
-
-        <div className="nav-bar__element">
-          <NavLink to="/">Messages (mail icon)</NavLink>
-        </div>
-      </div>
-
-      <div className="nav-bar__element">
-        <NavLink to="/">Options (3 dots icon)</NavLink>
       </div>
     </div>
     // old code before mapping

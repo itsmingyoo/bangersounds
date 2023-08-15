@@ -70,8 +70,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
   };
 
   return (
-    <div className="landing-page__container">
-      <h1>Hello, this is the landing page</h1>
+    <div className="landing-page__main-container">
       <div id="recently-played__container">
         <h2>Recently Played</h2>
         <div id="recently-played__songs">
@@ -92,17 +91,18 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
                       )}
                     </div>
                   </button>
-
                   <NavLink to={`/songs/${s.id}`}>
-                    <img
-                      src={
-                        s.thumbnail
-                          ? s.thumbnail
-                          : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
-                      }
-                      className="recently-played__images"
-                      alt={`p-image__${s.title}`}
-                    />
+                    <div className="song-image__container">
+                      <img
+                        src={
+                          s.thumbnail
+                            ? s.thumbnail
+                            : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
+                        }
+                        className="recently-played__images"
+                        alt={`p-image__${s.title}`}
+                      />
+                    </div>
                   </NavLink>
                 </div>
                 <div>

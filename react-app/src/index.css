@@ -11,6 +11,12 @@ body {
     box-sizing: border-box;
 }
 
-/* #root {
-    min-height: 100vh;
-} */
+
+#root {
+    display: block;
+    /* padding-right: 1000px; */
+}
+
+a {
+    white-space: nowrap;
+}
