@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfilePicture = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
+const ProfilePicture = ({ song }) => {
   return (
     <>
       <div className="song-details__profile-picture">

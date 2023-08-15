@@ -39,13 +39,20 @@ flex-direction: column;
 .song-details__profile-picture > img {
     width: 340px;
     height: 340px;
+    /* margin: 15px; */
+    padding: 20px;
 }
 .song-details__waveform > img {
     width: 900px;
     margin-left: 30px;
+    padding-bottom: 20px;
 }
 
-#song-details__left-side {}
+#song-details__left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .song-details__play-btn {
 

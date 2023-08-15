@@ -1,7 +1,7 @@
 import React from "react";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
 
-const PlayContent = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
+const PlayContent = ({ song, isPlayingState, currentlyPlaying, togglePlayPause }) => {
   return (
     <>
       <div id="play-content__container">
