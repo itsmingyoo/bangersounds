@@ -2,9 +2,9 @@ import React from "react";
 
 const AddComment = ({ song }) => {
   return (
-    <>
-      <input type="text" placeholder="Make a comment here" className="song-details__input" />
-    </>
+    <div id="song-details__input-container">
+      <input type="text" placeholder="  Write a comment" className="song-details__input" autoComplete="off" />
+    </div>
   );
 };
 

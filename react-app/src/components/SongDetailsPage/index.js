@@ -2,13 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setPlayingState, playUserSongAction } from "../../store/songs";
-
 import PlayContent from "./PlayContent";
 import WaveForm from "./WaveForm";
 import ProfilePicture from "./ProfilePicture";
 import SongStats from "./SongStatsNavBar";
-import "./SongDetailsPage.css";
 import AddComment from "./AddComment";
+import Thumbnail from "./Thumbnail";
+import "./SongDetailsPage.css";
 
 function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
   const { songId } = useParams();
@@ -37,21 +37,20 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
     <div id="song-details__wrapper">
       <div id="song-detail__main-container">
         <div id="song-details__top-container">
-          {/* COMPONENTS */}
           <div id="song-details__left-side">
             <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
             <WaveForm />
           </div>
-          <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+          <Thumbnail {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
         </div>
 
-        <div>
+        <div id="song-details__bot-wrapper">
           <div id="song-details__bot-container">
-            {/* COMPONENTS */}
             <div id="song-details__song-stats-container">
+              <ProfilePicture song={song} />
               <AddComment song={song} />
-              <SongStats {...{ song, songId, isUserSong, user }} />
             </div>
+            <SongStats {...{ song, songId, isUserSong, user }} />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>
