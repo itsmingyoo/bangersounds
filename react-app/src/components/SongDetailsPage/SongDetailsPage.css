@@ -16,8 +16,8 @@
 }
 
 #song-details__content {
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #song-details__nav-bar {

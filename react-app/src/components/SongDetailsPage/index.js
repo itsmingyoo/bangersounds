@@ -37,6 +37,7 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
     <div id="song-details__wrapper">
       <div id="song-detail__main-container">
         <div id="song-details__top-container">
+          {/* COMPONENTS */}
           <div id="song-details__left-side">
             <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
             <WaveForm />
@@ -46,7 +47,8 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
 
         <div>
           <div id="song-details__bot-container">
-            <div>
+            {/* COMPONENTS */}
+            <div id="song-details__song-stats-container">
               <AddComment song={song} />
               <SongStats {...{ song, songId, isUserSong, user }} />
             </div>
