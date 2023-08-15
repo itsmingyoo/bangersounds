@@ -5,12 +5,12 @@ const PlayContent = ({ song, isPlayingState, currentlyPlaying, togglePlayPause }
   return (
     <>
       <div id="play-content__container">
-        <button onClick={() => togglePlayPause(song)} className="orange-btn-white-txt play-btn">
+        <button onClick={() => togglePlayPause(song)} className="orange-btn-white-txt song-details__play-btn-container">
           <div className="song-details__play-btn">
             {currentlyPlaying.id === song.id && isPlayingState ? (
-              <IoPauseSharp className="song-btn" />
+              <IoPauseSharp className="song-details__play-icon" />
             ) : (
-              <IoPlaySharp className="song-btn" />
+              <IoPlaySharp className="song-details__play-icon" />
             )}
           </div>
         </button>

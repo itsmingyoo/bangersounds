@@ -60,8 +60,9 @@
     justify-content: space-between;
 }
 
-.song-details__play-btn {
-
+.song-details__play-btn-container {
+    font-size: 50px;
+    cursor: pointer;
 }
 
 #play-content__container {
