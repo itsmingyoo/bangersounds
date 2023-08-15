@@ -19,6 +19,8 @@
 #song-details__content {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-width: 0;
 }
 
 #song-details__nav-bar {
@@ -33,14 +35,22 @@
     max-height: 40px;
 }
 
-
-#song-details__description-comments {
-    /* display: flex;
-    flex-direction: column; */
-
+.song-details__title, .song-details__display-name {
+    background: black;
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: 100;
+    width: fit-content;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -webkit-word-break: break-all;
 }
-
-#song-details__side-bar {
+.song-details__display-name {
+    color: #ccc !important;
+    font-weight: 100;
 
 }
 
@@ -70,7 +80,8 @@
 #play-content__container {
     display: flex;
     align-items: center;
-    margin: 30px;
+    /* margin: 30px; */
+    padding-left: 30px;
 }
 
 .btn-container > img {
