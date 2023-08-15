@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
+import MySocialSecurity from "./MySocialSecurity";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -18,7 +19,6 @@ function Navigation({ isLoaded }) {
     { name: "For Artists", to: "#", className: "" },
     { name: "Upload", to: "/upload", className: "" },
   ];
-  // TO DO: GROUP ELEMENTS TOGETHER THAT MATCH LIKE ON SOUNDCLOUD
   return (
     <div id="main-nav__container">
       <div id="nav-element__container">
@@ -36,21 +36,9 @@ function Navigation({ isLoaded }) {
             </div>
           </>
         ))}
+
         <SearchBar />
-        <div className="nav-bar__element">
-          <div className="nav-bar__element">
-            <a href="https://www.linkedin.com/in/minh-tran-36501a251/" className="nav-ad" target="_blank">
-              LinkedIn
-            </a>
-          </div>
-        </div>
-        <div className="nav-bar__element">
-          <div className="nav-bar__element">
-            <a href="https://github.com/itsmingyoo" className="nav-ad" target="_blank">
-              GitHub
-            </a>
-          </div>
-        </div>
+        <MySocialSecurity />
         {navNames2.map((nav) => (
           <div
             className={`nav-bar__element`}
@@ -61,8 +49,6 @@ function Navigation({ isLoaded }) {
             </NavLink>
           </div>
         ))}
-        {/* Home button actually leads to discover on the real soundcloud */}
-        {/* User Nav */}
         <div id="user-nav">
           {isLoaded && <ProfileButton user={sessionUser} />}
 
