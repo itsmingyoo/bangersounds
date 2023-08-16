@@ -167,27 +167,31 @@ export const thunkGetAllComments = () => async (dispatch) => {
     },
   });
   if (comments.ok) {
-    comments = comments.json();
+    comments = await comments.json();
+    console.log(`YOU ARE WORKING WITH THIS ===`, comments);
     dispatch(getAllComments(comments));
     return comments;
   }
   return comments.errors;
 };
 
-export const thunkPostComment = (songId, comment) => async (dispatch) => {
-  let comment = await fetch(`/songs/${songId}/comment`, {
+export const thunkPostComment = (songId, commentData) => async (dispatch) => {
+  console.log("before thunk", commentData);
+  let comment = await fetch(`/api/songs/${songId}/comment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ comment }),
+    body: JSON.stringify(commentData),
   });
-
+  console.log("after thunk, outside if block", comment);
   if (comment.ok) {
-    comment = comment.json();
+    comment = await comment.json();
+    console.log("in if block", comment);
     dispatch(postComment(songId, comment));
     return comment;
   }
+  console.log("end", comment.errors);
   return comment.errors;
 };
 
@@ -196,7 +200,7 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
     method: "DELETE",
   });
   if (comment.ok) {
-    comment = comment.json();
+    comment = await comment.json();
     dispatch(deleteComment(comment));
     return comment;
   }
@@ -287,9 +291,9 @@ export default function reducer(state = initialState, action) {
     }
     case POST_COMMENT_ACTION: {
       newState = { ...state };
-      newState.comments[action.comment.id] = action.comment;
-      newState.userComments[action.comment.id] = action.comment;
-      newState.songComments[action.songId] = action.comment;
+      newState.comments[action.newComment.id] = action.newComment;
+      newState.userComments[action.newComment.id] = action.newComment;
+      newState.songComments[action.newComment.id] = action.newComment;
       return newState;
     }
     case DELETE_COMMENT_ACTION: {

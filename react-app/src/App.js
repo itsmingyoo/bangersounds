@@ -17,16 +17,18 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetAllSongs()))
+      .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   // Grab all states and send them as props
   const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const comments = useSelector((s) => Object.values(s.songs.comments));
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
 
   // Fix render issues
-  if (songs.length === 0 || !songs) return null; // this fixes the audio player issues because we're passing in songs as props
+  if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
   if (isLoaded === false) return null;
 
   return (
@@ -43,25 +45,20 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/upload">
-            <PostNewSong />
+            <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments }} />
           </Route>
           <Route exact path="/songs/:songId">
-            <SongDetailsPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
+            <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments }} />
           </Route>
           <Route exact path="/">
-            <LandingPage songs={songs} isPlayingState={isPlayingState} currentlyPlaying={currentlyPlaying} />
+            <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments }} />
           </Route>
         </Switch>
       )}
       {/* </div>
       </div> */}
 
-      <AudioPlayer
-        isLoaded={isLoaded}
-        songs={songs}
-        isPlayingState={isPlayingState}
-        currentlyPlaying={currentlyPlaying}
-      />
+      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments }} />
     </>
   );
 }
