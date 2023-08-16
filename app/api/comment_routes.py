@@ -8,3 +8,12 @@ from pprint import pprint
 
 # PREFIX '/api/comments'
 comment_routes = Blueprint("comments", __name__)
+
+@comment_routes.route('')
+def get_comments():
+    return { comment.to_dict()['id']: comment.to_dict() for comment in Comment.query.all() }
+
+
+# Post comment will make more sense in the songs route as /songs/songid/new
+
+# delete should go here
