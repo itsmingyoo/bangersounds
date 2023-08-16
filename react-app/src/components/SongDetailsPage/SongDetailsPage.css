@@ -169,3 +169,19 @@
 .display-comment-date {
     opacity: 1;
 }
+
+/** EDIT MODAL */
+#edit__main-container {
+    /* padding: 100px; */
+    width: 100%;
+    height: 100%;
+}
+#edit-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#edit__main-container div {
+    padding: 10px;
+    margin: 5px;
+}

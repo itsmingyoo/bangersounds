@@ -50,7 +50,19 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
               <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
               <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
-            <SongStats {...{ song, songId, isUserSong, user, comments }} />
+            <SongStats
+              {...{
+                song,
+                songs,
+                isPlayingState,
+                currentlyPlaying,
+                togglePlayPause,
+                comments,
+                songId,
+                isUserSong,
+                user,
+              }}
+            />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>

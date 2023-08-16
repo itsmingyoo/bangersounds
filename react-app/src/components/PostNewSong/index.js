@@ -127,13 +127,6 @@ function PostNewSong() {
       title: "Title*",
     },
     {
-      name: "songURL",
-      value: songURL,
-      placeHolder: "Song URL",
-      onChange: setSongURL,
-      title: "Song URL",
-    },
-    {
       name: "description",
       value: description,
       placeHolder: "Description",
