@@ -287,8 +287,6 @@ let initialState = {
   },
   isPlaying: false,
   comments: {},
-  userComments: {},
-  songComments: {},
 };
 export default function reducer(state = initialState, action) {
   let newState;

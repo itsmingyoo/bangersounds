@@ -5,6 +5,7 @@
 /** Audio Player Main Container */
 .audio-player {
     position: sticky;
+    margin-top: auto; /** fixes my audio player to stick to the bottom by giving a margin top auto, even though i have 'bottom: 0' */
     margin-bottom: 0;
     bottom: 0;
     background-color: #9d9d9d;

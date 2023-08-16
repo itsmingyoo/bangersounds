@@ -14,8 +14,9 @@ import AudioPlayer from "./components/AudioPlayer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  // useSelector is unreliable with finding the updated state during an async function (i.e. the dispatches in the useEffect)
-  // Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
+
+  //* useSelector is unreliable with finding the updated state after an async function (i.e. the dispatches in the useEffect)
+  //* Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
   const user = useSelector((s) => s.session.user);
   const userRef = useRef(user);
   useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
       .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => {
-        // now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
+        //* now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
         if (userRef.current !== null) {
           // console.log("app.js fetching user comments...");
           return Promise.all([dispatch(songActions.thunkGetUserComments())]);
@@ -37,6 +38,7 @@ function App() {
         // console.log("Data fetch complete");
         setIsLoaded(true);
       })
+      //! CATCH ERRORS
       .catch((e) => {
         // console.error("Error fetching data:", e);
         setIsLoaded(true);
