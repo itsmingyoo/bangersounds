@@ -192,11 +192,7 @@ function PostNewSong() {
         {/* {console.log("this is song after user chooses a file", song)} */}
         {/* {console.log("privated ? ", privated)} */}
         <div>
-          <form
-            className="new-song__form"
-            onSubmit={onSubmit}
-            encType="multipart/form-data"
-          >
+          <form className="new-song__form" onSubmit={onSubmit} encType="multipart/form-data">
             {inputs.map((el, index) => (
               <div key={el.name}>
                 <div>{el.title}</div>
@@ -251,14 +247,9 @@ function PostNewSong() {
               />
               <label for="private">Private</label>
             </div>
-            {submitted && errors.genre && (
-              <div className="errors">{errors.genre}</div>
-            )}
+            {submitted && errors.genre && <div className="errors">{errors.genre}</div>}
             <div id="new-song__submit">
-              <button
-                className="white-btn-black-txt"
-                onClick={(e) => history.push("/")}
-              >
+              <button className="white-btn-black-txt" onClick={(e) => history.push("/")}>
                 Cancel
               </button>
               <button className="orange-btn-white-txt">Save</button>

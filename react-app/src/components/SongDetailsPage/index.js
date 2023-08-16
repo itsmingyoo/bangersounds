@@ -8,9 +8,11 @@ import ProfilePicture from "./ProfilePicture";
 import SongStats from "./SongStatsNavBar";
 import AddComment from "./AddComment";
 import Thumbnail from "./Thumbnail";
+import CommentBox from "./Comments";
 import "./SongDetailsPage.css";
 
-function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
+function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) {
+  // console.log(songs, isPlayingState, currentlyPlaying, comments);
   const { songId } = useParams();
   const dispatch = useDispatch();
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
@@ -38,23 +40,23 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
       <div id="song-detail__main-container">
         <div id="song-details__top-container">
           <div id="song-details__left-side">
-            <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+            <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             <WaveForm />
           </div>
-          <Thumbnail {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+          <Thumbnail {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
         </div>
 
         <div id="song-details__bot-wrapper">
           <div id="song-details__bot-container">
             <div id="song-details__song-stats-container">
-              <ProfilePicture song={song} />
-              <AddComment song={song} />
+              <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+              <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
-            <SongStats {...{ song, songId, isUserSong, user }} />
+            <SongStats {...{ song, songId, isUserSong, user, comments }} />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>
-              <div>All comments on this song will show here</div>
+              <CommentBox {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
           </div>
 

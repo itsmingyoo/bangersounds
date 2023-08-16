@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
@@ -14,18 +14,40 @@ import AudioPlayer from "./components/AudioPlayer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  // useSelector is unreliable with finding the updated state during an async function (i.e. the dispatches in the useEffect)
+  // Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
+  const user = useSelector((s) => s.session.user);
+  const userRef = useRef(user);
+  useEffect(() => {
+    userRef.current = user;
+  });
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
-      .then(() => setIsLoaded(true));
+      .then(() => {
+        // now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
+        if (userRef.current !== null) {
+          // console.log("app.js fetching user comments...");
+          return Promise.all([dispatch(songActions.thunkGetUserComments())]);
+        }
+        return Promise.resolve();
+      })
+      .then(() => {
+        // console.log("Data fetch complete");
+        setIsLoaded(true);
+      })
+      .catch((e) => {
+        // console.error("Error fetching data:", e);
+        setIsLoaded(true);
+      });
   }, [dispatch]);
 
   // Grab all states and send them as props
   const songs = useSelector((s) => Object.values(s.songs.Songs));
-  const comments = useSelector((s) => Object.values(s.songs.comments));
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
+  const comments = useSelector((s) => s.songs.comments);
 
   // Fix render issues
   if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props

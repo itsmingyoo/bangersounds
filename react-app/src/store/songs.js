@@ -8,8 +8,10 @@ const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
 // ACTIONS FOR COMMENTS
 const GET_ALL_COMMENTS_ACTION = "comments/GET_ALL_COMMENTS_ACTION";
+const GET_USER_COMMENTS_ACTION = "comments/GET_USER_COMMENTS_ACTION";
 const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
 const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
+const CLEAR_STATE_ACTION = "comments/CLEAR_STATE_ACTION";
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -62,11 +64,18 @@ export const setPlayingState = (boolean) => {
   };
 };
 
-// ACTIONS FOR COMMENTS
+//*** ACTIONS FOR COMMENTS
 const getAllComments = (allComments) => {
   return {
     type: GET_ALL_COMMENTS_ACTION,
     allComments,
+  };
+};
+
+const getUserComments = (userComments) => {
+  return {
+    type: GET_USER_COMMENTS_ACTION,
+    userComments,
   };
 };
 
@@ -82,6 +91,12 @@ const deleteComment = (comment) => {
   return {
     type: DELETE_COMMENT_ACTION,
     comment,
+  };
+};
+
+export const clearState = () => {
+  return {
+    type: CLEAR_STATE_ACTION,
   };
 };
 
@@ -168,15 +183,33 @@ export const thunkGetAllComments = () => async (dispatch) => {
   });
   if (comments.ok) {
     comments = await comments.json();
-    console.log(`YOU ARE WORKING WITH THIS ===`, comments);
+    // console.log(`YOU ARE WORKING WITH THIS ===`, comments);
     dispatch(getAllComments(comments));
     return comments;
   }
   return comments.errors;
 };
 
+export const thunkGetUserComments = () => async (dispatch) => {
+  let comments = await fetch(`/api/comments/user-comments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // Can input more KVP here to grab from headers in the backend
+    },
+  });
+  if (comments.ok) {
+    comments = await comments.json();
+    console.log("thunk", comments);
+    // console.log(`YOU ARE WORKING WITH THIS ===`, comments);
+    dispatch(getUserComments(comments));
+    return comments;
+  }
+  return comments.errors;
+};
+
 export const thunkPostComment = (songId, commentData) => async (dispatch) => {
-  console.log("before thunk", commentData);
+  // console.log("before thunk", commentData);
   let comment = await fetch(`/api/songs/${songId}/comment`, {
     method: "POST",
     headers: {
@@ -184,14 +217,14 @@ export const thunkPostComment = (songId, commentData) => async (dispatch) => {
     },
     body: JSON.stringify(commentData),
   });
-  console.log("after thunk, outside if block", comment);
+  // console.log("after thunk, outside if block", comment);
   if (comment.ok) {
     comment = await comment.json();
-    console.log("in if block", comment);
+    // console.log("in if block", comment);
     dispatch(postComment(songId, comment));
     return comment;
   }
-  console.log("end", comment.errors);
+  // console.log("end", comment.errors);
   return comment.errors;
 };
 
@@ -289,6 +322,14 @@ export default function reducer(state = initialState, action) {
       newState.comments = { ...action.allComments };
       return newState;
     }
+    case GET_USER_COMMENTS_ACTION: {
+      newState = { ...state };
+      console.log("reducer", action.userComments);
+      newState.userComments = {};
+      newState.userComments = { ...action.userComments };
+
+      return newState;
+    }
     case POST_COMMENT_ACTION: {
       newState = { ...state };
       newState.comments[action.newComment.id] = action.newComment;
@@ -305,6 +346,10 @@ export default function reducer(state = initialState, action) {
       delete newState.userComments[action.comment.id];
       delete newState.songComments[action.comment.id];
       return newState;
+    }
+    case CLEAR_STATE_ACTION: {
+      newState = { ...state };
+      newState.userComments = {};
     }
     default:
       return state;
