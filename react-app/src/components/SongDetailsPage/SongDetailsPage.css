@@ -103,6 +103,10 @@
     margin-bottom: 15px;
 }
 
+#song-details__description-comments {
+    flex-direction: column;
+}
+
 .song-details__profile-picture {
     max-height: 40px
 }
@@ -131,4 +135,23 @@
 
 #song-details__song-stats-container {
     align-items: center;
+}
+
+/** USER COMMENTS */
+#user-comment__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#user-comment__container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 60%;
+}
+
+#user-displayname {
+    color: #999
 }
