@@ -12,7 +12,6 @@ const GET_USER_COMMENTS_ACTION = "comments/GET_USER_COMMENTS_ACTION";
 const GET_SONG_COMMENTS_ACTION = "comments/GET_SONG_COMMENTS_ACTION";
 const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
 const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
-const CLEAR_STATE_ACTION = "comments/CLEAR_STATE_ACTION";
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -95,16 +94,10 @@ const postComment = (songId, newComment) => {
   };
 };
 
-const deleteComment = (comment) => {
+const deleteComment = (commentId) => {
   return {
     type: DELETE_COMMENT_ACTION,
-    comment,
-  };
-};
-
-export const clearState = () => {
-  return {
-    type: CLEAR_STATE_ACTION,
+    commentId,
   };
 };
 
@@ -257,7 +250,7 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
   });
   if (comment.ok) {
     comment = await comment.json();
-    dispatch(deleteComment(comment));
+    dispatch(deleteComment(commentId));
     return comment;
   }
   return comment.errors;
@@ -368,16 +361,8 @@ export default function reducer(state = initialState, action) {
     case DELETE_COMMENT_ACTION: {
       newState = { ...state };
       newState.comments = { ...newState.comments };
-      newState.userComments = { ...newState.userComments };
-      newState.songComments = { ...newState.songComments };
-      delete newState.comments[action.comment.id];
-      delete newState.userComments[action.comment.id];
-      delete newState.songComments[action.comment.id];
+      delete newState.comments[action.commentId];
       return newState;
-    }
-    case CLEAR_STATE_ACTION: {
-      newState = { ...state };
-      newState.userComments = {};
     }
     default:
       return state;
