@@ -9,7 +9,7 @@ function MySocialSecurity() {
           {/* <a href="https://www.linkedin.com/in/minh-tran-36501a251/" className="nav-ad" target="_blank"> */}
           <span
             onClick={() => window.open("https://www.linkedin.com/in/minh-tran-36501a251/", "_blank")}
-            className="nav-ad"
+            className="nav-linkedin"
           >
             LinkedIn
           </span>
@@ -22,7 +22,7 @@ function MySocialSecurity() {
           {/* GitHub */}
           {/* </a> */}
 
-          <span onClick={() => window.open("https://github.com/itsmingyoo", "_blank")} className="nav-ad">
+          <span onClick={() => window.open("https://github.com/itsmingyoo", "_blank")} className="nav-github">
             GitHub
           </span>
         </div>
