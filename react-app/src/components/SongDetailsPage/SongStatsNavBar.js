@@ -31,7 +31,8 @@ const SongStats = ({ song, songId, isUserSong, user }) => {
           <IoLinkSharp />
           Copy Link
         </button>
-        {/* <button>More</button> */}
+        {/* Modal Button Popup to Edit Song */}
+        {/* {song.artistId === user.id && <button className="song-edit-btn">Edit</button>} */}
         <DropDown
           // iconClassName={IoEllipsisHorizontalSharp}
           list={list}

@@ -10,6 +10,8 @@ import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
 import PostNewSong from "./components/PostNewSong";
 import AudioPlayer from "./components/AudioPlayer";
+import Profile from "./components/Profile";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,9 +70,19 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
+
           <Route exact path="/upload">
-            <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+            <ProtectedRoute>
+              <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+            </ProtectedRoute>
           </Route>
+
+          <Route exact path="/profile">
+            <ProtectedRoute>
+              <Profile {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+            </ProtectedRoute>
+          </Route>
+
           <Route exact path="/songs/:songId">
             <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments }} />
           </Route>
