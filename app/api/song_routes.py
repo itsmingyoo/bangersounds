@@ -220,8 +220,8 @@ def delete_comment(songId, commentId):
     comment = Comment.query.get(commentId)
     if not comment:
         return {"error": "Comment couldn't be found."}
-    comment_user_id = comment.userId
-    if user_id == comment_user_id:
+
+    if user_id == comment.userId:
         db.session.delete(comment)
         db.session.commit()
         return jsonify({"deletedComment": comment.to_dict()})
