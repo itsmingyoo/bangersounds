@@ -155,3 +155,15 @@
 #user-displayname {
     color: #999
 }
+
+#user-time-delete {
+    display: flex;
+}
+
+.user-delete {
+    opacity: 0;
+}
+
+.display-comment-date {
+    opacity: 1;
+}
