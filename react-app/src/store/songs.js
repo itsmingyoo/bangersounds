@@ -6,8 +6,10 @@ const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
-//*  ===================end of types ===================//
-
+// ACTIONS FOR COMMENTS
+const GET_ALL_COMMENTS_ACTION = "comments/GET_ALL_COMMENTS_ACTION";
+const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
+const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -60,9 +62,30 @@ export const setPlayingState = (boolean) => {
   };
 };
 
-//?  ======================= end of actions ===================//
+// ACTIONS FOR COMMENTS
+const getAllComments = (allComments) => {
+  return {
+    type: GET_ALL_COMMENTS_ACTION,
+    allComments,
+  };
+};
 
-//*  =====================  thunks ===========================//
+const postComment = (songId, newComment) => {
+  return {
+    type: POST_COMMENT_ACTION,
+    songId,
+    newComment,
+  };
+};
+
+const deleteComment = (comment) => {
+  return {
+    type: DELETE_COMMENT_ACTION,
+    comment,
+  };
+};
+
+//*  ===================== song thunks ===========================//
 
 export const thunkGetAllSongs = () => async (dispatch) => {
   let songs = await fetch(`/api/songs/`, {
@@ -105,19 +128,18 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
   }
 };
 
-export const thunkEditSongById =
-  (songId, updatedSongFormData) => async (dispatch) => {
-    let updatedSong = await fetch(`/api/songs/${songId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedSongFormData),
-    });
-    updatedSong = await updatedSong.json();
-    dispatch(editSongByIdAction(updatedSong));
-    return updatedSong;
-  };
+export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatch) => {
+  let updatedSong = await fetch(`/api/songs/${songId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedSongFormData),
+  });
+  updatedSong = await updatedSong.json();
+  dispatch(editSongByIdAction(updatedSong));
+  return updatedSong;
+};
 
 export const thunkDeleteUserSong = (songId) => async (dispatch) => {
   let deleted = await fetch(`/api/songs/${songId}`, {
@@ -131,7 +153,55 @@ export const thunkDeleteUserSong = (songId) => async (dispatch) => {
   return deleted.errors;
 };
 
-//*  ======================= end of thunks ===================//
+//!  ===================== comments thunks ===========================//
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
+
+export const thunkGetAllComments = () => async (dispatch) => {
+  let comments = await fetch(`/api/comments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // Can input more KVP here to grab from headers in the backend
+    },
+  });
+  if (comments.ok) {
+    comments = comments.json();
+    dispatch(getAllComments(comments));
+    return comments;
+  }
+  return comments.errors;
+};
+
+export const thunkPostComment = (songId, comment) => async (dispatch) => {
+  let comment = await fetch(`/songs/${songId}/comment`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ comment }),
+  });
+
+  if (comment.ok) {
+    comment = comment.json();
+    dispatch(postComment(songId, comment));
+    return comment;
+  }
+  return comment.errors;
+};
+
+export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
+  let comment = await fetch(`/api/songs/${songId}/${commentId}`, {
+    method: "DELETE",
+  });
+  if (comment.ok) {
+    comment = comment.json();
+    dispatch(deleteComment(comment));
+    return comment;
+  }
+  return comment.errors;
+};
 
 //? ================== reducer================================//
 let initialState = {
@@ -149,8 +219,7 @@ let initialState = {
       profileBio: "This is a demo account for demo users",
       profileCity: "",
       profileCountry: "",
-      profileImage:
-        "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
+      profileImage: "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
       username: "Demo",
     },
     caption: "Bangers All Around",
@@ -161,10 +230,12 @@ let initialState = {
     songURL:
       "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
     title: "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
-    thumbnail:
-      "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
+    thumbnail: "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
   },
   isPlaying: false,
+  comments: {},
+  userComments: {},
+  songComments: {},
 };
 export default function reducer(state = initialState, action) {
   let newState;
@@ -206,13 +277,31 @@ export default function reducer(state = initialState, action) {
       newState.isPlaying = action.boolean;
       return newState;
     }
-
-    // TEST AWS
-    // case TEST_AWS_ROUTE_ACTION: {
-    //   newState = {};
-    //   console.log("action.test in the reducer", action.test);
-    //   newState.awsURL = action.test;
-    // }
+    // COMMENTS COMMENTS COMMENT //
+    // -- COMMENTS SECTION -- //
+    // COMMENTS COMMENTS COMMENT //
+    case GET_ALL_COMMENTS_ACTION: {
+      newState = { ...state };
+      newState.comments = { ...action.allComments };
+      return newState;
+    }
+    case POST_COMMENT_ACTION: {
+      newState = { ...state };
+      newState.comments[action.comment.id] = action.comment;
+      newState.userComments[action.comment.id] = action.comment;
+      newState.songComments[action.songId] = action.comment;
+      return newState;
+    }
+    case DELETE_COMMENT_ACTION: {
+      newState = { ...state };
+      newState.comments = { ...newState.comments };
+      newState.userComments = { ...newState.userComments };
+      newState.songComments = { ...newState.songComments };
+      delete newState.comments[action.comment.id];
+      delete newState.userComments[action.comment.id];
+      delete newState.songComments[action.comment.id];
+      return newState;
+    }
     default:
       return state;
   }
