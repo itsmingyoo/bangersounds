@@ -23,11 +23,6 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
 
   songId = Number(songId);
 
-  // THIS BREAKS MY CODE --- WHY???????????????????????????????????????????????
-  // useEffect(() => {
-  //   dispatch(thunkGetSongComments(songId));
-  // }, [dispatch, songId]);
-
   if (!song) return null;
 
   const togglePlayPause = async (song) => {
@@ -38,12 +33,6 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
     }
   };
 
-  const list = [
-    { name: "Add to Next Up", to: "#" },
-    { name: "Add to Playlist", to: "#" },
-    { name: "Station", to: "#" },
-    { name: "Report", to: "#" },
-  ];
   return (
     <div id="song-details__wrapper">
       <div id="song-detail__main-container">

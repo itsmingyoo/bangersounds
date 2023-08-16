@@ -78,7 +78,7 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
                 <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
                   {timeAgoString}
                 </div>
-                {c.userId === user.id && hoveredStates[index] && (
+                {user && c.userId === user.id && hoveredStates[index] && (
                   <button
                     onClick={() => handleDelete(c)}
                     className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}

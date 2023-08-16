@@ -27,14 +27,15 @@ const SongStats = ({ song, songId, isUserSong, user }) => {
           <IoShareOutline />
           Share
         </button>
+
         <button>
           <IoLinkSharp />
           Copy Link
         </button>
+
         {/* Modal Button Popup to Edit Song */}
-        {/* {song.artistId === user.id && <button className="song-edit-btn">Edit</button>} */}
+        {user && song?.artistId === user?.id && <button className="song-edit-btn">Edit</button>}
         <DropDown
-          // iconClassName={IoEllipsisHorizontalSharp}
           list={list}
           songId={songId}
           isUserSong={isUserSong}
