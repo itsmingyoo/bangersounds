@@ -352,8 +352,6 @@ export default function reducer(state = initialState, action) {
     case POST_COMMENT_ACTION: {
       newState = { ...state };
       newState.comments[action.newComment.id] = action.newComment;
-      newState.userComments[action.newComment.id] = action.newComment;
-      newState.songComments[action.newComment.id] = action.newComment;
       return newState;
     }
     case DELETE_COMMENT_ACTION: {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setPlayingState, playUserSongAction } from "../../store/songs";
@@ -16,6 +16,7 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
   // console.log(songs, isPlayingState, currentlyPlaying, comments);
   let { songId } = useParams();
   const dispatch = useDispatch();
+
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
   const user = useSelector((u) => u.session.user);
   const isUserSong = song?.artistId === user?.id;
@@ -65,7 +66,16 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>
               <CommentBox
-                {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments, user, dispatch }}
+                {...{
+                  song,
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  togglePlayPause,
+                  comments,
+                  user,
+                  dispatch,
+                }}
               />
             </div>
           </div>
