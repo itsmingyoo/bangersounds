@@ -28,6 +28,7 @@
 
 .nav-linkedin, .nav-github {
   color: #f50 !important;
+  cursor: pointer;
 }
 
 #user-nav {
