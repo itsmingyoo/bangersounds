@@ -22,9 +22,12 @@
   align-items: center;
 }
 
-.nav-ad {
+/* .nav-ad {
   color: #f50 !important;
-  /* white-space: nowrap; */
+} */
+
+.nav-linkedin, .nav-github {
+  color: #f50 !important;
 }
 
 #user-nav {
