@@ -4,11 +4,12 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from .models import db, User, Song
+from .models import db, User, Song, Comment
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.song_routes import songs_routes
 from .api.profile_routes import profile_routes
+from .api.comment_routes import comment_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +33,7 @@ app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(songs_routes, url_prefix="/api/songs")
 app.register_blueprint(profile_routes, url_prefix="/api/profile")
+app.register_blueprint(comment_routes, url_prefix="/api/comments")
 db.init_app(app)
 Migrate(app, db)
 

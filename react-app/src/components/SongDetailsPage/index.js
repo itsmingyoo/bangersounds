@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setPlayingState, playUserSongAction } from "../../store/songs";
-
 import PlayContent from "./PlayContent";
 import WaveForm from "./WaveForm";
 import ProfilePicture from "./ProfilePicture";
 import SongStats from "./SongStatsNavBar";
-import "./SongDetailsPage.css";
 import AddComment from "./AddComment";
+import Thumbnail from "./Thumbnail";
+import CommentBox from "./Comments";
+import { thunkGetSongComments } from "../../store/songs";
+import "./SongDetailsPage.css";
 
-function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
-  const { songId } = useParams();
+function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) {
+  // console.log(songs, isPlayingState, currentlyPlaying, comments);
+  let { songId } = useParams();
   const dispatch = useDispatch();
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
   const user = useSelector((u) => u.session.user);
   const isUserSong = song?.artistId === user?.id;
+
+  songId = Number(songId);
+
+  // THIS BREAKS MY CODE --- WHY???????????????????????????????????????????????
+  // useEffect(() => {
+  //   dispatch(thunkGetSongComments(songId));
+  // }, [dispatch, songId]);
 
   if (!song) return null;
 
@@ -38,22 +48,25 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying }) {
       <div id="song-detail__main-container">
         <div id="song-details__top-container">
           <div id="song-details__left-side">
-            <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+            <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             <WaveForm />
           </div>
-          <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+          <Thumbnail {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
         </div>
 
-        <div>
+        <div id="song-details__bot-wrapper">
           <div id="song-details__bot-container">
-            <div>
-              <AddComment song={song} />
-              <SongStats {...{ song, songId, isUserSong, user }} />
+            <div id="song-details__song-stats-container">
+              <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+              <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
+            <SongStats {...{ song, songId, isUserSong, user, comments }} />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>
-              <div>All comments on this song will show here</div>
+              <CommentBox
+                {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments, user, dispatch }}
+              />
             </div>
           </div>
 

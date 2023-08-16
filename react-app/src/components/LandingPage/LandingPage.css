@@ -67,16 +67,21 @@
     cursor: pointer;
 }
 
-.song-btn:hover {
-    display: block;
-}
-
 .icon-container {
     /* display: none; */
 }
 
 .icon-container:hover {
     display: block;
+}
+
+.song-btn, .play-btn {
+    opacity: 0;
+}
+
+.display-btn,
+.recently-played__btn-link:hover .song-btn {
+  opacity: 1;
 }
 
 .play-btn {

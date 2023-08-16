@@ -34,6 +34,9 @@ class Song(db.Model):
     # # One to Many - Many side
     user_songs = db.relationship("User", back_populates="song_users")
 
+    # Relationship to Comments
+    song_comments = db.relationship("Comment", back_populates="comment_song")
+
     # Nate's code
     # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
@@ -54,7 +57,8 @@ class Song(db.Model):
             # Nullable
             "caption": self.caption,
             "thumbnail": self.thumbnail,
-            "artistInfo": self.user_songs.to_dict()
+            "artistInfo": self.user_songs.to_dict(),
+            "comments": [comment.to_dict() for comment in self.song_comments]
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }

@@ -1,21 +1,13 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
-from app.forms import LoginForm
-from app.forms import SignUpForm
-from app.forms import NewSongForm
-from app.forms import SongUploadForm #aws
 from flask_login import current_user, login_user, logout_user, login_required
+from app.forms import NewSongForm, NewCommentForm
+from app.models import Song, Comment, db, User
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
-from app.models import Song
-# from app.models.test import NewSong #aws
 from .auth_routes import validation_errors_to_error_messages
 from pprint import pprint
 
 # PREFIX '/api/songs'
 songs_routes = Blueprint("songs", __name__)
-
-
-
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
 @songs_routes.route("/")
@@ -196,6 +188,60 @@ def delete_song_id(songId):
         db.session.commit()
         # PYTHON STRING INTERPOLATION - ADD THE 'f'
         return jsonify({'message': f'Song with id: {songId} has been successfully deleted', 'song': song.to_dict()}), 200
+
+
+
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+
+@songs_routes.route('/<int:songId>/comments')
+def get_song_comments(songId):
+    return jsonify({comment.to_dict()['id']: comment.to_dict() for comment in Comment.query.filter_by(songId=songId).all()})
+
+
+@songs_routes.route('/<int:songId>/comment', methods=['POST'])
+@login_required
+def post_comment(songId):
+    user_id = current_user.to_dict()['id']
+    # song = Song.query.get(songId)
+    form = NewCommentForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_comment = Comment(
+            userId=user_id,
+            songId=songId,
+            comment=form.data['comment'],
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        print('LOOK BELOW')
+        pprint(new_comment.to_dict())
+        print('LOOK ABOVE')
+        return jsonify(new_comment.to_dict()), 201
+    return {"error": "Error making a comment"}, 401
+
+@songs_routes.route('/<int:songId>/<int:commentId>', methods=['DELETE'])
+@login_required
+def delete_comment(songId, commentId):
+    user_id = current_user.to_dict()['id']
+    comment = Comment.query.get(commentId)
+    if not comment:
+        return {"error": "Comment couldn't be found."}
+
+    if user_id == comment.userId:
+        db.session.delete(comment)
+        db.session.commit()
+        return jsonify({"deletedComment": comment.to_dict()}), 200
+    return {"error": "Unable to delete this comment."}, 401
+
+
+
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # AWS Test Route

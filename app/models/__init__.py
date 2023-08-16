@@ -1,4 +1,6 @@
+#must import models here to create table
 from .db import db
 from .user import User
 from .db import environment, SCHEMA
-from .song import Song #must import here to create table
+from .song import Song
+from .comment import Comment

@@ -32,7 +32,9 @@ function Navigation({ isLoaded }) {
               className="nav-bar__element"
               key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
             >
-              <NavLink to={nav.to}>{nav.name}</NavLink>
+              <NavLink to={nav.to} key={nav.name}>
+                {nav.name}
+              </NavLink>
             </div>
           </>
         ))}
@@ -42,9 +44,9 @@ function Navigation({ isLoaded }) {
         {navNames2.map((nav) => (
           <div
             className={`nav-bar__element`}
-            key={`navMapEl2-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+            key={`navMap-${nav.name}`} // key has to be unique, else RED ERRORRRS
           >
-            <NavLink to={nav.to} className={`${nav.className}`}>
+            <NavLink to={nav.to} className={`${nav.className}`} key={`navLink-${nav.className}-chick`}>
               {nav.name}
             </NavLink>
           </div>
