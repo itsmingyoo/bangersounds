@@ -141,7 +141,9 @@
 #user-comment__main {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
+    width: 80%;
+    margin-bottom: 50px;
 }
 
 #user-comment__container {
