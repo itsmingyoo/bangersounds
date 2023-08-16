@@ -224,7 +224,7 @@ def delete_comment(songId, commentId):
     if user_id == comment.userId:
         db.session.delete(comment)
         db.session.commit()
-        return jsonify({"deletedComment": comment.to_dict()})
+        return jsonify({"deletedComment": comment.to_dict()}), 200
     return {"error": "Unable to delete this comment."}, 401
 
 

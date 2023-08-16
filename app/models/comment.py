@@ -31,4 +31,5 @@ class Comment(db.Model):
             "songId": self.songId,
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
+            "user": self.comment_user.to_dict()
         }
