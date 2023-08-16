@@ -192,6 +192,17 @@ def delete_song_id(songId):
 
 
 ################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+################# COMMENTS ROUTES FOR SONGS #################################
+
+@songs_routes.route('/<int:songId>/comments')
+def get_song_comments(songId):
+    return jsonify({comment.to_dict()['id']: comment.to_dict() for comment in Comment.query.filter_by(songId=songId).all()})
+
+
 @songs_routes.route('/<int:songId>/comment', methods=['POST'])
 @login_required
 def post_comment(songId):

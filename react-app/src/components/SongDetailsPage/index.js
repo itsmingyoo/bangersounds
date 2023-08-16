@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setPlayingState, playUserSongAction } from "../../store/songs";
@@ -9,15 +9,23 @@ import SongStats from "./SongStatsNavBar";
 import AddComment from "./AddComment";
 import Thumbnail from "./Thumbnail";
 import CommentBox from "./Comments";
+import { thunkGetSongComments } from "../../store/songs";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) {
   // console.log(songs, isPlayingState, currentlyPlaying, comments);
-  const { songId } = useParams();
+  let { songId } = useParams();
   const dispatch = useDispatch();
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
   const user = useSelector((u) => u.session.user);
   const isUserSong = song?.artistId === user?.id;
+
+  songId = Number(songId);
+
+  // THIS BREAKS MY CODE --- WHY???????????????????????????????????????????????
+  // useEffect(() => {
+  //   dispatch(thunkGetSongComments(songId));
+  // }, [dispatch, songId]);
 
   if (!song) return null;
 
@@ -56,7 +64,9 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>
-              <CommentBox {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+              <CommentBox
+                {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments, user, dispatch }}
+              />
             </div>
           </div>
 
