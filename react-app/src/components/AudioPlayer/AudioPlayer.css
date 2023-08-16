@@ -2,17 +2,26 @@
 /* top | right | bottom | left */
 /* Media Query - Make buttons smaller and text smaller so that there is no 'wrapping' of the letters in a word into a column which gives the WHITE SPACE at the bottom */
 
-/** Audio Player Main Container */
-.audio-player {
+/* .audio-player {
     position: sticky;
-    margin-top: auto; /** fixes my audio player to stick to the bottom by giving a margin top auto, even though i have 'bottom: 0' */
+    margin-top: auto;
     margin-bottom: 0;
     bottom: 0;
     background-color: #9d9d9d;
     border-top: 1px solid #cecece;
     z-index: 999;
-    /* background-color: #999; */
-    /* white-space: nowrap; */
+}
+*/
+
+/** FIXES AUDIO PLAYER TO STICK TO THE BOTTOM!!!!!! */
+.audio-player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9d9d9d;
+    border-top: 1px solid #cecece;
+    z-index: 999;
 }
 
 /*! wrapper of the components in the index.js (audioplayer component) */
