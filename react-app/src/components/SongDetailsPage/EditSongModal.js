@@ -144,26 +144,63 @@ const EditSong = ({
     }
   };
 
-  const downloadLinkRef = useRef(null);
-
-  const handleDownloadClick = () => {
-    downloadLinkRef.current.click();
+  const downloadFile = (fileUrl, fileName) => {
+    fetch(fileUrl)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+      });
   };
+
   return (
     <div id="edit__main-container">
       <div id="edit-wrapper">
         {/* flex row */}
         <div className="edit-files__container">
-          <div className="download-file">
-            <a href={song.songURL} download={"testdownload.mp3"}>
-              Download File
-            </a>
-          </div>
+          {/* TEST TO REFACTOR THE POPUP WINDOW TO RECOGNIZE .MP3 INSTEAD OF .HTML */}
+          <a
+            href={fileUrl}
+            onClick={(e) => {
+              e.preventDefault();
+              downloadFile();
+            }}
+          >
+            Download PLSSS
+          </a>
+
+          {/*  */}
+          {/* THIS OPENS UP THE POPUP WINDOW */}
+          {/* <div className="download-file" onClick={downloadFile}>
+            <a
+              href="https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3"
+              onClick={(e) => {
+                e.preventDefault();
+                downloadFile(
+                  "https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3",
+                  "sample.mp3"
+                );
+              }}
+            />
+            CLICK
+          </div> */}
+
           {/* TEST */}
           <div className="download-file">
             <a href={song.songURL} target="_blank" rel="noopener noreferrer" download="testdownload.mp3">
-              TESTTEST
+              DONT CLICK
             </a>
+            DONT CLICK
+          </div>
+          <div>
+            <video controls name="media">
+              <source
+                src="https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3"
+                type="audio/mpeg"
+              ></source>
+            </video>
           </div>
           {/* END TEST */}
           <div>
