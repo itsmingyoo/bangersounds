@@ -144,15 +144,39 @@ const EditSong = ({
     }
   };
 
-  const downloadFile = (fileUrl, fileName) => {
-    fetch(fileUrl)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = fileName;
-        link.click();
-      });
+  // BREAKDOWN OF THIS FUNCTION SINCE 'download' attribute of <a> tag does not work as intended
+  // pass in url, and file name
+
+  const downloadFile = async (fileUrl, fileName) => {
+    try {
+      // fetch the url
+      const response = await fetch(fileUrl);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // BLOB SYNTAX: const blob = new Blob([content], {type: "application/json",});
+      // convert response to a blob object that can contain media files, and other types like binary data(tldr on mdn)
+      const blob = await response.blob();
+
+      // URL object provides a method createObjectURL and it takes a blob or file object to return a unique url (obj URL) to represent the blob 'content'
+      // TLDR: blobUrl is the 'content' parameter in the blob syntax
+      const blobUrl = URL.createObjectURL(blob);
+
+      // simulate a "click" event by "creating" a new anchor tag (which is fake or just imagine its not there, its here for functionality of opening up the download window)
+      const link = document.createElement("a");
+      // set href of the anchor tag
+      link.href = blobUrl;
+      // sets the download name for the anchor tag
+      link.download = fileName;
+      // invokes a click on the anchor tag
+      link.click();
+
+      // Clean up the Blob URL by releasing the resources associated with the blobUrl (blob content) - why? they are temporary urls and may cause memory leaks if not released
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
   };
 
   return (
@@ -160,49 +184,17 @@ const EditSong = ({
       <div id="edit-wrapper">
         {/* flex row */}
         <div className="edit-files__container">
-          {/* TEST TO REFACTOR THE POPUP WINDOW TO RECOGNIZE .MP3 INSTEAD OF .HTML */}
-          <a
-            href={fileUrl}
-            onClick={(e) => {
-              e.preventDefault();
-              downloadFile();
-            }}
-          >
-            Download PLSSS
-          </a>
-
-          {/*  */}
-          {/* THIS OPENS UP THE POPUP WINDOW */}
-          {/* <div className="download-file" onClick={downloadFile}>
+          <div className="download-file">
             <a
-              href="https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3"
+              href={song.songURL}
               onClick={(e) => {
                 e.preventDefault();
-                downloadFile(
-                  "https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3",
-                  "sample.mp3"
-                );
+                downloadFile(song.songURL, song.title);
               }}
-            />
-            CLICK
-          </div> */}
-
-          {/* TEST */}
-          <div className="download-file">
-            <a href={song.songURL} target="_blank" rel="noopener noreferrer" download="testdownload.mp3">
-              DONT CLICK
+            >
+              Download
             </a>
-            DONT CLICK
           </div>
-          <div>
-            <video controls name="media">
-              <source
-                src="https://soundbangersbucket.s3.amazonaws.com/865bc13d9caa41a99c8c1e31035fb002.mp3"
-                type="audio/mpeg"
-              ></source>
-            </video>
-          </div>
-          {/* END TEST */}
           <div>
             <label className="upload-new" for="upload-new-file">
               <input
