@@ -1,18 +1,18 @@
 // Post a New Song Form
-// frontend/src/components/Products/CreateNewProduct/index.js
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 import { thunkPostNewSong } from "../../store/songs";
-// IMPORT TO TEST AWS
-// import { thunkTestAws } from "../../store/songs";
 import TopNavBar from "./TopNavBar";
 import UploadNavBar from "./UploadNavBar";
+import Dropzone from "../DropZone";
 import "./PostNewSong.css";
 
 function PostNewSong() {
   const dispatch = useDispatch();
   const history = useHistory();
+  // Initializing useDropzone hooks with options
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [songURL, setSongURL] = useState("");
@@ -81,6 +81,11 @@ function PostNewSong() {
     setSong(e.target.files[0]);
     setSubmitted(true);
   };
+  // onDrop function
+  const onDrop = useCallback((acceptedFiles) => {
+    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
+    console.log(acceptedFiles);
+  }, []);
   const genres = [
     { name: "None" },
     { name: "Alternative Rock" },
@@ -163,11 +168,12 @@ function PostNewSong() {
         <UploadNavBar />
         {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
         {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
+        <Dropzone onDrop={onDrop} accept={"audio/*"} />
         <div id="new-song__upload-container">
           <div id="new-song__upload-button">
             <h1>Drag and drop your tracks & albums here</h1>
             <div className="orange-btn-white-txt-upload">
-              <label for="upload-new-song" className="cursor-pointer">
+              <label for="upload-new-song">
                 <input
                   type="file"
                   accept="audio/*"
