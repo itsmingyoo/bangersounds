@@ -1,5 +1,5 @@
 // Post a New Song Form
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
@@ -78,14 +78,29 @@ function PostNewSong() {
 
   // Change Song Submit State to Render the Form of the Song
   const handleClick = async (e) => {
+    console.log("og", song);
     setSong(e.target.files[0]);
+    console.log("og after setSong", song);
     setSubmitted(true);
   };
   // onDrop function
   const onDrop = useCallback((acceptedFiles) => {
-    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
-    console.log(acceptedFiles);
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const audioFile = acceptedFiles[0];
+      setSong(audioFile); // Update the 'song' state with the audio file object
+      setSubmitted(true);
+    };
+
+    reader.readAsDataURL(acceptedFiles[0]); // Read the data URL of the dropped file
   }, []);
+
+  useEffect(() => {
+    console.log("UE");
+    console.log("this is the song state", song);
+  }, [song]);
+
   const genres = [
     { name: "None" },
     { name: "Alternative Rock" },
