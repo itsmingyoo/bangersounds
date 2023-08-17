@@ -42,6 +42,13 @@ function PostNewSong() {
     // Error Handlers for Frontend
     const errObj = {};
     // Add error handlers below
+    if (title === "") errObj.title = "Title is required";
+    if (description === "") errObj.description = "Description is required";
+
+    if (title.length > 100) errObj.title = "Title can be up to 100 characters";
+    if (description.length > 4000) errObj.description = "Description can be up to 4000 characters";
+    if (caption.length > 140) errObj.caption = "Caption can be up to 140 characters";
+    if (thumbnail.length > 255) errObj.thumbnail = "Thumbnail can be up to 255 characters";
 
     // If errors, STOP HERE (with return) => Set errors state
     if (Object.values(errObj).length > 0) return setErrors(errObj);
@@ -136,14 +143,14 @@ function PostNewSong() {
     {
       name: "caption",
       value: caption,
-      placeHolder: "Caption",
+      placeHolder: "Caption (Optional)",
       onChange: setCaption,
       title: "Caption",
     },
     {
       name: "thumbnail",
       value: thumbnail,
-      placeHolder: "Thumbnail URL",
+      placeHolder: "Thumbnail URL (Optional)",
       onChange: setThumbnail,
       title: "Thumbnail",
     },
@@ -214,6 +221,7 @@ function PostNewSong() {
                 name="genre"
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
+                required
               >
                 <option value="">Select Genre</option>
                 {genres.map((el) => (
@@ -221,7 +229,6 @@ function PostNewSong() {
                     {el.name}
                   </option>
                 ))}
-                {/* {console.log(genre)} */}
               </select>
             </div>
             <div id="new-song__radio-btns">
