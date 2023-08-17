@@ -31,6 +31,7 @@ const EditSong = ({
   const [songLoading, setSongLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [submittedForm, setSubmittedForm] = useState(false);
+
   const genres = [
     { name: "None" },
     { name: "Alternative Rock" },
@@ -200,6 +201,7 @@ const EditSong = ({
             >
               Download
             </a>
+            <a href="" download="sample.jpg" />
           </div>
           <div>
             <label className="upload-new" for="upload-new-file">

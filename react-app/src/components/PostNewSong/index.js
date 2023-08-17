@@ -2,7 +2,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useDropzone } from "react-dropzone";
 import { thunkPostNewSong } from "../../store/songs";
 import TopNavBar from "./TopNavBar";
 import UploadNavBar from "./UploadNavBar";
@@ -83,6 +82,7 @@ function PostNewSong() {
     console.log("og after setSong", song);
     setSubmitted(true);
   };
+
   // onDrop function
   const onDrop = useCallback((acceptedFiles) => {
     const reader = new FileReader();
@@ -184,30 +184,6 @@ function PostNewSong() {
         {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
         {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
         <Dropzone onDrop={onDrop} accept={"audio/*"} />
-        <div id="new-song__upload-container">
-          <div id="new-song__upload-button">
-            <h1>Drag and drop your tracks & albums here</h1>
-            <div className="orange-btn-white-txt-upload">
-              <label for="upload-new-song">
-                <input
-                  type="file"
-                  accept="audio/*"
-                  // onChange={(e) => setSong(e.target.files[0])}
-                  onChange={handleClick}
-                  className="orange-btn-white-txt-upload"
-                  id="upload-new-song"
-                  style={{ display: "none" }}
-                />
-                or choose files to upload
-              </label>
-            </div>
-
-            <label>
-              <input type="checkbox" name="multiple-files" />
-              Make a playlist when multiple files are selected
-            </label>
-          </div>
-        </div>
       </div>
     );
   }
@@ -349,3 +325,31 @@ export default PostNewSong;
 //   </>
 // );
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{
+  /** OLD BORING CLICK TO UPLOAD SONG
+        <div id="new-song__upload-container">
+          <div id="new-song__upload-button">
+            <h1>Drag and drop your tracks & albums here</h1>
+            <div className="orange-btn-white-txt-upload">
+              <label for="upload-new-song">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  // onChange={(e) => setSong(e.target.files[0])}
+                  onChange={handleClick}
+                  className="orange-btn-white-txt-upload"
+                  id="upload-new-song"
+                  style={{ display: "none" }}
+                />
+                or choose files to upload
+              </label>
+            </div>
+
+            <label>
+              <input type="checkbox" name="multiple-files" />
+              Make a playlist when multiple files are selected
+            </label>
+          </div>
+        </div>
+        */
+}
