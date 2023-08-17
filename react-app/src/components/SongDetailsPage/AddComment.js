@@ -5,10 +5,16 @@ import { thunkPostComment } from "../../store/songs";
 const AddComment = ({ song }) => {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
-  console.log(comment);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  // console.log(comment);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
     const errObj = {};
+    if (comment === "") errObj.comment = "Please enter a comment before submitting";
+    if (comment.length > 1000) errObj.comment = "Comment can be up to 1000 characters";
+    if (Object.values(errObj).length > 0) return setErrors(errObj);
     const commentObj = {
       comment: comment,
     };
@@ -26,6 +32,7 @@ const AddComment = ({ song }) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
+        {submitted && errors.comment && <div className="errors">{errors.comment}</div>}
       </form>
     </div>
   );

@@ -109,7 +109,13 @@ const EditSong = ({
     setSubmittedForm(true);
 
     const errObj = {};
+    if (title === "") errObj.title = "Title is required";
+    if (description === "") errObj.description = "Description is required";
 
+    if (title.length > 100) errObj.title = "Title can be up to 100 characters";
+    if (description.length > 4000) errObj.description = "Description can be up to 4000 characters";
+    if (caption.length > 140) errObj.caption = "Caption can be up to 140 characters";
+    if (thumbnail.length > 255) errObj.thumbnail = "Thumbnail can be up to 255 characters";
     if (Object.values(errObj).length > 0) return setErrors(errObj);
 
     console.log("title", title);
