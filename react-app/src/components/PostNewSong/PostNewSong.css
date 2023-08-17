@@ -59,6 +59,14 @@
     cursor: pointer;
 }
 
+#upload-new-song {
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /** Can use this globally */
 .orange-btn-outline-txt {
     color: #f50;
@@ -69,6 +77,9 @@
     background-color: #f50;
     color: white;
     margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 .white-btn-black-txt {

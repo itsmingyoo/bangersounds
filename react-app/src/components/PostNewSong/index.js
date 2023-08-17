@@ -159,8 +159,8 @@ function PostNewSong() {
         <div id="new-song__upload-container">
           <div id="new-song__upload-button">
             <h1>Drag and drop your tracks & albums here</h1>
-            <button className="orange-btn-white-txt-upload">
-              <label for="upload-new-song">
+            <div className="orange-btn-white-txt-upload">
+              <label for="upload-new-song" className="cursor-pointer">
                 <input
                   type="file"
                   accept="audio/*"
@@ -172,7 +172,7 @@ function PostNewSong() {
                 />
                 or choose files to upload
               </label>
-            </button>
+            </div>
 
             <label>
               <input type="checkbox" name="multiple-files" />

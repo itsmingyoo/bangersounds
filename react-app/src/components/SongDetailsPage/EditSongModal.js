@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkEditSongById } from "../../store/songs";
 import { useModal } from "../../context/Modal";
 import "./SongDetailsPage.css";
+import "../PostNewSong/PostNewSong.css";
 
 const EditSong = ({
   song,
@@ -142,26 +143,43 @@ const EditSong = ({
       closeModal();
     }
   };
+
+  const downloadLinkRef = useRef(null);
+
+  const handleDownloadClick = () => {
+    downloadLinkRef.current.click();
+  };
   return (
     <div id="edit__main-container">
       <div id="edit-wrapper">
         {/* flex row */}
         <div className="edit-files__container">
-          <button className="download-file">Download file</button>
-          <button>
+          <div className="download-file">
+            <a href={song.songURL} download={"testdownload.mp3"}>
+              Download File
+            </a>
+          </div>
+          {/* TEST */}
+          <div className="download-file">
+            <a href={song.songURL} target="_blank" rel="noopener noreferrer" download="testdownload.mp3">
+              TESTTEST
+            </a>
+          </div>
+          {/* END TEST */}
+          <div>
             <label className="upload-new" for="upload-new-file">
               <input
                 type="file"
                 accept="audio/*"
                 onChange={(e) => setSongUpload(e.target.files[0])}
                 // onChange={handleClick}
-                className="orange-btn-white-txt"
+                className="orange-btn-white-txt cursor-pointer"
                 style={{ display: "none" }}
                 id="upload-new-file"
               />
               Replace file
             </label>
-          </button>
+          </div>
         </div>
         <div className="edit-tabs">
           <span>Basic Info</span>
