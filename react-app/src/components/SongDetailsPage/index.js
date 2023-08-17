@@ -23,11 +23,6 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
 
   songId = Number(songId);
 
-  // THIS BREAKS MY CODE --- WHY???????????????????????????????????????????????
-  // useEffect(() => {
-  //   dispatch(thunkGetSongComments(songId));
-  // }, [dispatch, songId]);
-
   if (!song) return null;
 
   const togglePlayPause = async (song) => {
@@ -38,12 +33,6 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
     }
   };
 
-  const list = [
-    { name: "Add to Next Up", to: "#" },
-    { name: "Add to Playlist", to: "#" },
-    { name: "Station", to: "#" },
-    { name: "Report", to: "#" },
-  ];
   return (
     <div id="song-details__wrapper">
       <div id="song-detail__main-container">
@@ -61,7 +50,19 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
               <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
               <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
-            <SongStats {...{ song, songId, isUserSong, user, comments }} />
+            <SongStats
+              {...{
+                song,
+                songs,
+                isPlayingState,
+                currentlyPlaying,
+                togglePlayPause,
+                comments,
+                songId,
+                isUserSong,
+                user,
+              }}
+            />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
               <div>Song Description Here with Ads</div>

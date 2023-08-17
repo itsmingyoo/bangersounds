@@ -1,11 +1,22 @@
 import React from "react";
+import { IoHeartSharp, IoShareOutline, IoLinkSharp, IoEllipsisHorizontalSharp } from "react-icons/io5";
 import DropDown from "../DropDown";
+import OpenModalButton from "../OpenModalButton";
+import EditSong from "./EditSongModal";
 import addToQueue from "../../images/AddToQueue.ico";
 import playNext from "../../images/PlayNext.ico";
 import repost from "../../images/repost.png";
-import { IoHeartSharp, IoShareOutline, IoLinkSharp, IoEllipsisHorizontalSharp } from "react-icons/io5";
-
-const SongStats = ({ song, songId, isUserSong, user }) => {
+const SongStats = ({
+  song,
+  songs,
+  isPlayingState,
+  currentlyPlaying,
+  togglePlayPause,
+  comments,
+  songId,
+  isUserSong,
+  user,
+}) => {
   const list = [
     { name: "Add to Next Up", to: "#" },
     { name: "Add to Playlist", to: "#" },
@@ -27,13 +38,35 @@ const SongStats = ({ song, songId, isUserSong, user }) => {
           <IoShareOutline />
           Share
         </button>
+
         <button>
           <IoLinkSharp />
           Copy Link
         </button>
-        {/* <button>More</button> */}
+
+        {/* Modal Button Popup to Edit Song */}
+        {user && song?.artistId === user?.id && (
+          <OpenModalButton
+            buttonText="Edit"
+            modalComponent={
+              <EditSong
+                {...{
+                  song,
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  togglePlayPause,
+                  comments,
+                  songId,
+                  isUserSong,
+                  user,
+                }}
+              />
+            }
+          />
+        )}
+
         <DropDown
-          // iconClassName={IoEllipsisHorizontalSharp}
           list={list}
           songId={songId}
           isUserSong={isUserSong}

@@ -35,7 +35,7 @@ const Controls = ({
 
   //* REPEAT FUNCTION HANDLES THE PROGRESS / TIME BAR
   const repeat = useCallback(() => {
-    if (Object.values(currentSong).length > 0) {
+    if (Object.values(currentlyPlaying).length > 0) {
       //! Object.values(currentSong).length > 0 returns a bug for some reason, so we just check if there are any values. -- its not breaking anymore, 'Object.values(currentSong) > 0' broke my progress bar, so it never hit this if statement so i have to add .length, but it did fix the error of when it was just '(currentSong) ...code to execute' it would break at the next line 'const currentTime = audioRef.current.currentTime'
 
       const currentTime = audioRef.current.currentTime;
@@ -99,9 +99,7 @@ const Controls = ({
           <IoPlayBackSharp />
         </button>
 
-        <button onClick={togglePlayPause}>
-          {isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}
-        </button>
+        <button onClick={togglePlayPause}>{isPlayingState ? <IoPauseSharp /> : <IoPlaySharp />}</button>
 
         <button onClick={skipForward}>
           <IoPlayForwardSharp />

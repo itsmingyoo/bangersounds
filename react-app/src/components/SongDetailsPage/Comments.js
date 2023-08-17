@@ -30,7 +30,8 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
   // CONTEXT - MAPPING THROUGH EACH COMMENT, EXTRACTING COMMENT AND INDEX - INDEX IS USED FOR MANAGING EACH ELEMENT'S LOCAL STATE WHICH IS DEFINED ASS AN ARRAY
   return (
     <div id="user-comment__main">
-      {songComments.map((c, index) => {
+      {/* order by most recent comment */}
+      {songComments.reverse().map((c, index) => {
         // Create Current Date
         let currentDate = new Date(); //.toString().split(" ");
         // console.log("currentDate", currentDate); // idx 4 is time (hh:mm:ss)
@@ -77,7 +78,7 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
                 <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
                   {timeAgoString}
                 </div>
-                {c.userId === user.id && hoveredStates[index] && (
+                {user && c.userId === user.id && hoveredStates[index] && (
                   <button
                     onClick={() => handleDelete(c)}
                     className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}

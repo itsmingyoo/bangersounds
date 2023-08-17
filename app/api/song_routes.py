@@ -150,17 +150,36 @@ def edit_song(songId):
     pprint(form.data)
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        if form.data['song']:
+            new_song = form.data['song']
+            new_song.filename = get_unique_filename(new_song.filename)
+            upload = upload_file_to_s3(new_song)
+
+            if 'url' not in upload:
+                return jsonify(upload), 400
+            url = upload['url']
+
+            song.title = form.data["title"]
+            song.genre = form.data["genre"]
+            song.song_url = url
+            song.description = form.data["description"]
+            song.private = form.data["private"]
+            song.caption = form.data["caption"]
+            song.thumbnail = form.data["thumbnail"]
+            song.artistId = user_id
+            db.session.commit()
+            return jsonify(song.to_dict())
         song.title = form.data["title"]
         song.genre = form.data["genre"]
-        song.song_url = form.data["song_url"]
+        song.song_url = song.song_url
         song.description = form.data["description"]
         song.private = form.data["private"]
         song.caption = form.data["caption"]
-        song.preview_imageURL = form.data["preview_imageURL"]
+        song.thumbnail = form.data["thumbnail"]
         song.artistId = user_id
         db.session.commit()
         return jsonify(song.to_dict())
-    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+    return {"errors": validation_errors_to_error_messages(form.errors), 'message': 'last return'}, 401
 
 # Delete will be on /profile/songs/:songId but altering it to /songs/:songId
 @songs_routes.route("/<int:songId>", methods=['DELETE'])

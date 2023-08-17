@@ -55,9 +55,7 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
             isPlayingState,
           }}
         />
-        <ProgressBar
-          {...{ progressBarRef, audioRef, timeProgress, duration }}
-        />
+        <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
         <VolumeBar {...{ audioRef }} />
         <DisplaySong
           {...{

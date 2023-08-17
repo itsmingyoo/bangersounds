@@ -145,12 +145,13 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
 };
 
 export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatch) => {
+  console.log("thunk", updatedSongFormData);
   let updatedSong = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedSongFormData),
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: updatedSongFormData,
   });
   updatedSong = await updatedSong.json();
   dispatch(editSongByIdAction(updatedSong));

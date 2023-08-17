@@ -141,7 +141,9 @@
 #user-comment__main {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
+    width: 80%;
+    margin-bottom: 50px;
 }
 
 #user-comment__container {
@@ -166,4 +168,30 @@
 
 .display-comment-date {
     opacity: 1;
+}
+
+/** EDIT MODAL */
+#edit__main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    width: 100%;
+    height: 100%;
+}
+#edit-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#edit__main-container div {
+    padding: 5px;
+    margin: 5px;
+}
+
+.edit-song-img > img {
+    width: 200px;
+    height: 200px;
+}
+.edit-song-and-form__container {
+    display: flex;
 }
