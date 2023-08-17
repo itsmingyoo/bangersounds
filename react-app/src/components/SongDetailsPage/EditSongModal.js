@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkEditSongById } from "../../store/songs";
+import { useModal } from "../../context/Modal";
 import "./SongDetailsPage.css";
 
 const EditSong = ({
@@ -17,14 +18,15 @@ const EditSong = ({
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [title, setTitle] = useState("");
-  const [genre, setGenre] = useState("");
-  const [songURL, setSongURL] = useState("");
-  const [description, setDescription] = useState("");
-  const [privated, setPrivated] = useState(false);
-  const [caption, setCaption] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [songUpload, setSongUpload] = useState(null);
+  const { closeModal } = useModal();
+  const [title, setTitle] = useState(song.title);
+  const [genre, setGenre] = useState(song.genre);
+  const [songURL, setSongURL] = useState(song.songURL);
+  const [description, setDescription] = useState(song.description);
+  const [privated, setPrivated] = useState(song.private);
+  const [caption, setCaption] = useState(song.caption);
+  const [thumbnail, setThumbnail] = useState(song.thumbnail);
+  const [songUpload, setSongUpload] = useState("");
   const [songLoading, setSongLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [submittedForm, setSubmittedForm] = useState(false);
@@ -106,33 +108,38 @@ const EditSong = ({
     e.preventDefault();
     setSubmittedForm(true);
 
-    // Error Handlers for Frontend
     const errObj = {};
-    // Add error handlers below
 
-    // If errors, STOP HERE (with return) => Set errors state
     if (Object.values(errObj).length > 0) return setErrors(errObj);
 
-    // FORMDATA APPEND VALIDATED DATA BEFORE SENDING IT OFF
-    // AWS Form data - APPEND TAKES TWO ARGS ("KEY IN QUOTES", VALUE)
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("genre", genre);
-    formData.append("description", description);
-    formData.append("private", privated);
-    formData.append("caption", caption);
-    formData.append("thumbnail", thumbnail);
-    formData.append("song", song);
-    formData.append("song_url", songURL);
+    console.log("title", title);
+    console.log("genre", genre);
+    console.log("description", description);
+    console.log("private", privated);
+    console.log("caption", caption);
+    console.log("thumbnail", thumbnail);
+    console.log("song", songUpload);
+    console.log("song_url", songURL);
 
-    let res = await dispatch(thunkEditSongById(song.id, formData));
+    const formData2 = new FormData();
+    formData2.append("title", title);
+    formData2.append("genre", genre);
+    formData2.append("description", description);
+    formData2.append("private", privated);
+    formData2.append("caption", caption);
+    formData2.append("thumbnail", thumbnail);
+    formData2.append("song", songUpload);
+    formData2.append("song_url", songURL);
+    console.log("formdata after appending", formData2.entries());
 
-    // console.log("this is res after post new song dispatch", res);
+    let res = await dispatch(thunkEditSongById(song.id, formData2));
+
+    console.log("this is res after edit song dispatch", res);
 
     if (!res.errors) {
       setSongLoading(true);
       // await dispatch(thunkGetSongById(res.id)); // remove this unless you have rendering issues after creating a new song
-      history.push(`/songs/${res.id}`);
+      closeModal();
     }
   };
   return (
@@ -163,29 +170,46 @@ const EditSong = ({
           <span>Advanced</span>
           <span>NEW</span>
         </div>
-        <div>
-          <div>
-            <img src="" alt="preview image here"></img>
+        <div className="edit-song-and-form__container">
+          <div className="edit-song-img">
+            <img
+              src="https://images.all-free-download.com/images/graphiclarge/testing_with_magnifier_185604.jpg"
+              alt="preview image here"
+            ></img>
           </div>
           <div>
-            <form className="new-song__form" onSubmit={onSubmit} encType="multipart/form-data">
-              {inputs.map((el, index) => (
-                <div key={el.name}>
-                  <div>{el.title}</div>
-                  <input
-                    type="text"
-                    name={el.name}
-                    placeholder={el.placeHolder}
-                    value={el.value}
-                    onChange={(e) => el.onChange(e.target.value)}
-                  />
-                  {submittedForm && errors[el.name] && (
-                    <div className="errors" key={`error-${el.name}`}>
-                      {errors[el.name]}
-                    </div>
-                  )}
-                </div>
-              ))}
+            <form className="edit-song__form" onSubmit={onSubmit} encType="multipart/form-data">
+              {inputs.map((el, index) =>
+                el.name === "description" ? (
+                  <div key={el.name}>
+                    <div>{el.name}</div>
+                    <textarea
+                      id={`textarea-${el.name}`}
+                      rows="10"
+                      value={el.value}
+                      onChange={(e) => el.onChange(e.target.value)}
+                    >
+                      {el.value}
+                    </textarea>
+                  </div>
+                ) : (
+                  <div key={el.name}>
+                    <div>{el.title}</div>
+                    <input
+                      type="text"
+                      name={el.name}
+                      placeholder={el.placeHolder}
+                      value={el.value}
+                      onChange={(e) => el.onChange(e.target.value)}
+                    />
+                    {submittedForm && errors[el.name] && (
+                      <div className="errors" key={`error-${el.name}`}>
+                        {errors[el.name]}
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
               <div className="select-container">
                 <div>Genre</div>
                 <select
@@ -225,7 +249,7 @@ const EditSong = ({
               </div>
               {submittedForm && errors.genre && <div className="errors">{errors.genre}</div>}
               <div id="new-song__submit">
-                <button className="white-btn-black-txt" onClick={(e) => history.push("/")}>
+                <button className="white-btn-black-txt" onClick={() => closeModal()}>
                   Cancel
                 </button>
                 <button className="orange-btn-white-txt">Save</button>

@@ -8,7 +8,6 @@ import "./AudioPlayer.css";
 function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
   // USEREF
   const audioRef = useRef();
-  console.log("this is audioref", audioRef);
   const progressBarRef = useRef();
 
   // Default song to bangersounds library of songs
