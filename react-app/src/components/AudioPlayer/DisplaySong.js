@@ -21,12 +21,12 @@ function DisplaySong({
       const seconds = audioRef.current.duration;
       setDuration(seconds);
       progressBarRef.current.max = seconds;
-      console.log("IF - seconds", seconds);
-      console.log("IF - duration", duration); // duration
-      console.log("IF - progressbarref.max", progressBarRef.current.max);
+      // console.log("IF - seconds", seconds); // nan - this was NaN bc we weren't setting loadedmetadata state back to false so that the song can fetch the new metadata again
+      // console.log("IF - duration", duration); // duration
+      // console.log("IF - progressbarref.max", progressBarRef.current.max);
     }
-    console.log("duration", duration); // duration
-    console.log("progressbarref.max", progressBarRef.current.max);
+    // console.log("duration", duration); // duration
+    // console.log("progressbarref.max", progressBarRef.current.max);
   }, [loadedMetaData]);
 
   useEffect(() => {
