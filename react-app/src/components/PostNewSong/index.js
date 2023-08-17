@@ -159,16 +159,20 @@ function PostNewSong() {
         <div id="new-song__upload-container">
           <div id="new-song__upload-button">
             <h1>Drag and drop your tracks & albums here</h1>
-            <label>
-              <input
-                type="file"
-                accept="audio/*"
-                // onChange={(e) => setSong(e.target.files[0])}
-                onChange={handleClick}
-                className="orange-btn-white-txt"
-              />
-              or choose files to upload
-            </label>
+            <button className="orange-btn-white-txt-upload">
+              <label for="upload-new-song">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  // onChange={(e) => setSong(e.target.files[0])}
+                  onChange={handleClick}
+                  className="orange-btn-white-txt-upload"
+                  id="upload-new-song"
+                  style={{ display: "none" }}
+                />
+                or choose files to upload
+              </label>
+            </button>
 
             <label>
               <input type="checkbox" name="multiple-files" />
