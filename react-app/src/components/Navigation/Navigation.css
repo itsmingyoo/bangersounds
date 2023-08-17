@@ -57,8 +57,9 @@
   color: white;
 }
 
-.white-hover:hover {
-  color: white;
+.white-hover {
+  /* border: 1px solid white; */
+  /* border-radius: 10%; */
 }
 
 
