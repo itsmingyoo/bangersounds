@@ -73,28 +73,28 @@ function App() {
 
           <Route exact path="/upload">
             <ProtectedRoute>
-              <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+              <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </ProtectedRoute>
           </Route>
 
           <Route exact path="/profile">
             <ProtectedRoute>
-              <Profile {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+              <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </ProtectedRoute>
           </Route>
 
           <Route exact path="/songs/:songId">
-            <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+            <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
           </Route>
           <Route exact path="/">
-            <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+            <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
           </Route>
         </Switch>
       )}
       {/* </div>
       </div> */}
 
-      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments }} />
+      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
     </>
   );
 }

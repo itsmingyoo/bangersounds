@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import VolumeBar from "./VolumeBar";
+import { playUserSongAction } from "../../store/songs";
 import "./AudioPlayer.css";
 
 function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
+  const dispatch = useDispatch();
   // USEREF
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -22,16 +25,7 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
   if (songs.length === 0 || Object.values(currentlyPlaying) === 0) return null;
 
   const handleNext = () => {
-    // Default the index to 0 if we've went past all our existing songs
-    if (songIndex >= songs.length - 1) {
-      setSongIndex(0);
-      setCurrentSong(songs[0]);
-    }
-    // Increment the index and the songindex for playSong because we want to go to the next song
-    else {
-      setSongIndex((prev) => prev + 1);
-      setCurrentSong(songs[songIndex + 1]);
-    }
+    dispatch(playUserSongAction(songs[Math.floor(Math.random() * songs.length)]));
   };
 
   return (
@@ -65,6 +59,8 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
             setDuration,
             progressBarRef,
             handleNext,
+            duration,
+            isPlayingState,
           }}
         />
 
