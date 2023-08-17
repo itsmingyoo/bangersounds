@@ -65,9 +65,10 @@
     border-color: #f50;
 }
 
-.orange-btn-white-txt {
+.orange-btn-white-txt-upload {
     background-color: #f50;
     color: white;
+    margin-bottom: 10px;
 }
 
 .white-btn-black-txt {
