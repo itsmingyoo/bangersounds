@@ -65,6 +65,8 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
             setDuration,
             progressBarRef,
             handleNext,
+            duration,
+            isPlayingState,
           }}
         />
 

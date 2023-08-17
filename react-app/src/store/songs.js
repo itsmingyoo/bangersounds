@@ -202,7 +202,7 @@ export const thunkGetUserComments = () => async (dispatch) => {
   });
   if (comments.ok) {
     comments = await comments.json();
-    console.log("thunk", comments);
+    // console.log("thunk", comments);
     // console.log(`YOU ARE WORKING WITH THIS ===`, comments);
     dispatch(getUserComments(comments));
     return comments;
@@ -339,7 +339,7 @@ export default function reducer(state = initialState, action) {
     }
     case GET_USER_COMMENTS_ACTION: {
       newState = { ...state };
-      console.log("reducer", action.userComments);
+      // console.log("reducer", action.userComments);
       newState.userComments = {};
       newState.userComments = { ...action.userComments };
 
