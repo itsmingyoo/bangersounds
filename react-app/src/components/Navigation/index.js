@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
 import MySocialSecurity from "./MySocialSecurity";
+import bangerSoundsLogo from "../../images/bangersounds-logo.ico";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -22,8 +23,10 @@ function Navigation({ isLoaded }) {
   return (
     <div id="main-nav__container">
       <div id="nav-element__container">
-        <div className="nav-bar__element">
-          <NavLink to="/">BangerSounds(Icon)</NavLink>
+        <div className="nav-bar__element white-hover">
+          <NavLink to="/">
+            <img src={bangerSoundsLogo} />
+          </NavLink>
         </div>
 
         {navNames.map((nav) => (

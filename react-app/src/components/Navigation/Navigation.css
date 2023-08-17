@@ -53,6 +53,14 @@
   color: white;
 }
 
+.nav-bar__element > a > img:hover {
+  color: white;
+}
+
+.white-hover:hover {
+  color: white;
+}
+
 
 .dropdown-button {
   /* border: 2px solid red; */
