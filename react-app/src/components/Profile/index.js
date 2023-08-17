@@ -4,13 +4,13 @@ import Profile from "./Profile";
 import Likes from "./Likes";
 import LatestComments from "./UserComments";
 
-const ProfilePage = () => {
+const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   return (
     <div>
-      <Profile />
-      <ProfileNavBar />
-      <Likes />
-      <LatestComments />
+      <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+      <ProfileNavBar {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+      <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+      <LatestComments {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
     </div>
   );
 };

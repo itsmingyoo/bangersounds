@@ -1,15 +1,9 @@
 import React from "react";
-
-const Reposts = () => {
+import SongDisplay from "../SongDisplay";
+const Reposts = ({ songs, isPlayingState, currentlyPlaying, comments }) => {
   return (
     <div>
-      <div>song</div>
-      <div>song</div>
-      <div>song</div>
-      <div>song</div>
-      <div>song</div>
-      <div>song</div>
-      <div>song</div>
+      <SongDisplay {...{ songs, isPlayingState, currentlyPlaying, comments }} />
     </div>
   );
 };

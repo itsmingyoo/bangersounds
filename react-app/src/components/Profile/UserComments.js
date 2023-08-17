@@ -1,6 +1,6 @@
 import React from "react";
 
-const LatestComments = () => {
+const LatestComments = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   return (
     <div>
       <div>

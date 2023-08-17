@@ -1,17 +1,11 @@
 import React from "react";
+import SongDisplay from "../SongDisplay";
 
-const All = () => {
+const All = ({ songs, isPlayingState, currentlyPlaying, comments }) => {
   return (
     <div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
-      <div>All Reposts, Playlists, Likes, Albums, etc...</div>
+      {/* This will be mapped */}
+      <SongDisplay {...{ songs, isPlayingState, currentlyPlaying, comments }} />
     </div>
   );
 };

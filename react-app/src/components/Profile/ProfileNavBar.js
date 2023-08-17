@@ -2,7 +2,7 @@ import React from "react";
 import Reposts from "./Reposts";
 import All from "./All";
 
-const ProfileNavBar = () => {
+const ProfileNavBar = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   // states for each div if clicked to render their specific page on the same page
   return (
     <div>

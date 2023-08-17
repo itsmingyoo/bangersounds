@@ -1,6 +1,6 @@
 import React from "react";
 
-const Profile = () => {
+const Profile = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   return (
     <div>
       <div>
