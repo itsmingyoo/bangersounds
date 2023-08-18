@@ -15,8 +15,8 @@ function Navigation({ isLoaded }) {
 
   const navNames = [
     { name: "Home", to: "/" },
-    { name: "Feed", to: "/feed" },
-    { name: "Library", to: "/library" },
+    { name: "Feed", to: "#" },
+    { name: "Library", to: "#" },
   ];
 
   const navNames2 = [
@@ -32,23 +32,38 @@ function Navigation({ isLoaded }) {
           </NavLink>
         </div>
 
-        {navNames.map((nav) => (
-          <>
-            <div
-              className="nav-bar__element"
-              key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
-            >
-              <NavLink to={nav.to} key={nav.name}>
-                {nav.name}
-              </NavLink>
-            </div>
-          </>
-        ))}
-
+        {navNames.map((nav) => {
+          if (nav.name === "Home") {
+            return (
+              <>
+                <div
+                  className="nav-bar__element"
+                  key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+                >
+                  <NavLink to={nav.to} key={nav.name}>
+                    {nav.name}
+                  </NavLink>
+                </div>
+              </>
+            );
+          } else {
+            return (
+              <>
+                <div
+                  className="nav-bar__element"
+                  key={`navMapEl-${navNames.indexOf(nav)}`} // key has to be unique, else RED ERRORRRS
+                  onClick={() => alert("Feature coming soon!")}
+                >
+                  <NavLink to={nav.to} key={nav.name}>
+                    {nav.name}
+                  </NavLink>
+                </div>
+              </>
+            );
+          }
+        })}
         <SearchBar />
-
         <MySocialSecurity />
-
         {navNames2.map((nav) => {
           if (nav.name !== "Upload") {
             return (
@@ -90,7 +105,6 @@ function Navigation({ isLoaded }) {
             </NavLink>
           </div>
         </div>
-
         <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
           <NavLink to="/">
             <IoEllipsisHorizontalSharp style={{ color: "white" }} />
