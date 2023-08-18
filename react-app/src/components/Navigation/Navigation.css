@@ -68,6 +68,7 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  background: none;
 }
 
 .dropdown-button > img {
@@ -177,6 +178,6 @@
 }
 
 .nav-bar__profile-image {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }

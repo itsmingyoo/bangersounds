@@ -19,7 +19,9 @@ const ProfileHeader = ({ user }) => {
               LINEAR GRADIENT BG
             </div>
           ) : (
-            <img src={user.profileBackground} alt="bgpicture" />
+            <div className="user-profile-bg-container">
+              <img src={user.profileBackground} alt="bgpicture" />
+            </div>
           )}
         </div>
         <div className="profile-header-user-info-wrapper">

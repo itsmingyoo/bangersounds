@@ -20,6 +20,12 @@
     background: #e5e5e5;
 }
 
+.user-profile-bg-container > img {
+    max-width: 1240px;
+    max-height: 380px;
+    object-fit: fill;
+}
+
 /** How var and calc works
 Top padding: The value of --spacing-4x.
 Right padding: The calculated sum of --artwork-40x-size, --spacing-5x, two --spacing-4x, and 150px.
