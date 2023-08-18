@@ -13,15 +13,18 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
 
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+    // if (showMenu) return;
+
+    // Set this to toggle instead of a return if true
+    setShowMenu(!showMenu);
   };
 
   useEffect(() => {
     if (!showMenu) return;
 
     const closeMenuOnClickOutside = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      // add a null check since we're getting an error here with our new modified code to implement signup - login modal buttons separate from the profile button
+      if (!ulRef.current || !ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -41,20 +44,14 @@ function ProfileButton({ user }) {
 
   return (
     <div className="profile-dropdown">
-      <button
-        onClick={openMenu}
-        className="dropdown-button"
-        style={{ backgroundColor: showMenu ? "black" : "" }}
-      >
-        <i
-          className="fas fa-user-circle"
-          style={{ color: showMenu ? "white" : "" }}
-        />
-      </button>
-      <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
-        <ul className="dropdown-nav">
-          {user ? (
-            <>
+      {user ? (
+        <>
+          <button onClick={openMenu} className="dropdown-button" style={{ backgroundColor: showMenu ? "black" : "" }}>
+            <i className="fas fa-user-circle" style={{ color: showMenu ? "white" : "" }} />
+          </button>
+          <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
+            <ul className="dropdown-nav">
+              {/* Display user information here */}
               <li>{user.username}</li>
               <li>{user.email}</li>
               <li>
@@ -75,24 +72,23 @@ function ProfileButton({ user }) {
               <li>
                 <button onClick={handleLogout}>Log Out</button>
               </li>
-            </>
-          ) : (
-            <>
-              <OpenModalButton
-                buttonText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-
-              <OpenModalButton
-                buttonText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
-      </div>
+            </ul>
+          </div>
+        </>
+      ) : (
+        <div className="user-login-signup">
+          <div className="signin-btn">
+            <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
+          </div>
+          <div className="create-new-account">
+            <OpenModalButton
+              buttonText="Create an account"
+              onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

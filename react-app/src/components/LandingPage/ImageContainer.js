@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
-const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, songs }) => {
+const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -33,8 +33,13 @@ const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, 
           </div>
         </button>
 
-        <div className={`song-image__container`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <NavLink to={`/songs/${s.id}`}>
+        <div
+          className={`song-image__container`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          title={s.title}
+        >
+          <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
             <img
               src={s.thumbnail ? s.thumbnail : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"}
               className="recently-played__images"

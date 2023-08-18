@@ -24,6 +24,9 @@ const Controls = ({
   handleNext,
   isPlayingState,
   currentlyPlaying,
+  playUserSongAction,
+  setPrevSongAction,
+  previousSong,
 }) => {
   const dispatch = useDispatch();
 
@@ -77,16 +80,11 @@ const Controls = ({
   const skipBackward = () => {
     audioRef.current.currentTime -= 10;
   };
+
   const handlePrevious = () => {
-    if (songIndex === 0) {
-      let lastSongIndex = songs.length - 1;
-      setSongIndex(lastSongIndex);
-      setCurrentSong(songs[lastSongIndex]);
-    } else {
-      setSongIndex((prev) => prev - 1);
-      setCurrentSong(songs[songIndex - 1]);
-    }
+    if (previousSong.id != currentlyPlaying.id) dispatch(playUserSongAction(previousSong));
   };
+
   return (
     <div className="controls-container">
       {/* CONTROL BUTTONS */}

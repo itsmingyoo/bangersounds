@@ -65,7 +65,7 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
             />
             {/* SONG DESCRIPTION AND ADS & COMMENTS SECTION */}
             <div id="song-details__description-comments">
-              <div>Song Description Here with Ads</div>
+              <div>{song.description}</div>
               <CommentBox
                 {...{
                   song,

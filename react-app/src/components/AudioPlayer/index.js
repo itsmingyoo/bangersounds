@@ -4,10 +4,10 @@ import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
 import VolumeBar from "./VolumeBar";
-import { playUserSongAction } from "../../store/songs";
+import { playUserSongAction, setPrevSongAction } from "../../store/songs";
 import "./AudioPlayer.css";
 
-function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
+function AudioPlayer({ songs, isPlayingState, currentlyPlaying, previousSong }) {
   const dispatch = useDispatch();
   // USEREF
   const audioRef = useRef();
@@ -25,7 +25,9 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
   if (songs.length === 0 || Object.values(currentlyPlaying) === 0) return null;
 
   const handleNext = () => {
-    dispatch(playUserSongAction(songs[Math.floor(Math.random() * songs.length)]));
+    dispatch(setPrevSongAction(currentlyPlaying));
+    const song = songs[Math.floor(Math.random() * songs.length)];
+    dispatch(playUserSongAction(song));
   };
 
   return (
@@ -47,6 +49,9 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying }) {
             setPrevSong,
             currentlyPlaying,
             isPlayingState,
+            playUserSongAction,
+            setPrevSongAction,
+            previousSong,
           }}
         />
         <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />

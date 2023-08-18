@@ -147,6 +147,19 @@ def seed_users():
         profile_country="",
         profile_background="",
     )
+    cartman = User(
+        username="cartman",
+        email="cartman@aa.io",
+        password="password",
+        first_name="eric theodore",
+        last_name="cartman",
+        display_name='CartmanChangingTheRapGame',
+        profile_image="https://cdn.discordapp.com/attachments/1108904522220318781/1142128184867946576/cartman.JPG",
+        profile_bio="I used to be depressed, I still am, but I used to be too.",
+        profile_city="South Park",
+        profile_country="United States",
+        profile_background="https://c4.wallpaperflare.com/wallpaper/758/235/652/south-park-eric-cartman-wallpaper-preview.jpg",
+    )
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -159,6 +172,7 @@ def seed_users():
     db.session.add(seabass)
     db.session.add(nate)
     db.session.add(james)
+    db.session.add(cartman)
     db.session.commit()
 
 

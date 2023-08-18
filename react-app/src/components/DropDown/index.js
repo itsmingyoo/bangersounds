@@ -40,7 +40,8 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
 
   return (
     <div className="dropdown">
-      <button onClick={openMenu} style={{ backgroundColor: showMenu ? "black" : "" }}>
+      {/* <button onClick={openMenu} style={{ backgroundColor: showMenu ? "black" : "" }}> */}
+      <button onClick={openMenu} style={{ height: "100%", width: "100%" }}>
         <IoEllipsisHorizontalSharp />
         More
         {iconClassName ? (

@@ -8,6 +8,16 @@ def seed_songs():
     # 41 Seed Data
     songs = [
         {
+            "title": "CARTMAN - Mix Tape",
+            "genre": "Hip-Hop & RAP",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/cartman-god-tier-rapper.mp3",
+            "description": "ERIC CARTMAN RAP GOD CHANGING THE RAP SCENE. From his foul-mouthed humor to his cunning wordplay, Cartman's spitting fire in a brand new way. With beats that bang and rhymes that stun, He's the top dog in the rap game, second to none.",
+            "private": False,
+            "caption": "RAP GOD HOMIE REPRESENT FROM SOUTH PARK",
+            "artistId": 12,
+            "thumbnail": "https://cdn.discordapp.com/attachments/1108904522220318781/1142128184867946576/cartman.JPG"
+        },
+        {
             "title": "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
             "genre": "Dance & EDM",
             "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
