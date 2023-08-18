@@ -5,6 +5,9 @@ import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
 import MySocialSecurity from "./MySocialSecurity";
 import bangerSoundsLogo from "../../images/bangersounds-logo.ico";
+import notifications from "../../images/bell.ico";
+import messages from "../../images/email.ico";
+import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -43,31 +46,55 @@ function Navigation({ isLoaded }) {
         ))}
 
         <SearchBar />
+
         <MySocialSecurity />
-        {navNames2.map((nav) => (
-          <div
-            className={`nav-bar__element`}
-            key={`navMap-${nav.name}`} // key has to be unique, else RED ERRORRRS
-          >
-            <NavLink to={nav.to} className={`${nav.className}`} key={`navLink-${nav.className}-chick`}>
-              {nav.name}
-            </NavLink>
-          </div>
-        ))}
+
+        {navNames2.map((nav) => {
+          if (nav.name !== "Upload") {
+            return (
+              <div
+                className={`nav-bar__element`}
+                key={`navMap-${nav.name}`} // key has to be unique, else RED ERRORRRS
+                onClick={() => alert("Feature coming soon!")}
+              >
+                <NavLink to={nav.to} className={`${nav.className}`} key={`navLink-${nav.className}-chick`}>
+                  {nav.name}
+                </NavLink>
+              </div>
+            );
+          } else {
+            return (
+              <div
+                className={`nav-bar__element`}
+                key={`navMap-${nav.name}`} // key has to be unique, else RED ERRORRRS
+              >
+                <NavLink to={nav.to} className={`${nav.className}`} key={`navLink-${nav.className}-chick`}>
+                  {nav.name}
+                </NavLink>
+              </div>
+            );
+          }
+        })}
         <div id="user-nav">
           {isLoaded && <ProfileButton user={sessionUser} />}
 
-          <div className="nav-bar__element">
-            <NavLink to="/">Alerts (bell icon)</NavLink>
+          <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
+            <NavLink to="#">
+              <img src={notifications} alt="Alerts" />
+            </NavLink>
           </div>
 
-          <div className="nav-bar__element">
-            <NavLink to="/">Messages (mail icon)</NavLink>
+          <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
+            <NavLink to="#">
+              <img src={messages} alt="Messages" />
+            </NavLink>
           </div>
         </div>
 
-        <div className="nav-bar__element">
-          <NavLink to="/">Options (3 dots icon)</NavLink>
+        <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
+          <NavLink to="/">
+            <IoEllipsisHorizontalSharp />
+          </NavLink>
         </div>
       </div>
     </div>
