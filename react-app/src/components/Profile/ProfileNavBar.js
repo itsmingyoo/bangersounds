@@ -2,7 +2,7 @@ import React from "react";
 import Reposts from "./Reposts";
 import All from "./All";
 
-const ProfileNavBar = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
+const ProfileNavBar = ({ userSongs, isPlayingState, currentlyPlaying }) => {
   // states for each div if clicked to render their specific page on the same page
   return (
     <div>
@@ -17,8 +17,8 @@ const ProfileNavBar = ({ songs, isPlayingState, currentlyPlaying, comments, user
       </div>
       <div>
         if conditionals to render...
-        <Reposts />
-        <All />
+        <Reposts {...{ userSongs, isPlayingState, currentlyPlaying }} />
+        <All {...{ userSongs, isPlayingState, currentlyPlaying }} />
       </div>
     </div>
   );
