@@ -65,12 +65,20 @@
 .dropdown-button {
   /* border: 2px solid red; */
   /* z-index: 1; make button on top */
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-button > img {
+  border-radius: 50%;
 }
 
 .dropdown-list {
   /* put absolute so the entire div pops up */
   position: absolute;
-  top: 30px;
+  top: 45px;
+  /* right: 200px; */
   text-decoration: white;
   background-color: gray;
   box-shadow: 3px 3px 3px black;
@@ -166,4 +174,9 @@
 .user-login-signup {
   display: flex;
   gap: 15px
+}
+
+.nav-bar__profile-image {
+  width: 24px;
+  height: 24px;
 }

@@ -46,31 +46,34 @@ function ProfileButton({ user }) {
     <div className="profile-dropdown">
       {user ? (
         <>
-          <button onClick={openMenu} className="dropdown-button" style={{ backgroundColor: showMenu ? "black" : "" }}>
-            <i className="fas fa-user-circle" style={{ color: showMenu ? "white" : "" }} />
+          <button
+            onClick={openMenu}
+            className="dropdown-button"
+            style={{ marginLeft: "10px", marginRight: "10px", backgroundColor: showMenu ? "black" : "" }}
+          >
+            {/* <i className="fas fa-user-circle" style={{ color: showMenu ? "white" : "" }} /> */}
+            <img src={user.profileImage} alt="user image" className="nav-bar__profile-image" />
           </button>
           <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
             <ul className="dropdown-nav">
               {/* Display user information here */}
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              {/* <li>{user.username}</li>
+              <li>{user.email}</li> */}
               <li>
                 <NavLink to="/profile">Profile</NavLink>
               </li>
-              <li>
+              <li onClick={() => alert("Feature coming soon!")}>
                 <NavLink to="/likes">Likes</NavLink>
               </li>
-              <li>
+              <li onClick={() => alert("Feature coming soon!")}>
                 <NavLink to="/playlists">Playlists</NavLink>
               </li>
-              <li>
+              <li onClick={() => alert("Feature coming soon!")}>
                 <NavLink to="/follows">Follows</NavLink>
               </li>
-              <li>
-                <NavLink to="/tracks">Tracks</NavLink>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Log Out</button>
+              <li onClick={() => alert("Feature coming soon!")}></li>
+              <li onClick={handleLogout}>
+                <NavLink to="/">Log Out</NavLink>
               </li>
             </ul>
           </div>
