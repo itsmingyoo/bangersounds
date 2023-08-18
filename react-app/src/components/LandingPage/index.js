@@ -18,6 +18,9 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
       else dispatch(setPlayingState(true));
     }
   };
+  const displayTopTransition = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="landing-page__main-container">
@@ -28,15 +31,15 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
           {songs &&
             songs.map((s) => (
               <div key={s.id} id="recently-played__each-song-container">
-                <ImageContainer {...{ s, togglePlayPause, currentlyPlaying, isPlayingState, songs }} />
-                <div>
-                  {/* need to change this later bc its not the real 'artist - song name' format from the AWS file link */}
-                  {/* <div>
-                    {s.artistInfo.firstName} {s.artistInfo.lastName}
-                  </div> */}
-                  <div>{s.title}</div>
+                <ImageContainer
+                  {...{ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }}
+                />
+                <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
+                  <div style={{ "white-space": "nowrap", overflow: "hidden" }}>{s.title}</div>
+                </NavLink>
+                <div style={{ "word-break": "break-all", overflow: "hidden", color: "#999" }}>
+                  {s.artistInfo.displayName}
                 </div>
-                <div>{s.artistInfo.displayName}</div>
               </div>
             ))}
           {/* END of loop */}

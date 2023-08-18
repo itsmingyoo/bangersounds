@@ -30,7 +30,12 @@
     /* margin: 20px; */
     flex-basis: 13.5%;
     padding: 20px;
+    width: 13.5%;
+}
 
+#recently-played__each-song-container > a {
+    text-decoration: none;
+    color: black;
 }
 
 #recently-played__songs {

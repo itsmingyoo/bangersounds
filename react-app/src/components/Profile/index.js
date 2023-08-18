@@ -1,6 +1,6 @@
 import React from "react";
 import ProfileNavBar from "./ProfileNavBar";
-import ProfileHeader from "./Profile";
+import ProfileHeader from "./ProfileHeader";
 import Likes from "./Likes";
 import LatestComments from "./LatestComments";
 import "./Profile.css";
