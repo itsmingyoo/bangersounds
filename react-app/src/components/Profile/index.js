@@ -1,8 +1,9 @@
 import React from "react";
 import ProfileNavBar from "./ProfileNavBar";
-import Profile from "./Profile";
+import ProfileHeader from "./Profile";
 import Likes from "./Likes";
 import LatestComments from "./LatestComments";
+import "./Profile.css";
 
 const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   // All user info
@@ -13,18 +14,20 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   // filter userReposts
 
   return (
-    <div>
-      {/* just requires user information to perform an update on their displayname/fn/ln/location/bio */}
-      <Profile {...{ user }} />
+    <div className="profile-container-main">
+      <div className="profile-container">
+        {/* just requires user information to perform an update on their displayname/fn/ln/location/bio */}
+        <ProfileHeader {...{ user }} />
 
-      {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
-      <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying }} />
+        {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
+        <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying }} />
 
-      {/* Like/Reposts not yet implemented */}
-      <Likes />
+        {/* Like/Reposts not yet implemented */}
+        <Likes />
 
-      {/* Only need userComments, then need to order them by most recent */}
-      <LatestComments {...{ user, userComments }} />
+        {/* Only need userComments, then need to order them by most recent */}
+        <LatestComments {...{ user, userComments }} />
+      </div>
     </div>
   );
 };
