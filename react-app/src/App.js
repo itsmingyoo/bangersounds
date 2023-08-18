@@ -53,6 +53,7 @@ function App() {
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
   const comments = useSelector((s) => s.songs.comments);
+  const previousSong = useSelector((s) => s.songs.PreviousSong);
 
   // Fix render issues
   if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
@@ -101,7 +102,7 @@ function App() {
       {/* </div>
       </div> */}
 
-      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
     </>
   );
 }
