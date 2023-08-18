@@ -10,16 +10,19 @@ const LatestComments = ({ user, userComments }) => {
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
+
   const handleMouseEnter = (index) => {
     const updatedHoveredStates = [...hoveredStates];
     updatedHoveredStates[index] = true;
     setHoveredStates(updatedHoveredStates);
   };
+
   const handleMouseLeave = (index) => {
     const updatedHoveredStates = [...hoveredStates];
     updatedHoveredStates[index] = false;
     setHoveredStates(updatedHoveredStates);
   };
+
   return (
     <div>
       <div>

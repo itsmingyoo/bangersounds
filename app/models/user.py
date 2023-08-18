@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     profile_bio = db.Column(db.String(255), nullable=True)
     profile_city = db.Column(db.String(255), nullable=True)
     profile_country = db.Column(db.String(255), nullable=True)
+    profile_background = db.Column(db.String(255), nullable=True)
 
     # Relationship to Songs
     # Target Relationship = db.r('Model', back_populates="current model")
@@ -56,6 +57,7 @@ class User(db.Model, UserMixin):
             "profileBio": self.profile_bio,
             "profileCity": self.profile_city,
             "profileCountry": self.profile_country,
+            "profileBackground": self.profile_background
             # "comments": [comment.to_dict() for comment in self.user_comments]
             # "songsOwned": [song.to_dict() for song in self.song_users]
             #this should be on the parent side and it will to_dict() all the songs that belong to this user due to the relationship

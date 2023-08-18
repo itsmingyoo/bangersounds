@@ -15,6 +15,7 @@ def seed_users():
         profile_bio="This is a demo account for demo users",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     marnie = User(
         username="marnie",
@@ -27,6 +28,7 @@ def seed_users():
         profile_bio="Fill in your bio",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     bobbie = User(
         username="bobbie",
@@ -39,6 +41,7 @@ def seed_users():
         profile_bio="Fill something here for your bio",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     barnie = User(
         username="barnie",
@@ -51,6 +54,7 @@ def seed_users():
         profile_bio="Fill in your bio here",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     minh = User(
         username="minh",
@@ -63,6 +67,7 @@ def seed_users():
         profile_bio="Im gaming right now brb",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     chris = User(
         username="chris",
@@ -75,6 +80,7 @@ def seed_users():
         profile_bio="Rick roll og",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     jenny = User(
         username="jenny",
@@ -87,6 +93,7 @@ def seed_users():
         profile_bio="I like to go for marathonicaltacular runs",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     casey = User(
         username="casey",
@@ -99,6 +106,7 @@ def seed_users():
         profile_bio="Just some random grid user",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     seabass = User(
         username="seabass",
@@ -111,6 +119,7 @@ def seed_users():
         profile_bio="Bottoms up!!!!",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     nate = User(
         username="nate",
@@ -123,6 +132,7 @@ def seed_users():
         profile_bio="I like going on dates.",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
     james = User(
         username="james",
@@ -135,6 +145,7 @@ def seed_users():
         profile_bio="I used to be depressed, I still am, but I used to be too.",
         profile_city="",
         profile_country="",
+        profile_background="",
     )
 
     db.session.add(demo)
