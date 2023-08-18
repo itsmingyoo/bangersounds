@@ -7,9 +7,8 @@ const ProfileHeader = ({ user }) => {
   return (
     <div className="profile-header-container">
       <div className="profile-header-wrapper" style={{ height: "380px" }}>
-        {/* LINEAR-GRADIENT DEFAULT BG */}
-        <div style={{ height: "100%" }}>
-          {user.profileBackground === "" ? (
+        {user.profileBackground === "" ? (
+          <div style={{ height: "100%" }}>
             <div className="profile-linear-gradient" style={{ height: "100%" }}>
               <div className="profile-linear-gradient-buffer backgroundGradient-hidden"></div>
               <div
@@ -18,26 +17,31 @@ const ProfileHeader = ({ user }) => {
               ></div>
               LINEAR GRADIENT BG
             </div>
-          ) : (
-            <div className="user-profile-bg-container">
-              <img src={user.profileBackground} alt="bgpicture" />
-            </div>
-          )}
-        </div>
-        <div className="profile-header-user-info-wrapper">
-          <div className="profile-header-picture">
-            <ProfilePicture user={user} />
           </div>
-          <div className="profile-header-user-info">
-            <div>{user.displayName}</div>
-            <div>
-              {user.firstName} {user.lastName}
+        ) : (
+          <div
+            className="profile-header-user-info-wrapper"
+            style={{
+              backgroundImage: `url(${user.profileBackground})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="profile-header-picture">
+              <ProfilePicture user={user} />
             </div>
-            <div>
-              {user.profileCity} {user.profileCountry}
+            <div className="profile-header-user-info">
+              <div>{user.displayName}</div>
+              <div>
+                {user.firstName} {user.lastName}
+              </div>
+              <div>
+                {user.profileCity} {user.profileCountry}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
