@@ -12,6 +12,7 @@ import PostNewSong from "./components/PostNewSong";
 import AudioPlayer from "./components/AudioPlayer";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AllUserComments from "./components/Profile/AllUserComments";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,12 @@ function App() {
           <Route exact path="/profile">
             <ProtectedRoute>
               <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            </ProtectedRoute>
+          </Route>
+
+          <Route exact path="/profile/comments">
+            <ProtectedRoute>
+              <AllUserComments {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </ProtectedRoute>
           </Route>
 

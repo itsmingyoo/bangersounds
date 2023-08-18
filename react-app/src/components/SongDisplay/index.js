@@ -2,7 +2,7 @@ import React from "react";
 import WaveForm from "../SongDetailsPage/WaveForm";
 import PlayContent from "../SongDetailsPage/PlayContent";
 
-const SongDisplay = ({ song, songs, isPlayingState, currentlyPlaying, comments, togglePlayPause }) => {
+const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
   return (
     <div>
       <div>SongDisplay</div>

@@ -2,7 +2,7 @@ import React from "react";
 import ProfileNavBar from "./ProfileNavBar";
 import Profile from "./Profile";
 import Likes from "./Likes";
-import LatestComments from "./UserComments";
+import LatestComments from "./LatestComments";
 
 const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   // All user info
@@ -18,13 +18,13 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
       <Profile {...{ user }} />
 
       {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
-      <ProfileNavBar {...{ userSongs, isPlayingState, currentlyPlaying }} />
+      <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying }} />
 
       {/* Like/Reposts not yet implemented */}
       <Likes />
 
       {/* Only need userComments, then need to order them by most recent */}
-      <LatestComments {...{ userComments }} />
+      <LatestComments {...{ user, userComments }} />
     </div>
   );
 };
