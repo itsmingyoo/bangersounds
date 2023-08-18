@@ -1,9 +1,10 @@
 import React from "react";
 import SongDisplay from "../SongDisplay";
-const Reposts = ({ songs, isPlayingState, currentlyPlaying, comments }) => {
+
+const Reposts = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
   return (
     <div>
-      <SongDisplay {...{ songs, isPlayingState, currentlyPlaying, comments }} />
+      <SongDisplay {...{ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
     </div>
   );
 };

@@ -26,20 +26,20 @@ const SongStats = ({
   return (
     <div id="song-details__nav-bar">
       <div id="song-details__nav-bar-buttons">
-        <button className="btn-container">
+        <button className="btn-container" onClick={() => alert("Feature coming soon!")}>
           <IoHeartSharp />
           Like
         </button>
-        <button className="btn-container">
+        <button className="btn-container" onClick={() => alert("Feature coming soon!")}>
           <img src={repost} alt="repost" />
           Repost
         </button>
-        <button className="btn-container">
+        <button className="btn-container" onClick={() => alert("Feature coming soon!")}>
           <IoShareOutline />
           Share
         </button>
 
-        <button>
+        <button onClick={() => alert("Feature coming soon!")}>
           <IoLinkSharp />
           Copy Link
         </button>
@@ -75,7 +75,7 @@ const SongStats = ({
           icon1={addToQueue}
           icon2={playNext}
         />
-        <button>Free Download</button>
+        <button onClick={() => alert("Feature coming soon!")}>Free Download</button>
       </div>
       <div id="song-details__stats">
         <span>1 Play(s)</span>

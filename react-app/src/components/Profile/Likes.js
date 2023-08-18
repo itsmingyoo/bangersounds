@@ -1,6 +1,6 @@
 import React from "react";
 
-const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
+const Likes = () => {
   return (
     <div>
       <div>

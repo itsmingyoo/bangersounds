@@ -32,3 +32,4 @@ class SignUpForm(FlaskForm):
     profile_city = StringField('profile_city')
     profile_country = StringField('profile_country')
     display_name = StringField('display_name')
+    profile_background = StringField('profile_background')

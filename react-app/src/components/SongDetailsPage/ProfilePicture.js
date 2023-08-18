@@ -1,10 +1,11 @@
 import React from "react";
 
-const ProfilePicture = ({ song }) => {
+const ProfilePicture = ({ user, song }) => {
+  if (!user || user === null) return null;
   return (
     <>
       <div className="song-details__profile-picture">
-        <img src={song.thumbnail} alt="fake ProfilePicture" />
+        <img src={user.profileImage} alt="PROFILE PICTURE" />
       </div>
     </>
   );

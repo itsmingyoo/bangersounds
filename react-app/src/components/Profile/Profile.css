@@ -1,0 +1,20 @@
+/** NAV-BAR */
+.profile-navbar__main {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-navbar__left {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-navbar__right {
+    display: flex;
+}
+
+.profile-navbar__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}

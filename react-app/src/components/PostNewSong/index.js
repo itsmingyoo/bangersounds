@@ -1,18 +1,17 @@
 // Post a New Song Form
-// frontend/src/components/Products/CreateNewProduct/index.js
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkPostNewSong } from "../../store/songs";
-// IMPORT TO TEST AWS
-// import { thunkTestAws } from "../../store/songs";
 import TopNavBar from "./TopNavBar";
 import UploadNavBar from "./UploadNavBar";
+import Dropzone from "../DropZone";
 import "./PostNewSong.css";
 
 function PostNewSong() {
   const dispatch = useDispatch();
   const history = useHistory();
+  // Initializing useDropzone hooks with options
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
   const [songURL, setSongURL] = useState("");
@@ -78,9 +77,30 @@ function PostNewSong() {
 
   // Change Song Submit State to Render the Form of the Song
   const handleClick = async (e) => {
+    console.log("og", song);
     setSong(e.target.files[0]);
+    console.log("og after setSong", song);
     setSubmitted(true);
   };
+
+  // onDrop function
+  const onDrop = useCallback((acceptedFiles) => {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const audioFile = acceptedFiles[0];
+      setSong(audioFile); // Update the 'song' state with the audio file object
+      setSubmitted(true);
+    };
+
+    reader.readAsDataURL(acceptedFiles[0]); // Read the data URL of the dropped file
+  }, []);
+
+  useEffect(() => {
+    console.log("UE");
+    console.log("this is the song state", song);
+  }, [song]);
+
   const genres = [
     { name: "None" },
     { name: "Alternative Rock" },
@@ -163,30 +183,7 @@ function PostNewSong() {
         <UploadNavBar />
         {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
         {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
-        <div id="new-song__upload-container">
-          <div id="new-song__upload-button">
-            <h1>Drag and drop your tracks & albums here</h1>
-            <button className="orange-btn-white-txt-upload">
-              <label for="upload-new-song">
-                <input
-                  type="file"
-                  accept="audio/*"
-                  // onChange={(e) => setSong(e.target.files[0])}
-                  onChange={handleClick}
-                  className="orange-btn-white-txt-upload"
-                  id="upload-new-song"
-                  style={{ display: "none" }}
-                />
-                or choose files to upload
-              </label>
-            </button>
-
-            <label>
-              <input type="checkbox" name="multiple-files" />
-              Make a playlist when multiple files are selected
-            </label>
-          </div>
-        </div>
+        <Dropzone onDrop={onDrop} accept={"audio/*"} />
       </div>
     );
   }
@@ -328,3 +325,31 @@ export default PostNewSong;
 //   </>
 // );
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{
+  /** OLD BORING CLICK TO UPLOAD SONG
+        <div id="new-song__upload-container">
+          <div id="new-song__upload-button">
+            <h1>Drag and drop your tracks & albums here</h1>
+            <div className="orange-btn-white-txt-upload">
+              <label for="upload-new-song">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  // onChange={(e) => setSong(e.target.files[0])}
+                  onChange={handleClick}
+                  className="orange-btn-white-txt-upload"
+                  id="upload-new-song"
+                  style={{ display: "none" }}
+                />
+                or choose files to upload
+              </label>
+            </div>
+
+            <label>
+              <input type="checkbox" name="multiple-files" />
+              Make a playlist when multiple files are selected
+            </label>
+          </div>
+        </div>
+        */
+}

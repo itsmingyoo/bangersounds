@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkEditSongById } from "../../store/songs";
 import { useModal } from "../../context/Modal";
 import "./SongDetailsPage.css";
+import "../PostNewSong/PostNewSong.css";
 
 const EditSong = ({
   song,
@@ -30,6 +31,7 @@ const EditSong = ({
   const [songLoading, setSongLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [submittedForm, setSubmittedForm] = useState(false);
+
   const genres = [
     { name: "None" },
     { name: "Alternative Rock" },
@@ -148,26 +150,73 @@ const EditSong = ({
       closeModal();
     }
   };
+
+  // BREAKDOWN OF THIS FUNCTION SINCE 'download' attribute of <a> tag does not work as intended
+  // pass in url, and file name
+
+  const downloadFile = async (fileUrl, fileName) => {
+    try {
+      // fetch the url
+      const response = await fetch(fileUrl);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // BLOB SYNTAX: const blob = new Blob([content], {type: "application/json",});
+      // convert response to a blob object that can contain media files, and other types like binary data(tldr on mdn)
+      const blob = await response.blob();
+
+      // URL object provides a method createObjectURL and it takes a blob or file object to return a unique url (obj URL) to represent the blob 'content'
+      // TLDR: blobUrl is the 'content' parameter in the blob syntax
+      const blobUrl = URL.createObjectURL(blob);
+
+      // simulate a "click" event by "creating" a new anchor tag (which is fake or just imagine its not there, its here for functionality of opening up the download window)
+      const link = document.createElement("a");
+      // set href of the anchor tag
+      link.href = blobUrl;
+      // sets the download name for the anchor tag
+      link.download = fileName;
+      // invokes a click on the anchor tag
+      link.click();
+
+      // Clean up the Blob URL by releasing the resources associated with the blobUrl (blob content) - why? they are temporary urls and may cause memory leaks if not released
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <div id="edit__main-container">
       <div id="edit-wrapper">
         {/* flex row */}
         <div className="edit-files__container">
-          <button className="download-file">Download file</button>
-          <button>
+          <div className="download-file">
+            <a
+              href={song.songURL}
+              onClick={(e) => {
+                e.preventDefault();
+                downloadFile(song.songURL, song.title);
+              }}
+            >
+              Download
+            </a>
+            <a href="" download="sample.jpg" />
+          </div>
+          <div>
             <label className="upload-new" for="upload-new-file">
               <input
                 type="file"
                 accept="audio/*"
                 onChange={(e) => setSongUpload(e.target.files[0])}
                 // onChange={handleClick}
-                className="orange-btn-white-txt"
+                className="orange-btn-white-txt cursor-pointer"
                 style={{ display: "none" }}
                 id="upload-new-file"
               />
               Replace file
             </label>
-          </button>
+          </div>
         </div>
         <div className="edit-tabs">
           <span>Basic Info</span>

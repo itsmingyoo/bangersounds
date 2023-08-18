@@ -188,10 +188,10 @@
     height: 100%;
 }
 
-#edit__main-container div {
+/* #edit__main-container div {
     padding: 5px;
     margin: 5px;
-}
+} */
 
 .edit-song-img > img {
     width: 200px;

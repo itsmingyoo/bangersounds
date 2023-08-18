@@ -37,8 +37,8 @@ app.register_blueprint(comment_routes, url_prefix="/api/comments")
 db.init_app(app)
 Migrate(app, db)
 
-# Application Security
-CORS(app)
+# Application Security - implement origins to allow fetches with correct cors headers - this is for the 'download song' function to work on the frontend
+CORS(app, origins=["https://bangersounds.onrender.com", "http://localhost:3000"])
 
 
 # Since we are deploying with Docker and Flask,
