@@ -32,7 +32,7 @@ const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying }) =>
           <button onClick={() => alert("Feature coming soon!")}>Your Insights</button>
           <button onClick={() => alert("Feature coming soon!")}>Station</button>
           <button onClick={() => alert("Feature coming soon!")}>Share</button>
-          <button>Edit</button>
+          <button onClick={() => alert("Feature coming soon!")}>Edit</button>
         </div>
       </div>
       <div className="navbar-content-box">
