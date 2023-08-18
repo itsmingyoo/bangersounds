@@ -77,9 +77,9 @@ function PostNewSong() {
 
   // Change Song Submit State to Render the Form of the Song
   const handleClick = async (e) => {
-    console.log("og", song);
+    // console.log("og", song);
     setSong(e.target.files[0]);
-    console.log("og after setSong", song);
+    // console.log("og after setSong", song);
     setSubmitted(true);
   };
 

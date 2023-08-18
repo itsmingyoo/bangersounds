@@ -3,7 +3,7 @@ import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import WaveForm from "../SongDetailsPage/WaveForm";
 
 const ProfileHeader = ({ user }) => {
-  console.log(user);
+  // console.log(user);
   return (
     <div className="profile-header-container">
       <div className="profile-header-wrapper" style={{ height: "380px" }}>

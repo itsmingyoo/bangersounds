@@ -27,10 +27,10 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
     setHoveredStates(updatedHoveredStates);
   };
 
-  useEffect(() => {
-    console.log("true", hoveredStates);
-    console.log("false", hoveredStates);
-  });
+  // useEffect(() => {
+  //   console.log("true", hoveredStates);
+  //   console.log("false", hoveredStates);
+  // });
 
   // CONTEXT - MAPPING THROUGH EACH COMMENT, EXTRACTING COMMENT AND INDEX - INDEX IS USED FOR MANAGING EACH ELEMENT'S LOCAL STATE WHICH IS DEFINED ASS AN ARRAY
   return (
