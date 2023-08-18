@@ -194,23 +194,45 @@ function PostNewSong() {
         {/* {console.log("privated ? ", privated)} */}
         <div>
           <form className="new-song__form" onSubmit={onSubmit} encType="multipart/form-data">
-            {inputs.map((el, index) => (
-              <div key={el.name}>
-                <div>{el.title}</div>
-                <input
-                  type="text"
-                  name={el.name}
-                  placeholder={el.placeHolder}
-                  value={el.value}
-                  onChange={(e) => el.onChange(e.target.value)}
-                />
-                {submitted && errors[el.name] && (
-                  <div className="errors" key={`error-${el.name}`}>
-                    {errors[el.name]}
+            {inputs.map((el, index) => {
+              if (el.name === "description") {
+                return (
+                  <div key={el.name}>
+                    <div>{el.title}</div>
+                    <textarea
+                      type="text"
+                      name={el.name}
+                      placeholder={el.placeHolder}
+                      value={el.value}
+                      onChange={(e) => el.onChange(e.target.value)}
+                    />
+                    {submitted && errors[el.name] && (
+                      <div className="errors" key={`error-${el.name}`}>
+                        {errors[el.name]}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                );
+              } else {
+                return (
+                  <div key={el.name}>
+                    <div>{el.title}</div>
+                    <input
+                      type="text"
+                      name={el.name}
+                      placeholder={el.placeHolder}
+                      value={el.value}
+                      onChange={(e) => el.onChange(e.target.value)}
+                    />
+                    {submitted && errors[el.name] && (
+                      <div className="errors" key={`error-${el.name}`}>
+                        {errors[el.name]}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+            })}
             <div className="select-container">
               <div>Genre</div>
               <select
