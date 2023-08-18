@@ -6,7 +6,7 @@ const ProfileHeader = ({ user }) => {
   // console.log(user);
   return (
     <div className="profile-header-container">
-      <div className="profile-header-wrapper" style={{ height: "380px" }}>
+      <div className="profile-header-wrapper">
         {user.profileBackground === "" ? (
           <div style={{ height: "100%" }}>
             <div className="profile-linear-gradient" style={{ height: "100%" }}>
@@ -29,7 +29,7 @@ const ProfileHeader = ({ user }) => {
             }}
           >
             <div className="profile-header-picture">
-              <ProfilePicture user={user} className="user-profile-pic" />
+              <ProfilePicture user={user} />
             </div>
             <div className="profile-header-user-info">
               <div>{user.displayName}</div>
@@ -37,7 +37,7 @@ const ProfileHeader = ({ user }) => {
                 {user.firstName} {user.lastName}
               </div>
               <div>
-                {user.profileCity} {user.profileCountry}
+                {user.profileCity}, {user.profileCountry}
               </div>
             </div>
           </div>
