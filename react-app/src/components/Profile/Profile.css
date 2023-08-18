@@ -16,10 +16,14 @@
 }
 
 .profile-header-user-info-wrapper {
-    height: 380px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 240px;
     /* background: #e5e5e5; */
     width: 100%;
 }
+
 
 /* .user-profile-bg-container > img {
     width: 100%;
@@ -57,7 +61,11 @@ Left padding: The value of --spacing-4x. */
     width: 70%;
 } */
 
-.profile-header-picture {}
+.profile-header-picture > img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
 
 .profile-waveform > img {
     width: 70%;

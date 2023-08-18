@@ -29,7 +29,7 @@ const ProfileHeader = ({ user }) => {
             }}
           >
             <div className="profile-header-picture">
-              <ProfilePicture user={user} />
+              <ProfilePicture user={user} className="user-profile-pic" />
             </div>
             <div className="profile-header-user-info">
               <div>{user.displayName}</div>
