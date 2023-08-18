@@ -35,7 +35,9 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
                   {...{ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }}
                 />
                 <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
-                  <div style={{ whiteSpace: "nowrap", overflow: "hidden" }}>{s.title}</div>
+                  <div style={{ whiteSpace: "nowrap", overflow: "hidden" }} title={s.title}>
+                    {s.title}
+                  </div>
                 </NavLink>
                 <div style={{ wordBreak: "break-all", overflow: "hidden", color: "#999" }}>
                   {s.artistInfo.displayName}

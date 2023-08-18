@@ -33,7 +33,12 @@ const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, 
           </div>
         </button>
 
-        <div className={`song-image__container`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <div
+          className={`song-image__container`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          title={s.title}
+        >
           <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
             <img
               src={s.thumbnail ? s.thumbnail : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"}

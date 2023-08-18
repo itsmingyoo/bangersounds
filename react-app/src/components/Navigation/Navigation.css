@@ -40,8 +40,7 @@
 
 .nav-bar__element {
   font-size: 15px;
-  margin: 0 15px;
-
+  margin: 0 10px;
 }
 
 .nav-bar__element > a {
@@ -120,4 +119,26 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+
+/** LOGO ANIMATION */
+
+.logo-animation {
+  width: 200px; height: 200px;
+  box-shadow: 16px 14px 20px #0000008c;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-animation-before::before {
+  content: "";
+  background-image: conic-gradient(#ff0052 20deg, transparent 120deg);
+  width: 150%; height: 150%;
+  position: absolute;
+  animation: rotate 2s linear infinite;
 }

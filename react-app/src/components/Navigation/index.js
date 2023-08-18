@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import SearchBar from "./SearchBar";
 import MySocialSecurity from "./MySocialSecurity";
-import bangerSoundsLogo from "../../images/bangersounds-logo.ico";
+import bangerSoundsLogo from "../../images/bangersounds-logo-new.ico";
 import notifications from "../../images/bell.ico";
 import messages from "../../images/email.ico";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
@@ -80,20 +80,20 @@ function Navigation({ isLoaded }) {
 
           <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
             <NavLink to="#">
-              <img src={notifications} alt="Alerts" />
+              <img src={notifications} alt="Alerts" style={{ width: "60%", height: "60%", filter: "invert(100%)" }} />
             </NavLink>
           </div>
 
           <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
             <NavLink to="#">
-              <img src={messages} alt="Messages" />
+              <img src={messages} alt="Messages" style={{ width: "60%", height: "60%", filter: "invert(100%)" }} />
             </NavLink>
           </div>
         </div>
 
         <div className="nav-bar__element" onClick={() => alert("Feature coming soon!")}>
           <NavLink to="/">
-            <IoEllipsisHorizontalSharp />
+            <IoEllipsisHorizontalSharp style={{ color: "white" }} />
           </NavLink>
         </div>
       </div>
