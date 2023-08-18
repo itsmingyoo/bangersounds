@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { thunkDeleteComment } from "../../store/songs";
 
 const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments, user, dispatch }) => {
@@ -26,6 +26,11 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
     updatedHoveredStates[index] = false;
     setHoveredStates(updatedHoveredStates);
   };
+
+  useEffect(() => {
+    console.log("true", hoveredStates);
+    console.log("false", hoveredStates);
+  });
 
   // CONTEXT - MAPPING THROUGH EACH COMMENT, EXTRACTING COMMENT AND INDEX - INDEX IS USED FOR MANAGING EACH ELEMENT'S LOCAL STATE WHICH IS DEFINED ASS AN ARRAY
   return (

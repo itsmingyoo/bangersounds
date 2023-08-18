@@ -11,16 +11,34 @@ const LatestComments = ({ user, userComments }) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
 
+  // BUGGED CODE - WHEN THERE IS RAPID MOUSE MOVEMENTS OVER MULTIPLE DIVS THEY ARENT ABLE TO GRAB THE UPDATED STATE - SO WE NEED TO PASS A FUNCTION INTO THE SETHOVEREDSTATES
+  // const handleMouseEnter = (index) => {
+  //   const updatedHoveredStates = [...hoveredStates];
+  //   updatedHoveredStates[index] = true;
+  //   setHoveredStates(updatedHoveredStates);
+  // };
+
+  // const handleMouseLeave = (index) => {
+  //   const updatedHoveredStates = [...hoveredStates];
+  //   updatedHoveredStates[index] = false;
+  //   setHoveredStates(updatedHoveredStates);
+  // };
+
+  // by using a function within setHoveredStates, you ensure that the function receives the latest state as its argument,so you dont end up using a stale state value when modifying the hoveredStates array - STILL BUGGY - BUT SOMEWHAT FIXES IT - IT SOMETIMES STILL OCCURS
   const handleMouseEnter = (index) => {
-    const updatedHoveredStates = [...hoveredStates];
-    updatedHoveredStates[index] = true;
-    setHoveredStates(updatedHoveredStates);
+    setHoveredStates((prevStates) => {
+      const updatedStates = [...prevStates];
+      updatedStates[index] = true;
+      return updatedStates;
+    });
   };
 
   const handleMouseLeave = (index) => {
-    const updatedHoveredStates = [...hoveredStates];
-    updatedHoveredStates[index] = false;
-    setHoveredStates(updatedHoveredStates);
+    setHoveredStates((prevStates) => {
+      const updatedStates = [...prevStates];
+      updatedStates[index] = false;
+      return updatedStates;
+    });
   };
 
   return (
@@ -28,7 +46,9 @@ const LatestComments = ({ user, userComments }) => {
       <div>
         <div>(comment icon) Latest Comments</div>
         <div>
-          <NavLink to="/profile/comments">View All</NavLink>
+          <NavLink to="/profile/comments" style={{ cursor: "pointer" }}>
+            View All
+          </NavLink>
         </div>
       </div>
       <div>
@@ -56,33 +76,31 @@ const LatestComments = ({ user, userComments }) => {
               timeAgoString = `${months} ${months === 1 ? "month" : "months"} ago`;
             }
             return (
-              <>
-                <div
-                  id="user-comment__container"
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={() => handleMouseLeave(index)}
-                >
-                  <div>
-                    <div key={c.id} className="user-displayname">
-                      {c.user.displayName}
-                    </div>
-                    <div className="user-comment">{c.comment}</div>
+              <div
+                id="user-comment__container"
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={() => handleMouseLeave(index)}
+              >
+                <div>
+                  <div key={c.id} className="user-displayname">
+                    {c.user.displayName}
                   </div>
-                  <div id="user-time-delete">
-                    <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
-                      {timeAgoString}
-                    </div>
-                    {user && c.userId === user.id && hoveredStates[index] && (
-                      <button
-                        onClick={() => handleDelete(c)}
-                        className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}
-                      >
-                        Delete
-                      </button>
-                    )}
-                  </div>
+                  <div className="user-comment">{c.comment}</div>
                 </div>
-              </>
+                <div id="user-time-delete">
+                  <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
+                    {timeAgoString}
+                  </div>
+                  {user && c.userId === user.id && hoveredStates[index] && (
+                    <button
+                      onClick={() => handleDelete(c)}
+                      className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              </div>
             );
           })}
       </div>
