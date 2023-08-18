@@ -53,19 +53,19 @@ function SignupFormModal() {
     }
   };
   return (
-    <>
-      <h1 id="signup-text">Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div id="signup-container">
+      <div id="signup-text">Create an account</div>
+      <form onSubmit={handleSubmit} className="form-input-container">
         <div className="input-group">
           <input
             className="signup-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="example@gmail.com"
             required
           />
           <label className="user-label">
-            Email
             {submitted && errors.email && <div className="errors">{errors.email}</div>}
           </label>
         </div>
@@ -76,10 +76,10 @@ function SignupFormModal() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
             required
           />
           <label className="user-label">
-            Username
             {submitted && errors.username && <div className="errors">{errors.username}</div>}
           </label>
         </div>
@@ -90,10 +90,10 @@ function SignupFormModal() {
             type="text"
             value={first_name}
             onChange={(e) => setFirstName(e.target.value)}
+            placeholder="First Name"
             required
           />
           <label className="user-label">
-            First Name
             {submitted && errors.first_name && <div className="errors">{errors.first_name}</div>}
           </label>
         </div>
@@ -104,10 +104,10 @@ function SignupFormModal() {
             type="text"
             value={last_name}
             onChange={(e) => setLastName(e.target.value)}
+            placeholder="Last Name"
             required
           />
           <label className="user-label">
-            Last Name
             {submitted && errors.last_name && <div className="errors">{errors.last_name}</div>}
           </label>
         </div>
@@ -118,10 +118,10 @@ function SignupFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
             required
           />
           <label className="user-label">
-            Password
             {submitted && errors.password && <div className="errors">{errors.password}</div>}
           </label>
         </div>
@@ -132,20 +132,20 @@ function SignupFormModal() {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
             required
           />
           <label className="user-label">
-            Confirm Password
             {submitted && errors.confirmPassword && <div className="errors">{errors.confirmPassword}</div>}
           </label>
         </div>
         <div>
-          <button type="submit" id="signup-modal-button" className="PID-cartButt">
+          <button type="submit" id="signup-modal-button" className="orange-btn">
             Sign Up
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 export default SignupFormModal;
