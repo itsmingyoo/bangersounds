@@ -72,7 +72,7 @@ const ProfileNavBar = ({
             className={`profile-navbar__item ${active === 5 ? "profile-navbar__item-active" : ""}`}
             onClick={() => {
               handleActiveClick(5);
-              // alert("Feature coming soon!");
+              alert("Feature coming soon!");
             }}
           >
             Reposts
