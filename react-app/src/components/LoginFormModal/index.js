@@ -108,7 +108,7 @@ function LoginFormModal() {
         <button type="submit">Log In</button>
       </form>
       <form onSubmit={handleDemoSubmit}>
-        <button id="Demo-user" type="submit">
+        <button id="demo-user" type="submit">
           DemoUser
         </button>
       </form>
