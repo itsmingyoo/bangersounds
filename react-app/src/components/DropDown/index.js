@@ -65,7 +65,9 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
         <ul className="dropdown-nav">
           {list?.map((item) => (
             <li key={item.name}>
-              <NavLink to={item.to}>{item.name}</NavLink>
+              <NavLink to={item.to} onClick={() => alert("Feature coming soon!")}>
+                {item.name}
+              </NavLink>
             </li>
           ))}
           {/* insert MODAL here */}

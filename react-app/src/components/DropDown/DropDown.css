@@ -5,4 +5,17 @@
 .dropdown {
     display: flex;
     flex-direction: column;
+    position: relative
 }
+
+.dropdown-list {
+    position: absolute;
+    top: 100%; /* Position the dropdown below the button */
+    right: 0; /* Align the dropdown with the button */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: max-content;
+    z-index: 1000;
+  }

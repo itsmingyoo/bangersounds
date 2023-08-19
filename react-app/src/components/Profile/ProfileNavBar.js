@@ -5,7 +5,7 @@ import All from "./All";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./Profile.css";
 
-const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying }) => {
+const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying, comments, songs }) => {
   // states for each div if clicked to render their specific page on the same page
   const dispatch = useDispatch();
   const togglePlayPause = async (song) => {
@@ -37,8 +37,8 @@ const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying }) =>
       </div>
       <div className="navbar-content-box">
         IF CONDITIONALS TO RENDER IF USER SELECTS ON OF THE NAV BUTTONS...
-        <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
-        <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+        <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
+        <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
       </div>
     </div>
   );

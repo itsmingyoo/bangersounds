@@ -20,7 +20,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
         <ProfileHeader {...{ user }} />
 
         {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
-        <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying }} />
+        <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying, comments, songs }} />
 
         {/* Like/Reposts not yet implemented */}
         <Likes />
