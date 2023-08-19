@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import ProfileNavBar from "./ProfileNavBar";
 import ProfileHeader from "./ProfileHeader";
 import Likes from "./Likes";
 import LatestComments from "./LatestComments";
+import NavBarContent from "./NavBarContent";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./Profile.css";
 
 const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
+  const dispatch = useDispatch();
+  const [active, setActive] = useState(null);
   // All user info
   const user = userRef.current;
   const userSongs = songs.filter((s) => s.artistId === user.id);
@@ -13,20 +18,53 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   // filter userLikes
   // filter userReposts
 
+  // FN
+  const togglePlayPause = async (song) => {
+    dispatch(playUserSongAction(song));
+    if (currentlyPlaying) {
+      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      else dispatch(setPlayingState(true));
+    }
+  };
+
   return (
     <div className="profile-container-main">
       <div className="profile-container">
         <ProfileHeader {...{ user }} />
         {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
-        <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying, comments, songs }} />
-        <div id="profile-left-and-right__container">
-          <div id="profile-right-content">
-            {/* Like/Reposts not yet implemented */}
-            <Likes />
-
-            {/* Only need userComments, then need to order them by most recent */}
-            <LatestComments {...{ user, userComments }} />
-          </div>
+        <ProfileNavBar
+          {...{
+            user,
+            userSongs,
+            isPlayingState,
+            currentlyPlaying,
+            comments,
+            songs,
+            active,
+            setActive,
+            togglePlayPause,
+          }}
+        />
+        <NavBarContent
+          {...{
+            user,
+            userSongs,
+            isPlayingState,
+            currentlyPlaying,
+            comments,
+            songs,
+            active,
+            setActive,
+            togglePlayPause,
+          }}
+        />
+      </div>
+      <div id="profile-left-and-right__container">
+        <div id="profile-right-content">
+          {/* Like/Reposts not yet implemented */}
+          <Likes />
+          {/* Only need userComments, then need to order them by most recent */}
+          <LatestComments {...{ user, userComments }} />
         </div>
       </div>
     </div>

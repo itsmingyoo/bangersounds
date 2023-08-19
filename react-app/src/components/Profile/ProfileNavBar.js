@@ -5,20 +5,20 @@ import All from "./All";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./Profile.css";
 
-const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying, comments, songs }) => {
+const ProfileNavBar = ({
+  user,
+  userSongs,
+  isPlayingState,
+  currentlyPlaying,
+  comments,
+  songs,
+  togglePlayPause,
+  active,
+  setActive,
+}) => {
   // states for each div if clicked to render their specific page on the same page
-  const dispatch = useDispatch();
-  const [active, setActive] = useState(null);
   const handleActiveClick = (index) => {
     setActive(index);
-  };
-  const togglePlayPause = async (song) => {
-    dispatch(playUserSongAction(song));
-
-    if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
-      else dispatch(setPlayingState(true));
-    }
   };
 
   return (
@@ -84,18 +84,6 @@ const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying, comm
           <button onClick={() => alert("Feature coming soon!")}>Share</button>
           <button onClick={() => alert("Feature coming soon!")}>Edit</button>
         </div>
-      </div>
-      <div className="navbar-content-box">
-        {active === 0 && (
-          <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
-        )}
-        {/* {active === 1 && <PopularSongs />} */}
-        {/* {active === 2 && <Songs />} */}
-        {/* {active === 3 && <Albums />} */}
-        {/* {active === 4 && <Playlists />} */}
-        {active === 5 && (
-          <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
-        )}
       </div>
     </div>
   );

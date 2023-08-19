@@ -3,6 +3,7 @@
     width: 100%;
     /* overflow: hidden; */
     max-height: 150px;
+    margin-bottom: 20px;
 }
 
 .song-display-pfp > img {
