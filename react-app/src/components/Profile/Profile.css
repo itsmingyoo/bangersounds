@@ -3,8 +3,9 @@
     width: 100%;
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    align-content: space-between;
 }
 
 .profile-container {
@@ -23,8 +24,18 @@
     width: 100%;
 }
 
-#profile-left-and-right__container {
+.profile-content-container {
     display: flex;
+    flex-direction: column;
+}
+
+#profile-content-wrapper {
+    display: flex;
+}
+
+#profile-info__container {
+    display: flex;
+    width: 20%;
 }
 
 #profile-right-content {
