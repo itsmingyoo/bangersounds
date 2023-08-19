@@ -31,6 +31,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
     <div className="profile-container-main">
       <div className="profile-container">
         <ProfileHeader {...{ user }} />
+
         <ProfileNavBar
           {...{
             user,
@@ -62,6 +63,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
               }}
             />
           </div>
+
           <div id="profile-info__container">
             {/* Like/Reposts not yet implemented */}
             <Likes />

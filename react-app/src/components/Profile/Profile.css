@@ -11,8 +11,9 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
     background-color: #fff;
+    min-height: 100vh;
 }
 
 .profile-header-user-info-wrapper {
@@ -28,18 +29,23 @@
 .profile-content-container {
     display: flex;
     flex-direction: column;
+    width: 65%;
 }
 
 #profile-content-wrapper {
     display: flex;
     justify-content: space-between;
+    padding: 0 25px;
 }
 
 #profile-info__container {
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-    padding: 0 50px;
+    /* padding: 0 20px; */
+    width: 30%;
+    border-left: 1px solid #999;
+    padding-left: 30px;
 }
 
 #profile-right-content {
@@ -56,6 +62,7 @@
     flex-direction: column;
     row-gap: 8px;
 }
+
 .profile-header-user-info div:first-child {
     background-color: black;
     color: white;
@@ -185,6 +192,20 @@ Left padding: The value of --spacing-4x. */
 
 .profile-navbar__right {
     display: flex;
+    gap: 3px;
+}
+
+.profile-navbar__right > button:first-child {
+    background-color: #f50;
+    border: 1px solid #999;
+    border-radius: 4px;
+    color: white;
+}
+
+.profile-navbar__right > button:nth-child(n+2):nth-child(-n+4) {
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
 }
 
 .profile-navbar__item-active {
@@ -236,6 +257,13 @@ hr {
     background-color: #999;
     height: 1px;
     margin-top: 5px;
+}
+
+.divider2 {
+    background-color: #999;
+    height: 100%;
+    width: 1px;
+    margin-bottom: 15px;
 }
 
 #user-comment__container2 {

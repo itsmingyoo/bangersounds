@@ -2,14 +2,14 @@
     display: flex;
     width: 100%;
     /* overflow: hidden; */
-    max-height: 150px;
+    max-height: 170px;
     margin-bottom: 20px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .song-display-pfp > img {
-    height: 150px;
-    width: 150px;
+    height: 170px;
+    width: 170px;
 }
 
 .song-display__each-song {
@@ -17,9 +17,14 @@
     width: fit-content;
 }
 
+.song-display-waveform {
+    max-height: 75px;
+}
+
 .song-display-waveform > img {
     width: 98%;
-    height: 75px;
+    /* height: 75px; */
+    height: 100%;
     margin-left: 10px;
 }
 
@@ -73,4 +78,20 @@
 
 #song-display-btns {
     display: flex;
+    gap: 3px;
+}
+
+#song-display-btns > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+#song-display-btns > div > button {
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
 }
