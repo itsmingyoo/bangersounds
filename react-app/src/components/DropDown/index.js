@@ -61,7 +61,7 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
           </div>
         ))} */}
       </button>
-      <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
+      <div className={`${ulClassName} dropdown-list2`} ref={ulRef}>
         <ul className="dropdown-nav">
           {list?.map((item) => (
             <li key={item.name}>
