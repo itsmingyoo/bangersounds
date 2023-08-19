@@ -1,0 +1,38 @@
+.login-container {
+    border: 1px solid black;
+    padding: 50px;
+    background: #717070;
+}
+
+.login-modal {
+    display: flex;
+    flex-direction: column;
+    /** top right bottom left : CLOCKWISE */
+    padding: 10px 30px 30px 30px;
+
+}
+
+.login-div {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.login-modal > input {
+    margin-bottom: 10px;;
+}
+
+.show-pw-label {
+    margin-bottom: 10px;
+}
+
+#demo-user {
+    width: 100%;
+    cursor: pointer;
+    height: 45px;
+    border-radius: 20px;
+    background-color: #f50;
+    color: white;
+    border: 0cm;
+}

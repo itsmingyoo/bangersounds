@@ -22,15 +22,11 @@ const PlayContent = ({ song, isPlayingState, currentlyPlaying, togglePlayPause }
 
         <div id="song-details__content">
           <div id="song-details__title-container">
-            <h1 className="song-details__title">
-              <span>{song.title}</span>
-            </h1>
+            <div className="song-details__title song-display-title">{song.title}</div>
           </div>
 
           <div id="song-details__display-name">
-            <h2 className="song-details__display-name">
-              <span>{song.artistInfo.displayName}</span>
-            </h2>
+            <div className="song-details__display-name">{song.artistInfo.displayName}</div>
           </div>
         </div>
       </div>

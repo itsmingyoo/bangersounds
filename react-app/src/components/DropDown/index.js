@@ -40,7 +40,8 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
 
   return (
     <div className="dropdown">
-      <button onClick={openMenu} style={{ backgroundColor: showMenu ? "black" : "" }}>
+      {/* <button onClick={openMenu} style={{ backgroundColor: showMenu ? "black" : "" }}> */}
+      <button onClick={openMenu} style={{ height: "100%", width: "100%" }}>
         <IoEllipsisHorizontalSharp />
         More
         {iconClassName ? (
@@ -60,11 +61,13 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
           </div>
         ))} */}
       </button>
-      <div className={`${ulClassName} dropdown-list`} ref={ulRef}>
+      <div className={`${ulClassName} dropdown-list2`} ref={ulRef}>
         <ul className="dropdown-nav">
           {list?.map((item) => (
             <li key={item.name}>
-              <NavLink to={item.to}>{item.name}</NavLink>
+              <NavLink to={item.to} onClick={() => alert("Feature coming soon!")}>
+                {item.name}
+              </NavLink>
             </li>
           ))}
           {/* insert MODAL here */}

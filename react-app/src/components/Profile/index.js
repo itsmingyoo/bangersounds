@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import ProfileNavBar from "./ProfileNavBar";
-import Profile from "./Profile";
+import ProfileHeader from "./ProfileHeader";
 import Likes from "./Likes";
 import LatestComments from "./LatestComments";
+import NavBarContent from "./NavBarContent";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
+import "./Profile.css";
 
 const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
+  const dispatch = useDispatch();
+  const [active, setActive] = useState(0);
   // All user info
   const user = userRef.current;
   const userSongs = songs.filter((s) => s.artistId === user.id);
@@ -12,19 +18,58 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   // filter userLikes
   // filter userReposts
 
+  // FN
+  const togglePlayPause = async (song) => {
+    dispatch(playUserSongAction(song));
+    if (currentlyPlaying) {
+      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      else dispatch(setPlayingState(true));
+    }
+  };
+
   return (
-    <div>
-      {/* just requires user information to perform an update on their displayname/fn/ln/location/bio */}
-      <Profile {...{ user }} />
+    <div className="profile-container-main">
+      <div className="profile-container">
+        <ProfileHeader {...{ user }} />
+        <ProfileNavBar
+          {...{
+            user,
+            userSongs,
+            isPlayingState,
+            currentlyPlaying,
+            comments,
+            songs,
+            active,
+            setActive,
+            togglePlayPause,
+          }}
+        />
+        <div id="profile-content-wrapper">
+          <div className="profile-content-container">
+            {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
 
-      {/* Renders Components: All, Popular Songs, userSongs, albums, playlists, reposts: Some of these components like in All will have a 'SongDisplay' component to play the displayed song  */}
-      <ProfileNavBar {...{ user, userSongs, isPlayingState, currentlyPlaying }} />
-
-      {/* Like/Reposts not yet implemented */}
-      <Likes />
-
-      {/* Only need userComments, then need to order them by most recent */}
-      <LatestComments {...{ user, userComments }} />
+            <NavBarContent
+              {...{
+                user,
+                userSongs,
+                isPlayingState,
+                currentlyPlaying,
+                comments,
+                songs,
+                active,
+                setActive,
+                togglePlayPause,
+              }}
+            />
+          </div>
+          <div id="profile-info__container">
+            {/* Like/Reposts not yet implemented */}
+            <Likes />
+            {/* Only need userComments, then need to order them by most recent */}
+            <LatestComments {...{ user, userComments }} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

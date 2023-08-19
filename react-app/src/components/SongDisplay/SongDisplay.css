@@ -1,0 +1,76 @@
+#song-display-container {
+    display: flex;
+    width: 100%;
+    /* overflow: hidden; */
+    max-height: 150px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.song-display-pfp > img {
+    height: 150px;
+    width: 150px;
+}
+
+.song-display__each-song {
+    max-height: 100px;
+    width: fit-content;
+}
+
+.song-display-waveform > img {
+    width: 98%;
+    height: 75px;
+    margin-left: 10px;
+}
+
+
+#song-display__button-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.song-display__display-name {
+    color: #999;
+    font-size: 12px;;
+    margin-bottom: 3px;
+}
+
+.song-display__title {
+    font-size: 14px;
+}
+
+#song-display__content {
+    margin-left: 5px;
+}
+
+#song-display__button-wrapper {
+    display: flex;
+    margin-left: 10px;
+}
+
+.song-display__play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+.song-display__play-icon {
+    font-size: 20px;
+}
+
+#song-display-navbar {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.dropdown > button {
+    max-width: 150px;
+}
+
+#song-display-btns {
+    display: flex;
+}

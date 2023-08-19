@@ -6,6 +6,7 @@ const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
+const SET_PREV_SONG_ACTION = "songs/SET_PREV_SONG_ACTION";
 // ACTIONS FOR COMMENTS
 const GET_ALL_COMMENTS_ACTION = "comments/GET_ALL_COMMENTS_ACTION";
 const GET_USER_COMMENTS_ACTION = "comments/GET_USER_COMMENTS_ACTION";
@@ -61,6 +62,13 @@ export const setPlayingState = (boolean) => {
   return {
     type: IS_PLAYING_BOOLEAN_ACTION,
     boolean,
+  };
+};
+
+export const setPrevSongAction = (song) => {
+  return {
+    type: SET_PREV_SONG_ACTION,
+    song,
   };
 };
 
@@ -145,7 +153,7 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
 };
 
 export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatch) => {
-  console.log("thunk", updatedSongFormData);
+  // console.log("thunk", updatedSongFormData);
   let updatedSong = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
     // headers: {
@@ -262,6 +270,30 @@ let initialState = {
   Songs: {},
   SongDetails: {},
   UserSongs: {},
+  PreviousSong: {
+    artistId: 1,
+    artistInfo: {
+      displayName: "Enter your display name here",
+      email: "demo@aa.io",
+      firstName: "Demo",
+      id: 1,
+      lastName: "FiftyNine",
+      profileBio: "This is a demo account for demo users",
+      profileCity: "",
+      profileCountry: "",
+      profileImage: "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
+      username: "Demo",
+    },
+    caption: "Bangers All Around",
+    description: "Default Description From BangerSounds",
+    genre: "Dance & EDM",
+    id: 1,
+    private: false,
+    songURL:
+      "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
+    title: "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
+    thumbnail: "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
+  },
   CurrentlyPlaying: {
     artistId: 1,
     artistInfo: {
@@ -322,6 +354,13 @@ export default function reducer(state = initialState, action) {
       newState = { ...state };
       newState.CurrentlyPlaying = {};
       newState.CurrentlyPlaying = { ...action.song };
+      return newState;
+    }
+    case SET_PREV_SONG_ACTION: {
+      newState = { ...state };
+
+      newState.PreviousSong = { ...action.song };
+
       return newState;
     }
     case IS_PLAYING_BOOLEAN_ACTION: {
