@@ -28,6 +28,16 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemoSubmit = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login("demo@aa.io", "password"));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
+    }
+  };
+
   const handleSubmit2 = async (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -96,6 +106,11 @@ function LoginFormModal() {
           Show Password
         </label>
         <button type="submit">Log In</button>
+      </form>
+      <form onSubmit={handleDemoSubmit}>
+        <button id="Demo-user" type="submit">
+          DemoUser
+        </button>
       </form>
     </div>
   );

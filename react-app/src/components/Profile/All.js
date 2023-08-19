@@ -1,11 +1,13 @@
 import React from "react";
 import SongDisplay from "../SongDisplay";
 
-const All = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
+const All = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }) => {
   return (
     <div>
+      THIS IS ALL THE STUFFFFFFFFF
+      <div>-------------------------------</div>
       {/* This will be mapped */}
-      <SongDisplay {...{ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+      <SongDisplay {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
     </div>
   );
 };

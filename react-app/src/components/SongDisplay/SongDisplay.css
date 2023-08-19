@@ -1,0 +1,19 @@
+#song-display-container {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.song-display-pfp > img {
+    height: 100px;
+    width: 100px;
+}
+
+.song-display__each-song {
+    max-height: 100px;
+    width: fit-content;
+}
+
+.song-display-waveform > img {
+    width: 100%;
+}

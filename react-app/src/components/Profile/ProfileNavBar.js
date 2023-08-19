@@ -37,8 +37,8 @@ const ProfileNavBar = ({ user, userSongs, isPlayingState, currentlyPlaying }) =>
       </div>
       <div className="navbar-content-box">
         IF CONDITIONALS TO RENDER IF USER SELECTS ON OF THE NAV BUTTONS...
-        <Reposts {...{ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
-        <All {...{ userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+        <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+        <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
       </div>
     </div>
   );
