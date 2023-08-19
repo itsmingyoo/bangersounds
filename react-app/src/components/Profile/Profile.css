@@ -35,7 +35,9 @@
 
 #profile-info__container {
     display: flex;
-    width: 20%;
+    flex-direction: column;
+    margin-left: 30px;
+    padding: 50px;
 }
 
 #profile-right-content {

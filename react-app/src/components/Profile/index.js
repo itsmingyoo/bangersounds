@@ -63,12 +63,10 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
             />
           </div>
           <div id="profile-info__container">
-            <div id="profile-right-content">
-              {/* Like/Reposts not yet implemented */}
-              <Likes />
-              {/* Only need userComments, then need to order them by most recent */}
-              <LatestComments {...{ user, userComments }} />
-            </div>
+            {/* Like/Reposts not yet implemented */}
+            <Likes />
+            {/* Only need userComments, then need to order them by most recent */}
+            <LatestComments {...{ user, userComments }} />
           </div>
         </div>
       </div>
