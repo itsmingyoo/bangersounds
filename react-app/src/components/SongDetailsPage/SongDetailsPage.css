@@ -29,6 +29,7 @@
     flex-direction: column;
     padding: 0 25px;
     height: 100vh;
+    height: 100%;
 }
 
 #song-details__content {
