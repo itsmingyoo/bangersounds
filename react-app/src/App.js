@@ -92,7 +92,7 @@ function App() {
           </Route>
 
           <Route exact path="/songs/:songId">
-            <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
           </Route>
           <Route exact path="/">
             <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />

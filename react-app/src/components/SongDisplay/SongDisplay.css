@@ -85,6 +85,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 3px;
     background-color: white;
     border: 1px solid #999;
     border-radius: 4px;
