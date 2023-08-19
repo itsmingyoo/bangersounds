@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { thunkDeleteComment } from "../../store/songs";
+import { FaComment } from "react-icons/fa";
 
 const LatestComments = ({ user, userComments }) => {
   const dispatch = useDispatch();
@@ -42,15 +43,18 @@ const LatestComments = ({ user, userComments }) => {
   };
 
   return (
-    <div>
-      <div>
-        <div>(comment icon) Latest Comments</div>
+    <div className="latest-comments__main-container">
+      <div className="latest-comments-top">
+        <div>
+          <FaComment /> Latest Comments
+        </div>
         <div>
           <NavLink to="/profile/comments" style={{ cursor: "pointer" }}>
             View All
           </NavLink>
         </div>
       </div>
+      <div className="divider"></div>
       <div>
         {userComments
           ?.reverse()
@@ -77,7 +81,7 @@ const LatestComments = ({ user, userComments }) => {
             }
             return (
               <div
-                id="user-comment__container"
+                id="user-comment__container2"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
               >
@@ -87,16 +91,14 @@ const LatestComments = ({ user, userComments }) => {
                   </div>
                   <div className="user-comment">{c.comment}</div>
                 </div>
-                <div id="user-time-delete">
-                  <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
-                    {timeAgoString}
-                  </div>
+                <div id="user-time-delete" className="user-time-delete">
+                  <div className={`user-comment__date ${hoveredStates[index] ? "hidden" : ""}`}>{timeAgoString}</div>
                   {user && c.userId === user.id && hoveredStates[index] && (
                     <button
                       onClick={() => handleDelete(c)}
-                      className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}
+                      className={`user-delete user-delete2 ${hoveredStates[index] ? "display-comment-date" : ""}`}
                     >
-                      Delete
+                      <i class="fa-solid fas fa-trash" style={{ color: "#000000" }}></i>
                     </button>
                   )}
                 </div>
@@ -104,8 +106,6 @@ const LatestComments = ({ user, userComments }) => {
             );
           })}
       </div>
-      <div>on (song.name) "user's comment"</div>
-      <div>time ago</div>
     </div>
   );
 };

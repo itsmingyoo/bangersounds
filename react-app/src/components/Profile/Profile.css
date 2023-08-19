@@ -215,3 +215,53 @@ Left padding: The value of --spacing-4x. */
     flex-direction: column;
     align-items: center;
 }
+
+/** LATEST COMMENTS  */
+.latest-comments-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.latest-comments-top > div, .latest-comments-top > div > a {
+    color: #999;
+    text-decoration: none;
+}
+
+hr {
+    border-color: #999;
+    height: 1px;
+}
+
+.divider {
+    background-color: #999;
+    height: 1px;
+    margin-top: 5px;
+}
+
+#user-comment__container2 {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 15px;
+    margin-top: 15px;
+    gap: 50px;
+}
+
+.user-delete2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px; height: 25px;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.user-time-delete {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+#user-comment__container2 > * {
+    color: #999
+}
