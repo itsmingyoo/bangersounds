@@ -81,9 +81,9 @@ function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, com
             </div>
           </div>
 
-          <div id="song-details__side-bar">
+          {/* <div id="song-details__side-bar">
             INSERT REUSABLE CONTENT HERE FOR BLOCK OF 'RELATED TRACKS', 'SUGGESTIONS'
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

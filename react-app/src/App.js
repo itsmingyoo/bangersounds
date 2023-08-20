@@ -15,11 +15,16 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
+  // const [path, setPath] = useState(window.location.pathname);
+  // console.log("path state", path);
+  // useEffect(() => {
+  //   console.log("UE - path state", path);
+  // });
   //* useSelector is unreliable with finding the updated state after an async function (i.e. the dispatches in the useEffect)
   //* Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
   const user = useSelector((s) => s.session.user);
@@ -60,11 +65,13 @@ function App() {
   // Fix render issues
   if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
   if (isLoaded === false) return null;
+  // console.log("isLoaded", isLoaded);
+  // console.log("window path", window.location.pathname);
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />} */}
+      {/* {isLoaded && path !== "/" && <Navigation isLoaded={isLoaded} />} */}
       {isLoaded && (
         <>
           <Switch>
@@ -111,9 +118,9 @@ function App() {
         </>
       )}
       <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      {/* {isLoaded && window.location.pathname !== "/" && (
+      {/* <div className={isLoaded && path !== "/" ? "" : "hide-audio-player"}>
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      )} */}
+      </div> */}
     </>
   );
 }

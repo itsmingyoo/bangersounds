@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import SplashCarousel from "../SlickCarousel";
 import bangerSoundsLogo from "../../images/bangersounds-logo-new.ico";
 import ImageContainer from "../LandingPage/ImageContainer";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
+import OpenModalButton from "../OpenModalButton";
+import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../LoginFormModal";
 import { FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,7 +17,8 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
   // import login/create acc stuff here
 
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
 
@@ -27,8 +31,10 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
   const displayTopTransition = () => {
     window.scrollTo(0, 0);
   };
+
+  const closeMenu = () => setShowMenu(false);
   return (
-    <div className="splash-wrapper" style={{ width: "100%" }}>
+    <div className="splash-wrapper" style={{ width: "100%", marginBottom: "50px" }}>
       <div className="splash-container" style={{ width: "65%" }}>
         <SplashCarousel />
         <div className="splash-header">
@@ -37,8 +43,14 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
               <img src={bangerSoundsLogo} alt="logo" />
 
               <div className="splash-navbar-right-buttons">
-                <button>Sign In</button>
-                <button>Create account</button>
+                {/* <button>Sign In</button>
+                <button>Create account</button> */}
+                <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
+                <OpenModalButton
+                  buttonText="Create account"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
                 <div>For Artists</div>
               </div>
             </div>
@@ -61,11 +73,11 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
               </button>
             </div>
             <div>or</div>
-            <button>Upload your own</button>
+            <button onClick={() => history.push("/upload")}>Upload your own</button>
           </div>
 
           <div className="splash-trending-songs">
-            <NavLink to="/discover">Discover</NavLink>
+            {/* <NavLink to="/discover">Discover</NavLink> */}
             <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
               {songs &&
@@ -124,7 +136,9 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
                   Get on BangerSounds to connect with fans, share your sounds, and grow your audience. What are you
                   waiting for?
                 </div>
-                <button className="splash-footer-bot-button">Find out more</button>
+                <button className="splash-footer-bot-button" onClick={() => alert("Feature coming soon!")}>
+                  Find out more
+                </button>
               </div>
               <div style={{ width: "50%" }}></div>
             </div>
@@ -135,10 +149,13 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
             <div className="splash-footer-bot-text4">
               Save tracks, follow artists and build playlists. All for free.
             </div>
-            <button>Create account</button>
+            {/* <button>Create account</button> */}
+
+            <OpenModalButton buttonText="Create account" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
             <div className="already-have-an-account">
               <label>Already have an account?</label>
-              <button>Sign In</button>
+              {/* <button>Sign In</button> */}
+              <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
             </div>
           </div>
 
