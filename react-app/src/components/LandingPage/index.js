@@ -18,6 +18,7 @@ function LandingPage({ songs, isPlayingState, currentlyPlaying }) {
       else dispatch(setPlayingState(true));
     }
   };
+
   const displayTopTransition = () => {
     window.scrollTo(0, 0);
   };
