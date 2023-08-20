@@ -131,17 +131,19 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
           </div>
 
           <div className="footer-footer">
-            <div>Thanks for listening. Now join in.</div>
-            <div>Save tracks, follow artists and build playlists. All for free.</div>
+            <div className="splash-footer-bot-text3">Thanks for listening. Now join in.</div>
+            <div className="splash-footer-bot-text4">
+              Save tracks, follow artists and build playlists. All for free.
+            </div>
             <button>Create account</button>
-            <div>
-              <label>
-                Already have an account?
-                <button>Sign In</button>
-              </label>
+            <div className="already-have-an-account">
+              <label>Already have an account?</label>
+              <button>Sign In</button>
             </div>
           </div>
+
           <hr></hr>
+
           <div className="footer-footer-footer">
             Directory - About us - Artist Resources - Blog - Jobs - Developers - Help - Legal - Do Not Sell or Share My
             Personal Information - Privacy - Cookie Policy - Cookie Manager - Imprint - Charts Language: English (US)
