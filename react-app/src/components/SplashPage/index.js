@@ -1,34 +1,51 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SplashCarousel from "../SlickCarousel";
+import bangerSoundsLogo from "../../images/bangersounds-logo-new.ico";
+import { FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./SplashPage.css";
 
 const Splash = ({ songs }) => {
+  // import login/create acc stuff here
   return (
     <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
         <SplashCarousel />
-        <div className="splash-content">
-          Content
-          <div className="splash-header">
-            Header
-            <div className="splash-header-content">
-              <div className="splash-navbar">
-                <div>SoundBangersLogo</div>
+        <div className="splash-header">
+          <div className="splash-header-content">
+            <div className="splash-navbar">
+              <img src={bangerSoundsLogo} alt="logo" />
 
-                <div className="splash-navbar-right-buttons">
-                  <button>Sign In</button>
-                  <button>Create account</button>
-                  <div>For Artists</div>
-                </div>
+              <div className="splash-navbar-right-buttons">
+                <button>Sign In</button>
+                <button>Create account</button>
+                <div>For Artists</div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="splash-content">
           <div className="splash-search">
-            <input type="type" placeholder="Search for artists, bands, songs, podcasts" />
+            <div
+              style={{
+                position: "relative",
+                width: "50%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <input type="type" placeholder="Search for artists, bands, songs, podcasts" />
+              <button className="splash-search-button">
+                <FaSearch />
+              </button>
+            </div>
+            <div>or</div>
+            <button>Upload your own</button>
           </div>
+
           <div className="splash-trending-songs">
             <div>H1 = Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
