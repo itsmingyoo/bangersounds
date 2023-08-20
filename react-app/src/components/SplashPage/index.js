@@ -1,14 +1,32 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SplashCarousel from "../SlickCarousel";
 import bangerSoundsLogo from "../../images/bangersounds-logo-new.ico";
+import ImageContainer from "../LandingPage/ImageContainer";
+import { playUserSongAction, setPlayingState } from "../../store/songs";
 import { FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./SplashPage.css";
 
-const Splash = ({ songs }) => {
+const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
   // import login/create acc stuff here
+
+  const dispatch = useDispatch();
+
+  const togglePlayPause = async (song) => {
+    dispatch(playUserSongAction(song));
+
+    if (currentlyPlaying) {
+      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      else dispatch(setPlayingState(true));
+    }
+  };
+
+  const displayTopTransition = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
@@ -47,16 +65,29 @@ const Splash = ({ songs }) => {
           </div>
 
           <div className="splash-trending-songs">
-            <div>H1 = Hear what’s trending for free in the SoundCloud community </div>
+            <NavLink to="/discover">Discover</NavLink>
+            <div>Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
-              <NavLink to="/discover">Discover</NavLink>
-              <div>Song</div>
-              <div>Song</div>
-              <div>Song</div>
-              <div>Song</div>
-              <div>Song</div>
-              <div>Song</div>
-              <div>Song</div>
+              {songs &&
+                songs.slice(0, 12).map((s) => (
+                  <div
+                    key={s.id}
+                    id="recently-played__each-song-container"
+                    style={{ flexBasis: "10%", width: "10%", padding: "20px" }}
+                  >
+                    <ImageContainer
+                      {...{ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }}
+                    />
+                    <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
+                      <div style={{ whiteSpace: "nowrap", overflow: "hidden" }} title={s.title}>
+                        {s.title}
+                      </div>
+                    </NavLink>
+                    <div style={{ wordBreak: "break-all", overflow: "hidden", color: "#999" }}>
+                      {s.artistInfo.displayName}
+                    </div>
+                  </div>
+                ))}
             </div>
             <button onClick={() => alert("Feature coming soon!")}>Explore trending playlists</button>
           </div>

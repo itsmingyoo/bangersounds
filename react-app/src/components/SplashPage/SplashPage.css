@@ -134,6 +134,7 @@
     align-items: center;
     gap: 20px;
     width: 100%;
+    margin-top: 30px;
 }
 
 .splash-search > div > input {
@@ -171,11 +172,27 @@
     display: flex;
     flex-direction: column;
     margin: 40px;
+    align-items: center;
+}
+
+.splash-trending-songs > button {
+    height: 45px;
+    background-color: #f50;
+    border: transparent;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    width: fit-content;
 }
 
 .splash-songs {
     display: flex;
     flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-evenly;
+    overflow: hidden;
+    /* row-gap: 120px; */
+    height: 540px;
 }
 
 .splash-songs > div {
