@@ -5,17 +5,21 @@ const Splash = () => {
   return (
     <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
-        <div>
+        <div className="splash-content">
           Content
           <div className="splash-header">
             Header
-            <div>
+            <div className="splash-header-content">
               <div className="splash-navbar">
-                HeaderNav
-                <button>Sign In</button>
-                <button>Create account</button>
-                <div>For Artists</div>
+                <div>SoundBangersLogo</div>
+
+                <div className="splash-navbar-right-buttons">
+                  <button>Sign In</button>
+                  <button>Create account</button>
+                  <div>For Artists</div>
+                </div>
               </div>
+
               {/* Carousel 1 */}
               <div className="splash-header-mid">
                 <div>H1 = Discover more with BangerSounds Go+</div>
@@ -24,6 +28,7 @@ const Splash = () => {
                 </div>
                 <button>Start uploading today</button>
               </div>
+
               {/* Carousel 2 */}
               <div className="splash-header-mid">
                 <div>H1 = Whats next in music is first on BangerSounds</div>
@@ -35,14 +40,18 @@ const Splash = () => {
               </div>
             </div>
           </div>
-          <div className="splash-search">Search Bar</div>
+          <div className="splash-search">
+            <input type="type" placeholder="Search for artists, bands, songs, podcasts" />
+          </div>
           <div className="splash-trending-songs">
             <div>H1 = Hear what’s trending for free in the SoundCloud community </div>
-            <div>Song</div>
-            <div>Song</div>
-            <div>Song</div>
-            <div>Song</div>
-            <div>Song</div>
+            <div className="splash-songs">
+              <div>Song</div>
+              <div>Song</div>
+              <div>Song</div>
+              <div>Song</div>
+              <div>Song</div>
+            </div>
             <button onClick={() => alert("Feature coming soon!")}>Explore trending playlists</button>
           </div>
           <div className="splash-footer-top">

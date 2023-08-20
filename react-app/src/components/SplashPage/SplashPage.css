@@ -1,0 +1,69 @@
+.splash-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.splash-container {
+    background-color: white;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.splash-navbar-right-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.splash-header-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.splash-search {
+    text-align: center;
+    width: 100%;
+}
+
+.splash-search > input {
+    width: 100%;
+}
+
+.splash-trending-songs {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+}
+
+.splash-songs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.splash-songs > div {
+    flex-basis: 25%;
+    height: 100px;
+}

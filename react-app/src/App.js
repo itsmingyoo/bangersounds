@@ -13,6 +13,7 @@ import AudioPlayer from "./components/AudioPlayer";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
+import Splash from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,10 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />
+          </Route>
+
+          <Route exact path="/splash">
+            <Splash {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
           </Route>
 
           <Route exact path="/upload">
