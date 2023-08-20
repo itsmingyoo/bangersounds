@@ -22,6 +22,7 @@ const SplashCarousel = () => {
     slidesToScroll: 1,
     initialSlide: 0,
   };
+
   return (
     <>
       <Slider className="slider" {...settings}>
