@@ -50,7 +50,10 @@ function PostNewSong() {
     if (thumbnail.length > 255) errObj.thumbnail = "Thumbnail can be up to 255 characters";
 
     // If errors, STOP HERE (with return) => Set errors state
-    if (Object.values(errObj).length > 0) return setErrors(errObj);
+    if (Object.values(errObj).length > 0) {
+      setSubmittedForm(false);
+      return setErrors(errObj);
+    }
 
     // FORMDATA APPEND VALIDATED DATA BEFORE SENDING IT OFF
     // AWS Form data - APPEND TAKES TWO ARGS ("KEY IN QUOTES", VALUE)
@@ -71,6 +74,7 @@ function PostNewSong() {
     if (!res.errors) {
       setSongLoading(true);
       // await dispatch(thunkGetSongById(res.id)); // remove this unless you have rendering issues after creating a new song
+      setSubmittedForm(false);
       history.push(`/songs/${res.id}`);
     }
   };
@@ -275,7 +279,9 @@ function PostNewSong() {
               <button className="white-btn-black-txt" onClick={(e) => history.push("/")}>
                 Cancel
               </button>
-              <button className="orange-btn-white-txt">Save</button>
+              <button className={submittedForm ? "disabled-button" : "orange-btn-white-txt"} disabled={submittedForm}>
+                Save
+              </button>
               {songLoading && <p>Loading . . .</p>}
             </div>
           </form>

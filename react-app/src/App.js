@@ -20,7 +20,11 @@ import "./index.css";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const [path, setPath] = useState(window.location.pathname);
+  console.log("path state", path);
+  useEffect(() => {
+    console.log("UE - path state", path);
+  });
   //* useSelector is unreliable with finding the updated state after an async function (i.e. the dispatches in the useEffect)
   //* Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
   const user = useSelector((s) => s.session.user);
@@ -66,8 +70,8 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {/* {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />} */}
+      {/* <Navigation isLoaded={isLoaded} /> */}
+      {isLoaded && path !== "/" && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <>
           <Switch>
@@ -113,10 +117,10 @@ function App() {
           </Switch>
         </>
       )}
-      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      {/* {isLoaded && window.location.pathname !== "/" && (
+      {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
+      <div className={isLoaded && path !== "/" ? "" : "hide-audio-player"}>
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      )} */}
+      </div>
     </>
   );
 }

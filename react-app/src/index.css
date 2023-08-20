@@ -47,7 +47,7 @@ a {
     text-decoration: none;
 }
 
-#hide-audio-player {
+.hide-audio-player {
     display: none;
     z-index: -1;
 }

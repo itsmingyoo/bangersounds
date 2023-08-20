@@ -87,3 +87,8 @@
     color: black;
     border: none;
 }
+
+.disabled-button {
+    background-color: gray;
+    color: white;
+}
