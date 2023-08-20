@@ -1,10 +1,14 @@
 import React from "react";
+import SongDisplay from "../SongDisplay";
+import SplashCarousel from "../SlickCarousel";
 import "./SplashPage.css";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-const Splash = () => {
+const Splash = ({ songs }) => {
   return (
     <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
+        <SplashCarousel />
         <div className="splash-content">
           Content
           <div className="splash-header">
@@ -19,25 +23,6 @@ const Splash = () => {
                   <div>For Artists</div>
                 </div>
               </div>
-
-              {/* Carousel 1 */}
-              <div className="splash-header-mid">
-                <div>H1 = Discover more with BangerSounds Go+</div>
-                <div>
-                  P = SoundCloud Go+ lets you listen offline, ad-free, with over 320 million tracks — and growing.
-                </div>
-                <button>Start uploading today</button>
-              </div>
-
-              {/* Carousel 2 */}
-              <div className="splash-header-mid">
-                <div>H1 = Whats next in music is first on BangerSounds</div>
-                <div>
-                  P = Upload your first track and begin your journey. SoundCloud gives you space to create, find your
-                  fans, and connect with other artists.
-                </div>
-                <button>Start uploading today</button>
-              </div>
             </div>
           </div>
           <div className="splash-search">
@@ -46,6 +31,9 @@ const Splash = () => {
           <div className="splash-trending-songs">
             <div>H1 = Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
+              <NavLink to="/discover">Discover</NavLink>
+              <div>Song</div>
+              <div>Song</div>
               <div>Song</div>
               <div>Song</div>
               <div>Song</div>
@@ -77,6 +65,7 @@ const Splash = () => {
               </label>
             </div>
           </div>
+          <hr></hr>
           <div className="footer-footer-footer">
             Directory - About us - Artist Resources - Blog - Jobs - Developers - Help - Legal - Do Not Sell or Share My
             Personal Information - Privacy - Cookie Policy - Cookie Manager - Imprint - Charts Language: English (US)

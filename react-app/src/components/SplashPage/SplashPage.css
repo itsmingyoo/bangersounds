@@ -36,12 +36,12 @@
     gap: 5px;
 }
 
-.splash-header-mid {
+/* .splash-header-mid {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-}
+} */
 
 .splash-search {
     text-align: center;
