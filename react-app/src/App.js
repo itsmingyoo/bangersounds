@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +61,8 @@ function App() {
   // Fix render issues
   if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
   if (isLoaded === false) return null;
+  console.log("isLoaded", isLoaded);
+  console.log("window path", window.location.pathname);
 
   return (
     <>
@@ -111,9 +114,13 @@ function App() {
         </>
       )}
       {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
-      {isLoaded && window.location.pathname !== "/" && (
+      {/* {isLoaded && window.location.pathname !== "/" && (
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      )}
+      )} */}
+      <AudioPlayer
+        id={window.location.pathname === "/" ? "hide-audio-player" : ""}
+        {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }}
+      />
     </>
   );
 }
