@@ -13,6 +13,8 @@ import AudioPlayer from "./components/AudioPlayer";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
+import Splash from "./components/SplashPage";
+import SplashCarousel from "./components/SlickCarousel";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,47 +64,56 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* <div id="inner-root">
-        <div id="inner-root-wrapper"> */}
+      {/* {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />} */}
       {isLoaded && (
-        <Switch>
-          <Route exact path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
+        <>
+          <Switch>
+            <Route exact path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route exact path="/signup">
+              <SignupFormPage />
+            </Route>
 
-          <Route exact path="/upload">
-            <ProtectedRoute>
-              <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-            </ProtectedRoute>
-          </Route>
+            <Route exact path="/splash">
+              <SplashCarousel />
+            </Route>
 
-          <Route exact path="/profile">
-            <ProtectedRoute>
-              <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-            </ProtectedRoute>
-          </Route>
+            <Route exact path="/upload">
+              <ProtectedRoute>
+                <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              </ProtectedRoute>
+            </Route>
 
-          <Route exact path="/profile/comments">
-            <ProtectedRoute>
-              <AllUserComments {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-            </ProtectedRoute>
-          </Route>
+            <Route exact path="/profile">
+              <ProtectedRoute>
+                <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              </ProtectedRoute>
+            </Route>
 
-          <Route exact path="/songs/:songId">
-            <SongDetailsPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-          </Route>
-          <Route exact path="/">
-            <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-          </Route>
-        </Switch>
+            <Route exact path="/profile/comments">
+              <ProtectedRoute>
+                <AllUserComments {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              </ProtectedRoute>
+            </Route>
+
+            <Route exact path="/songs/:songId">
+              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            </Route>
+            <Route exact path="/discover">
+              <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            </Route>
+
+            <Route exact path="/">
+              <Splash {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            </Route>
+          </Switch>
+        </>
       )}
-      {/* </div>
-      </div> */}
-
       <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
+      {/* {isLoaded && window.location.pathname !== "/" && (
+        <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
+      )} */}
     </>
   );
 }

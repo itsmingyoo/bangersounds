@@ -1,0 +1,332 @@
+.splash-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.splash-container {
+    background-color: white;
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/** HEADER NAV BAR*/
+.splash-header {
+    position: absolute;
+    top: 0;
+    width: 65%;
+    margin-top: 15px;
+}
+
+.splash-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.splash-navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.splash-navbar-right-buttons {
+    display: flex;
+    gap: 5px;
+}
+.splash-navbar-right-buttons button:first-child {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+.splash-navbar-right-buttons button {
+    background-color: #f50;
+    border: transparent;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+.splash-navbar-right-buttons > div {
+    color: white;
+}
+
+/** END OF NAVBAR */
+
+/*! START OF CAROUSEL  */
+.splash-header-mid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.splash-header-mid img {
+    width: 100%;
+    height: 365px;
+}
+
+.splash-header-mid > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 80%; /* Adjust as needed */
+    margin-bottom: 20px; /* Add margin to create spacing between stacked divs */
+}
+
+.splash-header-mid > div > div > button {
+    background-color: #f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.content-slide > button {
+    background-color: #f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.content-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content-slide-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.item-1 {
+    border-top: 3px solid #f50;
+}
+
+.slick-dots {
+    top: 85%;
+    right: 0%;
+}
+
+.slick-dots > li > button {
+    border-radius: 50%;
+    /* border: 1px solid white; */
+    background-color: white;
+}
+
+.slick-dots li.slick-active button:before {
+    color: white;
+    content: '';
+}
+
+/*! END OF CAROUSEL */
+
+.splash-search {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.splash-search > div > input {
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: #f2f2f2;
+    padding: 0 5px;
+}
+
+.splash-search-button {
+    position: absolute;
+    text-align: center;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+.splash-search > button {
+    height: 45px;
+    background-color: #f50;
+    border: transparent;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+/*! END OF SEARCH BAR  */
+
+.splash-trending-songs {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    align-items: center;
+}
+
+.splash-trending-songs > button {
+    height: 45px;
+    background-color: #f50;
+    border: transparent;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    width: fit-content;
+    padding: 15px;
+}
+
+.splash-songs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-evenly;
+    overflow: hidden;
+    /* row-gap: 120px; */
+    height: 540px;
+}
+
+.splash-songs > div {
+    flex-basis: 25%;
+    height: 100px;
+}
+
+.splash-footer-top {
+    display: flex;
+}
+
+.splash-footer-top-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.splash-footer-top-right-buttons > button {
+    background-color: none;
+    background: none;
+    border: none;
+}
+
+.splash-footer-bot {
+    width: 100%;
+}
+
+.splash-footer-bot > img {
+    width: 100%;
+}
+
+.splash-footer-bot-button {
+    background-color: transparent;
+    background: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: white;
+    font-size: 24px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.splash-footer-bot-image {
+    background-image: url("https://a-v2.sndcdn.com/assets/images/hp_creator_image_featured_artists-798050ae.jpg");
+    width: 100%;
+    height: 450px;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+.splash-footer-bot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: space-between;
+    gap: 20px;
+    padding: 100px;
+}
+
+.splash-footer-bot-text1 {
+    font-size: 36px;
+}
+
+.splash-footer-bot-text2 {
+    font-size: 24px;
+}
+
+.footer-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 70px 0;
+}
+
+.footer-footer > button {
+    height: 45px;
+    background-color: #f50;
+    border: transparent;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 0 15px;
+    width: fit-content;
+    padding: 0 50px;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.already-have-an-account > button {
+    border: 1px solid #f2f2f2;
+    background-color: white;
+    border-radius: 4px;
+    color: black;
+    margin-left: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 3px 7px;
+}
+
+.splash-footer-bot-text3 {
+    font-size: 32px;
+    font-weight: 100;
+}
+.splash-footer-bot-text4 {
+    font-size: 24px;
+}
+
+.footer-line {
+    display: flex;
+}
+
+.horizontal-line {
+    height: 1px;
+    width: 100%;
+    background-color: #999;
+    margin-bottom: 20px;
+}
+
+.footer-footer-footer {
+    margin: 10px 20px;
+}

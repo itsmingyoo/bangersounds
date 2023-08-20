@@ -12,7 +12,7 @@ import CommentBox from "./Comments";
 import { thunkGetSongComments } from "../../store/songs";
 import "./SongDetailsPage.css";
 
-function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) {
+function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, comments }) {
   // console.log(songs, isPlayingState, currentlyPlaying, comments);
   let { songId } = useParams();
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ function SongDetailsPage({ songs, isPlayingState, currentlyPlaying, comments }) 
         <div id="song-details__bot-wrapper">
           <div id="song-details__bot-container">
             <div id="song-details__song-stats-container">
-              <ProfilePicture {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+              <ProfilePicture {...{ user, song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
               <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
             </div>
             <SongStats

@@ -18,8 +18,9 @@
 #recently-played__container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
     background-color: white;
+    margin-bottom: 50px;
 }
 
 #recently-played__container > h2 {
@@ -28,9 +29,10 @@
 
 #recently-played__each-song-container {
     /* margin: 20px; */
-    flex-basis: 13.5%;
+    /* flex-basis: 13.5%; */
     padding: 20px;
-    width: 13.5%;
+    /* width: 13.5%; */
+    width: 20%;
 }
 
 #recently-played__each-song-container > a {
@@ -40,9 +42,10 @@
 
 #recently-played__songs {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     row-gap: 20px;
-    padding-left: 15px;
+    /* padding-left: 15px; */
 }
 
 .recently-played__images {

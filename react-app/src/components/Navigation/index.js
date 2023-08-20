@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   const navNames = [
-    { name: "Home", to: "/" },
+    { name: "Home", to: "/discover" },
     { name: "Feed", to: "#" },
     { name: "Library", to: "#" },
   ];

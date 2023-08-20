@@ -11,8 +11,10 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
     background-color: #fff;
+    margin-bottom: 50px;
+    min-height: 100vh;
 }
 
 .profile-header-user-info-wrapper {
@@ -28,18 +30,23 @@
 .profile-content-container {
     display: flex;
     flex-direction: column;
+    width: 65%;
 }
 
 #profile-content-wrapper {
     display: flex;
     justify-content: space-between;
+    padding: 0 25px;
 }
 
 #profile-info__container {
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-    padding: 0 50px;
+    /* padding: 0 20px; */
+    width: 30%;
+    border-left: 1px solid #999;
+    padding-left: 30px;
 }
 
 #profile-right-content {
@@ -56,6 +63,7 @@
     flex-direction: column;
     row-gap: 8px;
 }
+
 .profile-header-user-info div:first-child {
     background-color: black;
     color: white;
@@ -185,6 +193,21 @@ Left padding: The value of --spacing-4x. */
 
 .profile-navbar__right {
     display: flex;
+    gap: 3px;
+    margin-bottom: 5px;
+}
+
+.profile-navbar__right > button:first-child {
+    background-color: #f50;
+    border: 1px solid #999;
+    border-radius: 4px;
+    color: white;
+}
+
+.profile-navbar__right > button:nth-child(n+2):nth-child(-n+4) {
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
 }
 
 .profile-navbar__item-active {
@@ -195,6 +218,8 @@ Left padding: The value of --spacing-4x. */
     display: flex;
     justify-content: space-between;
     margin: 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #999;
 }
 
 /** LIKES  */
@@ -214,4 +239,61 @@ Left padding: The value of --spacing-4x. */
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/** LATEST COMMENTS  */
+.latest-comments-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.latest-comments-top > div, .latest-comments-top > div > a {
+    color: #999;
+    text-decoration: none;
+}
+
+hr {
+    border-color: #999;
+    height: 1px;
+}
+
+.divider {
+    background-color: #999;
+    height: 1px;
+    margin-top: 5px;
+}
+
+.divider2 {
+    background-color: #999;
+    height: 100%;
+    width: 1px;
+    margin-bottom: 15px;
+}
+
+#user-comment__container2 {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 15px;
+    margin-top: 15px;
+    gap: 50px;
+}
+
+.user-delete2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px; height: 25px;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.user-time-delete {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+#user-comment__container2 > * {
+    color: #999
 }

@@ -73,16 +73,23 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
             >
-              <div>
-                <div key={c.id} className="user-displayname">
-                  {c.user.displayName}
+              <div className="user-pfp__container">
+                <div className="user-pfp">
+                  <img src={c.user.profileImage} alt="user pfp" />
                 </div>
-                <div className="user-comment">{c.comment}</div>
+                <div>
+                  <div key={c.id} className="user-displayname">
+                    {c.user.displayName}
+                  </div>
+                  <div className="user-comment">{c.comment}</div>
+                </div>
               </div>
+
               <div id="user-time-delete">
                 <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
                   {timeAgoString}
                 </div>
+
                 {user && c.userId === user.id && hoveredStates[index] && (
                   <button
                     onClick={() => handleDelete(c)}
