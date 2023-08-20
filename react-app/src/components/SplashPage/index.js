@@ -65,7 +65,7 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
           </div>
 
           <div className="splash-trending-songs">
-            <NavLink to="/discover">Discover</NavLink>
+            {/* <NavLink to="/discover">Discover</NavLink> */}
             <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
               {songs &&
