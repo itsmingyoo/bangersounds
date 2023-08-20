@@ -93,7 +93,7 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
           </div>
           <div className="splash-footer-top">
             <img src="https://a-v2.sndcdn.com/assets/images/never_stop_listening@1x-9c5264ff.jpg" alt="footer-top" />
-            <div className="splash-footer-top-right-wrapper">
+            <div className="splash-footer-top-right-wrapper" style={{ backgroundColor: "#f2f2f2" }}>
               <div className="splash-footer-top-right">
                 <h1 style={{ fontWeight: "400" }}>Never stop listening</h1>
                 <h3 style={{ fontWeight: "100", width: "60%" }}>
@@ -142,7 +142,7 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
             </div>
           </div>
 
-          <hr></hr>
+          <div className="horizontal-line"></div>
 
           <div className="footer-footer-footer">
             Directory - About us - Artist Resources - Blog - Jobs - Developers - Help - Legal - Do Not Sell or Share My
