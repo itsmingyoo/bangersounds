@@ -100,10 +100,10 @@ function PostNewSong() {
     reader.readAsDataURL(acceptedFiles[0]); // Read the data URL of the dropped file
   }, []);
 
-  useEffect(() => {
-    console.log("UE");
-    console.log("this is the song state", song);
-  }, [song]);
+  // useEffect(() => {
+  //   console.log("UE");
+  //   console.log("this is the song state", song);
+  // }, [song]);
 
   const genres = [
     { name: "None" },

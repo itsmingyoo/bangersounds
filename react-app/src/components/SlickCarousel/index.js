@@ -1,10 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../SplashPage/SplashPage.css";
 
 const SplashCarousel = () => {
+  const history = useHistory();
   const settings = {
     dots: true,
     infinite: true,
@@ -24,8 +26,8 @@ const SplashCarousel = () => {
               <div>Discover more with BangerSounds Go+</div>
               <div>SoundCloud Go+ lets you listen offline, ad-free, with over 320 million tracks — and growing.</div>
               <div className="content-slide-buttons">
-                <button>Learn more</button>
-                <button>Start uploading today</button>
+                <button onClick={() => alert("Feature coming soon!")}>Learn more</button>
+                <button onClick={() => history.push("/upload")}>Start uploading today</button>
               </div>
             </div>
           </div>
@@ -42,7 +44,7 @@ const SplashCarousel = () => {
                 Upload your first track and begin your journey. SoundCloud gives you space to create, find your fans,
                 and connect with other artists.
               </div>
-              <button>Start uploading today</button>
+              <button onClick={() => history.push("/upload")}>Start uploading today</button>
             </div>
           </div>
         </div>
