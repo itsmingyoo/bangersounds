@@ -1,8 +1,9 @@
 import React from "react";
-import SongDisplay from "../SongDisplay";
+import { NavLink } from "react-router-dom";
 import SplashCarousel from "../SlickCarousel";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./SplashPage.css";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 const Splash = ({ songs }) => {
   return (

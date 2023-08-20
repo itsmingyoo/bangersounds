@@ -111,9 +111,9 @@ function App() {
         </>
       )}
       {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
-      {isLoaded && window.location.pathname !== "/" && (
+      {/* {isLoaded && window.location.pathname !== "/" && (
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      )}
+      )} */}
     </>
   );
 }
