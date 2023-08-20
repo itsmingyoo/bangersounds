@@ -66,8 +66,8 @@ function App() {
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
-      {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />}
+      <Navigation isLoaded={isLoaded} />
+      {/* {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />} */}
       {isLoaded && (
         <>
           <Switch>
@@ -113,14 +113,10 @@ function App() {
           </Switch>
         </>
       )}
-      {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
+      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
       {/* {isLoaded && window.location.pathname !== "/" && (
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
       )} */}
-      <AudioPlayer
-        id={window.location.pathname === "/" ? "hide-audio-player" : ""}
-        {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }}
-      />
     </>
   );
 }
