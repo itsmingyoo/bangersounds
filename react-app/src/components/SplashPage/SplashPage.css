@@ -58,39 +58,49 @@
 
 /*! START OF CAROUSEL  */
 .splash-header-mid {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
 }
 
 .splash-header-mid img {
-  width: 100%;
-  height: 365px;
+    width: 100%;
+    height: 365px;
 }
 
 .splash-header-mid > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 80%; /* Adjust as needed */
-  margin-bottom: 20px; /* Add margin to create spacing between stacked divs */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 80%; /* Adjust as needed */
+    margin-bottom: 20px; /* Add margin to create spacing between stacked divs */
 }
 
 .splash-header-mid > div > div > button {
-  background-color: #f50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    background-color: #f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.content-slide > button {
+    background-color: #f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .content-slide {
@@ -155,6 +165,7 @@
     border: none;
     cursor: pointer;
     font-size: 16px;
+
 }
 
 .splash-search > button {
@@ -164,6 +175,7 @@
     border-radius: 4px;
     color: white;
     cursor: pointer;
+    padding: 0 15px;
 }
 
 /*! END OF SEARCH BAR  */
@@ -183,6 +195,7 @@
     color: white;
     cursor: pointer;
     width: fit-content;
+    padding: 15px;
 }
 
 .splash-songs {
@@ -200,10 +213,63 @@
     height: 100px;
 }
 
+.splash-footer-top {
+    display: flex;
+}
+
+.splash-footer-top-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.splash-footer-top-right-buttons > button {
+    background-color: none;
+    background: none;
+    border: none;
+}
+
 .splash-footer-bot {
     width: 100%;
 }
 
 .splash-footer-bot > img {
     width: 100%;
+}
+
+.splash-footer-bot-button {
+    background-color: transparent;
+    background: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: white;
+    font-size: 24px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.splash-footer-bot-image {
+    background-image: url("https://a-v2.sndcdn.com/assets/images/hp_creator_image_featured_artists-798050ae.jpg");
+    width: 100%;
+    height: 450px;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+.splash-footer-bot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: space-between;
+    gap: 20px;
+    padding: 100px;
+}
+
+.splash-footer-bot-text1 {
+    font-size: 36px;
+}
+
+.splash-footer-bot-text2 {
+    font-size: 24px;
 }

@@ -66,7 +66,7 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
 
           <div className="splash-trending-songs">
             <NavLink to="/discover">Discover</NavLink>
-            <div>Hear what’s trending for free in the SoundCloud community </div>
+            <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the SoundCloud community </div>
             <div className="splash-songs">
               {songs &&
                 songs.slice(0, 12).map((s) => (
@@ -93,16 +93,43 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
           </div>
           <div className="splash-footer-top">
             <img src="https://a-v2.sndcdn.com/assets/images/never_stop_listening@1x-9c5264ff.jpg" alt="footer-top" />
-            <button>Download on the App Store</button>
-            <button>GET IT ON Google Play</button>
+            <div className="splash-footer-top-right-wrapper">
+              <div className="splash-footer-top-right">
+                <h1 style={{ fontWeight: "400" }}>Never stop listening</h1>
+                <h3 style={{ fontWeight: "100", width: "60%" }}>
+                  BangerSounds is available on Web, iOS, Android, Sonos, Chromecast, and Xbox One.
+                </h3>
+                <div className="splash-footer-top-right-buttons">
+                  <button>
+                    <img src="https://a-v2.sndcdn.com/assets/images/appstore_badge@en-9e7292e6.png" alt="apple-dl" />
+                  </button>
+                  <button>
+                    <img
+                      src="https://a-v2.sndcdn.com/assets/images/google_play_badge@en-51d52194.png"
+                      alt="google-dl"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div className="splash-footer-bot">
-            <img
-              src="https://a-v2.sndcdn.com/assets/images/hp_creator_image_featured_artists-798050ae.jpg"
-              alt="footer-bot"
-            />
-            <button>Find out more</button>
+            <div className="splash-footer-bot-image">
+              <div style={{ width: "50%" }} className="splash-footer-bot-content">
+                <div style={{ color: "white" }} className="splash-footer-bot-text1">
+                  Calling all creators
+                </div>
+                <div style={{ color: "white" }} className="splash-footer-bot-text2">
+                  Get on BangerSounds to connect with fans, share your sounds, and grow your audience. What are you
+                  waiting for?
+                </div>
+                <button className="splash-footer-bot-button">Find out more</button>
+              </div>
+              <div style={{ width: "50%" }}></div>
+            </div>
           </div>
+
           <div className="footer-footer">
             <div>Thanks for listening. Now join in.</div>
             <div>Save tracks, follow artists and build playlists. All for free.</div>
