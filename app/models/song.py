@@ -5,7 +5,8 @@ from .db import (
     add_prefix_for_prod,
 )  # this method is for foreign keys
 
-# from .user import User
+from .likes import likes
+from .reposts import reposts
 
 
 class Song(db.Model):
@@ -37,8 +38,10 @@ class Song(db.Model):
     # Relationship to Comments
     song_comments = db.relationship("Comment", back_populates="comment_song")
 
-    # Nate's code
-    # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+    # join table relationships for many-to-many metadata table for likes/reposts
+    user_likes = db.relationship("User", secondary=likes, back_populates="user_songs_liked")
+    user_reposts = db.relationship("User", secondary=reposts, back_populates="user_songs_reposted")
+
 
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
@@ -59,6 +62,8 @@ class Song(db.Model):
             "thumbnail": self.thumbnail,
             "artistInfo": self.user_songs.to_dict(),
             "comments": [comment.to_dict() for comment in self.song_comments]
+            # "likes": [like.to_dict() for like in self.user_likes]
+            # "reposts": [repost.to_dict() for repost in self.user_reposts]
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
