@@ -457,6 +457,156 @@ def seed_songs():
             "artistId": 11,
             "thumbnail": "https://mixmag.net/assets/uploads/images/_full/darudesandstorm.jpg"
         },
+        {
+            "title": "1nonly - Bunny Girl",
+            "genre": "Hip-Hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/1nonly+-+Bunny+Girl.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 15,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/1nonly-bunnygirl.jpg"
+        },
+        {
+            "title": "Young Thug, 6LACK - Climax",
+            "genre": "Hip-Hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Young+Thug%2C+6LACK+-+Climax+(feat.+6lack).mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 9,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/6lack-climax.jpg"
+        },
+        {
+            "title": "A Day To Remember - If It Means a Lot to You",
+            "genre": "Alternative Rock",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/A+Day+To+Remember+-+If+It+Means+a+Lot+to+You.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 22,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/a-day-to-remember-if-it-means-alot-to-you.jpg"
+        },
+        {
+            "title": "Astrus - She wonders why",
+            "genre": "Hip-Hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Astrus+-+She+Wonders+Why.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 5,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/astrus-she-wonders-why.jpg"
+        },
+        {
+            "title": "Dance Gavin Dance - Evaporate",
+            "genre": "Rock",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Dance+Gavin+Dance+-+Evaporate.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 11,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/dance-gavin-dance.jpg"
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
+        {
+            "title": "",
+            "genre": "",
+            "song_url": "",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": ,
+            "thumbnail": ""
+        },
 
     ]
 
