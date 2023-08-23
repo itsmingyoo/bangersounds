@@ -508,74 +508,134 @@ def seed_songs():
             "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/dance-gavin-dance.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "Drake - Nice For What",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Drake+-+Nice+For+What.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 21,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/drake-nice-for-what.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "eaJ - Car Crash",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/eaJ+-+Car+Crash.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 17,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/eaj-car-crash.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "eaJ - wallflower",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/eaJ+-+wallflower.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 17,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/eaj-wallflower.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "eaJ x Seori - It just is (Feat. Keshis Strat)",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/eaJ+x+Seori+-+It+just+is+(Feat.+Keshis+Strat).mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 25,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/seori-eaj-it-just-is.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "Ella Mai - Trip",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Ella+Mai+-+Trip.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 26,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/ella-mai.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "Jiho Givenchy, Javan - Frank Ocean",
+            "genre": "Hip-Hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Jiho+Givenchy%2C+Javan+-+Frank+Ocean.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 11,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/frank-ocean-jiho.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "GenriX, CORBAL, Shiloh Dynasty - novocaine",
+            "genre": "Electronic",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/GenriX%2C+CORBAL%2C+Shiloh+Dynasty+-+novocaine.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 19,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/genrix.jpg"
+        },
+        {
+            "title": "Kendrick Lamar - HUMBLE",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Kendrick+Lamar+-+HUMBLE..mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 12,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/kendrick-humble.jpg"
+        },
+        {
+            "title": "Hell & High Water - DRYM Remix",
+            "genre": "Trance",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Hell+%26+High+Water+-+DRYM+Remix.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 12,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/hell-and-high-water.jpg"
+        },
+        {
+            "title": "Kendrick Lamar, Jay Rock - Money Trees",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Kendrick+Lamar%2C+Jay+Rock+-+Money+Trees.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 12,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/kendrick-money-trees.jpg"
+        },
+        {
+            "title": "MAX - IT'S YOU (feat. keshi)",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/MAX%2C+keshi+-+IT'S+YOU+(feat.+keshi).mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 7,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/keshi-its-you.jpg"
+        },
+        {
+            "title": "Linkin Park - Numb",
+            "genre": "Alternative Rock",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Linkin+Park+-+Numb.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 18,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/linkin-park-numb.jpg"
+        },
+        {
+            "title": "Linkin Park - In the End",
+            "genre": "Alternative Rock",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Linkin+Park+-+In+the+End.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 18,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/linkin-park.jpg"
         },
         {
             "title": "",
