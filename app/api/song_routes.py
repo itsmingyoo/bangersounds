@@ -10,18 +10,31 @@ from pprint import pprint
 songs_routes = Blueprint("songs", __name__)
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
+# @songs_routes.route("/")
+# def get_songs():
+#     """
+#     This route returns all the songs
+#     """
+#     songs = Song.query.all()  # query.all returns an array
+#     all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+
+#     pprint(all_songs)
+#     return {
+#         "Songs": {song["id"]: song for song in all_songs}
+#     }  # this returns a dictionary of normalized data
+
 @songs_routes.route("/")
 def get_songs():
     """
-    This route returns all the songs
+    This route returns all the songs with related data eagerly loaded
     """
-    songs = Song.query.all()  # query.all returns an array
-    all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+    songs = Song.query.all()
+    all_songs_data = [song.get_song_with_related_data(song.id).to_dict() for song in songs]
 
-    pprint(all_songs)
     return {
-        "Songs": {song["id"]: song for song in all_songs}
-    }  # this returns a dictionary of normalized data
+        "Songs": all_songs_data
+    }
+
 
 
 # Maybe don't need this route because we have the home route

@@ -7,6 +7,7 @@ from .db import (
 
 from .likes import likes
 from .reposts import reposts
+from sqlalchemy.orm import joinedload # for eagerloading
 
 
 class Song(db.Model):
@@ -60,10 +61,22 @@ class Song(db.Model):
             # Nullable
             "caption": self.caption,
             "thumbnail": self.thumbnail,
+
+            # LAZY LOADING - THIS RUNS MULTIPLE QUERIES RESULTING IN N+1
             "artistInfo": self.user_songs.to_dict(),
-            "comments": [comment.to_dict() for comment in self.song_comments]
-            # "likes": [like.to_dict() for like in self.user_likes]
-            # "reposts": [repost.to_dict() for repost in self.user_reposts]
+            "comments": [comment.to_dict() for comment in self.song_comments],
+            "likes": [like.to_dict() for like in self.user_likes],
+            "reposts": [repost.to_dict() for repost in self.user_reposts]
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
+
+    # EAGER LOADING - THIS WOULD REDUCE THE AMOUNT OF QUERIES TO IMPROVE YOUR SITE PERFORMANCE - ALSO GOOD TO USE ALONG WITH THE LAZY LOADING ABOVE - CHECK GET ALL SONGS ROUTE FOR AN EXAMPLE OF HOW TO RUN ONE QUERY WITH 'JOINEDLOAD' EAGERLOADING
+    @classmethod
+    def get_song_with_related_data(cls, song_id):
+        return cls.query.options(
+            joinedload(cls.user_songs),
+            joinedload(cls.song_comments),
+            joinedload(cls.user_likes),
+            joinedload(cls.user_reposts)
+        ).get(song_id)
