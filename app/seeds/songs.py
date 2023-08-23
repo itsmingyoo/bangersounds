@@ -374,7 +374,7 @@ def seed_songs():
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": 10,
+            "artistId": 23,
             "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/25+-+lucid+dreams+juice+wrld.jpg"
         },
         {
@@ -638,34 +638,174 @@ def seed_songs():
             "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/linkin-park.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "Nate Traveller - You",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Nate+Traveller+-+You.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 16,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/nate-traveller-you.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "Nate Traveller - FELT",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Nate+Traveller+-+FELT.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 16,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/nate-traveller-felt.jpg"
         },
         {
-            "title": "",
-            "genre": "",
-            "song_url": "",
+            "title": "New Heights - Peaches",
+            "genre": "Alternative Rock",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/New+Heights+-+Peaches.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",
-            "artistId": ,
-            "thumbnail": ""
+            "artistId": 8,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/new-heights-peaches.jpg"
+        },
+        {
+            "title": "NewJeans - OMG",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/NewJeans+-+OMG.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 7,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/new-jeans-omg.jpg"
+        },
+        {
+            "title": "offonoff - Cigarette (Feat. Tablo, MISO)",
+            "genre": "Pop",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/offonoff+-+Cigarette+(Feat.+Tablo%2C+MISO).mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 7,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/offonoff-cig.jpg"
+        },
+        {
+            "title": "Post Malone - I Fall Apart",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Post+Malone+-+I+Fall+Apart.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 23,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/postmalone-fall-apart.jpg"
+        },
+        {
+            "title": "Post Malone, Doja Cat - I Like You (A Happier Song)",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Post+Malone%2C+Doja+Cat+-+I+Like+You+(A+Happier+Song).mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 23,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/postmalone-cooped-up.jpg"
+        },
+        {
+            "title": "Post Malone, Quavo - Congratulations",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Post+Malone%2C+Quavo+-+Congratulations.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 23,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/postmalone-congrats.jpg"
+        },
+        {
+            "title": "Post Malone, Roddy Ricch - Cooped Up",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Post+Malone%2C+Roddy+Ricch+-+Cooped+Up+(with+Roddy+Ricch).mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 23,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/postmalone-cooped-up.jpg"
+        },
+        {
+            "title": "The Weeknd - Blinding Lights",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/The+Weeknd+-+Blinding+Lights.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 1,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/the-weeknd-blindinglights.jpg"
+        },
+        {
+            "title": "The Weeknd - Call Out My Name",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/The+Weeknd+-+Call+Out+My+Name.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 1,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/the-weeknd-calloutmyname.jpg"
+        },
+        {
+            "title": "The Weeknd, Daft Punk - Starboy",
+            "genre": "R&B & Soul",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/The+Weeknd%2C+Daft+Punk+-+Starboy.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 1,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/the-weeknd-starboy.jpg"
+        },
+        {
+            "title": "Underoath - Writing On The Walls",
+            "genre": "Metalcore",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/Underoath+-+Writing+On+The+Walls.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 27,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/underoath.jpg"
+        },
+        {
+            "title": "XXXTENTACION - Everybody Dies In Their Nightmares",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+Everybody+Dies+In+Their+Nightmares.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 14,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/xxx-everybody-dies.jpg"
+        },
+        {
+            "title": "XXXTENTACION - Jocelyn Flores",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+Jocelyn+Flores.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 14,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/xxx-jocelyn.jpg"
+        },
+        {
+            "title": "XXXTENTACION - Revenge",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+Revenge.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 14,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/xxx-revenge.jpg"
+        },
+        {
+            "title": "XXXTENTACION - SAD!",
+            "genre": "Hip-hop & Rap",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+SAD!.mp3",
+            "description": "Default Description From BangerSounds",
+            "private": False,
+            "caption": "Bangers All Around",
+            "artistId": 14,
+            "thumbnail": "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/xxx-sad.jpg"
         },
 
     ]
