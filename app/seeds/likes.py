@@ -6,7 +6,7 @@ import random
 def seed_likes():
     seed_data = []
 
-    user_ids = list(range(1, 12))  # List of user IDs from 1 to 11
+    user_ids = list(range(1, 28))  # List of user IDs from 1 to 11
     song_ids = list(range(1, 46))  # List of song IDs from 1 to 45
 
     for user_id in user_ids:
