@@ -6,12 +6,12 @@ import random
 def seed_likes():
     seed_data = []
 
-    user_ids = list(range(1, 28))  # List of user IDs from 1 to 11
-    song_ids = list(range(1, 46))  # List of song IDs from 1 to 45
+    user_ids = list(range(1, 28))  # 2nd param not inclusive
+    song_ids = list(range(1, 81))  # 2nd param not inclusive
 
     for user_id in user_ids:
         liked_songs = set()  # Set to store liked songs for this user
-        for _ in range(20):  # Assuming you want 10 likes per user
+        for _ in range(20):  # Adjust amount of 'likes' per user
             # Generate a unique song for this user
             song_id = random.choice(list(set(song_ids) - liked_songs))
             liked_songs.add(song_id)

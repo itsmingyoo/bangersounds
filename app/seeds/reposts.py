@@ -7,7 +7,7 @@ def seed_reposts():
     seed_data = []
 
     user_ids = list(range(1, 28))  # List of user IDs from 1 to 11
-    song_ids = list(range(1, 46))  # List of song IDs from 1 to 45
+    song_ids = list(range(1, 81))  # List of song IDs from 1 to 45
 
     for user_id in user_ids:
         reposted_songs = set()  # Set to store liked songs for this user

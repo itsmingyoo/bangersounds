@@ -800,7 +800,7 @@ def seed_songs():
         {
             "title": "XXXTENTACION - SAD!",
             "genre": "Hip-hop & Rap",
-            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+SAD!.mp3",
+            "song_url": "https://soundbangersbucket.s3.us-west-1.amazonaws.com/seed-data-pt2/XXXTENTACION+-+SAD!2.mp3",
             "description": "Default Description From BangerSounds",
             "private": False,
             "caption": "Bangers All Around",

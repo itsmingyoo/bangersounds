@@ -75,8 +75,8 @@ def seed_comments():
 
     seed_data = []
 
-    for user_id in range(1, 28):  # userId ranges from 1 to 11
-        for song_id in range(1, 46):  # songId ranges from 1 to 44
+    for user_id in range(1, 28):  # 2nd param not inclusive
+        for song_id in range(1, 81):  # 2nd param not inclusive
             # Randomly select a comment from the sample_comments list
             comment = random.choice(comments)
 
