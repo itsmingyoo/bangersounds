@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
@@ -19,6 +19,13 @@ import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
+
+  // THIS SOLVES THE ISSUE OF REDIRECTING FROM SPLASH PAGE TO ANOTHER PAGE AND IT WOULD SOLVE THE PROBLEM OF NAVBAR/AUDIOPLAYER NOT SHOWING - DONT ASK WHY OR HOW - IT JUST WORKS
+  // PSA - WE'RE NOT EVEN USING THIS ANYWHERE AND IT SOLVES IT - YEAH DONT ASK - IT JUST SOLVES IT
+  const location = useLocation();
+  const locationRef = useRef(location);
+  // console.log("this is location", locationRef.current);
+
   const [isLoaded, setIsLoaded] = useState(false);
   // const [path, setPath] = useState(window.location.pathname);
   // console.log("path state", path);
@@ -70,8 +77,8 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {/* {isLoaded && path !== "/" && <Navigation isLoaded={isLoaded} />} */}
+      {/* <Navigation isLoaded={isLoaded} /> */}
+      {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <>
           <Switch>
@@ -117,10 +124,10 @@ function App() {
           </Switch>
         </>
       )}
-      <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      {/* <div className={isLoaded && path !== "/" ? "" : "hide-audio-player"}>
+      {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
+      <div className={isLoaded && window.location.pathname !== "/" ? "" : "hide-audio-player"}>
         <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
-      </div> */}
+      </div>
     </>
   );
 }
