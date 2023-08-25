@@ -6,21 +6,22 @@ const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
+
 // ACTIONS FOR AUDIO PLAYER
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
 const SET_PREV_SONG_ACTION = "songs/SET_PREV_SONG_ACTION";
+
 // ACTIONS FOR COMMENTS
 const GET_ALL_COMMENTS_ACTION = "comments/GET_ALL_COMMENTS_ACTION";
 const GET_USER_COMMENTS_ACTION = "comments/GET_USER_COMMENTS_ACTION";
 const GET_SONG_COMMENTS_ACTION = "comments/GET_SONG_COMMENTS_ACTION";
 const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
 const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
-// ACTIONS FOR LIKES AND REPOSTS
-const POST_LIKE_ACTION = "likes/POST_LIKE_ACTION";
-const DELETE_LIKE_ACTION = "likes/DELETE_LIKE_ACTION";
 
-const POST_REPOST_ACTION = "reposts/POST_REPOST_ACTION";
-const DELETE_REPOST_ACTION = "reposts/DELETE_REPOST_ACTION";
+// ACTIONS FOR LIKES AND REPOSTS
+const TOGGLE_LIKE_ACTION = "likes/TOGGLE_LIKE_ACTION";
+const TOGGLE_REPOST_ACTION = "reposts/TOGGLE_REPOST_ACTION";
+
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -121,10 +122,15 @@ const deleteComment = (commentId) => {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const postLike = (userId, songId) => {
+const toggleLike = (songId) => {
   return {
-    type: POST_LIKE_ACTION,
-    userId,
+    type: TOGGLE_LIKE_ACTION,
+    songId,
+  };
+};
+const toggleRepost = (songId) => {
+  return {
+    type: TOGGLE_REPOST_ACTION,
     songId,
   };
 };
@@ -288,7 +294,7 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
 //**=================== LIKES AND REPOSTS THUNKS =======================/
 //**********************************************************************/
 //**********************************************************************/
-export const thunkPostLike = (songId, userId) => async (dispatch) => {
+export const thunkToggleLike = (songId, userId) => async (dispatch) => {
   try {
     let likedSong = await fetch(`/api/songs/${songId}/like`, {
       method: "POST",
@@ -296,12 +302,31 @@ export const thunkPostLike = (songId, userId) => async (dispatch) => {
         "Content-Type": "application/json",
       },
       body: {
-        userId,
         songId,
       },
     });
-    likedSong = likedSong.json();
+    likedSong = await likedSong.json();
     console.log("thunk liked song", likedSong);
+    dispatch(toggleLike(songId));
+  } catch (e) {
+    console.log("error");
+    return e;
+  }
+};
+export const thunkToggleRepost = (songId, userId) => async (dispatch) => {
+  try {
+    let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        songId,
+      },
+    });
+    repostedSong = await repostedSong.json();
+    console.log("thunk reposted song", repostedSong);
+    dispatch(toggleRepost(songId));
   } catch (e) {
     console.log("error");
     return e;
@@ -367,6 +392,9 @@ let initialState = {
 export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
+    // SONGS SONGS SONGS SONGS SONGS SONGS SONGS SONGS   //
+    // ----------------- SONGS SECTION ----------------- //
+    // SONGS SONGS SONGS SONGS SONGS SONGS SONGS SONGS   //
     case GET_ALL_SONGS_ACTION: {
       newState = { ...state };
       newState.Songs = { ...action.allSongs.Songs };
@@ -401,9 +429,7 @@ export default function reducer(state = initialState, action) {
     }
     case SET_PREV_SONG_ACTION: {
       newState = { ...state };
-
       newState.PreviousSong = { ...action.song };
-
       return newState;
     }
     case IS_PLAYING_BOOLEAN_ACTION: {
@@ -411,9 +437,9 @@ export default function reducer(state = initialState, action) {
       newState.isPlaying = action.boolean;
       return newState;
     }
-    // COMMENTS COMMENTS COMMENT //
-    // -- COMMENTS SECTION -- //
-    // COMMENTS COMMENTS COMMENT //
+    // COMMENTS COMMENTS COMMENT COMMENTS COMMENT COMMENT   //
+    // ----------------- COMMENTS SECTION ----------------- //
+    // COMMENTS COMMENTS COMMENT COMMENTS COMMENT COMMENT   //
     case GET_ALL_COMMENTS_ACTION: {
       newState = { ...state };
       newState.comments = { ...action.allComments };
@@ -421,10 +447,8 @@ export default function reducer(state = initialState, action) {
     }
     case GET_USER_COMMENTS_ACTION: {
       newState = { ...state };
-      // console.log("reducer", action.userComments);
       newState.userComments = {};
       newState.userComments = { ...action.userComments };
-
       return newState;
     }
     case GET_SONG_COMMENTS_ACTION: {
@@ -441,6 +465,13 @@ export default function reducer(state = initialState, action) {
       newState = { ...state };
       newState.comments = { ...newState.comments };
       delete newState.comments[action.commentId];
+      return newState;
+    }
+    // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
+    // ------------- LIKES AND REPOSTS SECTION ------------- //
+    // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
+    case TOGGLE_LIKE_ACTION: {
+      newState = { ...state };
       return newState;
     }
     default:

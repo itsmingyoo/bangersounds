@@ -1,6 +1,6 @@
 import React from "react";
 
-const Likes = () => {
+const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
   return (
     <div id="likes-main__container">
       <div className="likes-sub__container">

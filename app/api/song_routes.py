@@ -283,10 +283,40 @@ def delete_comment(songId, commentId):
 def post_like(songId):
     song = Song.query.get(songId)
     user = User.query.get(current_user.id)
-    print('================LOOK BELOW====================')
-    pprint(song.to_dict())
-    pprint(user.to_dict())
-    return song.to_dict(), user.to_dict()
+    if not song:
+        return {"errors": "Song doesn't exist"}
+
+    if not user:
+        return {"errors": "You must be logged in to like a song"}
+
+    if user in song.user_likes:
+        song.user_likes.remove(user)
+        db.session.commit()
+        return {"message": "You successfully unliked the song"}
+    else:
+        song.user_likes.append(user)
+        db.session.commit()
+        return {"message": "You successfully liked the song"}
+
+@songs_routes.route('/<int:songId>/repost', methods=['POST'])
+@login_required
+def post_repost(songId):
+    song = Song.query.get(songId)
+    user = User.query.get(current_user.id)
+    if not song:
+        return {"errors": "Song doesn't exist"}
+
+    if not user:
+        return {"errors": "You must be logged in to repost a song"}
+
+    if user in song.user_likes:
+        song.user_likes.remove(user)
+        db.session.commit()
+        return {"message": "You successfully removed a repost the song"}
+    else:
+        song.user_likes.append(user)
+        db.session.commit()
+        return {"message": "You successfully reposted the song"}
 
 
 
