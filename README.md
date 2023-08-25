@@ -1,148 +1,76 @@
-# Flask React Project
 
-This is the starter for the Flask React project.
+# Database Schema and Backend Routes
 
-## Getting started
-1. Clone this repository (only this branch)
+## Database Schema
 
-2. Install dependencies
+![BangerSounds-Flask-Schema](https://i.imgur.com/gImNYG7.png)
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+## Backend Routes
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+### Users
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+`GET /api/users/`
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
+-   Returns the information for all users
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+`GET /api/users/:id`
 
-   ```bash
-   pipenv shell
-   ```
+-   Returns the information for one user
 
-   ```bash
-   flask db upgrade
-   ```
+### Sessions
 
-   ```bash
-   flask seed all
-   ```
+`GET /api/auth/`
 
-   ```bash
-   flask run
-   ```
+-   Returns the information for the logged in user
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+`POST /api/auth/signup`
 
+-   Signs a new user up
 
-## Deployment through Render.com
+`POST /api/auth/login`
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+-   Logs in a user
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+`DELETE /api/auth/`
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+-   Logs out a user
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+### Songs
 
-### Part A: Configure the Start and Build Commands
+`GET /api/discover or /api/home`
 
-Start by giving your application a name.
+-  Discover new songs
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+`GET /api/profile/`
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+-   Returns the user's songs, liked songs, and playlists
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+`GET /api/profile/songs`
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
+-   Returns the all the songs that belongs to the user
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+`POST /api/new/`
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
+-   Creates a new song
 
-Now, add your start command in the Start field:
+`PUT /api/profile/songs/:songId`
 
-```shell
-# start script
-gunicorn app:app
-```
+-   Creates a new song
 
-_If you are using websockets, use the following start command instead for increased performance:_
+`DELETE /api/profile/songs/:songId`
 
-`gunicorn --worker-class eventlet -w 1 app:app`
+- Deletes a song
 
-### Part B: Add the Environment Variables
+### Comments
 
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
+`GET /api/songs/:songId`
 
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
+-   View all comments of a song
 
-Add the following keys and values in the Render GUI form:
+`POST /api/songs/:songId`
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
+-   Creates a new comment
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+`DELETE /api/songs/:songId`
 
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+-   Deletes a comment

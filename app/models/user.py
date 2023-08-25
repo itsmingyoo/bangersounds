@@ -61,8 +61,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             "id": self.id,
-            "username": self.username,
-            "email": self.email,
+            # "username": self.username, # same reason here - with security reasons
+            # "email": self.email, # removing this for security reasons on user end - almost all the other info are public information for the user
             "displayName": self.display_name,
             "firstName": self.first_name,
             "lastName": self.last_name,

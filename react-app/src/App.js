@@ -16,6 +16,8 @@ import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
 import "./index.css";
+import User from "./components/User";
+import Users from "./components/Users";
 
 function App() {
   const dispatch = useDispatch();
@@ -91,6 +93,14 @@ function App() {
 
             <Route exact path="/splash">
               <SplashCarousel />
+            </Route>
+
+            <Route exact path="/users">
+              <Users {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            </Route>
+
+            <Route exact path="/users/:userId">
+              <User {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </Route>
 
             <Route exact path="/upload">
