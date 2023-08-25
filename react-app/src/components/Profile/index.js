@@ -15,8 +15,8 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   const user = userRef.current;
   const userSongs = songs.filter((s) => s.artistId === user.id);
   const userComments = Object.values(comments).filter((c) => c.userId === user.id);
-  // filter userLikes
-  // filter userReposts
+  const userLikes = songs.filter((s) => s.likes[user.id]);
+  const userReposts = songs.filter((s) => s.reposts[user.id]);
 
   // FN
   const togglePlayPause = async (song) => {
@@ -28,12 +28,12 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   };
 
   // Likes Button Function Props
-  // const handleLikeClick = (songId) => {
-  //   dispatch(thunkPostLike(songId));
+  // const toggleLike = (songId) => {
+  //   dispatch(thunkToggleLike(songId));
   // };
 
-  // const handleUnlikeClick = (songId) => {
-  //   dispatch(thunkDeleteLike(songId));
+  // const toggleRepost = (songId) => {
+  //   dispatch(thunkToggleRepost(songId));
   // };
 
   return (
@@ -69,13 +69,15 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
                 active,
                 setActive,
                 togglePlayPause,
+                userLikes,
+                userReposts,
               }}
             />
           </div>
 
           <div id="profile-info__container">
             {/* Like/Reposts not yet implemented */}
-            <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+            <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
             {/* Only need userComments, then need to order them by most recent */}
             <LatestComments {...{ user, userComments }} />
           </div>
