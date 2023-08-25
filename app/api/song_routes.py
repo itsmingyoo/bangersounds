@@ -271,7 +271,22 @@ def delete_comment(songId, commentId):
     return {"error": "Unable to delete this comment."}, 401
 
 
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
 
+@songs_routes.route('/<int:songId>/like', methods=['POST'])
+@login_required
+def post_like(songId):
+    song = Song.query.get(songId)
+    user = User.query.get(current_user.id)
+    print('================LOOK BELOW====================')
+    pprint(song.to_dict())
+    pprint(user.to_dict())
+    return song.to_dict(), user.to_dict()
 
 
 

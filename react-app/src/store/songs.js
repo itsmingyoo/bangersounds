@@ -1,10 +1,12 @@
 //* =====================  types ===========================//
+// ACTIONS FOR THUNKS
 const GET_ALL_SONGS_ACTION = "songs/GET_ALL_SONGS_ACTION";
 const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
 const DELETE_SONG_BY_ID_ACTION = "songs/DELETE_SONG_BY_ID_ACTION";
 const PLAY_CURRENT_USER_SONG_ACTION = "songs/PLAY_CURRENT_USER_SONG_ACTION";
+// ACTIONS FOR AUDIO PLAYER
 const IS_PLAYING_BOOLEAN_ACTION = "songs/IS_PLAYING_BOOLEAN_ACTION";
 const SET_PREV_SONG_ACTION = "songs/SET_PREV_SONG_ACTION";
 // ACTIONS FOR COMMENTS
@@ -13,6 +15,12 @@ const GET_USER_COMMENTS_ACTION = "comments/GET_USER_COMMENTS_ACTION";
 const GET_SONG_COMMENTS_ACTION = "comments/GET_SONG_COMMENTS_ACTION";
 const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
 const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
+// ACTIONS FOR LIKES AND REPOSTS
+const POST_LIKE_ACTION = "likes/POST_LIKE_ACTION";
+const DELETE_LIKE_ACTION = "likes/DELETE_LIKE_ACTION";
+
+const POST_REPOST_ACTION = "reposts/POST_REPOST_ACTION";
+const DELETE_REPOST_ACTION = "reposts/DELETE_REPOST_ACTION";
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -106,6 +114,18 @@ const deleteComment = (commentId) => {
   return {
     type: DELETE_COMMENT_ACTION,
     commentId,
+  };
+};
+
+//!!! ACTIONS FOR LIKES AND COMMENTS !!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const postLike = (userId, songId) => {
+  return {
+    type: POST_LIKE_ACTION,
+    userId,
+    songId,
   };
 };
 
@@ -263,6 +283,29 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
     return comment;
   }
   return comment.errors;
+};
+
+//**=================== LIKES AND REPOSTS THUNKS =======================/
+//**********************************************************************/
+//**********************************************************************/
+export const thunkPostLike = (songId, userId) => async (dispatch) => {
+  try {
+    let likedSong = await fetch(`/api/songs/${songId}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        userId,
+        songId,
+      },
+    });
+    likedSong = likedSong.json();
+    console.log("thunk liked song", likedSong);
+  } catch (e) {
+    console.log("error");
+    return e;
+  }
 };
 
 //? ================== reducer================================//

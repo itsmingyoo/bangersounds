@@ -27,6 +27,15 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
     }
   };
 
+  // Likes Button Function Props
+  // const handleLikeClick = (songId) => {
+  //   dispatch(thunkPostLike(songId));
+  // };
+
+  // const handleUnlikeClick = (songId) => {
+  //   dispatch(thunkDeleteLike(songId));
+  // };
+
   return (
     <div className="profile-container-main">
       <div className="profile-container">
@@ -66,7 +75,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
 
           <div id="profile-info__container">
             {/* Like/Reposts not yet implemented */}
-            <Likes />
+            <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             {/* Only need userComments, then need to order them by most recent */}
             <LatestComments {...{ user, userComments }} />
           </div>
