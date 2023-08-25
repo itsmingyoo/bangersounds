@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
+import { authenticate } from "./store/session";
+import * as songActions from "./store/songs";
+import * as userActions from "./store/users";
+// COMPONENTS
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
-import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import * as songActions from "./store/songs";
 import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
 import PostNewSong from "./components/PostNewSong";
@@ -15,9 +17,10 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
-import "./index.css";
 import User from "./components/User";
 import Users from "./components/Users";
+
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +46,7 @@ function App() {
   });
   useEffect(() => {
     dispatch(authenticate())
+      .then(() => dispatch(userActions.thunkGetAllUsers()))
       .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => {
@@ -59,7 +63,7 @@ function App() {
       })
       //! CATCH ERRORS
       .catch((e) => {
-        // console.error("Error fetching data:", e);
+        console.error("Error fetching data:", e);
         setIsLoaded(true);
       });
   }, [dispatch]);
@@ -95,23 +99,23 @@ function App() {
               <SplashCarousel />
             </Route>
 
-            <Route exact path="/users">
+            <Route exact path="/artists">
               <Users {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </Route>
 
-            <Route exact path="/users/:userId">
+            <Route exact path="/profile/:artistId">
               <User {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-            </Route>
-
-            <Route exact path="/upload">
-              <ProtectedRoute>
-                <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
-              </ProtectedRoute>
             </Route>
 
             <Route exact path="/profile">
               <ProtectedRoute>
                 <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              </ProtectedRoute>
+            </Route>
+
+            <Route exact path="/upload">
+              <ProtectedRoute>
+                <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
               </ProtectedRoute>
             </Route>
 
