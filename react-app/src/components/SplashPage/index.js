@@ -34,7 +34,7 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
 
   const closeMenu = () => setShowMenu(false);
   return (
-    <div className="splash-wrapper" style={{ width: "100%", marginBottom: "50px" }}>
+    <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
         <SplashCarousel />
         <div className="splash-header">

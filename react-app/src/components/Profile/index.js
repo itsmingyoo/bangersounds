@@ -15,8 +15,8 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   const user = userRef.current;
   const userSongs = songs.filter((s) => s.artistId === user.id);
   const userComments = Object.values(comments).filter((c) => c.userId === user.id);
-  // filter userLikes
-  // filter userReposts
+  const userLikes = songs.filter((s) => s.likes[user.id]);
+  const userReposts = songs.filter((s) => s.reposts[user.id]);
 
   // FN
   const togglePlayPause = async (song) => {
@@ -26,6 +26,15 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
       else dispatch(setPlayingState(true));
     }
   };
+
+  // Likes Button Function Props
+  // const toggleLike = (songId) => {
+  //   dispatch(thunkToggleLike(songId));
+  // };
+
+  // const toggleRepost = (songId) => {
+  //   dispatch(thunkToggleRepost(songId));
+  // };
 
   return (
     <div className="profile-container-main">
@@ -60,15 +69,17 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
                 active,
                 setActive,
                 togglePlayPause,
+                userLikes,
+                userReposts,
               }}
             />
           </div>
 
           <div id="profile-info__container">
             {/* Like/Reposts not yet implemented */}
-            <Likes />
+            <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
             {/* Only need userComments, then need to order them by most recent */}
-            <LatestComments {...{ user, userComments }} />
+            <LatestComments {...{ user, userComments, songs }} />
           </div>
         </div>
       </div>

@@ -4,13 +4,15 @@ import { NavLink } from "react-router-dom";
 import { thunkDeleteComment } from "../../store/songs";
 import { FaComment } from "react-icons/fa";
 
-const LatestComments = ({ user, userComments }) => {
+const LatestComments = ({ user, userComments, songs }) => {
   const dispatch = useDispatch();
   const [hoveredStates, setHoveredStates] = useState(Array(userComments.length).fill(false));
 
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
+
+  console.log("usercomments", [...userComments].reverse().slice(0, 3));
 
   // BUGGED CODE - WHEN THERE IS RAPID MOUSE MOVEMENTS OVER MULTIPLE DIVS THEY ARENT ABLE TO GRAB THE UPDATED STATE - SO WE NEED TO PASS A FUNCTION INTO THE SETHOVEREDSTATES
   // const handleMouseEnter = (index) => {
@@ -79,6 +81,8 @@ const LatestComments = ({ user, userComments }) => {
               const months = Math.floor(timeDifference / 2592000);
               timeAgoString = `${months} ${months === 1 ? "month" : "months"} ago`;
             }
+            const songInfo = songs.filter((s) => c.songId === s.id);
+            console.log("songInfo", songInfo);
             return (
               <div
                 id="user-comment__container2"
@@ -87,12 +91,19 @@ const LatestComments = ({ user, userComments }) => {
               >
                 <div>
                   <div key={c.id} className="user-displayname">
-                    {c.user.displayName}
+                    <a href={`/songs/${songInfo[0].id}`} id="song-comment-info">
+                      on {songInfo[0].title}
+                    </a>
                   </div>
-                  <div className="user-comment">{c.comment}</div>
+                  <div className="user-comment">"{c.comment}"</div>
                 </div>
                 <div id="user-time-delete" className="user-time-delete">
-                  <div className={`user-comment__date ${hoveredStates[index] ? "hidden" : ""}`}>{timeAgoString}</div>
+                  <div
+                    className={`user-comment__date ${hoveredStates[index] ? "hidden" : ""}`}
+                    style={{ fontSize: "12px", width: "fit-content", whiteSpace: "nowrap" }}
+                  >
+                    {timeAgoString}
+                  </div>
                   {user && c.userId === user.id && hoveredStates[index] && (
                     <button
                       onClick={() => handleDelete(c)}

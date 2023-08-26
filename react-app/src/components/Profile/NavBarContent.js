@@ -14,11 +14,13 @@ const NavBarContent = ({
   active,
   setActive,
   togglePlayPause,
+  userLikes,
+  userReposts,
 }) => {
   return (
     <div className="navbar-content-box">
       {active === 0 && (
-        <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
+        <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs, userLikes }} />
       )}
       {/* {active === 1 && <PopularSongs />} */}
       {/* {active === 2 && <Songs />} */}

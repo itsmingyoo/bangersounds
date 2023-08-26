@@ -10,18 +10,31 @@ from pprint import pprint
 songs_routes = Blueprint("songs", __name__)
 
 # Home and Discover are okay here as we will make custom links in the frontend anyway
+# @songs_routes.route("/")
+# def get_songs():
+#     """
+#     This route returns all the songs
+#     """
+#     songs = Song.query.all()  # query.all returns an array
+#     all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+
+#     pprint(all_songs)
+#     return {
+#         "Songs": {song["id"]: song for song in all_songs}
+#     }  # this returns a dictionary of normalized data
+
 @songs_routes.route("/")
 def get_songs():
     """
-    This route returns all the songs
+    This route returns all the songs with related data eagerly loaded
     """
-    songs = Song.query.all()  # query.all returns an array
-    all_songs = [song.to_dict() for song in songs]  # turns each song into a dictionary
+    songs = Song.query.all()
+    all_songs_data = [song.get_song_with_related_data(song.id).to_dict() for song in songs]
 
-    pprint(all_songs)
     return {
-        "Songs": {song["id"]: song for song in all_songs}
-    }  # this returns a dictionary of normalized data
+        "Songs": all_songs_data
+    }
+
 
 
 # Maybe don't need this route because we have the home route
@@ -258,7 +271,52 @@ def delete_comment(songId, commentId):
     return {"error": "Unable to delete this comment."}, 401
 
 
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
+################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
 
+@songs_routes.route('/<int:songId>/like', methods=['POST'])
+@login_required
+def post_like(songId):
+    song = Song.query.get(songId)
+    user = User.query.get(current_user.id)
+    if not song:
+        return {"errors": "Song doesn't exist"}
+
+    if not user:
+        return {"errors": "You must be logged in to like a song"}
+
+    if user in song.user_likes:
+        song.user_likes.remove(user)
+        db.session.commit()
+        return {"message": "You successfully unliked the song"}
+    else:
+        song.user_likes.append(user)
+        db.session.commit()
+        return {"message": "You successfully liked the song"}
+
+@songs_routes.route('/<int:songId>/repost', methods=['POST'])
+@login_required
+def post_repost(songId):
+    song = Song.query.get(songId)
+    user = User.query.get(current_user.id)
+    if not song:
+        return {"errors": "Song doesn't exist"}
+
+    if not user:
+        return {"errors": "You must be logged in to repost a song"}
+
+    if user in song.user_likes:
+        song.user_likes.remove(user)
+        db.session.commit()
+        return {"message": "You successfully removed a repost the song"}
+    else:
+        song.user_likes.append(user)
+        db.session.commit()
+        return {"message": "You successfully reposted the song"}
 
 
 

@@ -22,7 +22,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    height: 100vh;
+    /* height: 100vh; this breaks the height of the entire container if theres a bunch of comments */
 }
 
 #song-details__bot-container {
@@ -128,6 +128,12 @@
 .song-details__play-btn-container {
     font-size: 50px;
     cursor: pointer;
+}
+
+.song-details__play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #play-content__container {

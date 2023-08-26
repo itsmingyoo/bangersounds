@@ -235,11 +235,17 @@ Left padding: The value of --spacing-4x. */
     justify-content: space-between ;
 }
 
+.likes-sub__container div {
+    color: #999;
+}
+
 .liked-songs-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+
 
 /** LATEST COMMENTS  */
 .latest-comments-top {
@@ -250,6 +256,28 @@ Left padding: The value of --spacing-4x. */
 .latest-comments-top > div, .latest-comments-top > div > a {
     color: #999;
     text-decoration: none;
+}
+
+.user-displayname {
+    overflow-wrap: break-word;
+    overflow: hidden;
+    max-width: 235px;
+}
+
+#song-comment-info {
+    text-decoration: none;
+    cursor: pointer;
+    color: #999;
+    font-size: 12px;
+    /* width: fit-content;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -webkit-word-break: break-all; */
+    overflow-wrap: break-word;
+    overflow: hidden;
+    width: 100px;
 }
 
 hr {
@@ -276,6 +304,12 @@ hr {
     margin-bottom: 15px;
     margin-top: 15px;
     gap: 50px;
+}
+
+.user-comment {
+    color: #333333;
+    font-size: 12px;
+
 }
 
 .user-delete2 {

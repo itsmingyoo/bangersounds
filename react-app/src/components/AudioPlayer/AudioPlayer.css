@@ -169,7 +169,6 @@ input[type="range"]::-webkit-slider-thumb {
     height: 8px;
     border-radius: 50%;
 
-
     /* Override the default thumb styles */
     -webkit-color: #f50;
     -webkit-appearance: none;
