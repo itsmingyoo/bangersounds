@@ -1,0 +1,19 @@
+#like__container {
+    width: 100%;
+    margin: 10px 0;
+}
+#play-btn__main-container {
+    width: 50px;
+    height: 50px;
+}
+
+#icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.like-btn {
+    font-size: 20px;
+    cursor: pointer;
+}

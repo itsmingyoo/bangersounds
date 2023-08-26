@@ -15,8 +15,7 @@ import TogglePlay from "./TogglePlay";
 import { playUserSongAction, setPlayingState } from "../../../store/songs";
 import "./Likes.css";
 
-const DisplayLikes = ({ s, user, userSongs, isPlayingState, currentlyPlaying, comments, songs, userLikes }) => {
-  console.log("this is s", s);
+const DisplayLikes = ({ s, isPlayingState, currentlyPlaying, userLikes }) => {
   const dispatch = useDispatch();
   const togglePlayPause = (song) => {
     dispatch(playUserSongAction(song));
@@ -25,13 +24,11 @@ const DisplayLikes = ({ s, user, userSongs, isPlayingState, currentlyPlaying, co
       else dispatch(setPlayingState(true));
     }
   };
-  if (!s) return null;
   return (
-    <>
-      <div>ImageContainer</div>
+    <div id="like__container">
       {/* ImageContainer will contain responsive button displayed over the thumbnail and have a function to toggle play/pause */}
       <TogglePlay {...{ s, userLikes, isPlayingState, currentlyPlaying, togglePlayPause }} />
-    </>
+    </div>
   );
 };
 
