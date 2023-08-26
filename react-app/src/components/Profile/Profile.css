@@ -258,21 +258,26 @@ Left padding: The value of --spacing-4x. */
     text-decoration: none;
 }
 
+.user-displayname {
+    overflow-wrap: break-word;
+    overflow: hidden;
+    max-width: 235px;
+}
+
 #song-comment-info {
     text-decoration: none;
     cursor: pointer;
     color: #999;
     font-size: 12px;
-    width: fit-content;
+    /* width: fit-content;
     word-break: break-word;
     word-wrap: break-word;
     hyphens: auto;
     -webkit-hyphens: auto;
-    -webkit-word-break: break-all;
-}
-
-.user-displayname {
-
+    -webkit-word-break: break-all; */
+    overflow-wrap: break-word;
+    overflow: hidden;
+    width: 100px;
 }
 
 hr {

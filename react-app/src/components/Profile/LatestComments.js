@@ -100,7 +100,7 @@ const LatestComments = ({ user, userComments, songs }) => {
                 <div id="user-time-delete" className="user-time-delete">
                   <div
                     className={`user-comment__date ${hoveredStates[index] ? "hidden" : ""}`}
-                    style={{ fontSize: "12px", width: "fit-content" }}
+                    style={{ fontSize: "12px", width: "fit-content", whiteSpace: "nowrap" }}
                   >
                     {timeAgoString}
                   </div>
