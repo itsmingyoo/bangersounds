@@ -122,16 +122,20 @@ const deleteComment = (commentId) => {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const toggleLike = (songId) => {
+const toggleLike = (songId, user, isLiked) => {
   return {
     type: TOGGLE_LIKE_ACTION,
     songId,
+    user,
+    isLiked,
   };
 };
-const toggleRepost = (songId) => {
+const toggleRepost = (songId, user, isRepost) => {
   return {
     type: TOGGLE_REPOST_ACTION,
     songId,
+    user,
+    isRepost,
   };
 };
 
@@ -294,39 +298,67 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
 //**=================== LIKES AND REPOSTS THUNKS =======================/
 //**********************************************************************/
 //**********************************************************************/
-export const thunkToggleLike = (songId, userId) => async (dispatch) => {
+export const thunkToggleLike = (songId, user, isLiked) => async (dispatch) => {
   try {
-    let likedSong = await fetch(`/api/songs/${songId}/like`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {
-        songId,
-      },
-    });
-    likedSong = await likedSong.json();
-    console.log("thunk liked song", likedSong);
-    dispatch(toggleLike(songId));
+    if (isLiked) {
+      let likedSong = await fetch(`/api/songs/${songId}/like`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          songId,
+        },
+      });
+      likedSong = await likedSong.json();
+      dispatch(toggleLike(songId, user, isLiked));
+      return likedSong;
+    } else {
+      let likedSong = await fetch(`/api/songs/${songId}/like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          songId,
+        },
+      });
+      likedSong = await likedSong.json();
+      dispatch(toggleLike(songId, user, isLiked));
+      return likedSong;
+    }
   } catch (e) {
     console.log("error");
     return e;
   }
 };
-export const thunkToggleRepost = (songId, userId) => async (dispatch) => {
+export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) => {
   try {
-    let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {
-        songId,
-      },
-    });
-    repostedSong = await repostedSong.json();
-    console.log("thunk reposted song", repostedSong);
-    dispatch(toggleRepost(songId));
+    if (isRepost) {
+      let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          songId,
+        },
+      });
+      repostedSong = await repostedSong.json();
+      dispatch(toggleRepost(songId, user, isRepost));
+    } else {
+      let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {
+          songId,
+        },
+      });
+      repostedSong = await repostedSong.json();
+      dispatch(toggleRepost(songId, user, isRepost));
+    }
   } catch (e) {
     console.log("error");
     return e;
@@ -471,6 +503,16 @@ export default function reducer(state = initialState, action) {
     // ------------- LIKES AND REPOSTS SECTION ------------- //
     // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
     case TOGGLE_LIKE_ACTION: {
+      newState = { ...state };
+      console.log("newState", newState);
+      console.log("songid", action.songId);
+      console.log("userId", action.userId);
+      console.log("isliked", action.isLiked);
+      if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
+      else newState.Songs[action.songId].likes[action.user.id] = { ...action.user };
+      return newState;
+    }
+    case TOGGLE_REPOST_ACTION: {
       newState = { ...state };
       return newState;
     }
