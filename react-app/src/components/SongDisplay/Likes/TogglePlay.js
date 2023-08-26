@@ -44,6 +44,7 @@ const TogglePlay = ({ s, currentlyPlaying, isPlayingState, togglePlayPause }) =>
           </div>
         </button>
 
+        {/* IMAGE WITH TITLE TOOLTIP */}
         <div title={s.title}>
           <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
             <img

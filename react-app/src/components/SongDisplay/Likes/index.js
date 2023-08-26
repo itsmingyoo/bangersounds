@@ -11,8 +11,9 @@ import {
 import EditSong from "../../SongDetailsPage/EditSongModal";
 import OpenModalButton from "../../OpenModalButton";
 import DropDown from "../../DropDown";
-import TogglePlay from "./TogglePlay";
 import { playUserSongAction, setPlayingState } from "../../../store/songs";
+import TogglePlay from "./TogglePlay";
+import LikesTitle from "./LikesTitle";
 import "./Likes.css";
 
 const DisplayLikes = ({ s, isPlayingState, currentlyPlaying, userLikes }) => {
@@ -28,6 +29,11 @@ const DisplayLikes = ({ s, isPlayingState, currentlyPlaying, userLikes }) => {
     <div id="like__container">
       {/* ImageContainer will contain responsive button displayed over the thumbnail and have a function to toggle play/pause */}
       <TogglePlay {...{ s, userLikes, isPlayingState, currentlyPlaying, togglePlayPause }} />
+
+      {/* DISPLAY NAME */}
+      {/* SONG TITLE */}
+      {/* PLAYS | LIKES | REPOSTS | COMMENTS */}
+      <LikesTitle {...{ s, userLikes }} />
     </div>
   );
 };

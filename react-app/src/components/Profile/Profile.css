@@ -235,11 +235,17 @@ Left padding: The value of --spacing-4x. */
     justify-content: space-between ;
 }
 
+.likes-sub__container div {
+    color: #999;
+}
+
 .liked-songs-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+
 
 /** LATEST COMMENTS  */
 .latest-comments-top {

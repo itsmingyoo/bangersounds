@@ -130,6 +130,12 @@
     cursor: pointer;
 }
 
+.song-details__play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #play-content__container {
     display: flex;
     align-items: center;
