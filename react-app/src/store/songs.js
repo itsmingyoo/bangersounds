@@ -506,7 +506,7 @@ export default function reducer(state = initialState, action) {
       newState = { ...state };
       console.log("newState", newState);
       console.log("songid", action.songId);
-      console.log("userId", action.userId);
+      console.log("userId", action.user);
       console.log("isliked", action.isLiked);
       if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
       else newState.Songs[action.songId].likes[action.user.id] = { ...action.user };
