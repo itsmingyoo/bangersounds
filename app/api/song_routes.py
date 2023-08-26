@@ -309,12 +309,12 @@ def toggle_repost(songId):
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.user_likes:
-        song.user_likes.remove(user)
+    if user in song.user_reposts:
+        song.user_reposts.remove(user)
         db.session.commit()
         return {"message": "You successfully removed a repost the song"}
     else:
-        song.user_likes.append(user)
+        song.user_reposts.append(user)
         db.session.commit()
         return {"message": "You successfully reposted the song"}
 

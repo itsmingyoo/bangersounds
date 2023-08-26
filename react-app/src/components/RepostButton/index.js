@@ -4,10 +4,10 @@ import { BiRepost } from "react-icons/bi";
 import { thunkToggleRepost } from "../../store/songs";
 import "./RepostButton.css";
 
-const RepostButton = ({ song }) => {
+const RepostButton = ({ song, user, isRepost }) => {
   const dispatch = useDispatch();
   const toggleRepost = () => {
-    dispatch(thunkToggleRepost(song));
+    dispatch(thunkToggleRepost(song.id, user, isRepost));
   };
   return (
     <div id="repost-btn__container">

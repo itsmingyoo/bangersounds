@@ -122,20 +122,22 @@ const deleteComment = (commentId) => {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const toggleLike = (songId, user, isLiked) => {
+const toggleLike = (songId, user, isLiked, res) => {
   return {
     type: TOGGLE_LIKE_ACTION,
     songId,
     user,
     isLiked,
+    res,
   };
 };
-const toggleRepost = (songId, user, isRepost) => {
+const toggleRepost = (songId, user, isRepost, res) => {
   return {
     type: TOGGLE_REPOST_ACTION,
     songId,
     user,
     isRepost,
+    res,
   };
 };
 
@@ -311,7 +313,7 @@ export const thunkToggleLike = (songId, user, isLiked) => async (dispatch) => {
         },
       });
       likedSong = await likedSong.json();
-      dispatch(toggleLike(songId, user, isLiked));
+      dispatch(toggleLike(songId, user, isLiked, likedSong));
       return likedSong;
     } else {
       let likedSong = await fetch(`/api/songs/${songId}/like`, {
@@ -324,7 +326,7 @@ export const thunkToggleLike = (songId, user, isLiked) => async (dispatch) => {
         },
       });
       likedSong = await likedSong.json();
-      dispatch(toggleLike(songId, user, isLiked));
+      dispatch(toggleLike(songId, user, isLiked, likedSong));
       return likedSong;
     }
   } catch (e) {
@@ -345,7 +347,8 @@ export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) =>
         },
       });
       repostedSong = await repostedSong.json();
-      dispatch(toggleRepost(songId, user, isRepost));
+      dispatch(toggleRepost(songId, user, isRepost, repostedSong));
+      return repostedSong;
     } else {
       let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
         method: "POST",
@@ -357,7 +360,8 @@ export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) =>
         },
       });
       repostedSong = await repostedSong.json();
-      dispatch(toggleRepost(songId, user, isRepost));
+      dispatch(toggleRepost(songId, user, isRepost, repostedSong));
+      return repostedSong;
     }
   } catch (e) {
     console.log("error");
@@ -504,16 +508,14 @@ export default function reducer(state = initialState, action) {
     // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
     case TOGGLE_LIKE_ACTION: {
       newState = { ...state };
-      console.log("newState", newState);
-      console.log("songid", action.songId);
-      console.log("userId", action.user);
-      console.log("isliked", action.isLiked);
       if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
       else newState.Songs[action.songId].likes[action.user.id] = { ...action.user };
       return newState;
     }
     case TOGGLE_REPOST_ACTION: {
       newState = { ...state };
+      if (action.isRepost) delete newState.Songs[action.songId].reposts[action.user.id];
+      else newState.Songs[action.songId].reposts[action.user.id] = { ...action.user };
       return newState;
     }
     default:
