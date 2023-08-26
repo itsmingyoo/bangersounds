@@ -57,7 +57,7 @@ function App() {
       })
       //! CATCH ERRORS
       .catch((e) => {
-        // console.error("Error fetching data:", e);
+        console.error("Error fetching data:", e);
         setIsLoaded(true);
       });
   }, [dispatch]);
@@ -72,8 +72,6 @@ function App() {
   // Fix render issues
   if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
   if (isLoaded === false) return null;
-  // console.log("isLoaded", isLoaded);
-  // console.log("window path", window.location.pathname);
 
   return (
     <>
@@ -114,6 +112,7 @@ function App() {
             <Route exact path="/songs/:songId">
               <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </Route>
+
             <Route exact path="/discover">
               <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
             </Route>

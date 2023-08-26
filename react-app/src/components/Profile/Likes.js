@@ -3,9 +3,22 @@ import { useHistory } from "react-router-dom";
 import { IoHeartSharp } from "react-icons/io5";
 import DisplayLikes from "../SongDisplay/Likes";
 
+// This is the sidebar box with the user's random three songs
 const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }) => {
   const history = useHistory();
   const numLikes = userLikes.length;
+
+  // Shuffle function to randomize array order
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  const shuffledUserLikes = shuffleArray(userLikes);
+  const randomThreeSongs = shuffledUserLikes.slice(0, 3);
+
   return (
     <div id="likes-main__container">
       <div className="likes-sub__container">
@@ -18,8 +31,8 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
         </div>
       </div>
       <div className="liked-songs-container">
-        {userLikes?.slice(0, 3).map((s) => (
-          <DisplayLikes {...{ userLikes }} />
+        {randomThreeSongs.map((s) => (
+          <DisplayLikes {...{ s, userLikes, isPlayingState, currentlyPlaying }} />
         ))}
       </div>
     </div>
