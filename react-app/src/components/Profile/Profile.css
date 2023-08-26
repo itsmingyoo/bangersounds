@@ -258,6 +258,23 @@ Left padding: The value of --spacing-4x. */
     text-decoration: none;
 }
 
+#song-comment-info {
+    text-decoration: none;
+    cursor: pointer;
+    color: #999;
+    font-size: 12px;
+    width: fit-content;
+    word-break: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -webkit-word-break: break-all;
+}
+
+.user-displayname {
+
+}
+
 hr {
     border-color: #999;
     height: 1px;
@@ -282,6 +299,12 @@ hr {
     margin-bottom: 15px;
     margin-top: 15px;
     gap: 50px;
+}
+
+.user-comment {
+    color: #333333;
+    font-size: 12px;
+
 }
 
 .user-delete2 {

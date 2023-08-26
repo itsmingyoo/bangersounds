@@ -79,7 +79,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
             {/* Like/Reposts not yet implemented */}
             <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
             {/* Only need userComments, then need to order them by most recent */}
-            <LatestComments {...{ user, userComments }} />
+            <LatestComments {...{ user, userComments, songs }} />
           </div>
         </div>
       </div>
