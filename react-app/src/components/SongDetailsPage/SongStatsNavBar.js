@@ -34,8 +34,8 @@ const SongStats = ({
     { name: "Station", to: "#" },
     { name: "Report", to: "#" },
   ];
-  const isLiked = Object.keys(song.likes).includes(user.id.toString());
-  const isRepost = Object.keys(song.reposts).includes(user.id.toString());
+  const isLiked = Object.keys(song.likes).includes(user?.id.toString());
+  const isRepost = Object.keys(song.reposts).includes(user?.id.toString());
 
   const downloadFile = async (fileUrl, fileName) => {
     try {

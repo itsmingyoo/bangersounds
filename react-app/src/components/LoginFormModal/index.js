@@ -38,6 +38,7 @@ function LoginFormModal() {
       setErrors(data);
     } else {
       closeModal();
+      history.push("/discover");
     }
   };
 
