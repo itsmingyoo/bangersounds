@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./SplashPage.css";
 
-const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
+const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
   // import login/create acc stuff here
 
   const dispatch = useDispatch();
@@ -45,12 +45,18 @@ const Splash = ({ songs, isPlayingState, currentlyPlaying }) => {
               <div className="splash-navbar-right-buttons">
                 {/* <button>Sign In</button>
                 <button>Create account</button> */}
-                <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
-                <OpenModalButton
-                  buttonText="Create account"
-                  onItemClick={closeMenu}
-                  modalComponent={<SignupFormModal />}
-                />
+                {userRef?.current === null ? (
+                  <>
+                    <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
+                    <OpenModalButton
+                      buttonText="Create account"
+                      onItemClick={closeMenu}
+                      modalComponent={<SignupFormModal />}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
                 <div>For Artists</div>
               </div>
             </div>

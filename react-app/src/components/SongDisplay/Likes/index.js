@@ -16,7 +16,7 @@ import TogglePlay from "./TogglePlay";
 import LikesTitle from "./LikesTitle";
 import "./Likes.css";
 
-const DisplayLikes = ({ s, isPlayingState, currentlyPlaying, userLikes }) => {
+const DisplayLikes = ({ s, user, isPlayingState, currentlyPlaying, userLikes }) => {
   const dispatch = useDispatch();
   const togglePlayPause = (song) => {
     dispatch(playUserSongAction(song));
@@ -33,7 +33,7 @@ const DisplayLikes = ({ s, isPlayingState, currentlyPlaying, userLikes }) => {
       {/* DISPLAY NAME */}
       {/* SONG TITLE */}
       {/* PLAYS | LIKES | REPOSTS | COMMENTS */}
-      <LikesTitle {...{ s, userLikes }} />
+      <LikesTitle {...{ s, user, userLikes }} />
     </div>
   );
 };

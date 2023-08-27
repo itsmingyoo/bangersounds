@@ -53,7 +53,7 @@
     gap: 5px;
 }
 
-#song-details__nav-bar-buttons > button {
+#song-details__nav-bar-buttons button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,9 +61,12 @@
     border-radius: 4px;
     background-color: white;
     border: 1px solid #999;
+    cursor: pointer;
 }
-
-#song-details__nav-bar-buttons > div > button {
+#song-details__nav-bar-buttons div {
+    max-height: 40px;
+}
+#song-details__nav-bar-buttons div button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,6 +74,7 @@
     border-radius: 4px;
     background-color: white;
     border: 1px solid #999;
+    height: 100%;
 }
 
 .song-details__title {
@@ -299,4 +303,24 @@
     padding: 5px;
     margin-bottom: 15px;
     cursor: pointer;
+}
+
+#song-details__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+#song-details__stats span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 14px;
+}
+
+#song-details__stats span svg {
+    font-size: 18px;
+    margin-right: 3px;
 }
