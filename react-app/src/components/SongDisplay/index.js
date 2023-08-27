@@ -9,6 +9,7 @@ import {
   IoShareOutline,
   IoLinkSharp,
 } from "react-icons/io5";
+import { FaComment } from "react-icons/fa";
 import EditSong from "../SongDetailsPage/EditSongModal";
 import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
@@ -55,7 +56,14 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
                     <div className="song-display__display-name">{song.artistInfo.displayName}</div>
                   </div>
                   <div id="song-display__title-container">
-                    <div className="song-display__title song-display-title">{song.title}</div>
+                    <div className="song-display__title song-display-title">
+                      <a
+                        href={`/songs/${song.id}`}
+                        style={{ textDecoration: "none", cursor: "pointer", color: "black" }}
+                      >
+                        {song.title}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -100,7 +108,15 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
                     <DropDown list={list} songId={song.id} isUserSong={isUserSong} user={user} isClassName={false} />
                   )}
                 </div>
-                <div id="song-display-stats">1 Play 1 Comment</div>
+                <div id="song-display-stats">
+                  <span>
+                    <IoPlaySharp /> 1.1m
+                  </span>
+                  <span>
+                    <FaComment />
+                    {song.comments.length}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ const LikesTitle = ({ s, user, userLikes }) => {
         </span>
         <span>
           {/* <BiRepost /> {Object.values(s.reposts).length} */}
-          <RepostButton song={s} user={user} isRepost={isRepost} />
+          <RepostButton song={s} user={user} isRepost={isRepost} /> {Object.values(s.reposts).length}
         </span>
         <span>
           <FaComment /> {s.comments.length}

@@ -11,8 +11,22 @@ const LikeButton = ({ song, user, isLiked, cName }) => {
   };
   return (
     <div id="like-btn__container">
-      <button id="like-btn" onClick={toggleLike}>
-        <IoHeartSharp className={cName} />
+      <button
+        id={`like-btn`}
+        onClick={toggleLike}
+        style={{
+          backgroundColor: "white",
+          border: isLiked ? "1px solid #f50" : "",
+          borderRadius: isLiked ? "4px" : "",
+        }}
+      >
+        <IoHeartSharp
+          className={cName}
+          style={{
+            color: isLiked ? "#f50" : "",
+            cursor: "pointer",
+          }}
+        />
       </button>
     </div>
   );

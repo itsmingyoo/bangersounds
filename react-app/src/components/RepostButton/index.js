@@ -11,8 +11,21 @@ const RepostButton = ({ song, user, isRepost }) => {
   };
   return (
     <div id="repost-btn__container">
-      <button id="repost-btn" onClick={toggleRepost}>
-        <BiRepost />
+      <button
+        id="repost-btn"
+        onClick={toggleRepost}
+        style={{
+          backgroundColor: "white",
+          border: isRepost ? "1px solid #f50" : "1px solid black",
+          borderRadius: isRepost ? "4px" : "4px",
+        }}
+      >
+        <BiRepost
+          style={{
+            color: isRepost ? "#f50" : "",
+            cursor: "pointer",
+          }}
+        />
       </button>
     </div>
   );
