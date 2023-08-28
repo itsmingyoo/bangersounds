@@ -22,6 +22,8 @@ const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
 const TOGGLE_LIKE_ACTION = "likes/TOGGLE_LIKE_ACTION";
 const TOGGLE_REPOST_ACTION = "reposts/TOGGLE_REPOST_ACTION";
 
+
+
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -140,6 +142,8 @@ const toggleRepost = (songId, user, isRepost, res) => {
     res,
   };
 };
+
+
 
 //*  ===================== song thunks ===========================//
 
@@ -369,6 +373,8 @@ export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) =>
   }
 };
 
+
+
 //? ================== reducer================================//
 let initialState = {
   Songs: {},
@@ -518,6 +524,7 @@ export default function reducer(state = initialState, action) {
       else newState.Songs[action.songId].reposts[action.user.id] = { ...action.user };
       return newState;
     }
+
     default:
       return state;
   }

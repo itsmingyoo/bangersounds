@@ -27,15 +27,6 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
     }
   };
 
-  // Likes Button Function Props
-  // const toggleLike = (songId) => {
-  //   dispatch(thunkToggleLike(songId));
-  // };
-
-  // const toggleRepost = (songId) => {
-  //   dispatch(thunkToggleRepost(songId));
-  // };
-
   return (
     <div className="profile-container-main">
       <div className="profile-container">
