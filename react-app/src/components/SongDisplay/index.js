@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import WaveForm from "../SongDetailsPage/WaveForm";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import {
@@ -9,22 +9,27 @@ import {
   IoShareOutline,
   IoLinkSharp,
 } from "react-icons/io5";
+import { FaComment } from "react-icons/fa";
 import EditSong from "../SongDetailsPage/EditSongModal";
 import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
 import "./SongDisplay.css";
+import LikeButton from "../LikeButton";
 
 const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
+  const userSongsRef = useRef(userSongs);
   return (
     <div>
-      {userSongs?.map((song) => {
+      {userSongsRef?.current.map((song) => {
         const isUserSong = song.artistId === user.id;
+        const isLiked = Object.keys(song.likes).includes(user.id.toString());
         const list = [
           { name: "Add to Next Up", to: "#" },
           { name: "Add to Playlist", to: "#" },
           { name: "Station", to: "#" },
           { name: "Report", to: "#" },
         ];
+
         return (
           <div id="song-display-container" key={song.id}>
             <div className="song-display-pfp">
@@ -51,7 +56,14 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
                     <div className="song-display__display-name">{song.artistInfo.displayName}</div>
                   </div>
                   <div id="song-display__title-container">
-                    <div className="song-display__title song-display-title">{song.title}</div>
+                    <div className="song-display__title song-display-title">
+                      <a
+                        href={`/songs/${song.id}`}
+                        style={{ textDecoration: "none", cursor: "pointer", color: "black" }}
+                      >
+                        {song.title}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -60,9 +72,10 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
               </div>
               <div id="song-display-navbar">
                 <div id="song-display-btns">
-                  <button onClick={() => alert("Feature coming soon!")}>
+                  {/* <button onClick={() => alert("Feature coming soon!")}>
                     <IoHeartSharp />
-                  </button>
+                  </button> */}
+                  <LikeButton {...{ song, user, isLiked }} />
                   <button onClick={() => alert("Feature coming soon!")}>
                     <IoShareOutline />
                     Share
@@ -95,7 +108,15 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
                     <DropDown list={list} songId={song.id} isUserSong={isUserSong} user={user} isClassName={false} />
                   )}
                 </div>
-                <div id="song-display-stats">1 Play 1 Comment</div>
+                <div id="song-display-stats">
+                  <span>
+                    <IoPlaySharp /> 1.1m
+                  </span>
+                  <span>
+                    <FaComment />
+                    {song.comments.length}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

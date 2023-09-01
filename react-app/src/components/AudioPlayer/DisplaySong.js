@@ -63,7 +63,11 @@ function DisplaySong({
         {/* TITLE */}
         <div className="audio-text">
           <span className="displayName">{currentlyPlaying.artistInfo.displayName}</span>
-          <span className="title">{currentlyPlaying.title}</span>
+          <span className="title">
+            <a href={`/songs/${currentlyPlaying.id}`} style={{ textDecoration: "none", cursor: "pointer" }}>
+              {currentlyPlaying.title}
+            </a>
+          </span>
         </div>
       </div>
     </div>

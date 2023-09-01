@@ -7,6 +7,7 @@ import DisplayLikes from "../SongDisplay/Likes";
 const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }) => {
   const history = useHistory();
   const numLikes = userLikes.length;
+  const user = userRef.current;
 
   // Cannot call a reverse() array method (that of which can only mutate the original array) on a prop because props aren't meant to be mutated, they are for read-only
   // Solution is to make a copy of that array, then mutate the copy to your liking.
@@ -43,7 +44,7 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
           .reverse()
           .slice(0, 3)
           .map((s) => (
-            <DisplayLikes {...{ s, userLikes, isPlayingState, currentlyPlaying }} />
+            <DisplayLikes {...{ s, user, userLikes, isPlayingState, currentlyPlaying }} />
           ))}
       </div>
     </div>
