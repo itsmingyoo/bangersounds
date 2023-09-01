@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { setUser } from "../../store/session";
+import { useDispatch } from "react-redux";
 
 const EditProfileModal = ({ user }) => {
+  const dispatch = useDispatch();
   const [dn, setDn] = useState(user.displayName ?? "");
   const [fn, setFn] = useState(user.firstName ?? "");
   const [ln, setLn] = useState(user.lastName ?? "");
@@ -30,6 +33,7 @@ const EditProfileModal = ({ user }) => {
       });
       update = await update.json();
       console.log(update);
+      await dispatch(setUser(update));
       return update;
     } catch (e) {
       return e;
