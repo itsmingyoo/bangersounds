@@ -1,20 +1,13 @@
 import React, { useRef } from "react";
 import WaveForm from "../SongDetailsPage/WaveForm";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
-import {
-  IoPlaySharp,
-  IoPauseSharp,
-  IoEllipsisHorizontalSharp,
-  IoHeartSharp,
-  IoShareOutline,
-  IoLinkSharp,
-} from "react-icons/io5";
+import { IoPlaySharp, IoPauseSharp, IoShareOutline, IoLinkSharp } from "react-icons/io5";
 import { FaComment } from "react-icons/fa";
 import EditSong from "../SongDetailsPage/EditSongModal";
 import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
-import "./SongDisplay.css";
 import LikeButton from "../LikeButton";
+import "./SongDisplay.css";
 
 const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
   const userSongsRef = useRef(userSongs);

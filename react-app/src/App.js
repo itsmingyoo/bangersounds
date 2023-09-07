@@ -22,16 +22,11 @@ function App() {
 
   // THIS SOLVES THE ISSUE OF REDIRECTING FROM SPLASH PAGE TO ANOTHER PAGE AND IT WOULD SOLVE THE PROBLEM OF NAVBAR/AUDIOPLAYER NOT SHOWING - DONT ASK WHY OR HOW - IT JUST WORKS
   // PSA - WE'RE NOT EVEN USING THIS ANYWHERE AND IT SOLVES IT - YEAH DONT ASK - IT JUST SOLVES IT
-  const location = useLocation();
+  useLocation();
   // const locationRef = useRef(location);
-  // console.log("this is location", locationRef.current);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [path, setPath] = useState(window.location.pathname);
-  // console.log("path state", path);
-  // useEffect(() => {
-  //   console.log("UE - path state", path);
-  // });
+
   //* useSelector is unreliable with finding the updated state after an async function (i.e. the dispatches in the useEffect)
   //* Solution: we pass the user that uses a useSelector into useRef(user) then in a useEffect we set userRef.current = user
   const user = useSelector((s) => s.session.user);
@@ -76,6 +71,7 @@ function App() {
   return (
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
+      <div className="text-xl text-blue text-sm text-blue">TAILWIND</div>
       {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <>
