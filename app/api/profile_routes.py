@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import EditUserForm
 from flask_login import current_user, login_user, logout_user, login_required
+from app.api.aws_helpers_img import upload_file_to_s3, get_unique_filename
 from pprint import pprint
 
 # PREFIX '/api/profile'
@@ -20,15 +21,33 @@ def edit_profile(userId):
     print('THIS IS THE FORM')
     print('form', form.data)
     if form.validate_on_submit():
+        # PROFILE IMAGE AWS S3
+        pfp_image = form.data['profile_image']
+        pfp_image.filename = get_unique_filename(pfp_image.filename)
+        upload = upload_file_to_s3
+        if "url" not in upload:
+            return jsonify(upload), 400
+        pfp_url = upload['url']
+
+        # PROFILE BG AWS S3
+        bg_image = form.data['profile_background']
+        bg_image.filename = get_unique_filename(bg_image.filename)
+        upload2 = upload_file_to_s3
+        if "url" not in upload2:
+            return jsonify(upload2), 400
+        bg_url = upload2['url']
+
+
         user.display_name = form.data['display_name']
         # user.email = form.data['email']
         # user.password = form.data['password']
         user.first_name = form.data['first_name']
         user.last_name = form.data['last_name']
-        # user.profile_image = form.data['profile_image']
+        user.profile_image = pfp_url
         user.profile_bio = form.data['profile_bio']
         user.profile_city = form.data['profile_city']
         user.profile_country = form.data['profile_country']
+        user.profile_background = bg_url
 
         db.session.commit()
 
