@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { setUser } from "../../store/session";
 import { useDispatch } from "react-redux";
 
-const EditProfileModal = ({ user }) => {
+const EditProfileModal = ({ userRef, closeModal }) => {
   const dispatch = useDispatch();
-  const [dn, setDn] = useState(user.displayName ?? "");
-  const [fn, setFn] = useState(user.firstName ?? "");
-  const [ln, setLn] = useState(user.lastName ?? "");
-  const [city, setCity] = useState(user.profileCity ?? "");
-  const [country, setCountry] = useState(user.profileCountry ?? "");
-  const [bio, setBio] = useState(user.profileBio ?? "");
 
-  console.log(user);
+  const [dn, setDn] = useState(userRef.current.displayName ?? "");
+  const [fn, setFn] = useState(userRef.current.firstName ?? "");
+  const [ln, setLn] = useState(userRef.current.lastName ?? "");
+  const [city, setCity] = useState(userRef.current.profileCity ?? "");
+  const [country, setCountry] = useState(userRef.current.profileCountry ?? "");
+  const [bio, setBio] = useState(userRef.current.profileBio ?? "");
+
+  console.log(userRef);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       first_name: fn,
       last_name: ln,
-      dislay_name: dn,
+      display_name: dn,
       profile_city: city,
       profile_country: country,
       profile_bio: bio,
     };
     try {
-      let update = await fetch(`/api/profile/${user.id}`, {
+      let update = await fetch(`/api/profile/${userRef.current.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +34,8 @@ const EditProfileModal = ({ user }) => {
       });
       update = await update.json();
       console.log(update);
-      await dispatch(setUser(update));
+      await dispatch(setUser(update.user));
+      closeModal();
       return update;
     } catch (e) {
       return e;

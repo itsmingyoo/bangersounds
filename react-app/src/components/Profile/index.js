@@ -30,11 +30,11 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   return (
     <div className="profile-container-main">
       <div className="profile-container">
-        <ProfileHeader {...{ user }} />
+        <ProfileHeader {...{ userRef }} />
 
         <ProfileNavBar
           {...{
-            user,
+            userRef,
             userSongs,
             isPlayingState,
             currentlyPlaying,

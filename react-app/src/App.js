@@ -110,7 +110,7 @@ function App() {
             </Route>
 
             <Route exact path="/songs/:songId">
-              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments }} />
             </Route>
 
             <Route exact path="/discover">
