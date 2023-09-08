@@ -16,6 +16,7 @@ import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
 import "./index.css";
+import Test from "./components/test";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +82,10 @@ function App() {
             </Route>
             <Route exact path="/signup">
               <SignupFormPage />
+            </Route>
+
+            <Route exact path="/test">
+              <Test />
             </Route>
 
             <Route exact path="/splash">

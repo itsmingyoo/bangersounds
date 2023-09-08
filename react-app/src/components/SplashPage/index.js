@@ -40,6 +40,7 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
         <div className="splash-header">
           <div className="splash-header-content">
             <div className="splash-navbar">
+              <div className="text-3xl text-green-500 border-2">TESTING DIV FOR TAILWIND</div>
               <img src={bangerSoundsLogo} alt="logo" />
 
               <div className="splash-navbar-right-buttons">
