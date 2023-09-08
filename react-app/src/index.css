@@ -1,9 +1,13 @@
 /* TODO Add site wide styles */
-import 'tailwindcss/base'
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 /** Orange Color: #f50 */
 /** DISPLAYNAME COLOR: #999  */
 /** LIGHT GRAY BG COLOR #717070 */
 /* Everything else is black or white */
+
 body {
     top: 0;
     bottom: 0;
