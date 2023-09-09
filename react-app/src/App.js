@@ -22,7 +22,7 @@ function App() {
 
   // THIS SOLVES THE ISSUE OF REDIRECTING FROM SPLASH PAGE TO ANOTHER PAGE AND IT WOULD SOLVE THE PROBLEM OF NAVBAR/AUDIOPLAYER NOT SHOWING - DONT ASK WHY OR HOW - IT JUST WORKS
   // PSA - WE'RE NOT EVEN USING THIS ANYWHERE AND IT SOLVES IT - YEAH DONT ASK - IT JUST SOLVES IT
-  const location = useLocation();
+  useLocation();
   // const locationRef = useRef(location);
   // console.log("this is location", locationRef.current);
 
@@ -110,7 +110,7 @@ function App() {
             </Route>
 
             <Route exact path="/songs/:songId">
-              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments }} />
             </Route>
 
             <Route exact path="/discover">

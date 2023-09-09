@@ -188,9 +188,6 @@ export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatc
   // console.log("thunk", updatedSongFormData);
   let updatedSong = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
     body: updatedSongFormData,
   });
   updatedSong = await updatedSong.json();
@@ -518,6 +515,7 @@ export default function reducer(state = initialState, action) {
       else newState.Songs[action.songId].reposts[action.user.id] = { ...action.user };
       return newState;
     }
+
     default:
       return state;
   }
