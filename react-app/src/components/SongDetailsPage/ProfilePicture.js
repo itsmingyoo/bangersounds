@@ -1,11 +1,11 @@
 import React from "react";
 
-const ProfilePicture = ({ userRef, song }) => {
-  if (!userRef || userRef.current === null) return null;
+const ProfilePicture = ({ user, song }) => {
+  if (!user || user === null) return null;
   return (
     <>
       {/* <div className="song-details__profile-picture"> */}
-      <img src={userRef.current.profileImage} alt="PROFILE PICTURE" />
+      <img src={user.profileImage} alt="PROFILE PICTURE" />
       {/* </div> */}
     </>
   );

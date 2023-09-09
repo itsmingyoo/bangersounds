@@ -3,6 +3,7 @@ from app.models import User, db
 from app.forms import EditUserForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_helpers_img import upload_file_to_s3, get_unique_filename
+from .auth_routes import validation_errors_to_error_messages
 from pprint import pprint
 
 # PREFIX '/api/profile'
@@ -22,20 +23,33 @@ def edit_profile(userId):
     print('form', form.data)
     if form.validate_on_submit():
         # PROFILE IMAGE AWS S3
-        pfp_image = form.data['profile_image']
+        pfp_image = form.data['profile_image_aws']
         pfp_image.filename = get_unique_filename(pfp_image.filename)
-        upload = upload_file_to_s3
+        upload = upload_file_to_s3(pfp_image)
         if "url" not in upload:
+            print('!!!!!!!!!!!!!!!')
+            print('!!!!!!!!!!!!!!!')
+            print('!!!!!!!!!!!!!!!')
+            print('PFP PFP PFP URL NOT IN UPLOAD')
             return jsonify(upload), 400
+        print('@@@@@@@@@@@@@@@')
+        print('@@@@@@@@@@@@@@@')
+        print('@@@@@@@@@@@@@@@')
         pfp_url = upload['url']
+        print('this is pfp_url', pfp_url)
 
         # PROFILE BG AWS S3
-        bg_image = form.data['profile_background']
+        bg_image = form.data['profile_bg_image_aws']
         bg_image.filename = get_unique_filename(bg_image.filename)
-        upload2 = upload_file_to_s3
+        upload2 = upload_file_to_s3(bg_image)
         if "url" not in upload2:
             return jsonify(upload2), 400
+
+        print('@@@@@@@@@@@@@@@')
+        print('@@@@@@@@@@@@@@@')
+        print('@@@@@@@@@@@@@@@')
         bg_url = upload2['url']
+        print('this is bg_url', bg_url)
 
 
         user.display_name = form.data['display_name']
@@ -54,8 +68,13 @@ def edit_profile(userId):
         pprint(user.to_dict())
 
         return jsonify({'message': "Profile updated successfully", "user": user.to_dict()})
-
-    return jsonify(errors=form.errors), 400
+    print('???????????????')
+    print('???????????????')
+    print('???????????????')
+    print('???????????????')
+    print('???????????????')
+    print('you never hit the if validate block')
+    return {"errors": validation_errors_to_error_messages(form.errors), 'message': 'last return'}, 401
 
 
 

@@ -3,14 +3,12 @@ import { useSelector } from "react-redux";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import WaveForm from "../SongDetailsPage/WaveForm";
 
-const ProfileHeader = ({ userRef }) => {
-  // console.log(userRef);
+const ProfileHeader = () => {
   const user = useSelector((s) => s.session.user);
-  console.log("bruh", user);
   return (
     <div className="profile-header-container">
       <div className="profile-header-wrapper">
-        {userRef.current.profileBackground === "" ? (
+        {user.profileBackground === "" ? (
           <div style={{ height: "100%" }}>
             <div className="profile-linear-gradient" style={{ height: "240px" }}>
               <div className="profile-linear-gradient-buffer backgroundGradient-hidden"></div>
@@ -20,7 +18,7 @@ const ProfileHeader = ({ userRef }) => {
               ></div>
               <div className="profile-header-user-info-wrapper" style={{ zIndex: "999" }}>
                 <div className="profile-header-picture" style={{ zIndex: "999" }}>
-                  <ProfilePicture userRef={userRef} />
+                  <ProfilePicture user={user} />
                 </div>
                 <div className="profile-header-user-info" style={{ zIndex: "999" }}>
                   <div>{user.displayName}</div>
@@ -38,14 +36,14 @@ const ProfileHeader = ({ userRef }) => {
           <div
             className="profile-header-user-info-wrapper"
             style={{
-              backgroundImage: `url(${userRef.current.profileBackground})`,
+              backgroundImage: `url(${user.profileBackground})`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
             }}
           >
             <div className="profile-header-picture">
-              <ProfilePicture userRef={userRef} />
+              <ProfilePicture user={user} />
             </div>
             <div className="profile-header-user-info">
               <div>{user.displayName}</div>

@@ -22,8 +22,6 @@ const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
 const TOGGLE_LIKE_ACTION = "likes/TOGGLE_LIKE_ACTION";
 const TOGGLE_REPOST_ACTION = "reposts/TOGGLE_REPOST_ACTION";
 
-
-
 //? =====================  actions ===========================//
 
 const getAllSongAction = (allSongs) => {
@@ -143,8 +141,6 @@ const toggleRepost = (songId, user, isRepost, res) => {
   };
 };
 
-
-
 //*  ===================== song thunks ===========================//
 
 export const thunkGetAllSongs = () => async (dispatch) => {
@@ -192,9 +188,6 @@ export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatc
   // console.log("thunk", updatedSongFormData);
   let updatedSong = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
     body: updatedSongFormData,
   });
   updatedSong = await updatedSong.json();
@@ -372,8 +365,6 @@ export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) =>
     return e;
   }
 };
-
-
 
 //? ================== reducer================================//
 let initialState = {
