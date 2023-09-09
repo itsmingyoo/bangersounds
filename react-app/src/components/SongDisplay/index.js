@@ -15,8 +15,10 @@ import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
 import "./SongDisplay.css";
 import LikeButton from "../LikeButton";
+import { useSelector } from "react-redux";
 
-const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
+const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
+  const user = useSelector((s) => s.session.user);
   const userSongsRef = useRef(userSongs);
   return (
     <div>
