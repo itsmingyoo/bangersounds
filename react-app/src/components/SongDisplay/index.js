@@ -27,7 +27,7 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
         const isUserSong = song.artistId === user.id;
         const isLiked = Object.keys(song.likes).includes(user.id.toString());
         const isRepost = Object.keys(song.reposts).includes(user.id.toString());
-        // console.log("is repost", isRepost);
+
         const list = [
           { name: "Add to Next Up", to: "#" },
           { name: "Add to Playlist", to: "#" },
@@ -38,7 +38,7 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
         return (
           <div id="song-display-container" key={song.id}>
             <div className="song-display-pfp">
-              {console.log(song)}
+              {/* {
               <ProfilePicture user={song.artistInfo} />
             </div>
             <div id="song-display__button-title-container">

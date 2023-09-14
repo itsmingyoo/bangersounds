@@ -29,9 +29,9 @@ function PostNewSong() {
   // const testData = new FormData();
   // let test = "test text";
   // testData.append("test", test);
-  // console.log("this is testData", testData);
+
   // for (const [key, value] of testData.entries()) {
-  //   console.log(key, value);
+
   // }
 
   const onSubmit = async (e) => {
@@ -69,7 +69,7 @@ function PostNewSong() {
 
     let res = await dispatch(thunkPostNewSong(formData));
 
-    // console.log("this is res after post new song dispatch", res);
+
 
     if (!res.errors) {
       setSongLoading(true);
@@ -81,9 +81,9 @@ function PostNewSong() {
 
   // Change Song Submit State to Render the Form of the Song
   const handleClick = async (e) => {
-    // console.log("og", song);
+
     setSong(e.target.files[0]);
-    // console.log("og after setSong", song);
+
     setSubmitted(true);
   };
 
@@ -101,8 +101,8 @@ function PostNewSong() {
   }, []);
 
   // useEffect(() => {
-  //   console.log("UE");
-  //   console.log("this is the song state", song);
+
+
   // }, [song]);
 
   const genres = [
@@ -194,8 +194,8 @@ function PostNewSong() {
   if (submitted === true) {
     return (
       <>
-        {/* {console.log("this is song after user chooses a file", song)} */}
-        {/* {console.log("privated ? ", privated)} */}
+        {/* {
+        {/* {
         <div>
           <form className="new-song__form" onSubmit={onSubmit} encType="multipart/form-data">
             {inputs.map((el, index) => {
@@ -325,9 +325,9 @@ export default PostNewSong;
 
 // TEST AWS
 // dispatch, save result, log response
-// console.log("you hit submit! now waiting for dispatch response");
+
 // let res = await dispatch(thunkTestAws(formData));
-// console.log(
+
 //   "back in the component! its completed the dispatch; this is the res from that dispatch",
 //   res
 // );

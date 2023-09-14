@@ -26,7 +26,7 @@
 //   if (searching)
 //     userFavorites = userFavorites.filter((p) => p.item_name.toLowerCase().includes(searching.toLowerCase()));
 
-//   // console.log(userFavorites)
+//
 
 //   return (
 //     <div className="favsPage">

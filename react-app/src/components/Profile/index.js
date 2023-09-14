@@ -17,7 +17,6 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   const userComments = Object.values(comments).filter((c) => c.userId === user.id);
   const userLikes = songs.filter((s) => s.likes[user.id]);
   const userReposts = songs.filter((s) => s.reposts[user.id]);
-  console.log("userrepoests", userReposts);
 
   // FN
   const togglePlayPause = async (song) => {

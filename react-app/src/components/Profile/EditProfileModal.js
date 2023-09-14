@@ -19,7 +19,7 @@ const EditProfileModal = ({ userRef, closeModal }) => {
   const [errors, setErrors] = useState({});
 
   // useEffect(() => {
-  //   console.log(pfp, bg);
+
   // });
 
   // const onDropPfp = useCallback((acceptedFiles) => {

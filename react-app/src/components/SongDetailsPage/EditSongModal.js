@@ -120,14 +120,14 @@ const EditSong = ({
     if (thumbnail.length > 255) errObj.thumbnail = "Thumbnail can be up to 255 characters";
     if (Object.values(errObj).length > 0) return setErrors(errObj);
 
-    // console.log("title", title);
-    // console.log("genre", genre);
-    // console.log("description", description);
-    // console.log("private", privated);
-    // console.log("caption", caption);
-    // console.log("thumbnail", thumbnail);
-    // console.log("song", songUpload);
-    // console.log("song_url", songURL);
+
+
+
+
+
+
+
+
 
     const formData2 = new FormData();
     formData2.append("title", title);
@@ -138,11 +138,11 @@ const EditSong = ({
     formData2.append("thumbnail", thumbnail);
     formData2.append("song", songUpload);
     formData2.append("song_url", songURL);
-    // console.log("formdata after appending", formData2.entries());
+
 
     let res = await dispatch(thunkEditSongById(song.id, formData2));
 
-    // console.log("this is res after edit song dispatch", res);
+
 
     if (!res.errors) {
       setSongLoading(true);
@@ -279,7 +279,7 @@ const EditSong = ({
                       {el.name}
                     </option>
                   ))}
-                  {/* {console.log(genre)} */}
+                  {/* {
                 </select>
               </div>
               <div id="new-song__radio-btns">
