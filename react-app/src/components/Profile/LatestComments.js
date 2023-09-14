@@ -84,11 +84,12 @@ const LatestComments = ({ user, userComments, songs }) => {
             return (
               <div
                 id="user-comment__container2"
+                key={`comment-${c.id}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
               >
                 <div>
-                  <div key={c.id} className="user-displayname">
+                  <div className="user-displayname">
                     <a href={`/songs/${songInfo[0].id}`} id="song-comment-info">
                       on {songInfo[0].title}
                     </a>

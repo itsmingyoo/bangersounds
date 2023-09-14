@@ -63,8 +63,8 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
       </button>
       <div className={`${ulClassName} dropdown-list2`} ref={ulRef}>
         <ul className="dropdown-nav">
-          {list?.map((item) => (
-            <li key={item.name}>
+          {list?.map((item, index) => (
+            <li key={index}>
               <NavLink to={item.to} onClick={() => alert("Feature coming soon!")}>
                 {item.name}
               </NavLink>

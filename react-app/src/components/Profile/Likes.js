@@ -43,8 +43,9 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
         {[...userLikes]
           .reverse()
           .slice(0, 3)
-          .map((s) => (
-            <DisplayLikes {...{ s, user, userLikes, isPlayingState, currentlyPlaying }} />
+          .map((s, index) => (
+            // Provide a unique key prop based on the index or a unique identifier of the 's' object
+            <DisplayLikes key={`like-${index}`} {...{ s, user, userLikes, isPlayingState, currentlyPlaying }} />
           ))}
       </div>
     </div>
