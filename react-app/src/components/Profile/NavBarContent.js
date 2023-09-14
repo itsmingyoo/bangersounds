@@ -27,7 +27,9 @@ const NavBarContent = ({
       {/* {active === 3 && <Albums />} */}
       {/* {active === 4 && <Playlists />} */}
       {active === 5 && (
-        <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
+        <Reposts
+          {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs, userReposts }}
+        />
       )}
     </div>
   );

@@ -17,6 +17,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   const userComments = Object.values(comments).filter((c) => c.userId === user.id);
   const userLikes = songs.filter((s) => s.likes[user.id]);
   const userReposts = songs.filter((s) => s.reposts[user.id]);
+  console.log("userrepoests", userReposts);
 
   // FN
   const togglePlayPause = async (song) => {
@@ -67,9 +68,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
           </div>
 
           <div id="profile-info__container">
-            {/* Like/Reposts not yet implemented */}
             <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
-            {/* Only need userComments, then need to order them by most recent */}
             <LatestComments {...{ user, userComments, songs }} />
           </div>
         </div>
