@@ -1,5 +1,5 @@
 // Post a New Song Form
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkPostNewSong } from "../../store/songs";

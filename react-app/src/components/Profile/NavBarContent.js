@@ -24,7 +24,7 @@ const NavBarContent = ({
         <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs, userLikes }} />
       )}
       {/* {active === 1 && <PopularSongs />} */}
-      {active === 2 && <UserUploads />}
+      {active === 2 && <UserUploads {...{ user, isPlayingState, currentlyPlaying, togglePlayPause }} />}
       {/* {active === 3 && <Albums />} */}
       {/* {active === 4 && <Playlists />} */}
       {active === 5 && (
