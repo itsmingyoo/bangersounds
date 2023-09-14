@@ -69,8 +69,6 @@ function PostNewSong() {
 
     let res = await dispatch(thunkPostNewSong(formData));
 
-
-
     if (!res.errors) {
       setSongLoading(true);
       // await dispatch(thunkGetSongById(res.id)); // remove this unless you have rendering issues after creating a new song
@@ -81,7 +79,6 @@ function PostNewSong() {
 
   // Change Song Submit State to Render the Form of the Song
   const handleClick = async (e) => {
-
     setSong(e.target.files[0]);
 
     setSubmitted(true);
@@ -99,11 +96,6 @@ function PostNewSong() {
 
     reader.readAsDataURL(acceptedFiles[0]); // Read the data URL of the dropped file
   }, []);
-
-  // useEffect(() => {
-
-
-  // }, [song]);
 
   const genres = [
     { name: "None" },
@@ -194,8 +186,6 @@ function PostNewSong() {
   if (submitted === true) {
     return (
       <>
-        {/* {
-        {/* {
         <div>
           <form className="new-song__form" onSubmit={onSubmit} encType="multipart/form-data">
             {inputs.map((el, index) => {

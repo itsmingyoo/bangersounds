@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Reposts from "./Reposts";
 import All from "./All";
 import "./Profile.css";
+import UserUploads from "./UserUploads";
 
 const NavBarContent = ({
   user,
@@ -23,7 +24,7 @@ const NavBarContent = ({
         <All {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs, userLikes }} />
       )}
       {/* {active === 1 && <PopularSongs />} */}
-      {/* {active === 2 && <Songs />} */}
+      {active === 2 && <UserUploads />}
       {/* {active === 3 && <Albums />} */}
       {/* {active === 4 && <Playlists />} */}
       {active === 5 && (

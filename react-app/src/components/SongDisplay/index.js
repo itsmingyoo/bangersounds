@@ -38,7 +38,6 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
         return (
           <div id="song-display-container" key={song.id}>
             <div className="song-display-pfp">
-              {/* {
               <ProfilePicture user={song.artistInfo} />
             </div>
             <div id="song-display__button-title-container">
