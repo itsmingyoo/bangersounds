@@ -8,7 +8,6 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
   // Give each index of the songComments its own local state so it wont apply to all the mapped elements
   const [hoveredStates, setHoveredStates] = useState(Array(songComments.length).fill(false));
 
-  // console.log("is user comment", isUserComment);
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(song.id, c.id));
   };
@@ -28,8 +27,7 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
   };
 
   // useEffect(() => {
-  //   console.log("true", hoveredStates);
-  //   console.log("false", hoveredStates);
+
   // });
 
   // CONTEXT - MAPPING THROUGH EACH COMMENT, EXTRACTING COMMENT AND INDEX - INDEX IS USED FOR MANAGING EACH ELEMENT'S LOCAL STATE WHICH IS DEFINED ASS AN ARRAY
@@ -39,15 +37,12 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
       {songComments.reverse().map((c, index) => {
         // Create Current Date
         let currentDate = new Date(); //.toString().split(" ");
-        // console.log("currentDate", currentDate); // idx 4 is time (hh:mm:ss)
 
         // Modify CreatedAt to be the same format as the currentDate
         let commentDate = new Date(c.createdAt); //.toString().split(" "); // idx 4
-        // console.log("commentDate", commentDate);
 
         // Calculate difference and convert from milliseconds to seconds by dividing by 1000
         const timeDifference = Math.floor((currentDate - commentDate) / 1000);
-        // console.log(timeDifference); // seconds
 
         // Create a "time since comment was posted"
         let timeAgoString = "";

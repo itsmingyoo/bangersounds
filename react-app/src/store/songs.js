@@ -179,13 +179,11 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
     dispatch(postNewSongAction(newSong));
     return newSong;
   } else {
-    // console.log("error: Song not okay");
     return;
   }
 };
 
 export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatch) => {
-  // console.log("thunk", updatedSongFormData);
   let updatedSong = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
     body: updatedSongFormData,
@@ -222,7 +220,7 @@ export const thunkGetAllComments = () => async (dispatch) => {
   });
   if (comments.ok) {
     comments = await comments.json();
-    // console.log(`YOU ARE WORKING WITH THIS ===`, comments);
+
     dispatch(getAllComments(comments));
     return comments;
   }
@@ -239,8 +237,7 @@ export const thunkGetUserComments = () => async (dispatch) => {
   });
   if (comments.ok) {
     comments = await comments.json();
-    // console.log("thunk", comments);
-    // console.log(`YOU ARE WORKING WITH THIS ===`, comments);
+
     dispatch(getUserComments(comments));
     return comments;
   }
@@ -263,7 +260,6 @@ export const thunkGetSongComments = (songId) => async (dispatch) => {
 };
 
 export const thunkPostComment = (songId, commentData) => async (dispatch) => {
-  // console.log("before thunk", commentData);
   let comment = await fetch(`/api/songs/${songId}/comment`, {
     method: "POST",
     headers: {
@@ -271,14 +267,14 @@ export const thunkPostComment = (songId, commentData) => async (dispatch) => {
     },
     body: JSON.stringify(commentData),
   });
-  // console.log("after thunk, outside if block", comment);
+
   if (comment.ok) {
     comment = await comment.json();
-    // console.log("in if block", comment);
+
     dispatch(postComment(songId, comment));
     return comment;
   }
-  // console.log("end", comment.errors);
+
   return comment.errors;
 };
 

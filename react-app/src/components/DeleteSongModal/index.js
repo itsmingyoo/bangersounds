@@ -10,7 +10,6 @@ function DeleteSongModal({ songId, user }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
-  // console.log("user in the modal", user);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -29,8 +28,7 @@ function DeleteSongModal({ songId, user }) {
       <div id="delete-modal__top">
         <div id="delete-modal__top-left">PROFILE PICTURE</div>
         <div id="delete-modal__top-right">
-          INSERT COMPONENT WITH PLAY BUTTON, SONG NAME, ARTIST NAME, DATE, AND
-          WAVEFORMS
+          INSERT COMPONENT WITH PLAY BUTTON, SONG NAME, ARTIST NAME, DATE, AND WAVEFORMS
         </div>
       </div>
       {/*  */}
@@ -46,8 +44,8 @@ function DeleteSongModal({ songId, user }) {
           {/* SLIGHTLY LARGER FONT THAN THE P TAGS */}
           <div>Permanently delete this track?</div>
           <p>
-            Removing this track is irreversible. You will lose all the plays,
-            likes and comments for this track with no way to get them back.
+            Removing this track is irreversible. You will lose all the plays, likes and comments for this track with no
+            way to get them back.
           </p>
           {/* BUTTONS NO BG - COLOR BLK - NO BORDER */}
           <div id="delete-modal__bot-left-buttons">
@@ -61,8 +59,8 @@ function DeleteSongModal({ songId, user }) {
         {/* RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT RIGHT */}
         <div id="delete-modal__bot-right">
           <p>
-            Never have to delete a track again. Unlock limitless upload time and
-            the ability to replace tracks with a Pro plan.
+            Never have to delete a track again. Unlock limitless upload time and the ability to replace tracks with a
+            Pro plan.
           </p>
           {/* ORANGE BUTTON WHITE TEXT */}
           <div id="delete-modal_bot-right-button">

@@ -13,7 +13,7 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
   // Solution is to make a copy of that array, then mutate the copy to your liking.
   // Solution:
   // const reverseLikes = [...userLikes].reverse();
-  // console.log("userLikes reversed in a variable", reverseLikes);
+
   // instead of using this, im going to one line it with the map
 
   // Removing this shuffle bc... soundcloud displays recent likes, and also theres a re-render everytime a new song plays
@@ -43,8 +43,9 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
         {[...userLikes]
           .reverse()
           .slice(0, 3)
-          .map((s) => (
-            <DisplayLikes {...{ s, user, userLikes, isPlayingState, currentlyPlaying }} />
+          .map((s, index) => (
+            // Provide a unique key prop based on the index or a unique identifier of the 's' object
+            <DisplayLikes key={`like-${index}`} {...{ s, user, userLikes, isPlayingState, currentlyPlaying }} />
           ))}
       </div>
     </div>

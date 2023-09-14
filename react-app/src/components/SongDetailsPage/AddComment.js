@@ -7,7 +7,7 @@ const AddComment = ({ song }) => {
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  // console.log(comment);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);

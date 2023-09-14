@@ -12,8 +12,6 @@ const LatestComments = ({ user, userComments, songs }) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
 
-  // console.log("usercomments", [...userComments].reverse().slice(0, 3));
-
   // BUGGED CODE - WHEN THERE IS RAPID MOUSE MOVEMENTS OVER MULTIPLE DIVS THEY ARENT ABLE TO GRAB THE UPDATED STATE - SO WE NEED TO PASS A FUNCTION INTO THE SETHOVEREDSTATES
   // const handleMouseEnter = (index) => {
   //   const updatedHoveredStates = [...hoveredStates];
@@ -82,15 +80,16 @@ const LatestComments = ({ user, userComments, songs }) => {
               timeAgoString = `${months} ${months === 1 ? "month" : "months"} ago`;
             }
             const songInfo = songs.filter((s) => c.songId === s.id);
-            // console.log("songInfo", songInfo);
+
             return (
               <div
                 id="user-comment__container2"
+                key={`comment-${c.id}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
               >
                 <div>
-                  <div key={c.id} className="user-displayname">
+                  <div className="user-displayname">
                     <a href={`/songs/${songInfo[0].id}`} id="song-comment-info">
                       on {songInfo[0].title}
                     </a>

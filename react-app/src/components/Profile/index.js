@@ -67,9 +67,7 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
           </div>
 
           <div id="profile-info__container">
-            {/* Like/Reposts not yet implemented */}
             <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
-            {/* Only need userComments, then need to order them by most recent */}
             <LatestComments {...{ user, userComments, songs }} />
           </div>
         </div>
