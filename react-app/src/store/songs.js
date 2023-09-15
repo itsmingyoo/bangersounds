@@ -503,13 +503,17 @@ export default function reducer(state = initialState, action) {
     case TOGGLE_LIKE_ACTION: {
       newState = { ...state };
       if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
-      else newState.Songs[action.songId].likes[action.user.id] = { date: action.res.likes_date, ...action.user };
+      else newState.Songs[action.songId].likes[action.user.id] = { dateLiked: action.res.like, ...action.user };
       return newState;
     }
     case TOGGLE_REPOST_ACTION: {
       newState = { ...state };
       if (action.isRepost) delete newState.Songs[action.songId].reposts[action.user.id];
-      else newState.Songs[action.songId].reposts[action.user.id] = { date: action.res.repost_date, ...action.user };
+      else
+        newState.Songs[action.songId].reposts[action.user.id] = {
+          dateReposted: action.res.repost,
+          ...action.user,
+        };
       return newState;
     }
 

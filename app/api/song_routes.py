@@ -244,18 +244,30 @@ def delete_comment(songId, commentId):
 def toggle_like(songId):
     song = Song.query.get(songId)
     user = User.query.get(current_user.id)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
+    print(song)
     if not song:
         return abort(404)  # Song not found
 
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.user_likes:
-        song.user_likes.remove(user)
+    if user in song.liked_by_users:
+        song.liked_by_users.remove(user)
+        db.session.delete(song)
         db.session.commit()
         return {"message": "You successfully unliked the song"}
     else:
         like = Like(user_id=user.id, song_id=songId)
+        db.session.add(like)
+        db.session.commit()
         like = like.to_dict()
 
         return jsonify({"message": "Successfully removed like", "like": like})
@@ -290,14 +302,27 @@ def toggle_repost(songId):
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.user_reposts:
-        song.user_reposts.remove(user)
+    if user in song.reposted_by_users:
+        song.reposted_by_users.remove(user)
+        db.session.delete(song)
         db.session.commit()
-        return {"message": "You successfully removed a repost the song"}
+        return {"message": "You successfully removed repost the song"}
     else:
         repost = Repost(user_id=user.id, song_id=songId)
+        db.session.add(repost)
+        db.session.commit()
+        repost = repost.to_dict()
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        print(repost)
+        return jsonify({"message": "Successfully reposted", "repost": repost})
 
-        return jsonify({"message": "Successfully removed repost", "repost": repost.to_dict()})
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
