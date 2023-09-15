@@ -2,8 +2,8 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from .likes import likes
-from .reposts import reposts
+from .likes import Like
+from .reposts import Repost
 
 
 
@@ -36,14 +36,24 @@ class User(db.Model, UserMixin):
     # Relationship to Comments
     user_comments = db.relationship("Comment", back_populates="comment_user")
 
+
+
+
     # join table relationships for many-to-many metadata table for likes/reposts
     # Key here is referenced on the other side
     # The relationship referenced here references:
     # 1. the MODEL on the other side (Song side)
     # 2. metadata many-to-many table
     # 3. the variable referencing this variable on the other side (Song Side)
-    user_songs_liked = db.relationship("Song", secondary=likes, back_populates="user_likes")
-    user_songs_reposted = db.relationship("Song", secondary=reposts, back_populates="user_reposts")
+    # user_songs_liked = db.relationship("Song", secondary=Like, back_populates="user_likes")
+    # user_songs_reposted = db.relationship("Song", secondary=Repost, back_populates="user_reposts")
+
+     # Relationship to Liked Songs
+    liked_songs = db.relationship("Like", back_populates="user")
+
+    # Relationship to Reposted Songs
+    reposted_songs = db.relationship("Repost", back_populates="user")
+
 
 
 

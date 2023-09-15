@@ -27,8 +27,6 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
         const isUserSong = song.artistId === user.id;
         const isLiked = Object.keys(song.likes).includes(user.id.toString());
         const isRepost = Object.keys(song.reposts).includes(user.id.toString());
-        console.log("isliked", isLiked);
-        console.log("isrepost", isRepost);
 
         const list = [
           { name: "Add to Next Up", to: "#" },

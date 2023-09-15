@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 93305ef3fc73
+Revision ID: 7f7a7a60b0e2
 Revises: 
-Create Date: 2023-09-14 23:46:40.845425
+Create Date: 2023-09-15 12:51:18.058167
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '93305ef3fc73'
+revision = '7f7a7a60b0e2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -60,20 +60,22 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('songId', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('userId', 'songId')
+    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reposts',
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('songId', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('userId', 'songId')
+    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 
