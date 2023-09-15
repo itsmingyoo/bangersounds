@@ -244,15 +244,7 @@ def delete_comment(songId, commentId):
 def toggle_like(songId):
     song = Song.query.get(songId)
     user = User.query.get(current_user.id)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
-    print(song)
+
     if not song:
         return abort(404)  # Song not found
 
@@ -312,15 +304,7 @@ def toggle_repost(songId):
         db.session.add(repost)
         db.session.commit()
         repost = repost.to_dict()
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
-        print(repost)
+
         return jsonify({"message": "Successfully reposted", "repost": repost})
 
 

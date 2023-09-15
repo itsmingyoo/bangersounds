@@ -16,7 +16,6 @@ const NavBarContent = ({
   setActive,
   togglePlayPause,
   userLikes,
-  userReposts,
 }) => {
   return (
     <div className="navbar-content-box">
@@ -28,9 +27,7 @@ const NavBarContent = ({
       {/* {active === 3 && <Albums />} */}
       {/* {active === 4 && <Playlists />} */}
       {active === 5 && (
-        <Reposts
-          {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs, userReposts }}
-        />
+        <Reposts {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }} />
       )}
     </div>
   );

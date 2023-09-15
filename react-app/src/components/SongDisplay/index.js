@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import WaveForm from "../SongDetailsPage/WaveForm";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import {
@@ -15,15 +16,13 @@ import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
 import "./SongDisplay.css";
 import LikeButton from "../LikeButton";
-import { useSelector } from "react-redux";
 import RepostButton from "../RepostButton";
 
 const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
   const user = useSelector((s) => s.session.user);
-  const userSongsRef = useRef(userSongs);
   return (
     <div>
-      {userSongsRef?.current.map((song) => {
+      {userSongs?.map((song) => {
         const isUserSong = song.artistId === user.id;
         const isLiked = Object.keys(song.likes).includes(user.id.toString());
         const isRepost = Object.keys(song.reposts).includes(user.id.toString());
