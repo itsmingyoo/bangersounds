@@ -1,9 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import WaveForm from "../SongDetailsPage/WaveForm";
 
-const ProfileHeader = ({ user }) => {
-  // console.log(user);
+const ProfileHeader = () => {
+  const user = useSelector((s) => s.session.user);
   return (
     <div className="profile-header-container">
       <div className="profile-header-wrapper">

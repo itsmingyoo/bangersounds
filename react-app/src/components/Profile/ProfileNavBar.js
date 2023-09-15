@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import Reposts from "./Reposts";
-import All from "./All";
-import { playUserSongAction, setPlayingState } from "../../store/songs";
+import React from "react";
+import { useModal } from "../../context/Modal";
+import EditProfileModal from "./EditProfileModal";
 import "./Profile.css";
 
 const ProfileNavBar = ({
-  user,
+  userRef,
   userSongs,
   isPlayingState,
   currentlyPlaying,
@@ -16,6 +14,7 @@ const ProfileNavBar = ({
   active,
   setActive,
 }) => {
+  const { closeModal, setModalContent } = useModal();
   // states for each div if clicked to render their specific page on the same page
   const handleActiveClick = (index) => {
     setActive(index);
@@ -36,7 +35,7 @@ const ProfileNavBar = ({
           <div
             className={`profile-navbar__item ${active === 1 ? "profile-navbar__item-active" : ""}`}
             onClick={() => {
-              handleActiveClick(1);
+              // handleActiveClick(1);
               alert("Feature coming soon!");
             }}
           >
@@ -53,7 +52,7 @@ const ProfileNavBar = ({
           <div
             className={`profile-navbar__item ${active === 3 ? "profile-navbar__item-active" : ""}`}
             onClick={() => {
-              handleActiveClick(3);
+              // handleActiveClick(3);
               alert("Feature coming soon!");
             }}
           >
@@ -72,7 +71,7 @@ const ProfileNavBar = ({
             className={`profile-navbar__item ${active === 5 ? "profile-navbar__item-active" : ""}`}
             onClick={() => {
               handleActiveClick(5);
-              alert("Feature coming soon!");
+              // alert("Feature coming soon!");
             }}
           >
             Reposts
@@ -82,7 +81,9 @@ const ProfileNavBar = ({
           <button onClick={() => alert("Feature coming soon!")}>Your Insights</button>
           <button onClick={() => alert("Feature coming soon!")}>Station</button>
           <button onClick={() => alert("Feature coming soon!")}>Share</button>
-          <button onClick={() => alert("Feature coming soon!")}>Edit</button>
+          <button onClick={() => setModalContent(<EditProfileModal userRef={userRef} closeModal={closeModal} />)}>
+            Edit
+          </button>
         </div>
       </div>
     </div>

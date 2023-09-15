@@ -15,14 +15,19 @@ import OpenModalButton from "../OpenModalButton";
 import DropDown from "../DropDown";
 import "./SongDisplay.css";
 import LikeButton from "../LikeButton";
+import { useSelector } from "react-redux";
+import RepostButton from "../RepostButton";
 
-const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
+const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPause, comments, songs }) => {
+  const user = useSelector((s) => s.session.user);
   const userSongsRef = useRef(userSongs);
   return (
     <div>
       {userSongsRef?.current.map((song) => {
         const isUserSong = song.artistId === user.id;
         const isLiked = Object.keys(song.likes).includes(user.id.toString());
+        const isRepost = Object.keys(song.reposts).includes(user.id.toString());
+
         const list = [
           { name: "Add to Next Up", to: "#" },
           { name: "Add to Playlist", to: "#" },
@@ -33,7 +38,7 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
         return (
           <div id="song-display-container" key={song.id}>
             <div className="song-display-pfp">
-              <ProfilePicture user={user} />
+              <ProfilePicture user={song.artistInfo} />
             </div>
             <div id="song-display__button-title-container">
               <div id="song-display__button-wrapper">
@@ -76,6 +81,7 @@ const SongDisplay = ({ user, userSongs, isPlayingState, currentlyPlaying, toggle
                     <IoHeartSharp />
                   </button> */}
                   <LikeButton {...{ song, user, isLiked }} />
+                  <RepostButton {...{ song, user, isRepost }} />
                   <button onClick={() => alert("Feature coming soon!")}>
                     <IoShareOutline />
                     Share

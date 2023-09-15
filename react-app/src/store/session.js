@@ -2,7 +2,19 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
-const setUser = (user) => ({
+// ACTIONS FOR EDIT USER
+// const EDIT_USER_ACTION = "user/EDIT_USER_ACTION";
+
+// ** ACTION FOR EDIT USER */
+// const editUserAction = (user, formData) => {
+//   return {
+//     type: EDIT_USER_ACTION,
+//     user,
+//     formData,
+//   };
+// };
+
+export const setUser = (user) => ({
   type: SET_USER,
   payload: user,
 });
@@ -96,12 +108,31 @@ export const signUp = (username, email, password, first_name, last_name) => asyn
   }
 };
 
+//!!=================== EDIT USER THUNK =======================/
+//*************************************************************/
+//*************************************************************/
+// export const thunkEditUser = (user, formData) => async (dispatch) => {
+//   let update = await fetch(`/profile/${user.id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(formData),
+//   });
+//   update = await update.json();
+//   return update;
+// };
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    // EDIT USER INFORMATION
+    // case EDIT_USER_ACTION: {
+    //   return { user: action.formData };
+    // }
     default:
       return state;
   }

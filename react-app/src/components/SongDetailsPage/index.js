@@ -13,7 +13,6 @@ import { thunkGetSongComments } from "../../store/songs";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, comments }) {
-  // console.log(songs, isPlayingState, currentlyPlaying, comments);
   let { songId } = useParams();
   const dispatch = useDispatch();
 

@@ -14,11 +14,8 @@
 //   const isPlayingState = useSelector((s) => s.songs.isPlayingState);
 //   const currentSong = useSelector((s) => s.songs.CurrentlyPlaying);
 
-//   console.log("this is state song", currentSong);
-//   console.log("this is prop song", song);
-
 //   useEffect(() => {
-//     console.log(isPlayingState);
+
 //   });
 
 //   // Btn Func

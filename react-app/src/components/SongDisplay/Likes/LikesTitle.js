@@ -6,7 +6,7 @@ import RepostButton from "../../RepostButton";
 
 const LikesTitle = ({ s, user, userLikes }) => {
   const isRepost = Object.keys(s.reposts).includes(user.id.toString());
-  console.log("isrepost true or false", isRepost);
+
   return (
     <div id="likes-title__container">
       <div>{s.artistInfo.displayName}</div>
