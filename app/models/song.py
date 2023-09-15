@@ -67,8 +67,8 @@ class Song(db.Model):
             # LAZY LOADING - THIS RUNS MULTIPLE QUERIES RESULTING IN N+1
             "artistInfo": self.user_songs.to_dict(),
             "comments": [comment.to_dict() for comment in self.song_comments],
-            "likes": {like.to_dict()['id']: like.to_dict() for like in self.user_likes},
-            "reposts": {repost.to_dict()['id']: repost.to_dict() for repost in self.user_reposts}
+            "likes": {like.to_dict()['id']: like.to_dict() for like in self.liked_by_users},
+            "reposts": {repost.to_dict()['id']: repost.to_dict() for repost in self.reposted_by_users}
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
@@ -79,6 +79,6 @@ class Song(db.Model):
         return cls.query.options(
             joinedload(cls.user_songs),
             joinedload(cls.song_comments),
-            joinedload(cls.user_likes),
-            joinedload(cls.user_reposts)
+            joinedload(cls.liked_by_users),
+            joinedload(cls.reposted_by_users)
         ).get(song_id)

@@ -257,13 +257,8 @@ def toggle_like(songId):
     else:
         like = Like(user_id=user.id, song_id=songId)
         like = like.to_dict()
-        print(like)
-        print(like)
-        print(like)
-        print(like)
-        print(like)
-        print(like)
-        return jsonify({"message": "Successfully removed like"})
+
+        return jsonify({"message": "Successfully removed like", "like": like})
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
@@ -302,7 +297,7 @@ def toggle_repost(songId):
     else:
         repost = Repost(user_id=user.id, song_id=songId)
 
-        return jsonify({"message": "Successfully removed repost"})
+        return jsonify({"message": "Successfully removed repost", "repost": repost.to_dict()})
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
