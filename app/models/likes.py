@@ -11,6 +11,7 @@ likes = db.Table(
     db.Column(
         "songId", db.ForeignKey(add_prefix_for_prod("songs.id")), primary_key=True
     ),
+    db.Column("date", db.DateTime, default=db.func.now()),
 )
 
 # For Production SCHEMA

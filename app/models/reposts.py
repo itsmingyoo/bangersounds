@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
 
 # Many-to-Many Relationship between Users & Songs
 reposts = db.Table(
@@ -11,6 +12,7 @@ reposts = db.Table(
     db.Column(
         "songId", db.ForeignKey(add_prefix_for_prod("songs.id")), primary_key=True
     ),
+    db.Column('date', db.DateTime, default=db.func.now())
 )
 
 # For Production SCHEMA

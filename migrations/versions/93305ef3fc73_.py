@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: f005bcac762c
-Revises:
-Create Date: 2023-09-14 22:20:48.128812
+Revision ID: 93305ef3fc73
+Revises: 
+Create Date: 2023-09-14 23:46:40.845425
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'f005bcac762c'
+revision = '93305ef3fc73'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -65,6 +62,7 @@ def upgrade():
     op.create_table('likes',
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('songId', sa.Integer(), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('userId', 'songId')
@@ -72,17 +70,11 @@ def upgrade():
     op.create_table('reposts',
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('songId', sa.Integer(), nullable=False),
+    sa.Column('date', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('userId', 'songId')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

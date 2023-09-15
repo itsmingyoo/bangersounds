@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, session, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import NewSongForm, NewCommentForm
-from app.models import Song, Comment, db, User
+from app.models import Song, Comment, db, User, likes, reposts
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from .auth_routes import validation_errors_to_error_messages
+from datetime import datetime
 from pprint import pprint
 
 # PREFIX '/api/songs'
@@ -294,9 +295,26 @@ def toggle_like(songId):
         db.session.commit()
         return {"message": "You successfully unliked the song"}
     else:
+        # establish user/song id in python syntax to make querying and inserting easier
+        user_id = user.id
+        song_id = songId
+
+        # insert into likes table and commit to create a date to then query
+        likes.insert().values(userId=user_id, songId=song_id)
         song.user_likes.append(user)
         db.session.commit()
-        return {"message": "You successfully liked the song"}
+
+        # Create a SQL statement to retrieve the timestamp from the 'date' column
+        select_sql = db.text("SELECT date FROM likes WHERE userId = :user_id AND songId = :song_id")
+        with db.engine.connect() as connection:
+            # Execute the SQL statement to retrieve the timestamp
+            result = connection.execute(select_sql, user_id=user_id, song_id=song_id)
+
+            # Fetch the timestamp from the result if available
+            row = result.fetchone()
+            like_timestamp = row[0] if row is not None else None
+
+        return {"message": "You successfully liked the song", "like_date": like_timestamp}
 
 @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
 @login_required
@@ -314,9 +332,26 @@ def toggle_repost(songId):
         db.session.commit()
         return {"message": "You successfully removed a repost the song"}
     else:
+        # establish user/song id in python syntax to make querying and inserting easier
+        user_id = user.id
+        song_id = songId
+
+        # insert into reposts table and commit to create a date to then query
+        reposts.insert().values(userId=user_id, songId=song_id)
         song.user_reposts.append(user)
         db.session.commit()
-        return {"message": "You successfully reposted the song"}
+
+        # Create a SQL statement to retrieve the timestamp from the 'date' column
+        select_sql = db.text("SELECT date FROM likes WHERE userId = :user_id AND songId = :song_id")
+        with db.engine.connect() as connection:
+            # Execute the SQL statement to retrieve the timestamp
+            result = connection.execute(select_sql, user_id=user_id, song_id=song_id)
+
+            # Fetch the timestamp from the result if available
+            row = result.fetchone()
+            repost_timestamp = row[0] if row is not None else None
+
+        return {"message": "You successfully reposted the song", "repost_date": repost_timestamp}
 
 
 

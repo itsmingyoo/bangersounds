@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import WaveForm from "../SongDetailsPage/WaveForm";
 import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 import {
@@ -27,6 +27,8 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
         const isUserSong = song.artistId === user.id;
         const isLiked = Object.keys(song.likes).includes(user.id.toString());
         const isRepost = Object.keys(song.reposts).includes(user.id.toString());
+        console.log("isliked", isLiked);
+        console.log("isrepost", isRepost);
 
         const list = [
           { name: "Add to Next Up", to: "#" },
@@ -40,6 +42,7 @@ const SongDisplay = ({ userSongs, isPlayingState, currentlyPlaying, togglePlayPa
             <div className="song-display-pfp">
               <ProfilePicture user={song.artistInfo} />
             </div>
+
             <div id="song-display__button-title-container">
               <div id="song-display__button-wrapper">
                 <div id="song-display__button-container">
