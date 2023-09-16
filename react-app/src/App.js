@@ -16,6 +16,7 @@ import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
 import "./index.css";
+import LikesPage from "./components/LikesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -97,6 +98,12 @@ function App() {
             <Route exact path="/profile">
               <ProtectedRoute>
                 <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              </ProtectedRoute>
+            </Route>
+
+            <Route exact path="/likes">
+              <ProtectedRoute>
+                <LikesPage {...{ songs, isPlayingState, currentlyPlaying }} />
               </ProtectedRoute>
             </Route>
 
