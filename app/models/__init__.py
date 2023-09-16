@@ -4,5 +4,5 @@ from .user import User
 from .db import environment, SCHEMA
 from .song import Song
 from .comment import Comment
-from .likes import likes
-from .reposts import reposts
+from .likes import Like
+from .reposts import Repost

@@ -16,7 +16,6 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
   const userSongs = songs.filter((s) => s.artistId === user.id);
   const userComments = Object.values(comments).filter((c) => c.userId === user.id);
   const userLikes = songs.filter((s) => s.likes[user.id]);
-  const userReposts = songs.filter((s) => s.reposts[user.id]);
 
   // FN
   const togglePlayPause = async (song) => {
@@ -61,7 +60,6 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
                 setActive,
                 togglePlayPause,
                 userLikes,
-                userReposts,
               }}
             />
           </div>
