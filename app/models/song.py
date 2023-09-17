@@ -45,6 +45,7 @@ class Song(db.Model):
     # Relationship to Users who Reposted the Song
     reposted_by_users = db.relationship("Repost", back_populates="song")
 
+    in_playlists = db.relationship("Playlist", back_populates="playlist_songs")
 
     # Reference if you want to use createdAt/updatedAt times
     # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
