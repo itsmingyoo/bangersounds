@@ -29,20 +29,16 @@ class Playlist(db.Model):
     thumbnail = db.Column(db.String(255), nullable=True)
     tags = db.Column(db.String(255), nullable=True)
     createdAt = db.Column(db.DateTime, default=db.func.now())
-    updatedAt = db.Column(db.DateTime, default=db.func.now())
+    # updatedAt = db.Column(db.DateTime, default=db.func.now())
 
     # Many-to-Many
-    user_id = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"))
-    )
-
-    song_ids = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id"))
-    )
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
     playlist_songs = db.relationship("Song", back_populates="in_playlists")
 
     playlist_creator = db.relationship("User", back_populates="my_playlists")
+
+    songs = db.relationship('Song', secondary='playlist_songs', back_populates='playlists')
 
     def to_dict(self):
         return {
@@ -53,7 +49,22 @@ class Playlist(db.Model):
             "thumbnail": self.thumbnail,
             "private" : self.private,
             "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt,
-            "songs": {song.id: song.to_dict() for song in self.playlist_songs},
+            # "updatedAt": self.updatedAt,
+            # "songs": {song.id: song.to_dict() for song in self.playlist_songs},
+            "songs": {playlist_song.song.id: {"added_at": playlist_song.added_at} for playlist_song in self.playlist_songs},
             "user": self.playlist_creator.to_dict()
         }
+
+class PlaylistSong(db.Model):
+    __tablename__ = 'playlist_songs'
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'))
+    song_id = db.Column(db.Integer, db.ForeignKey('songs.id'))
+    added_at = db.Column(db.DateTime, default=db.func.now())
+
+    playlist = db.relationship("Playlist", back_populates="playlist_songs")
+    song = db.relationship("Song", back_populates="in_playlists")
