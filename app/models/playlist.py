@@ -13,8 +13,10 @@ from sqlalchemy.orm import joinedload # for eagerloading
 class Playlist(db.Model):
     __tablename__ = "playlists"
 
+
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
+
 
     # Required Columns
     id = db.Column(db.Integer, primary_key=True)
@@ -22,23 +24,26 @@ class Playlist(db.Model):
     genre = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     # playlist_URL = db.Column(db.String(255), nullable=False)
-    private = db.Column(
-        db.Boolean, nullable=False
-    )  # Default on frontend should be 'false' bc it's a radio button
+    private = db.Column(db.Boolean, nullable=False )  # Default on frontend should be 'false' bc it's a radio button
+
 
     thumbnail = db.Column(db.String(255), nullable=True)
     tags = db.Column(db.String(255), nullable=True)
     createdAt = db.Column(db.DateTime, default=db.func.now())
     # updatedAt = db.Column(db.DateTime, default=db.func.now())
 
+
     # Many-to-Many
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
-    playlist_songs = db.relationship("Song", back_populates="in_playlists")
+
+    # playlist_songs = db.relationship("Song", back_populates="in_playlists")
 
     playlist_creator = db.relationship("User", back_populates="my_playlists")
 
+
     songs = db.relationship('Song', secondary='playlist_songs', back_populates='playlists')
+
 
     def to_dict(self):
         return {
@@ -66,5 +71,5 @@ class PlaylistSong(db.Model):
     song_id = db.Column(db.Integer, db.ForeignKey('songs.id'))
     added_at = db.Column(db.DateTime, default=db.func.now())
 
-    playlist = db.relationship("Playlist", back_populates="playlist_songs")
-    song = db.relationship("Song", back_populates="in_playlists")
+    # playlist = db.relationship("Playlist", back_populates="playlist_songs")
+    # song = db.relationship("Song", back_populates="in_playlists")

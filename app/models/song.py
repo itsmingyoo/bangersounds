@@ -13,8 +13,10 @@ from sqlalchemy.orm import joinedload # for eagerloading
 class Song(db.Model):
     __tablename__ = "songs"
 
+
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
+
 
     # Required Columns
     id = db.Column(db.Integer, primary_key=True)
@@ -22,49 +24,41 @@ class Song(db.Model):
     genre = db.Column(db.String(255), nullable=False)
     song_url = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    private = db.Column(
-        db.Boolean, nullable=False
-    )  # Default on frontend should be 'false'
+    private = db.Column(db.Boolean, nullable=False)  # Default on frontend should be 'false'
+
 
     # Not Required / Nullable Columns
     caption = db.Column(db.String(255), nullable=True)  # Nullable
     thumbnail = db.Column(db.String(255), nullable=True)
 
+
     # Song-User Relationship FK Column
     artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
+
 
     # # One to Many - Many side
     user_songs = db.relationship("User", back_populates="song_users")
 
+
     # Relationship to Comments
     song_comments = db.relationship("Comment", back_populates="comment_song")
+
 
     # Relationship to Users who Liked the Song
     liked_by_users = db.relationship("Like", back_populates="song")
 
+
     # Relationship to Users who Reposted the Song
     reposted_by_users = db.relationship("Repost", back_populates="song")
 
+
     # in_playlists = db.relationship("Playlist", back_populates="playlist_songs")
-    in_playlists = db.relationship(
-    "Playlist",
-    secondary="playlist_songs",
-    back_populates="playlist_songs",
-)
+    # in_playlists = db.relationship("Playlist", secondary="playlist_songs", back_populates="playlist_songs")
 
 
-    playlists = db.relationship('Playlist', secondary='playlist_songs', back_populates='songs')
-    playlists = db.relationship(
-    "Playlist",
-    secondary="playlist_songs",
-    back_populates="playlist_songs",
-)
+    # playlists = db.relationship("Playlist", secondary="playlist_songs", back_populates="playlist_songs",
+    playlists = db.relationship('Playlist', secondary='playlist_songs',back_populates='songs')
 
-
-    # Reference if you want to use createdAt/updatedAt times
-    # Your comments require a time from the song and displays 'time since created' i.e. '15 minutes ago'
-    # createdAt = db.Column(db.DateTime, default=db.func.now())
-    # updatedAt = db.Column(db.DateTime, default=db.func.now())
 
     def to_dict(self):
         return {
