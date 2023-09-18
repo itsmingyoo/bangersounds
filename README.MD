@@ -55,17 +55,35 @@ pipenv install -r requirements.txt
 
 Still in the root directory, run the following commands in the terminal:
 
-> pipenv shell
-> flask db init
-> flask db migrate
-> flask db upgrade
-> flask db seed all
-> flask run
+```
+pipenv shell
+```
+```
+flask db migrate
+```
+```
+flask db init
+```
+```
+flask db upgrade
+```
+```
+flask db seed all
+```
+```
+flask run
+```
 
 Next run this in the terminal
 
-> cd react-app
-> npm install
-> npm start
+```
+cd react-app
+```
+```
+npm install
+```
+```
+npm start
+```
 
 Now you're done! You should be able to see the project now and adjust it to your liking.

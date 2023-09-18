@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: f005bcac762c
-Revises:
-Create Date: 2023-09-14 22:20:48.128812
+Revision ID: 809476afa71f
+Revises: 
+Create Date: 2023-09-15 13:03:44.465475
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'f005bcac762c'
+revision = '809476afa71f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -63,26 +60,23 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('likes',
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('songId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('userId', 'songId')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.Integer(), nullable=True),
+    sa.Column('date', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reposts',
-    sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('songId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['songId'], ['songs.id'], ),
-    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('userId', 'songId')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.Integer(), nullable=True),
+    sa.Column('date', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

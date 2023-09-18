@@ -5,8 +5,8 @@ from .db import (
     add_prefix_for_prod,
 )  # this method is for foreign keys
 
-from .likes import likes
-from .reposts import reposts
+from .likes import Like
+from .reposts import Repost
 from sqlalchemy.orm import joinedload # for eagerloading
 
 
@@ -39,9 +39,11 @@ class Song(db.Model):
     # Relationship to Comments
     song_comments = db.relationship("Comment", back_populates="comment_song")
 
-    # join table relationships for many-to-many metadata table for likes/reposts
-    user_likes = db.relationship("User", secondary=likes, back_populates="user_songs_liked")
-    user_reposts = db.relationship("User", secondary=reposts, back_populates="user_songs_reposted")
+    # Relationship to Users who Liked the Song
+    liked_by_users = db.relationship("Like", back_populates="song")
+
+    # Relationship to Users who Reposted the Song
+    reposted_by_users = db.relationship("Repost", back_populates="song")
 
 
     # Reference if you want to use createdAt/updatedAt times
@@ -65,8 +67,8 @@ class Song(db.Model):
             # LAZY LOADING - THIS RUNS MULTIPLE QUERIES RESULTING IN N+1
             "artistInfo": self.user_songs.to_dict(),
             "comments": [comment.to_dict() for comment in self.song_comments],
-            "likes": {like.to_dict()['id']: like.to_dict() for like in self.user_likes},
-            "reposts": {repost.to_dict()['id']: repost.to_dict() for repost in self.user_reposts}
+            "likes": {like.to_dict()['id']: like.to_dict() for like in self.liked_by_users},
+            "reposts": {repost.to_dict()['id']: repost.to_dict() for repost in self.reposted_by_users}
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
@@ -77,6 +79,6 @@ class Song(db.Model):
         return cls.query.options(
             joinedload(cls.user_songs),
             joinedload(cls.song_comments),
-            joinedload(cls.user_likes),
-            joinedload(cls.user_reposts)
+            joinedload(cls.liked_by_users),
+            joinedload(cls.reposted_by_users)
         ).get(song_id)

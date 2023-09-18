@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, session, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import NewSongForm, NewCommentForm
-from app.models import Song, Comment, db, User
+from app.models import Song, Comment, db, User, likes, reposts, Like, Repost
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from .auth_routes import validation_errors_to_error_messages
+from sqlalchemy.orm import load_only
 from pprint import pprint
 
 # PREFIX '/api/songs'
@@ -34,17 +35,6 @@ def get_songs():
     return {
         "Songs": all_songs_data
     }
-
-
-
-# Maybe don't need this route because we have the home route
-@songs_routes.route("/discover")
-def get_discover():
-    pass
-    """
-    This route takes you to the discover page kind of similar to the home page / Query/Filter by genre and "trending" somehow
-    """
-
 
 @songs_routes.route("/<int:songId>")
 def get_song_id(songId):
@@ -86,12 +76,6 @@ def post_song():
         # if the dictionary doesn't have a url key
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
-            print('@@@ WE ARE IN THE IF URL NOT IN UPLOAD BLOCK @@@')
             print(jsonify(upload))
             return jsonify(upload), 400
 
@@ -109,30 +93,7 @@ def post_song():
         db.session.add(song)
         db.session.commit()
 
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        pprint(song.to_dict())
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-        print('this is the song!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@')
-
         return jsonify(song.to_dict())
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
-    print('@@@ WE ARE AT THE END OF THE CODE WITH ERRORS @@@')
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 # upload song route - validate the first part when they submit a song - then it will lead to the top route for phase 2 and validate the other data
@@ -283,20 +244,44 @@ def delete_comment(songId, commentId):
 def toggle_like(songId):
     song = Song.query.get(songId)
     user = User.query.get(current_user.id)
+
     if not song:
         return abort(404)  # Song not found
 
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.user_likes:
-        song.user_likes.remove(user)
+    if user in song.liked_by_users:
+        song.liked_by_users.remove(user)
+        db.session.delete(song)
         db.session.commit()
         return {"message": "You successfully unliked the song"}
     else:
-        song.user_likes.append(user)
+        like = Like(user_id=user.id, song_id=songId)
+        db.session.add(like)
         db.session.commit()
-        return {"message": "You successfully liked the song"}
+        like = like.to_dict()
+
+        return jsonify({"message": "Successfully removed like", "like": like})
+
+
+    # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
+    # else:
+        # establish user/song id in python syntax to make querying and inserting easier
+        # user_id = user.id
+        # song_id = songId
+        # insert into likes table and commit to create a date to then query
+        # likes.insert().values(userId=user_id, songId=song_id)
+        # song.user_likes.append(user)
+        # db.session.commit()
+        # like = (
+        #     db.session.query(likes)
+        #     .filter((likes.c.userId == user_id) & (likes.c.songId == song_id))
+        #     # .options(load_only(likes.c.userId, likes.c.songId, likes.c.date))
+        #     .first()
+        # )
+        # like_timestamp = like.date
+        # return {"message": "You successfully liked the song", "like_date": like_timestamp}
 
 @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
 @login_required
@@ -309,14 +294,38 @@ def toggle_repost(songId):
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.user_reposts:
-        song.user_reposts.remove(user)
+    if user in song.reposted_by_users:
+        song.reposted_by_users.remove(user)
+        db.session.delete(song)
         db.session.commit()
-        return {"message": "You successfully removed a repost the song"}
+        return {"message": "You successfully removed repost the song"}
     else:
-        song.user_reposts.append(user)
+        repost = Repost(user_id=user.id, song_id=songId)
+        db.session.add(repost)
         db.session.commit()
-        return {"message": "You successfully reposted the song"}
+        repost = repost.to_dict()
+
+        return jsonify({"message": "Successfully reposted", "repost": repost})
+
+
+
+    # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
+    # else:
+        # # establish user/song id in python syntax to make querying and inserting easier
+        # user_id = user.id
+        # song_id = songId
+        # # insert into reposts table and commit to create a date to then query
+        # reposts.insert().values(userId=user_id, songId=song_id)
+        # song.user_reposts.append(user)
+        # db.session.commit()
+        # repost = (
+        #     db.session.query(reposts)
+        #     .filter((reposts.c.userId == user_id) & (reposts.c.songId == song_id))
+        #     # .options(load_only(reposts.c.userId, reposts.c.songId, reposts.c.date))
+        #     .first()
+        # )
+        # repost_timestamp = repost.date
+        # return {"message": "You successfully reposted the song", "repost_date": repost_timestamp}
 
 
 
