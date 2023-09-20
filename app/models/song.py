@@ -31,33 +31,28 @@ class Song(db.Model):
     caption = db.Column(db.String(255), nullable=True)  # Nullable
     thumbnail = db.Column(db.String(255), nullable=True)
 
-
     # Song-User Relationship FK Column
     artistId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-
 
     # # One to Many - Many side
     user_songs = db.relationship("User", back_populates="song_users")
 
-
     # Relationship to Comments
     song_comments = db.relationship("Comment", back_populates="comment_song")
-
 
     # Relationship to Users who Liked the Song
     liked_by_users = db.relationship("Like", back_populates="song")
 
-
     # Relationship to Users who Reposted the Song
     reposted_by_users = db.relationship("Repost", back_populates="song")
 
-
     # in_playlists = db.relationship("Playlist", back_populates="playlist_songs")
-    # in_playlists = db.relationship("Playlist", secondary="playlist_songs", back_populates="playlist_songs")
+    # in_playlists = db.relationship("Playlist", secondary="playlist_songs", back_populates="song")
 
 
     # playlists = db.relationship("Playlist", secondary="playlist_songs", back_populates="playlist_songs",
-    playlists = db.relationship('Playlist', secondary='playlist_songs',back_populates='songs')
+    # playlists = db.relationship('Playlist', secondary='playlist_songs',back_populates='songs')
+    playlists = db.relationship('Playlist', back_populates='songs')
 
 
     def to_dict(self):

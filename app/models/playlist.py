@@ -8,6 +8,7 @@ from .db import (
 from .likes import Like
 from .reposts import Repost
 from sqlalchemy.orm import joinedload # for eagerloading
+from sqlalchemy.dialects.postgresql import JSON
 
 
 class Playlist(db.Model):
@@ -23,27 +24,20 @@ class Playlist(db.Model):
     title = db.Column(db.String(255), nullable=False)
     genre = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    # playlist_URL = db.Column(db.String(255), nullable=False)
-    private = db.Column(db.Boolean, nullable=False )  # Default on frontend should be 'false' bc it's a radio button
-
-
+    private = db.Column(db.Boolean, nullable=False)
     thumbnail = db.Column(db.String(255), nullable=True)
     tags = db.Column(db.String(255), nullable=True)
     createdAt = db.Column(db.DateTime, default=db.func.now())
-    # updatedAt = db.Column(db.DateTime, default=db.func.now())
+    playlist_songs = db.Column(JSON) # this will be your songs object
 
-
-    # Many-to-Many
+    # Many-to-Many - RELATIONSHIPS
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-
-
-    # playlist_songs = db.relationship("Song", back_populates="in_playlists")
+    song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id")))
 
     playlist_creator = db.relationship("User", back_populates="my_playlists")
-
-
-    songs = db.relationship('Song', secondary='playlist_songs', back_populates='playlists')
-
+    # playlist_songs = db.relationship("Song", back_populates="in_playlists")
+    # songs = db.relationship('Song', secondary='playlist_songs', back_populates='playlists')
+    songs = db.relationship('Song', back_populates='playlists')
 
     def to_dict(self):
         return {
@@ -53,23 +47,22 @@ class Playlist(db.Model):
             "description": self.description,
             "thumbnail": self.thumbnail,
             "private" : self.private,
-            "createdAt": self.createdAt,
+            # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
-            # "songs": {song.id: song.to_dict() for song in self.playlist_songs},
-            "songs": {playlist_song.song.id: {"added_at": playlist_song.added_at} for playlist_song in self.playlist_songs},
+            "songs": {song.to_dict['id']: song.to_dict() for song in self.songs},
+            # "songs": {playlist_song.song.id: {"added_at": playlist_song.added_at} for playlist_song in self.playlist_songs},
             "user": self.playlist_creator.to_dict()
         }
 
-class PlaylistSong(db.Model):
-    __tablename__ = 'playlist_songs'
+# class PlaylistSong(db.Model):
+#     __tablename__ = 'playlist_songs'
 
-    if environment == "production":
-        __table_args__ = {"schema": SCHEMA}
+#     if environment == "production":
+#         __table_args__ = {"schema": SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'))
-    song_id = db.Column(db.Integer, db.ForeignKey('songs.id'))
-    added_at = db.Column(db.DateTime, default=db.func.now())
+#     # id = db.Column(db.Integer, primary_key=True)
+#     playlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('playlists.id')), primary_key=True, nullable=False)
+#     song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('songs.id')), primary_key=True, nullable=False)
 
-    # playlist = db.relationship("Playlist", back_populates="playlist_songs")
-    # song = db.relationship("Song", back_populates="in_playlists")
+#     playlist = db.relationship("Playlist", back_populates="playlist_songs")
+#     song = db.relationship("Song", back_populates="in_playlists")
