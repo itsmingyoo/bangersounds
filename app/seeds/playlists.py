@@ -2,6 +2,7 @@ from app.models import db, Playlist, User, Song
 from datetime import datetime, timedelta
 from pprint import pprint
 import random
+import json
 
 def seed_playlists():
     playlist = Playlist(
@@ -20,12 +21,9 @@ def seed_playlists():
 
     # Append the songs to the playlist's songs attribute
     for song_id in song_ids:
-        print('this is song_id', song_id)
         song = Song.query.get(song_id)
-        print('this is song queried', song)
         playlist.song_id = song.id
-        playlist.playlist_songs[song_id] = {"songId": song.id, "songTitle": song.title}
-        print('this is the new playlist', playlist)
+        playlist.playlist_songs[song_id] = json.dumps({"songId": song.id, "songTitle": song.title})
 
 
     # Commit the playlist and songs to the database

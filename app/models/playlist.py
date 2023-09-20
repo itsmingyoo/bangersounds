@@ -49,7 +49,8 @@ class Playlist(db.Model):
             "private" : self.private,
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
-            "songs": {song.to_dict['id']: song.to_dict() for song in self.songs},
+            # "songs": {song.id: song.to_dict() for song in self.songs},
+            "songs": self.playlist_songs,
             # "songs": {playlist_song.song.id: {"added_at": playlist_song.added_at} for playlist_song in self.playlist_songs},
             "user": self.playlist_creator.to_dict()
         }
