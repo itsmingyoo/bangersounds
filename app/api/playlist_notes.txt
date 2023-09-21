@@ -15,3 +15,5 @@ Python 'JSON' Object storing in db
     -You dont actually need json.loads(), the to_dict() just parses it for you
     -Result when hitting the route:
         {"1": 1, "2": 2, "3": 3}
+
+3. Theory: The slashes aren't actually there because when we hit the route without json.loads -- we don't see the slashes. Therefore, Python might be doing some extra things behind the scenes.
