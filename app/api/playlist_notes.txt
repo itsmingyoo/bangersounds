@@ -17,3 +17,20 @@ Python 'JSON' Object storing in db
         {"1": 1, "2": 2, "3": 3}
 
 3. Theory: The slashes aren't actually there because when we hit the route without json.loads -- we don't see the slashes. Therefore, Python might be doing some extra things behind the scenes.
+
+    - Result:
+    before to_dict
+    {"1": 1, "2": 2, "3": 3}
+
+    After to_dict()
+    {'createdAt': datetime.datetime(2023, 9, 21, 17, 44, 29),
+    'description': 'A great collection of pop songs',
+    'genre': 'Pop',
+    'id': 1,
+    'private': True,
+    'songs': '{"1": 1, "2": 2, "3": 3}',
+    'thumbnail': 'thumbnail_url',
+    'title': 'My Sample Playlist'}
+
+    - Conclusion:
+    Slashes don't exist, SQLiteViewer just displays it with slashes.
