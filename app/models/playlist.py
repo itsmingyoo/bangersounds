@@ -32,12 +32,12 @@ class Playlist(db.Model):
 
     # Many-to-Many - RELATIONSHIPS
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-    song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id")))
+    # song_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id"))) # don't need this anymore bc you're using a JSON object column 'playlist_songs' that stores all the song ids in json serialized format
 
     playlist_creator = db.relationship("User", back_populates="my_playlists")
     # playlist_songs = db.relationship("Song", back_populates="in_playlists")
     # songs = db.relationship('Song', secondary='playlist_songs', back_populates='playlists')
-    songs = db.relationship('Song', back_populates='playlists')
+    # songs = db.relationship('Song', back_populates='playlists') # don't need this anymore bc you're using a JSON object column 'playlist_songs' that stores all the song ids in json serialized format
 
     def to_dict(self):
         return {
@@ -47,12 +47,12 @@ class Playlist(db.Model):
             "description": self.description,
             "thumbnail": self.thumbnail,
             "private" : self.private,
-            # "createdAt": self.createdAt,
+            "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
             # "songs": {song.id: song.to_dict() for song in self.songs},
             "songs": self.playlist_songs,
             # "songs": {playlist_song.song.id: {"added_at": playlist_song.added_at} for playlist_song in self.playlist_songs},
-            "user": self.playlist_creator.to_dict()
+            # "user": self.playlist_creator.to_dict()
         }
 
 # class PlaylistSong(db.Model):
