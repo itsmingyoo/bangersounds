@@ -1,7 +1,9 @@
+from flask import jsonify
 from app.models import db, Playlist, User, Song
 from datetime import datetime, timedelta
 from pprint import pprint
 import random
+import json
 
 def seed_playlists():
     playlist = Playlist(
@@ -16,16 +18,15 @@ def seed_playlists():
 
     )
     # Add songs to the playlist
-    song_ids = [1, 2, 3]
+    playlist.playlist_songs = json.dumps({1: 1, 2: 2, 3: 3})
+    # song_ids = [1, 2, 3]
 
     # Append the songs to the playlist's songs attribute
-    for song_id in song_ids:
-        print('this is song_id', song_id)
-        song = Song.query.get(song_id)
-        print('this is song queried', song)
-        playlist.song_id = song.id
-        playlist.playlist_songs[song_id] = {"songId": song.id, "songTitle": song.title}
-        print('this is the new playlist', playlist)
+    # for song_id in song_ids:
+    #     song = Song.query.get(song_id)
+    #     playlist.song_id = song.id
+    #     # playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
+    #     playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
 
 
     # Commit the playlist and songs to the database
