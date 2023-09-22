@@ -35,7 +35,7 @@ const Likes = ({ songs, isPlayingState, currentlyPlaying, comments, userRef, use
           <IoHeartSharp />
           {numLikes} Likes
         </div>
-        <div onClick={() => history.push("/likes")} style={{ cursor: "pointer" }}>
+        <div onClick={() => history.push("/you/library")} style={{ cursor: "pointer" }}>
           View All
         </div>
       </div>
