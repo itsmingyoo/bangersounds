@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
   const navNames = [
     { name: "Home", to: "/discover" },
     { name: "Feed", to: "#" },
-    { name: "Library", to: "#" },
+    { name: "Library", to: "/you/library" },
   ];
 
   const navNames2 = [
@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
         </div>
 
         {navNames.map((nav, index) => {
-          if (nav.name === "Home") {
+          if (nav.name !== "Feed") {
             return (
               <div
                 className="nav-bar__element"

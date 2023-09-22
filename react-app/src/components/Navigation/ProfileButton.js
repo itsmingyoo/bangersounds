@@ -62,16 +62,15 @@ function ProfileButton({ user }) {
               <li>
                 <NavLink to="/profile">Profile</NavLink>
               </li>
-              <li onClick={() => alert("Feature coming soon!")}>
-                <NavLink to="/likes">Likes</NavLink>
+              <li>
+                <NavLink to="/you/library">Likes</NavLink>
+              </li>
+              <li>
+                <NavLink to="/you/library">Playlists</NavLink>
               </li>
               <li onClick={() => alert("Feature coming soon!")}>
-                <NavLink to="/playlists">Playlists</NavLink>
+                <NavLink to="/you/library">Follows</NavLink>
               </li>
-              <li onClick={() => alert("Feature coming soon!")}>
-                <NavLink to="/follows">Follows</NavLink>
-              </li>
-              <li onClick={() => alert("Feature coming soon!")}></li>
               <li onClick={handleLogout}>
                 <NavLink to="/">Log Out</NavLink>
               </li>

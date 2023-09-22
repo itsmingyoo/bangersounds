@@ -1,0 +1,36 @@
+Python 'JSON' Object storing in db
+1. You can store store an object using json.dumps (but this serializes the data by stringifying the keys with backslashes)
+    - i.e.
+        - json.dumps({1: 1, 2: 2, 3: 3})
+        - result when in db:
+            {"playlist": "{\"1\": 1, \"2\": 2, \"3\": 3}"}
+
+2. When pulling the data
+    @playlist_routes.route('/<int:id>')
+    @login_required
+    def get_playlists(id):
+        playlist = Playlist.query.get(id)
+        playlist = playlist.to_dict() # this parses it, you dont need the json.loads unless maybe you want it on the entire return 'playlist'
+        return playlist['songs']
+    -You dont actually need json.loads(), the to_dict() just parses it for you
+    -Result when hitting the route:
+        {"1": 1, "2": 2, "3": 3}
+
+3. Theory: The slashes aren't actually there because when we hit the route without json.loads -- we don't see the slashes. Therefore, Python might be doing some extra things behind the scenes.
+
+    - Result:
+    before to_dict
+    {"1": 1, "2": 2, "3": 3}
+
+    After to_dict()
+    {'createdAt': datetime.datetime(2023, 9, 21, 17, 44, 29),
+    'description': 'A great collection of pop songs',
+    'genre': 'Pop',
+    'id': 1,
+    'private': True,
+    'songs': '{"1": 1, "2": 2, "3": 3}',
+    'thumbnail': 'thumbnail_url',
+    'title': 'My Sample Playlist'}
+
+    - Conclusion:
+    Slashes don't exist, SQLiteViewer just displays it with slashes.

@@ -54,7 +54,8 @@ class User(db.Model, UserMixin):
     # Relationship to Reposted Songs
     reposted_songs = db.relationship("Repost", back_populates="user")
 
-
+    # Relationhsip to Playlists
+    # my_playlists = db.relationship("Playlist", back_populates='playlist_creator')
 
 
     @property
