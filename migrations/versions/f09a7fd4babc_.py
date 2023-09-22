@@ -1,17 +1,18 @@
 """empty message
 
-Revision ID: 6db860bcc0a5
+Revision ID: f09a7fd4babc
 Revises:
-Create Date: 2023-09-21 10:26:05.281612
+Create Date: 2023-09-22 08:31:20.392947
 
 """
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 from sqlalchemy import Text
+from app.models.db import db, environment, SCHEMA
 
 # revision identifiers, used by Alembic.
-revision = '6db860bcc0a5'
+revision = 'f09a7fd4babc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,20 +36,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
-    )
-    op.create_table('playlists',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=255), nullable=False),
-    sa.Column('genre', sa.String(length=255), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
-    sa.Column('private', sa.Boolean(), nullable=False),
-    sa.Column('thumbnail', sa.String(length=255), nullable=True),
-    sa.Column('tags', sa.String(length=255), nullable=True),
-    sa.Column('createdAt', sa.DateTime(), nullable=True),
-    sa.Column('playlist_songs', postgresql.JSON(astext_type=Text()), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -92,6 +79,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        # op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
@@ -101,6 +95,5 @@ def downgrade():
     op.drop_table('likes')
     op.drop_table('comments')
     op.drop_table('songs')
-    op.drop_table('playlists')
     op.drop_table('users')
     # ### end Alembic commands ###

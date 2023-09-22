@@ -5,10 +5,19 @@
 
 BangerSounds is an intuitive music hosting website where users can share their unique remixes and other tunes! This is a full stack web application solely inspired by SoundCloud. Nearly pixel perfect, the audio player is definitely the most intuitive portion of design in which I recreated based off of SoundCloud. Users are able to upload, like, repost, and comment on songs. They also have a customizable profile page to creatively attune to their liking.
 
-
+# [BangerSounds Live](https://bangersounds.onrender.com)
 
 ## - [Database Schema](https://github.com/itsmingyoo/bangersounds/wiki/Database-Schema-and-Backend-Routes)  - [MVP](https://github.com/itsmingyoo/bangersounds/wiki/MVP-Features) - [User Stories](https://github.com/itsmingyoo/bangersounds/wiki/User-Stories) - [Wireframes](https://github.com/itsmingyoo/bangersounds/wiki/Wireframes) -
 
+## Preview
+![BangerSounds](https://i.imgur.com/Xh28PYw.gif)
+![Library](https://i.imgur.com/12ACv9W.png)
+![Download-Song](https://i.imgur.com/9iLHhJR.png)
+
+## Code Snippets
+
+## Image Below is a drag and drop implementation using 'DropZone' package and it also includes having two returns within one form with a transition depending on the state of submitting a song. If a valid song is submitted it will upload the song as it displays you the song details form to fill out it's title, genre, description, etc...
+![Drag-and-Drop](https://i.imgur.com/61Eacmc.png)
 
 
 ## Getting Started

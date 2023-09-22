@@ -4,7 +4,7 @@ from .songs import seed_songs, undo_songs
 from .likes import seed_likes, undo_likes
 from .reposts import seed_reposts, undo_reposts
 from .comments import seed_comments, undo_comments
-from .playlists import seed_playlists, undo_playlists
+# from .playlists import seed_playlists, undo_playlists
 
 from app.models.db import db, environment, SCHEMA
 
@@ -25,10 +25,10 @@ def seed():
         undo_likes()
         undo_comments()
         undo_songs()
-        undo_playlists()
+        # undo_playlists()
         undo_users()
     seed_users()
-    seed_playlists()
+    # seed_playlists()
     seed_songs()
     seed_comments()
     seed_likes()
@@ -43,6 +43,6 @@ def undo():
     undo_likes()
     undo_comments()
     undo_songs()
-    undo_playlists()
+    # undo_playlists()
     undo_users()
     # Add other undo functions here
