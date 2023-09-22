@@ -76,6 +76,7 @@ const ProfileNavBar = ({
             Reposts
           </div>
         </div>
+
         <div className="profile-navbar__right">
           <button onClick={() => alert("Feature coming soon!")}>Your Insights</button>
           <button onClick={() => alert("Feature coming soon!")}>Station</button>
