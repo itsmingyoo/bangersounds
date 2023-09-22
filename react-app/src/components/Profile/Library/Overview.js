@@ -17,7 +17,7 @@ const Overview = ({ isPlayingState, currentlyPlaying, togglePlayPause }) => {
   });
 
   return (
-    <div id="profile-all-container">
+    <div id="profile-library-container">
       <SongDisplay {...{ user, userSongs: relevantUserSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />
     </div>
   );

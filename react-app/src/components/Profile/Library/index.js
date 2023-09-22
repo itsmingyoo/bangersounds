@@ -4,6 +4,7 @@ import { useModal } from "../../../context/Modal";
 import Overview from "./Overview";
 import "../Profile.css";
 import "./Library.css";
+import Likes from "./Likes";
 
 const Library = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, userLikes }) => {
   const [active, setActive] = useState(0);
@@ -94,7 +95,7 @@ const Library = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlay
         {/*  */}
         {/*  */}
         {active === 0 && <Overview {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />}
-        {active === 1 && <div>Likes</div>}
+        {active === 1 && <Likes {...{ isPlayingState, currentlyPlaying, togglePlayPause }} />}
         {active === 2 && <div>Playlists</div>}
         {active === 3 && <div>Albums</div>}
         {active === 4 && <div>Following</div>}
