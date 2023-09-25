@@ -276,7 +276,7 @@ def toggle_like(songId):
         return {"message": "Unliked"}
     # POST
     else:
-        new_like = Like(user_id=user.id, song_id=songId, created_at=db.func.now())
+        new_like = Like(user_id=user.id, song_id=songId)
         db.session.add(new_like)
         db.session.commit()
         new_like = new_like.to_dict()
@@ -301,30 +301,51 @@ def toggle_like(songId):
         # like_timestamp = like.date
         # return {"message": "You successfully liked the song", "like_date": like_timestamp}
 
+# @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
+# @login_required
+# def toggle_repost(songId):
+#     song = Song.query.get(songId)
+#     user = User.query.get(current_user.id)
+#     if not song:
+#         return abort(404)  # Song not found
+
+#     if not user:
+#         return abort(401)  # User not logged in
+
+#     if user in song.reposted_by_users:
+#         song.reposted_by_users.remove(user)
+#         db.session.delete(song)
+#         db.session.commit()
+#         return {"message": "You successfully removed repost the song"}
+#     else:
+#         repost = Repost(user_id=user.id, song_id=songId)
+#         db.session.add(repost)
+#         db.session.commit()
+#         repost = repost.to_dict()
+
+#         return jsonify({"message": "Successfully reposted", "repost": repost})
+
 @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
 @login_required
 def toggle_repost(songId):
-    song = Song.query.get(songId)
+    song = Song.query.get(songId).to_dict()
     user = User.query.get(current_user.id)
+
     if not song:
         return abort(404)  # Song not found
 
-    if not user:
-        return abort(401)  # User not logged in
+    repost = Repost.query.filter_by(user_id=user.to_dict()['id'], song_id=songId).first()
 
-    if user in song.reposted_by_users:
-        song.reposted_by_users.remove(user)
-        db.session.delete(song)
+    if repost is not None:
+        db.session.delete(repost)
         db.session.commit()
-        return {"message": "You successfully removed repost the song"}
+        return {"message": "Un-reposted"}
     else:
-        repost = Repost(user_id=user.id, song_id=songId)
-        db.session.add(repost)
+        new_repost = Repost(user_id=user.id, song_id=songId)
+        db.session.add(new_repost)
         db.session.commit()
-        repost = repost.to_dict()
-
-        return jsonify({"message": "Successfully reposted", "repost": repost})
-
+        new_repost = new_repost.to_dict()
+        return {"message": "Reposted", "repost": new_repost}
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
