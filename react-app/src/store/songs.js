@@ -319,18 +319,17 @@ export const thunkToggleLike = (songId, user) => async (dispatch) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        songId: songId,
-      }),
     });
     res = await res.json();
     console.log("RESPONSE FROM THUNK", res);
     if (res.likeInfo) {
       console.log("POSTING A LIKE THUNK");
       dispatch(postLike(songId, res.likeInfo));
+      return;
     } else {
       console.log("DELETING A LIKE THUNK");
       dispatch(deleteLike(songId, user.id));
+      return;
     }
     return res;
   } catch (e) {
