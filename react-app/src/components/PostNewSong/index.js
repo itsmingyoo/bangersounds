@@ -175,11 +175,13 @@ function PostNewSong() {
   if (submitted === false) {
     return (
       <div id="new-song__main-container">
-        <TopNavBar />
-        <UploadNavBar />
-        {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
-        {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
-        <Dropzone onDrop={onDrop} accept={"audio/*"} />
+        <div id="new-song-wrapper">
+          <TopNavBar />
+          <UploadNavBar />
+          {/*! MAIN CONTENT - BUTTON WILL BE TO SELECT FILE TO UPLOAD WITH AWS THEN AFTER VALIDATING CORRECT FILE TYPE - IT LEADS TO THE FORM WHILE UPLOADING  */}
+          {/* Provide FLAC, WAV, ALAC, or AIFF for highest audio quality -- .mp3 works as well */}
+          <Dropzone onDrop={onDrop} accept={"audio/*"} />
+        </div>
       </div>
     );
   }
