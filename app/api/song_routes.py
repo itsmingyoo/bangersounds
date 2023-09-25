@@ -242,8 +242,17 @@ def delete_comment(songId, commentId):
 @songs_routes.route('/<int:songId>/like', methods=['POST', 'DELETE'])
 @login_required
 def toggle_like(songId):
-    song = Song.query.get(songId)
+    song = Song.query.get(songId).to_dict()
     user = User.query.get(current_user.id)
+
+    print('LOOK AT THIS SONG')
+    print('LOOK AT THIS SONG')
+    print('LOOK AT THIS SONG')
+    print('LOOK AT THIS SONG')
+    pprint(song)
+
+    print('user', user)
+
 
     if not song:
         return abort(404)  # Song not found
@@ -251,18 +260,19 @@ def toggle_like(songId):
     if not user:
         return abort(401)  # User not logged in
 
-    if user in song.liked_by_users:
-        song.liked_by_users.remove(user)
-        db.session.delete(song)
-        db.session.commit()
-        return {"message": "You successfully unliked the song"}
-    else:
-        like = Like(user_id=user.id, song_id=songId)
-        db.session.add(like)
-        db.session.commit()
-        like = like.to_dict()
+    # like = Like.query.filter_by(user_id=user.to_dict()['id'], song_id=songId).first()
+    like = Like.query.filter(Like.user_id == user.to_dict()['id'], Like.song_id == songId).first()
 
-        return jsonify({"message": "Successfully removed like", "like": like})
+    if like:
+        db.session.delete(like)
+        db.session.commit()
+        return {"message": "You successfully unliked a song"}, 200
+    else:
+        new_like = Like(user_id=user.id, song_id=songId)
+        db.session.add(new_like)
+        db.session.commit()
+        new_like = new_like.to_dict()
+        return jsonify({"message": "Successfully liked a song", "like": new_like}), 200
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table

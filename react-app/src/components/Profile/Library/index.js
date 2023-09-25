@@ -6,7 +6,7 @@ import "../Profile.css";
 import "./Library.css";
 import Likes from "./Likes";
 
-const Library = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause, userLikes }) => {
+const Library = ({ user, userSongs, songs, isPlayingState, currentlyPlaying, togglePlayPause, userLikes }) => {
   const [active, setActive] = useState(0);
 
   const handleActiveClick = (index) => {
@@ -94,7 +94,9 @@ const Library = ({ user, userSongs, isPlayingState, currentlyPlaying, togglePlay
         {/*  */}
         {/*  */}
         {/*  */}
-        {active === 0 && <Overview {...{ user, userSongs, isPlayingState, currentlyPlaying, togglePlayPause }} />}
+        {active === 0 && (
+          <Overview {...{ user, userSongs, songs, isPlayingState, currentlyPlaying, togglePlayPause }} />
+        )}
         {active === 1 && <Likes {...{ isPlayingState, currentlyPlaying, togglePlayPause }} />}
         {active === 2 && <div>Playlists</div>}
         {active === 3 && <div>Albums</div>}
