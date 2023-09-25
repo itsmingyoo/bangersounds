@@ -178,47 +178,38 @@ const EditSong = ({
     <div id="edit__main-container">
       <div id="edit-wrapper">
         {/* flex row */}
-        <div className="edit-files__container">
-          <div className="download-file">
-            <a
-              href={song.songURL}
-              onClick={(e) => {
-                e.preventDefault();
-                downloadFile(song.songURL, song.title);
-              }}
-            >
-              Download
-            </a>
-            <a href="" download="sample.jpg" />
-          </div>
-          <div>
-            <label className="upload-new" for="upload-new-file">
-              <input
-                type="file"
-                accept="audio/*"
-                onChange={(e) => setSongUpload(e.target.files[0])}
-                // onChange={handleClick}
-                className="orange-btn-white-txt cursor-pointer"
-                style={{ display: "none" }}
-                id="upload-new-file"
-              />
-              Replace file
-            </label>
-          </div>
-        </div>
-        <div className="edit-tabs">
-          <span>Basic Info</span>
-          <span>Metadata</span>
-          <span>Permissions</span>
-          <span>Advanced</span>
-          <span>NEW</span>
-        </div>
+
         <div className="edit-song-and-form__container">
           <div className="edit-song-img">
-            <img
-              src="https://images.all-free-download.com/images/graphiclarge/testing_with_magnifier_185604.jpg"
-              alt="preview image here"
-            ></img>
+            <img src={song.thumbnail} alt="preview image here"></img>
+          </div>
+          <div className="edit-files__container">
+            <div className="download-file">
+              <a
+                href={song.songURL}
+                onClick={(e) => {
+                  e.preventDefault();
+                  downloadFile(song.songURL, song.title);
+                }}
+              >
+                Download
+              </a>
+              <a href="" download="sample.jpg" />
+            </div>
+            <div>
+              <label className="upload-new" for="upload-new-file">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={(e) => setSongUpload(e.target.files[0])}
+                  // onChange={handleClick}
+                  className="cursor-pointer"
+                  style={{ display: "none" }}
+                  id="upload-new-file"
+                />
+                Replace file
+              </label>
+            </div>
           </div>
           <div>
             <form className="edit-song__form" onSubmit={onSubmit} encType="multipart/form-data">
@@ -294,7 +285,9 @@ const EditSong = ({
                 <button className="white-btn-black-txt" onClick={() => closeModal()}>
                   Cancel
                 </button>
-                <button className="orange-btn-white-txt">Save</button>
+                <button id="edit-save-btn" className="orange-btn-white-txt">
+                  Save
+                </button>
                 {songLoading && <p>Loading . . .</p>}
               </div>
             </form>

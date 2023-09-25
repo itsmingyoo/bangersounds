@@ -62,40 +62,39 @@ const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayP
           timeAgoString = `${months} ${months === 1 ? "month" : "months"} ago`;
         }
         return (
-          <>
-            <div
-              id="user-comment__container"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
-            >
-              <div className="user-pfp__container">
-                <div className="user-pfp">
-                  <img src={c.user.profileImage} alt="user pfp" />
-                </div>
-                <div>
-                  <div key={c.id} className="user-displayname">
-                    {c.user.displayName}
-                  </div>
-                  <div className="user-comment">{c.comment}</div>
-                </div>
+          <div
+            key={c.id}
+            id="user-comment__container"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <div className="user-pfp__container">
+              <div className="user-pfp">
+                <img src={c.user.profileImage} alt="user pfp" />
               </div>
-
-              <div id="user-time-delete">
-                <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
-                  {timeAgoString}
+              <div>
+                <div key={c.id} className="user-displayname">
+                  {c.user.displayName}
                 </div>
-
-                {user && c.userId === user.id && hoveredStates[index] && (
-                  <button
-                    onClick={() => handleDelete(c)}
-                    className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}
-                  >
-                    Delete
-                  </button>
-                )}
+                <div className="user-comment">{c.comment}</div>
               </div>
             </div>
-          </>
+
+            <div id="user-time-delete">
+              <div className={`user-comment__date ${hoveredStates[index] ? "display-comment-date" : ""}`}>
+                {timeAgoString}
+              </div>
+
+              {user && c.userId === user.id && hoveredStates[index] && (
+                <button
+                  onClick={() => handleDelete(c)}
+                  className={`user-delete ${hoveredStates[index] ? "display-comment-date" : ""}`}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          </div>
         );
       })}
     </div>
