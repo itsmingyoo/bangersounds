@@ -15,6 +15,7 @@ const Overview = ({ songs, isPlayingState, currentlyPlaying }) => {
         likedSongs.push(song);
       }
     });
+    console.log("likedSongs", likedSongs);
     return likedSongs;
   });
   // const playlists = useSelector((s) => {
