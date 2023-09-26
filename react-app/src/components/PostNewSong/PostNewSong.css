@@ -27,8 +27,14 @@
 
 #new-song__upload-space {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 100px;
+    padding: 10px;
+    margin: 10px 0;
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, .2);
 }
 
 #new-song__upload-button > button {
@@ -85,6 +91,10 @@
     cursor: pointer;
 }
 
+#orange-btn-white-txt {
+    border-radius: 4px;
+}
+
 .white-btn-black-txt {
     background-color: white;
     color: black;
@@ -113,6 +123,7 @@
     min-height: 100vh;
 }
 
-.dropzone-div {
-
+#upload-container {
+    display: flex;
+    flex-direction: column;
 }
