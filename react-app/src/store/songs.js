@@ -19,7 +19,10 @@ const POST_COMMENT_ACTION = "comments/POST_COMMENT_ACTION";
 const DELETE_COMMENT_ACTION = "comments/DELETE_COMMENT_ACTION";
 
 // ACTIONS FOR LIKES AND REPOSTS
-const TOGGLE_LIKE_ACTION = "likes/TOGGLE_LIKE_ACTION";
+// const TOGGLE_LIKE_ACTION = "likes/TOGGLE_LIKE_ACTION";
+const POST_LIKE_ACTION = "likes/POST_LIKE_ACTION";
+const DELETE_LIKE_ACTION = "likes/DELETE_LIKE_ACTION";
+
 const TOGGLE_REPOST_ACTION = "reposts/TOGGLE_REPOST_ACTION";
 
 //? =====================  actions ===========================//
@@ -122,15 +125,31 @@ const deleteComment = (commentId) => {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const toggleLike = (songId, user, isLiked, res) => {
+// const toggleLike = (songId, user, res) => {
+//   return {
+//     type: TOGGLE_LIKE_ACTION,
+//     songId,
+//     user,
+//     res, // 0 or 1 : 1 then create, 0 delete
+//   };
+// };
+
+const postLike = (songId, res) => {
   return {
-    type: TOGGLE_LIKE_ACTION,
+    type: POST_LIKE_ACTION,
     songId,
-    user,
-    isLiked,
     res,
   };
 };
+
+const deleteLike = (songId, userId) => {
+  return {
+    type: DELETE_LIKE_ACTION,
+    songId,
+    userId,
+  };
+};
+
 const toggleRepost = (songId, user, isRepost, res) => {
   return {
     type: TOGGLE_REPOST_ACTION,
@@ -293,38 +312,28 @@ export const thunkDeleteComment = (songId, commentId) => async (dispatch) => {
 //**=================== LIKES AND REPOSTS THUNKS =======================/
 //**********************************************************************/
 //**********************************************************************/
-export const thunkToggleLike = (songId, user, isLiked) => async (dispatch) => {
+export const thunkToggleLike = (songId, user) => async (dispatch) => {
   try {
-    if (isLiked) {
-      let likedSong = await fetch(`/api/songs/${songId}/like`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          songId,
-        },
-      });
-      likedSong = await likedSong.json();
-      dispatch(toggleLike(songId, user, isLiked, likedSong));
-      return likedSong;
+    let res = await fetch(`/api/songs/${songId}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    res = await res.json();
+    console.log("RESPONSE FROM THUNK", res);
+    if (res.likeInfo) {
+      console.log("POSTING A LIKE THUNK");
+      dispatch(postLike(songId, res.likeInfo));
+      return;
     } else {
-      let likedSong = await fetch(`/api/songs/${songId}/like`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          songId,
-        },
-      });
-      likedSong = await likedSong.json();
-      dispatch(toggleLike(songId, user, isLiked, likedSong));
-      return likedSong;
+      console.log("DELETING A LIKE THUNK");
+      dispatch(deleteLike(songId, user.id));
+      return;
     }
+    return res;
   } catch (e) {
-    console.log("error");
-    return e;
+    console.log(e);
   }
 };
 export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) => {
@@ -500,20 +509,30 @@ export default function reducer(state = initialState, action) {
     // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
     // ------------- LIKES AND REPOSTS SECTION ------------- //
     // LIKES AND REPOSTS LIKES AND REPOSTS LIKES AND REPOSTS //
-    case TOGGLE_LIKE_ACTION: {
+    // case TOGGLE_LIKE_ACTION: {
+    //   newState = { ...state };
+    //   if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
+    //   else {
+    //     console.log("this is the else statement reducer", action.res);
+    //     newState.Songs[action.songId].likes[action.user.id] = action.res.like;
+    //   }
+    //   return newState;
+    // }
+
+    case POST_LIKE_ACTION: {
       newState = { ...state };
-      if (action.isLiked) delete newState.Songs[action.songId].likes[action.user.id];
-      else newState.Songs[action.songId].likes[action.user.id] = { dateLiked: action.res.like, ...action.user };
+      newState.Songs[action.songId].likes[action.res.userId] = action.res;
+      return newState;
+    }
+    case DELETE_LIKE_ACTION: {
+      newState = { ...state };
+      delete newState.Songs[action.songId].likes[action.userId];
       return newState;
     }
     case TOGGLE_REPOST_ACTION: {
       newState = { ...state };
       if (action.isRepost) delete newState.Songs[action.songId].reposts[action.user.id];
-      else
-        newState.Songs[action.songId].reposts[action.user.id] = {
-          dateReposted: action.res.repost,
-          ...action.user,
-        };
+      else newState.Songs[action.songId].reposts[action.user.id] = action.res.repost;
       return newState;
     }
 

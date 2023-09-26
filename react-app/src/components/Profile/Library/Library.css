@@ -19,3 +19,9 @@
     font-size: 24px;
     margin: 10px 12px;
 }
+
+#liked-songs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

@@ -4,7 +4,7 @@ from app.forms import NewSongForm, NewCommentForm
 from app.models import Song, Comment, db, User, likes, reposts, Like, Repost
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from .auth_routes import validation_errors_to_error_messages
-from sqlalchemy.orm import load_only
+from sqlalchemy.orm import load_only, joinedload
 from pprint import pprint
 
 # PREFIX '/api/songs'
@@ -24,13 +24,30 @@ songs_routes = Blueprint("songs", __name__)
 #         "Songs": {song["id"]: song for song in all_songs}
 #     }  # this returns a dictionary of normalized data
 
+# @songs_routes.route("/")
+# def get_songs():
+#     """
+#     This route returns all the songs with related data eagerly loaded
+#     """
+#     songs = Song.query.all()
+
+#     all_songs_data = {song.get_song_with_related_data(song.id).to_dict()['id']: song.get_song_with_related_data(song.id).to_dict() for song in songs}
+
+#     return {
+#         "Songs": all_songs_data
+#     }
+
+
 @songs_routes.route("/")
 def get_songs():
-    """
-    This route returns all the songs with related data eagerly loaded
-    """
-    songs = Song.query.all()
-    all_songs_data = {song.get_song_with_related_data(song.id).to_dict()['id']: song.get_song_with_related_data(song.id).to_dict() for song in songs}
+    songs = Song.query.options(
+        joinedload(Song.user_songs),
+        joinedload(Song.song_comments),
+        joinedload(Song.liked_by_users),
+        joinedload(Song.reposted_by_users)
+    ).all()
+
+    all_songs_data = {song.id: song.to_dict() for song in songs}
 
     return {
         "Songs": all_songs_data
@@ -239,30 +256,31 @@ def delete_comment(songId, commentId):
 ################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
 ################# LIKES AND REPOSTS ROUTES FOR SONGS #################################
 
-@songs_routes.route('/<int:songId>/like', methods=['POST', 'DELETE'])
+@songs_routes.route('/<int:songId>/like', methods=['POST'])
 @login_required
 def toggle_like(songId):
-    song = Song.query.get(songId)
+    song = Song.query.get(songId).to_dict()
     user = User.query.get(current_user.id)
 
     if not song:
         return abort(404)  # Song not found
 
-    if not user:
-        return abort(401)  # User not logged in
+    # Two ways to Query
+    # like = Like.query.filter_by(user_id=user.to_dict()['id'], song_id=songId).first()
+    like = Like.query.filter(Like.user_id == user.to_dict()['id'], Like.song_id == songId).first()
 
-    if user in song.liked_by_users:
-        song.liked_by_users.remove(user)
-        db.session.delete(song)
+    # DELETE
+    if like is not None:
+        db.session.delete(like)
         db.session.commit()
-        return {"message": "You successfully unliked the song"}
+        return {"message": "Unliked"}
+    # POST
     else:
-        like = Like(user_id=user.id, song_id=songId)
-        db.session.add(like)
+        new_like = Like(user_id=user.id, song_id=songId)
+        db.session.add(new_like)
         db.session.commit()
-        like = like.to_dict()
-
-        return jsonify({"message": "Successfully removed like", "like": like})
+        new_like = new_like.to_dict()
+        return {"message": "Liked", "likeInfo": new_like}
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table
@@ -283,30 +301,51 @@ def toggle_like(songId):
         # like_timestamp = like.date
         # return {"message": "You successfully liked the song", "like_date": like_timestamp}
 
+# @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
+# @login_required
+# def toggle_repost(songId):
+#     song = Song.query.get(songId)
+#     user = User.query.get(current_user.id)
+#     if not song:
+#         return abort(404)  # Song not found
+
+#     if not user:
+#         return abort(401)  # User not logged in
+
+#     if user in song.reposted_by_users:
+#         song.reposted_by_users.remove(user)
+#         db.session.delete(song)
+#         db.session.commit()
+#         return {"message": "You successfully removed repost the song"}
+#     else:
+#         repost = Repost(user_id=user.id, song_id=songId)
+#         db.session.add(repost)
+#         db.session.commit()
+#         repost = repost.to_dict()
+
+#         return jsonify({"message": "Successfully reposted", "repost": repost})
+
 @songs_routes.route('/<int:songId>/repost', methods=['POST', 'DELETE'])
 @login_required
 def toggle_repost(songId):
-    song = Song.query.get(songId)
+    song = Song.query.get(songId).to_dict()
     user = User.query.get(current_user.id)
+
     if not song:
         return abort(404)  # Song not found
 
-    if not user:
-        return abort(401)  # User not logged in
+    repost = Repost.query.filter_by(user_id=user.to_dict()['id'], song_id=songId).first()
 
-    if user in song.reposted_by_users:
-        song.reposted_by_users.remove(user)
-        db.session.delete(song)
+    if repost is not None:
+        db.session.delete(repost)
         db.session.commit()
-        return {"message": "You successfully removed repost the song"}
+        return {"message": "Un-reposted"}
     else:
-        repost = Repost(user_id=user.id, song_id=songId)
-        db.session.add(repost)
+        new_repost = Repost(user_id=user.id, song_id=songId)
+        db.session.add(new_repost)
         db.session.commit()
-        repost = repost.to_dict()
-
-        return jsonify({"message": "Successfully reposted", "repost": repost})
-
+        new_repost = new_repost.to_dict()
+        return {"message": "Reposted", "repost": new_repost}
 
 
     # Meta Data Table for Many-to-Many Example - Currently Converted to a class m2m table

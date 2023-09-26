@@ -6,8 +6,8 @@ import "./LikeButton.css";
 
 const LikeButton = ({ song, user, isLiked, cName }) => {
   const dispatch = useDispatch();
-  const toggleLike = () => {
-    dispatch(thunkToggleLike(song.id, user, isLiked));
+  const toggleLike = async () => {
+    await dispatch(thunkToggleLike(song.id, user));
   };
   return (
     <div id="like-btn__container">

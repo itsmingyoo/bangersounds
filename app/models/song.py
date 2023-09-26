@@ -71,18 +71,18 @@ class Song(db.Model):
             # LAZY LOADING - THIS RUNS MULTIPLE QUERIES RESULTING IN N+1
             "artistInfo": self.user_songs.to_dict(),
             "comments": [comment.to_dict() for comment in self.song_comments],
-            "likes": {like.to_dict()['id']: like.to_dict() for like in self.liked_by_users},
-            "reposts": {repost.to_dict()['id']: repost.to_dict() for repost in self.reposted_by_users}
+            "likes": {like.to_dict()['userId']: like.to_dict() for like in self.liked_by_users},
+            "reposts": {repost.to_dict()['userId']: repost.to_dict() for repost in self.reposted_by_users}
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }
 
     # EAGER LOADING - THIS WOULD REDUCE THE AMOUNT OF QUERIES TO IMPROVE YOUR SITE PERFORMANCE - ALSO GOOD TO USE ALONG WITH THE LAZY LOADING ABOVE - CHECK GET ALL SONGS ROUTE FOR AN EXAMPLE OF HOW TO RUN ONE QUERY WITH 'JOINEDLOAD' EAGERLOADING
-    @classmethod
-    def get_song_with_related_data(cls, song_id):
-        return cls.query.options(
-            joinedload(cls.user_songs),
-            joinedload(cls.song_comments),
-            joinedload(cls.liked_by_users),
-            joinedload(cls.reposted_by_users)
-        ).get(song_id)
+    # @classmethod
+    # def get_song_with_related_data(cls, song_id):
+    #     return cls.query.options(
+    #         joinedload(cls.user_songs),
+    #         joinedload(cls.song_comments),
+    #         joinedload(cls.liked_by_users),
+    #         joinedload(cls.reposted_by_users)
+    #     ).get(song_id)
