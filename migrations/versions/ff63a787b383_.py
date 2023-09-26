@@ -8,8 +8,10 @@ Create Date: 2023-09-25 19:00:03.879129
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-from app.models.db import db, environment, SCHEMA
-
+from sqlalchemy import Text
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = 'ff63a787b383'
