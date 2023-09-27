@@ -61,8 +61,8 @@ const ProfileNavBar = ({
           <div
             className={`profile-navbar__item ${active === 4 ? "profile-navbar__item-active" : ""}`}
             onClick={() => {
-              // handleActiveClick(4);
-              alert("Feature coming soon!");
+              handleActiveClick(4);
+              // alert("Feature coming soon!");
             }}
           >
             Playlists

@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import * as songActions from "./store/songs";
+import * as playlistActions from "./store/playlists";
 import LandingPage from "./components/LandingPage";
 import SongDetailsPage from "./components/SongDetailsPage";
 import PostNewSong from "./components/PostNewSong";
@@ -15,9 +16,9 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AllUserComments from "./components/Profile/AllUserComments";
 import Splash from "./components/SplashPage";
 import SplashCarousel from "./components/SlickCarousel";
-import "./index.css";
 import LikesPage from "./components/LikesPage";
 import Library from "./components/Profile/Library";
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
+      .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
         //* now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
         if (userRef.current !== null) {
@@ -63,6 +65,7 @@ function App() {
 
   // Grab all states and send them as props
   const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const playlists = useSelector((s) => s.playlists);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
   const comments = useSelector((s) => s.songs.comments);
