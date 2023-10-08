@@ -28,9 +28,22 @@ def seed_playlists():
     #     # playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
     #     playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
 
+    playlist2 = Playlist(
+        title="My Sample Playlist Two",
+        genre="Electronic",
+        description="EDM Playlist Bangers Only",
+        private=True,
+        thumbnail="thumbnail_url",
+        tags="edm, music",
+        user_id=1,
+        playlist_songs={}
+
+    )
+    playlist2.playlist_songs = json.dumps({4: 4, 7: 7, 8: 8})
 
     # Commit the playlist and songs to the database
     db.session.add(playlist)
+    db.session.add(playlist2)
     db.session.commit()
 
 
