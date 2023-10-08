@@ -16,6 +16,11 @@ export const thunkGetAllPlaylists = () => async (dispatch) => {
     },
   });
   playlists = await playlists.json();
+  playlists = Object.values(playlists).map((playlist) => ({
+    ...playlist,
+    songs: playlist.songs.map(Number),
+  }));
+  console.log("playlist thunk", playlists);
   dispatch(getAllPlaylistsAction(playlists));
   return playlists;
 };

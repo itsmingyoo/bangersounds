@@ -331,3 +331,8 @@ hr {
 #user-comment__container2 > * {
     color: #999
 }
+
+/*** PLAYLIST CSS ***/
+#playlist-gradient {
+    background-color: white;
+}
