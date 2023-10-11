@@ -336,3 +336,12 @@ hr {
 #playlist-gradient {
     background-color: white;
 }
+
+#playlist {
+    display: flex;
+}
+
+#playlist-info {
+    display: flex;
+    flex-direction: column;
+}

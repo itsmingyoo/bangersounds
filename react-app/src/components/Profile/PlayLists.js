@@ -32,15 +32,21 @@ const Playlists = () => {
   return (
     <>
       {userPlaylists.map((playlist) => (
-        <div key={playlist.id}>
-          <img src={playlist.thumbnail} alt={playlist.thumbnail} />
-          {playlist.songs.map((songId) => {
-            const song = songs[songId];
-            console.log("this is mapped song", song);
+        <div key={playlist.id} id="playlist">
+          <div style={{ height: "100%" }}>
+            <a style={{ width: "160px", height: "160px" }}>
+              <img src={playlist.thumbnail} alt={playlist.thumbnail} style={{ width: "160px", height: "160px" }} />
+            </a>
+          </div>
+          <div id="playlist-info">
+            {playlist.songs.map((songId) => {
+              const song = songs[songId];
+              console.log("this is mapped song", song);
 
-            // You can render song information here if needed
-            return <div key={song.id}>{song.title}</div>;
-          })}
+              // You can render song information here if needed
+              return <div key={song.id}>{song.title}</div>;
+            })}
+          </div>
         </div>
       ))}
     </>

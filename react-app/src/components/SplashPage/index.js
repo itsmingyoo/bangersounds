@@ -84,7 +84,7 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
 
           <div className="splash-trending-songs">
             {/* <NavLink to="/discover">Discover</NavLink> */}
-            <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the SoundCloud community </div>
+            <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the BangerSounds community </div>
             <div className="splash-songs">
               {songs &&
                 songs.slice(0, 12).map((s) => (

@@ -14,7 +14,7 @@ def seed_playlists():
         genre="Pop",
         description="A great collection of pop songs",
         private=True,
-        thumbnail="https://cdn.discordapp.com/attachments/1108904522220318781/1142128184867946576/cartman.JPG",
+        thumbnail="https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg",
         tags="pop, music",
         user_id=1,
         playlist_songs=song_ids_playlist1  # Store song IDs as a list
@@ -25,7 +25,7 @@ def seed_playlists():
         genre="Electronic",
         description="EDM Playlist Bangers Only",
         private=True,
-        thumbnail="https://cdn.discordapp.com/attachments/1108904522220318781/1142128184867946576/cartman.JPG",
+        thumbnail="https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg",
         tags="edm, music",
         user_id=1,
         playlist_songs=[4, 7, 8]  # Store song IDs as a list for the second playlist
