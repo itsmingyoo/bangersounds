@@ -16,7 +16,7 @@ const Playlists = () => {
     }
   });
   console.log("uppppp", userPlaylists);
-  console.log('hello this is fresh')
+  console.log('hello this is fresh pc again')
 
   // display a playlist of songs
   // thumbnail on left : list of playlist songs on the navbar__right
