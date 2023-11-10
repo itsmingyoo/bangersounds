@@ -68,16 +68,16 @@ Still in the root directory, run the following commands in the terminal:
 pipenv shell
 ```
 ```
-flask db migrate
-```
-```
 flask db init
+```
+```
+flask db migrate
 ```
 ```
 flask db upgrade
 ```
 ```
-flask db seed all
+flask seed all
 ```
 ```
 flask run
@@ -93,6 +93,11 @@ npm install
 ```
 ```
 npm start
+```
+
+If you're running into errors regarding openssl, run this command then redo migrations
+```
+npm i react-scripts@latest
 ```
 
 Now you're done! You should be able to see the project now and adjust it to your liking.
