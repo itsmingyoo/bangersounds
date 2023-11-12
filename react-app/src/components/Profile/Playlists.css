@@ -10,6 +10,7 @@
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
+    display: flex;
 }
 
 #playlist-info {}
@@ -17,11 +18,19 @@
 #playlist-song-title {
     font-size: 12px;
     display: flex;
+    /* justify-content: center; */
+    align-items: center;
 }
 
-#playlist-creator {}
+#playlist-creator {
+    font-size: 12px;
+    color: #999999;
+}
 
-#playlist-title {}
+#playlist-title {
+    font-size: 15px;
+    color: black;
+}
 
 #playlist-thumbnail-container {
     height: 100%;
@@ -30,9 +39,16 @@
 #playlist-thumbnail{
     width: 160px;
     height: 160px;
+    margin-right: 5px;
 }
 
 #playlist-song-thumbnail {
     width: 20px;
     height: 20px;
 }
+
+#playlist-songs-container {
+
+}
+
+#playlist-play-button {}
