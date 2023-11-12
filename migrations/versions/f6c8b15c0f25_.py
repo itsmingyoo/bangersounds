@@ -1,16 +1,21 @@
 """empty message
 
-Revision ID: c0a76a20784a
-Revises: 
-Create Date: 2023-11-10 23:11:49.774699
+Revision ID: f6c8b15c0f25
+Revises:
+Create Date: 2023-11-12 06:16:50.045032
 
 """
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
+from sqlalchemy.dialects import postgresql
+from sqlalchemy import Text
+# postgresql and Text is for the 'JSON' column of 'playlist_songs' object
 # revision identifiers, used by Alembic.
-revision = 'c0a76a20784a'
+revision = 'f6c8b15c0f25'
 down_revision = None
 branch_labels = None
 depends_on = None
