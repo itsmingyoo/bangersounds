@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 79bef195e152
+Revision ID: f6c8b15c0f25
 Revises:
-Create Date: 2023-11-11 14:40:52.506547
+Create Date: 2023-11-12 06:16:50.045032
 
 """
 from alembic import op
@@ -14,10 +14,8 @@ SCHEMA = os.environ.get("SCHEMA")
 from sqlalchemy.dialects import postgresql
 from sqlalchemy import Text
 # postgresql and Text is for the 'JSON' column of 'playlist_songs' object
-
-
 # revision identifiers, used by Alembic.
-revision = '79bef195e152'
+revision = 'f6c8b15c0f25'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -98,13 +96,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

@@ -105,6 +105,9 @@ flask seed undo
 ```
 ```
 flask run
+#or
+flask run --port=5001
+
 ```
 
 Next run this in the terminal
