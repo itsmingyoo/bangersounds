@@ -20,7 +20,7 @@ BangerSounds is an intuitive music hosting website where users can share their u
 ![Drag-and-Drop](https://i.imgur.com/61Eacmc.png)
 
 
-## Getting Started
+# Getting Started
 
 
 
@@ -62,22 +62,46 @@ pipenv install -r requirements.txt
 
 
 
-Still in the root directory, run the following commands in the terminal:
+## Still in the root directory, run the following commands in the terminal:
 
+Enter virtual environment
 ```
 pipenv shell
 ```
 ```
+#creates migrations folders
+flask db init
+```
+```
 flask db migrate
 ```
+After migrating, add this to your migrations file
 ```
-flask db init
+from alembic import op
+import sqlalchemy as sa
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
+from sqlalchemy.dialects import postgresql
+from sqlalchemy import Text
+# postgresql and Text is for the 'JSON' column of 'playlist_songs' object
+
+if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
 ```
 ```
 flask db upgrade
 ```
 ```
-flask db seed all
+flask seed all
+//unseed command for future use
+flask seed undo
 ```
 ```
 flask run
@@ -96,3 +120,50 @@ npm start
 ```
 
 Now you're done! You should be able to see the project now and adjust it to your liking.
+
+# Troubleshooting openssl error
+Run this command if you have a different node version running and you run into an openssl error
+```
+npm i react-scripts@latest
+```
+
+If your dev.db is installed within the app folder instead of toplevel>instance
+```
+import os
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(base_dir, "instance", "dev.db")}'
+
+// If this doesn't work, make sure your packages are up-to-date in the requirements.txt file
+```
+
+### Making sure you're on Python3 v3.9.4
+
+Find the version
+```
+pyenv versions
+```
+
+Convert to v3.9.4
+
+```
+export PYENV_VERSION=3.9.4
+```
+
+## Useful Commands
+
+Create automatic .gitignore with curl
+```
+curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore > .gitignore
+```
+
+Exit Virtual Environment
+```
+deactivate
+```
+
+## Useful Sources
+Python/React Skeleton Setup
+```
+https://github.com/appacademy/practice-for-week-19-python-project-skeleton/tree/main
+```

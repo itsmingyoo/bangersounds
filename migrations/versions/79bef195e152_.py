@@ -1,20 +1,23 @@
 """empty message
 
-Revision ID: 97e7bdfe7e74
+Revision ID: 79bef195e152
 Revises:
-Create Date: 2023-09-26 19:28:25.924165
+Create Date: 2023-11-11 14:40:52.506547
 
 """
 from alembic import op
 import sqlalchemy as sa
 import os
-from sqlalchemy.dialects import postgresql
-from sqlalchemy import Text
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+from sqlalchemy.dialects import postgresql
+from sqlalchemy import Text
+# postgresql and Text is for the 'JSON' column of 'playlist_songs' object
+
+
 # revision identifiers, used by Alembic.
-revision = '97e7bdfe7e74'
+revision = '79bef195e152'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -95,6 +98,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
