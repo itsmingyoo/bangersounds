@@ -331,3 +331,17 @@ hr {
 #user-comment__container2 > * {
     color: #999
 }
+
+/*** PLAYLIST CSS ***/
+#playlist-gradient {
+    background-color: white;
+}
+
+#playlist {
+    display: flex;
+}
+
+#playlist-info {
+    display: flex;
+    flex-direction: column;
+}

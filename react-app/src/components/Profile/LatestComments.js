@@ -6,7 +6,9 @@ import { FaComment } from "react-icons/fa";
 
 const LatestComments = ({ user, userComments, songs }) => {
   const dispatch = useDispatch();
-  const [hoveredStates, setHoveredStates] = useState(Array(userComments.length).fill(false));
+  const [hoveredStates, setHoveredStates] = useState(
+    Array(userComments.length).fill(false)
+  );
 
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
@@ -62,13 +64,17 @@ const LatestComments = ({ user, userComments, songs }) => {
           .map((c, index) => {
             let currentDate = new Date();
             let commentDate = new Date(c.createdAt);
-            const timeDifference = Math.floor((currentDate - commentDate) / 1000);
+            const timeDifference = Math.floor(
+              (currentDate - commentDate) / 1000
+            );
             let timeAgoString = "";
             if (timeDifference < 60) {
               timeAgoString = `${timeDifference} seconds ago`;
             } else if (timeDifference < 3600) {
               const minutes = Math.floor(timeDifference / 60);
-              timeAgoString = `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+              timeAgoString = `${minutes} ${
+                minutes === 1 ? "minute" : "minutes"
+              } ago`;
             } else if (timeDifference < 86400) {
               const hours = Math.floor(timeDifference / 3600);
               timeAgoString = `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
@@ -77,7 +83,9 @@ const LatestComments = ({ user, userComments, songs }) => {
               timeAgoString = `${days} ${days === 1 ? "day" : "days"} ago`;
             } else {
               const months = Math.floor(timeDifference / 2592000);
-              timeAgoString = `${months} ${months === 1 ? "month" : "months"} ago`;
+              timeAgoString = `${months} ${
+                months === 1 ? "month" : "months"
+              } ago`;
             }
             const songInfo = songs.filter((s) => c.songId === s.id);
 
@@ -98,17 +106,28 @@ const LatestComments = ({ user, userComments, songs }) => {
                 </div>
                 <div id="user-time-delete" className="user-time-delete">
                   <div
-                    className={`user-comment__date ${hoveredStates[index] ? "hidden" : ""}`}
-                    style={{ fontSize: "12px", width: "fit-content", whiteSpace: "nowrap" }}
+                    className={`user-comment__date ${
+                      hoveredStates[index] ? "hidden" : ""
+                    }`}
+                    style={{
+                      fontSize: "12px",
+                      width: "fit-content",
+                      whiteSpace: "nowrap",
+                    }}
                   >
                     {timeAgoString}
                   </div>
                   {user && c.userId === user.id && hoveredStates[index] && (
                     <button
                       onClick={() => handleDelete(c)}
-                      className={`user-delete user-delete2 ${hoveredStates[index] ? "display-comment-date" : ""}`}
+                      className={`user-delete user-delete2 ${
+                        hoveredStates[index] ? "display-comment-date" : ""
+                      }`}
                     >
-                      <i class="fa-solid fas fa-trash" style={{ color: "#000000" }}></i>
+                      <i
+                        className="fa-solid fas fa-trash"
+                        style={{ color: "#000000" }}
+                      ></i>
                     </button>
                   )}
                 </div>
