@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SongDisplay from "../SongDisplay";
+import "./Playlists.css";
 
 const Playlists = () => {
   const dispatch = useDispatch();
   const user = useSelector((s) => s.session.user);
   const playlists = useSelector((s) => Object.values(s.playlists));
   const songs = useSelector((s) => s.songs.Songs);
-  console.log("u", user);
-  console.log("p", playlists);
+  console.log("user", user);
+  console.log("playlists", playlists);
   const userPlaylists = [];
   playlists?.forEach((p) => {
     if (p.createdBy === user.id) {
       userPlaylists.push(p);
     }
   });
-  console.log("uppppp", userPlaylists);
-  console.log('hello this is fresh pc again')
+  console.log("user playlists", userPlaylists);
 
   // display a playlist of songs
   // thumbnail on left : list of playlist songs on the navbar__right
@@ -33,20 +33,56 @@ const Playlists = () => {
   return (
     <>
       {userPlaylists.map((playlist) => (
-        <div key={playlist.id} id="playlist">
-          <div style={{ height: "100%" }}>
-            <a style={{ width: "160px", height: "160px" }}>
-              <img src={playlist.thumbnail} alt={playlist.thumbnail} style={{ width: "160px", height: "160px" }} />
-            </a>
-          </div>
-          <div id="playlist-info">
-            {playlist.songs.map((songId) => {
-              const song = songs[songId];
-              console.log("this is mapped song", song);
+        <div id="playlist-container">
+          <div key={playlist.id} id="playlist">
+            {/* Image */}
+            <div id="playlist-thumbnail-container">
+              <a>
+                <img
+                  id="playlist-thumbnail"
+                  src={playlist.thumbnail}
+                  alt={playlist.thumbnail}
+                />
+              </a>
+            </div>
 
-              // You can render song information here if needed
-              return <div key={song.id}>{song.title}</div>;
-            })}
+            {/* Songs */}
+            <div id="playlist-info">
+              <div id="playlist-play">
+                <button>Play</button>
+                <div>
+                  <div id="playlist-creator">Playlist Creator</div>
+                  <div id="playlist-title">Playlist Title</div>
+                </div>
+              </div>
+              {/* <div>
+                <img src="#" alt="waveform" />
+              </div> */}
+              {playlist.songs.map((songId, index) => {
+                const song = songs[songId];
+                console.log("this is mapped index of song", index);
+                console.log("this is mapped song", song);
+
+                // You can render song information here if needed
+                return (
+                  <>
+                    <div key={song.id} id="playlist-song-title">
+                      <div id="playlist-song-thumbnail">
+                        <img
+                          id="playlist-song-thumbnail"
+                          src={song.thumbnail}
+                          alt="playlist-song-thumbnail"
+                        />
+                      </div>
+                      <div>
+                        {index + Number(1)}
+                        {song.title}
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </div>
           </div>
         </div>
       ))}

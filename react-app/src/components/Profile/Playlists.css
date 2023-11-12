@@ -1,0 +1,38 @@
+#playlist-container {
+
+}
+
+#playlist {}
+
+#playlist-play {
+    background-image: url("https://miro.medium.com/v2/resize:fit:1400/1*jOoHvV25uFapHS3IcT8qzw.png");
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#playlist-info {}
+
+#playlist-song-title {
+    font-size: 12px;
+    display: flex;
+}
+
+#playlist-creator {}
+
+#playlist-title {}
+
+#playlist-thumbnail-container {
+    height: 100%;
+}
+
+#playlist-thumbnail{
+    width: 160px;
+    height: 160px;
+}
+
+#playlist-song-thumbnail {
+    width: 20px;
+    height: 20px;
+}
