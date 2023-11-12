@@ -107,6 +107,11 @@ flask seed undo
 flask run
 #or
 flask run --port=5001
+#if the port is already in use, find the PIDs
+lsof -i :5001
+
+#kill the port(s)
+kill -9 PID
 
 ```
 
