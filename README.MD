@@ -96,9 +96,6 @@ if environment == "production":
         op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
 ```
 ```
-flask db migrate
-```
-```
 flask db upgrade
 ```
 ```

@@ -1,37 +1,22 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/6764e37e5a3d_.py
-Revision ID: 6764e37e5a3d
-Revises: 
-Create Date: 2023-11-10 10:11:45.051794
-========
-Revision ID: 79bef195e152
+Revision ID: e4a0e905a836
 Revises:
-Create Date: 2023-11-11 14:40:52.506547
->>>>>>>> test-playlists:migrations/versions/79bef195e152_.py
+Create Date: 2023-11-11 23:45:26.335784
 
 """
 from alembic import op
 import sqlalchemy as sa
-<<<<<<<< HEAD:migrations/versions/6764e37e5a3d_.py
-
-========
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
->>>>>>>> test-playlists:migrations/versions/79bef195e152_.py
 
 from sqlalchemy.dialects import postgresql
 from sqlalchemy import Text
 # postgresql and Text is for the 'JSON' column of 'playlist_songs' object
 
-
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/6764e37e5a3d_.py
-revision = '6764e37e5a3d'
-========
-revision = '79bef195e152'
->>>>>>>> test-playlists:migrations/versions/79bef195e152_.py
+revision = 'e4a0e905a836'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -112,8 +97,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<<< HEAD:migrations/versions/6764e37e5a3d_.py
-========
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
@@ -121,7 +104,6 @@ def upgrade():
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE reposts SET SCHEMA {SCHEMA};")
->>>>>>>> test-playlists:migrations/versions/79bef195e152_.py
     # ### end Alembic commands ###
 
 
