@@ -51,4 +51,10 @@
     cursor: pointer;
 }
 
-#playlist-play-button {}
+#playlist-play-button {
+    background-color: #f50;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    height: 25%;
+}
