@@ -15,6 +15,7 @@ from .seeds import seed_commands
 from .config import Config
 
 app = Flask(__name__, static_folder="../react-app/build", static_url_path="/")
+# CORS(app)
 
 # Setup login manager
 login = LoginManager(app)
@@ -38,6 +39,7 @@ app.register_blueprint(comment_routes, url_prefix="/api/comments")
 app.register_blueprint(playlist_routes, url_prefix="/api/playlist")
 db.init_app(app)
 Migrate(app, db)
+# CORS(app)
 
 # Application Security - implement origins to allow fetches with correct cors headers - this is for the 'download song' function to work on the frontend
 CORS(app, origins=["https://bangersounds.onrender.com", "http://localhost:3000"])
