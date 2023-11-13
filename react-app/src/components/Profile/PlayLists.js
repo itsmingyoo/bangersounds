@@ -23,8 +23,8 @@ const Playlists = () => {
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const [isCopied, setIsCopied] = useState(false);
   const [song, setSong] = useState(currentlyPlaying);
-  console.log("song state", song);
-  console.log("currentlyPlaying", currentlyPlaying);
+  // console.log("song state", song);
+  // console.log("currentlyPlaying", currentlyPlaying);
 
   // Local state to manage play/pause state for each song
   const [songStates, setSongStates] = useState({});
@@ -64,6 +64,10 @@ const Playlists = () => {
       {userPlaylists.map((playlist) => {
         const firstSongId = playlist.songs[0];
         const firstSong = songs[firstSongId];
+        const playlistHasCurrentlyPlaying = playlist.songs.includes(
+          currentlyPlaying.id
+        );
+        console.log("bruhhhhhhhh", playlistHasCurrentlyPlaying);
         return (
           <div id="playlist-container" key={playlist.id}>
             <div id="playlist">
@@ -94,7 +98,9 @@ const Playlists = () => {
                     id="playlist-play-button"
                   >
                     <div>
-                      {currentlyPlaying.id === song.id && isPlayingState ? (
+                      {playlistHasCurrentlyPlaying &&
+                      currentlyPlaying.id === song.id &&
+                      isPlayingState ? (
                         <IoPauseSharp id="playlist-play-button" />
                       ) : (
                         <IoPlaySharp id="playlist-play-button" />
@@ -115,11 +121,11 @@ const Playlists = () => {
                   const isPlaying =
                     currentlyPlaying.id === songId && songStates[songId];
 
-                  console.log(
-                    "playlistSong && isPlaying",
-                    playlistSong,
-                    isPlaying
-                  );
+                  // console.log(
+                  //   "playlistSong && isPlaying",
+                  //   playlistSong,
+                  //   isPlaying
+                  // );
 
                   return (
                     <div
