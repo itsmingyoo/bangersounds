@@ -13,6 +13,7 @@ import {
 } from "react-icons/io5";
 import { BiRepost } from "react-icons/bi";
 import "./Playlists.css";
+import Waveform from "../Waveforms/Waveforms";
 
 const Playlists = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Playlists = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [song, setSong] = useState(currentlyPlaying);
   // console.log("song state", song);
-  // console.log("currentlyPlaying", currentlyPlaying);
+  console.log("currentlyPlaying", currentlyPlaying);
 
   // Local state to manage play/pause state for each song
   const [songStates, setSongStates] = useState({});
@@ -61,13 +62,14 @@ const Playlists = () => {
   return (
     <>
       <div>WIP</div>
+      <Waveform audio={currentlyPlaying.songURL} />
       {userPlaylists.map((playlist) => {
         const firstSongId = playlist.songs[0];
         const firstSong = songs[firstSongId];
         const playlistHasCurrentlyPlaying = playlist.songs.includes(
           currentlyPlaying.id
         );
-        console.log("bruhhhhhhhh", playlistHasCurrentlyPlaying);
+        // console.log("bruhhhhhhhh", playlistHasCurrentlyPlaying);
         return (
           <div id="playlist-container" key={playlist.id}>
             <div id="playlist">
