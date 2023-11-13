@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SongDisplay from "../SongDisplay";
-// import { setPlayingState, playUserSongAction } from "../../store/songs";
 import { copyTextToClipboard } from "../../util/copyClipboard";
 import { downloadFile } from "../../util/downloadFile";
 import { togglePlayPause } from "../../util/togglePlay";
@@ -24,104 +22,141 @@ const Playlists = () => {
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const [isCopied, setIsCopied] = useState(false);
+  const [song, setSong] = useState(currentlyPlaying);
+  console.log("song state", song);
+  console.log("currentlyPlaying", currentlyPlaying);
 
-  console.log("user", user);
-  console.log("playlists", playlists);
+  // Local state to manage play/pause state for each song
+  const [songStates, setSongStates] = useState({});
 
-  const userPlaylists = [];
-  playlists?.forEach((p) => {
-    if (p.createdBy === user.id) {
-      userPlaylists.push(p);
-    }
-  });
+  // console.log("user", user);
+  // console.log("playlists", playlists);
 
-  console.log("user playlists", userPlaylists);
+  // const userPlaylists = [];
+  // playlists?.forEach((p) => {
+  //   if (p.createdBy === user.id) {
+  //     userPlaylists.push(p);
+  //   }
+  // });
+
+  // refactored version
+  const userPlaylists = playlists.filter((p) => p.createdBy === user.id);
+
+  // console.log("user playlists", userPlaylists[0]["songs"][0]);
+
+  const handleSongClick = (playlistSong, songId, isPlaying) => {
+    // Update the song state
+    setSong(playlistSong);
+
+    // Toggle play/pause after the state has been updated
+    togglePlayPause(playlistSong, dispatch, currentlyPlaying, isPlayingState);
+
+    // Update the songStates
+    setSongStates((prevStates) => ({
+      ...prevStates,
+      [songId]: !isPlaying,
+    }));
+  };
 
   return (
     <>
       <div>WIP</div>
-      {userPlaylists.map((playlist) => (
-        <div id="playlist-container">
-          <div key={playlist.id} id="playlist">
-            {/* Image */}
-            <div id="playlist-thumbnail-container">
-              <a>
-                <img
-                  id="playlist-thumbnail"
-                  src={playlist.thumbnail}
-                  alt={playlist.thumbnail}
-                />
-              </a>
-            </div>
-
-            {/* Play Button - Top Left of Waveform */}
-            <div id="playlist-info">
-              <div id="playlist-play">
-                <button
-                  onClick={() =>
-                    togglePlayPause(dispatch, currentlyPlaying, isPlayingState)
-                  }
-                  id="playlist-play-button"
-                >
-                  <div>
-                    {currentlyPlaying && isPlayingState ? (
-                      <IoPauseSharp id="playlist-play-button" />
-                    ) : (
-                      <IoPlaySharp id="playlist-play-button" />
-                    )}
-                  </div>
-                </button>
-                <div>
-                  <div id="playlist-creator">Playlist Creator</div>
-                  <div id="playlist-title">Playlist Title</div>
-                </div>
+      {userPlaylists.map((playlist) => {
+        const firstSongId = playlist.songs[0];
+        const firstSong = songs[firstSongId];
+        return (
+          <div id="playlist-container" key={playlist.id}>
+            <div id="playlist">
+              {/* Image */}
+              <div id="playlist-thumbnail-container">
+                <a>
+                  <img
+                    id="playlist-thumbnail"
+                    src={playlist.thumbnail}
+                    alt={playlist.thumbnail}
+                  />
+                </a>
               </div>
 
-              {/* Playlist-Songs */}
-              {playlist.songs.map((songId, index) => {
-                const song = songs[songId];
-                console.log("this is mapped index of song", index);
-                console.log("this is mapped song", song);
-
-                // You can render song information here if needed
-                return (
-                  <div
-                    id="playlist-songs-container"
-                    onClick={() =>
+              {/* Play Button - Top Left of Waveform */}
+              <div id="playlist-info">
+                <div id="playlist-play">
+                  <button
+                    onClick={() => {
+                      setSong(firstSong);
                       togglePlayPause(
+                        song,
                         dispatch,
                         currentlyPlaying,
                         isPlayingState
-                      )
-                    }
+                      );
+                    }}
+                    id="playlist-play-button"
                   >
-                    <div key={song.id} id="playlist-song-title">
-                      <div id="playlist-song-thumbnail">
-                        <img
-                          id="playlist-song-thumbnail"
-                          src={song.thumbnail}
-                          alt="playlist-song-thumbnail"
-                        />
-                      </div>
-                      <div>
-                        {index + Number(1)}
-                        {song.title}
-                      </div>
-                      <div>Play: Count</div>
+                    <div>
+                      {currentlyPlaying.id === song.id && isPlayingState ? (
+                        <IoPauseSharp id="playlist-play-button" />
+                      ) : (
+                        <IoPlaySharp id="playlist-play-button" />
+                      )}
                     </div>
+                  </button>
+                  <div>
+                    <div id="playlist-creator">{playlist.createdBy}</div>
+                    <div id="playlist-title">{playlist.title}</div>
                   </div>
-                );
-              })}
-              <div>
-                <IoHeartSharp />
-                <BiRepost />
-                <IoShareOutline />
-                <IoLinkSharp />
+                </div>
+
+                {/* Playlist-Songs */}
+                {playlist.songs.map((songId, index) => {
+                  const playlistSong = songs[songId];
+
+                  // Get play/pause state for the current song
+                  const isPlaying =
+                    currentlyPlaying.id === songId && songStates[songId];
+
+                  console.log(
+                    "playlistSong && isPlaying",
+                    playlistSong,
+                    isPlaying
+                  );
+
+                  return (
+                    <div
+                      id="playlist-songs-container"
+                      onClick={() => {
+                        handleSongClick(playlistSong, songId, isPlaying);
+                      }}
+                      key={playlistSong.id}
+                    >
+                      <div id="playlist-song-title">
+                        <div id="playlist-song-thumbnail">
+                          <img
+                            id="playlist-song-thumbnail"
+                            src={playlistSong.thumbnail}
+                            alt="playlist-song-thumbnail"
+                          />
+                        </div>
+                        <div>
+                          {index + Number(1)}
+                          {playlistSong.title}
+                        </div>
+                        <div>Play: Count</div>
+                      </div>
+                    </div>
+                  );
+                })}
+                <div>
+                  <IoHeartSharp />
+                  <BiRepost />
+                  <IoShareOutline />
+                  <IoLinkSharp />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };
