@@ -15,7 +15,9 @@ from .seeds import seed_commands
 from .config import Config
 
 app = Flask(__name__, static_folder="../react-app/build", static_url_path="/")
-# CORS(app)
+# CORS has to be here before the routes
+CORS(app, origins=["https://bangersounds.onrender.com", "http://localhost:3000"])
+# CORS(app, origins='*')
 
 # Setup login manager
 login = LoginManager(app)
@@ -42,7 +44,7 @@ Migrate(app, db)
 # CORS(app)
 
 # Application Security - implement origins to allow fetches with correct cors headers - this is for the 'download song' function to work on the frontend
-CORS(app, origins=["https://bangersounds.onrender.com", "http://localhost:3000"])
+# CORS(app, origins=["https://bangersounds.onrender.com", "http://localhost:3000"])
 
 
 # Since we are deploying with Docker and Flask,
