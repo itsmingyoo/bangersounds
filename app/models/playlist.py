@@ -51,7 +51,8 @@ class Playlist(db.Model):
             "private" : self.private,
             "createdAt": self.createdAt,
             "songs": self.playlist_songs,
-            "createdBy": self.user_id
+            "createdBy": self.user_id,
+            "artistName": self.playlist_creator.to_dict()["displayName"]
         }
 
         #     NOT NEEDED

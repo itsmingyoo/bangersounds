@@ -24,25 +24,16 @@ const Playlists = () => {
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
   const [isCopied, setIsCopied] = useState(false);
   const [song, setSong] = useState(currentlyPlaying);
-  // console.log("song state", song);
-  // console.log("currentlyPlaying", currentlyPlaying);
 
   // Local state to manage play/pause state for each song
   const [songStates, setSongStates] = useState({});
 
-  // console.log("user", user);
-  // console.log("playlists", playlists);
-
-  // const userPlaylists = [];
-  // playlists?.forEach((p) => {
-  //   if (p.createdBy === user.id) {
-  //     userPlaylists.push(p);
-  //   }
-  // });
-
-  // refactored version
   const userPlaylists = playlists.filter((p) => p.createdBy === user.id);
 
+  // console.log("song state", song);
+  // console.log("currentlyPlaying", currentlyPlaying);
+  // console.log("user", user);
+  // console.log("playlists", playlists);
   // console.log("user playlists", userPlaylists[0]["songs"][0]);
 
   const handleSongClick = (playlistSong, songId, isPlaying) => {
@@ -98,7 +89,7 @@ const Playlists = () => {
                       }}
                       id="playlist-play-button"
                     >
-                      <div>
+                      <div id='play-button-icons'>
                         {playlistHasCurrentlyPlaying &&
                         currentlyPlaying.id === song.id &&
                         isPlayingState ? (

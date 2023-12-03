@@ -71,8 +71,14 @@
     color: white;
     border-radius: 50%;
     border: none;
-    height: 25%;
+    height: 50%;
     margin: 5px;
+}
+
+#play-button-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #playlist-title {
