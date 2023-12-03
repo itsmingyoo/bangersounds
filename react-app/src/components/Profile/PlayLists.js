@@ -12,6 +12,7 @@ import {
   IoLinkSharp,
 } from "react-icons/io5";
 import { BiRepost } from "react-icons/bi";
+import WaveForm from "../SongDetailsPage/WaveForm";
 import "./Playlists.css";
 
 const Playlists = () => {
@@ -60,7 +61,6 @@ const Playlists = () => {
 
   return (
     <>
-      <div>WIP</div>
       {userPlaylists.map((playlist) => {
         const firstSongId = playlist.songs[0];
         const firstSong = songs[firstSongId];
@@ -85,73 +85,78 @@ const Playlists = () => {
               {/* Play Button - Top Left of Waveform */}
               <div id="playlist-info">
                 <div id="playlist-play">
-                  <button
-                    onClick={() => {
-                      setSong(firstSong);
-                      togglePlayPause(
-                        song,
-                        dispatch,
-                        currentlyPlaying,
-                        isPlayingState
-                      );
-                    }}
-                    id="playlist-play-button"
-                  >
-                    <div>
-                      {playlistHasCurrentlyPlaying &&
-                      currentlyPlaying.id === song.id &&
-                      isPlayingState ? (
-                        <IoPauseSharp id="playlist-play-button" />
-                      ) : (
-                        <IoPlaySharp id="playlist-play-button" />
-                      )}
-                    </div>
-                  </button>
                   <div>
-                    <div id="playlist-creator">{playlist.createdBy}</div>
+                    <button
+                      onClick={() => {
+                        setSong(firstSong);
+                        togglePlayPause(
+                          song,
+                          dispatch,
+                          currentlyPlaying,
+                          isPlayingState
+                        );
+                      }}
+                      id="playlist-play-button"
+                    >
+                      <div>
+                        {playlistHasCurrentlyPlaying &&
+                        currentlyPlaying.id === song.id &&
+                        isPlayingState ? (
+                          <IoPauseSharp />
+                        ) : (
+                          <IoPlaySharp />
+                        )}
+                      </div>
+                    </button>
+                  </div>
+                  <div id="playlist-title">
+                    <div id="playlist-creator">{playlist.artistName}</div>
                     <div id="playlist-title">{playlist.title}</div>
                   </div>
                 </div>
+                <WaveForm style={{}} />
 
                 {/* Playlist-Songs */}
-                {playlist.songs.map((songId, index) => {
-                  const playlistSong = songs[songId];
+                <div id="playlist-songs-container">
+                  {playlist.songs.map((songId, index) => {
+                    const playlistSong = songs[songId];
 
-                  // Get play/pause state for the current song
-                  const isPlaying =
-                    currentlyPlaying.id === songId && songStates[songId];
+                    // Get play/pause state for the current song
+                    const isPlaying =
+                      currentlyPlaying.id === songId && songStates[songId];
 
-                  // console.log(
-                  //   "playlistSong && isPlaying",
-                  //   playlistSong,
-                  //   isPlaying
-                  // );
+                    // console.log(
+                    //   "playlistSong && isPlaying",
+                    //   playlistSong,
+                    //   isPlaying
+                    // );
 
-                  return (
-                    <div
-                      id="playlist-songs-container"
-                      onClick={() => {
-                        handleSongClick(playlistSong, songId, isPlaying);
-                      }}
-                      key={playlistSong.id}
-                    >
-                      <div id="playlist-song-title">
-                        <div id="playlist-song-thumbnail">
-                          <img
-                            id="playlist-song-thumbnail"
-                            src={playlistSong.thumbnail}
-                            alt="playlist-song-thumbnail"
-                          />
+                    return (
+                      <div
+                        id="playlist-song-container"
+                        onClick={() => {
+                          handleSongClick(playlistSong, songId, isPlaying);
+                        }}
+                        key={playlistSong.id}
+                      >
+                        <div id="playlist-song-title">
+                          <div id="playlist-song-thumbnail">
+                            <img
+                              id="playlist-song-thumbnail"
+                              src={playlistSong.thumbnail}
+                              alt="playlist-song-thumbnail"
+                            />
+                          </div>
+                          <div>
+                            {index + Number(1)}
+                            {playlistSong.title}
+                          </div>
+                          <div>Play: Count</div>
                         </div>
-                        <div>
-                          {index + Number(1)}
-                          {playlistSong.title}
-                        </div>
-                        <div>Play: Count</div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
                 <div>
                   <IoHeartSharp />
                   <BiRepost />
