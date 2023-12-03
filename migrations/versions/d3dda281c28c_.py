@@ -1,20 +1,22 @@
 """empty message
 
-Revision ID: ff63a787b383
+Revision ID: d3dda281c28c
 Revises:
-Create Date: 2023-09-25 19:00:03.879129
+Create Date: 2023-12-03 06:27:24.855430
 
 """
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
-from sqlalchemy import Text
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+from sqlalchemy.dialects import postgresql
+from sqlalchemy import Text
+# postgresql and Text is for the 'JSON' column of 'playlist_songs' object
+
 # revision identifiers, used by Alembic.
-revision = 'ff63a787b383'
+revision = 'd3dda281c28c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,6 +40,20 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
+    )
+    op.create_table('playlists',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=255), nullable=False),
+    sa.Column('genre', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('private', sa.Boolean(), nullable=False),
+    sa.Column('thumbnail', sa.String(length=255), nullable=True),
+    sa.Column('tags', sa.String(length=255), nullable=True),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('playlist_songs', postgresql.JSON(astext_type=Text()), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -83,6 +99,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE playlists SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
@@ -96,5 +113,6 @@ def downgrade():
     op.drop_table('likes')
     op.drop_table('comments')
     op.drop_table('songs')
+    op.drop_table('playlists')
     op.drop_table('users')
     # ### end Alembic commands ###

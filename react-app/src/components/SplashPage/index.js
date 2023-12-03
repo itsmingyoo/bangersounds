@@ -23,7 +23,8 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
     dispatch(playUserSongAction(song));
 
     if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      if (currentlyPlaying.id === song.id)
+        dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
     }
   };
@@ -47,7 +48,11 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
                 <button>Create account</button> */}
                 {userRef?.current === null ? (
                   <>
-                    <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
+                    <OpenModalButton
+                      buttonText="Sign In"
+                      onItemClick={closeMenu}
+                      modalComponent={<LoginFormModal />}
+                    />
                     <OpenModalButton
                       buttonText="Create account"
                       onItemClick={closeMenu}
@@ -73,18 +78,25 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
                 alignItems: "center",
               }}
             >
-              <input type="type" placeholder="Search for artists, bands, songs, podcasts" />
+              <input
+                type="type"
+                placeholder="Search for artists, bands, songs, podcasts"
+              />
               <button className="splash-search-button">
                 <FaSearch />
               </button>
             </div>
             <div>or</div>
-            <button onClick={() => history.push("/upload")}>Upload your own</button>
+            <button onClick={() => history.push("/upload")}>
+              Upload your own
+            </button>
           </div>
 
           <div className="splash-trending-songs">
             {/* <NavLink to="/discover">Discover</NavLink> */}
-            <div style={{ fontSize: "24px" }}>Hear what’s trending for free in the SoundCloud community </div>
+            <div style={{ fontSize: "24px" }}>
+              Hear what’s trending for free in the BangerSounds community{" "}
+            </div>
             <div className="splash-songs">
               {songs &&
                 songs.slice(0, 12).map((s) => (
@@ -94,32 +106,63 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
                     style={{ flexBasis: "10%", width: "10%", padding: "20px" }}
                   >
                     <ImageContainer
-                      {...{ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }}
+                      {...{
+                        s,
+                        togglePlayPause,
+                        currentlyPlaying,
+                        isPlayingState,
+                        songs,
+                        displayTopTransition,
+                      }}
                     />
-                    <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
-                      <div style={{ whiteSpace: "nowrap", overflow: "hidden" }} title={s.title}>
+                    <NavLink
+                      to={`/songs/${s.id}`}
+                      onClick={displayTopTransition}
+                    >
+                      <div
+                        style={{ whiteSpace: "nowrap", overflow: "hidden" }}
+                        title={s.title}
+                      >
                         {s.title}
                       </div>
                     </NavLink>
-                    <div style={{ wordBreak: "break-all", overflow: "hidden", color: "#999" }}>
+                    <div
+                      style={{
+                        wordBreak: "break-all",
+                        overflow: "hidden",
+                        color: "#999",
+                      }}
+                    >
                       {s.artistInfo.displayName}
                     </div>
                   </div>
                 ))}
             </div>
-            <button onClick={() => alert("Feature coming soon!")}>Explore trending playlists</button>
+            <button onClick={() => alert("Feature coming soon!")}>
+              Explore trending playlists
+            </button>
           </div>
           <div className="splash-footer-top">
-            <img src="https://a-v2.sndcdn.com/assets/images/never_stop_listening@1x-9c5264ff.jpg" alt="footer-top" />
-            <div className="splash-footer-top-right-wrapper" style={{ backgroundColor: "#f2f2f2" }}>
+            <img
+              src="https://a-v2.sndcdn.com/assets/images/never_stop_listening@1x-9c5264ff.jpg"
+              alt="footer-top"
+            />
+            <div
+              className="splash-footer-top-right-wrapper"
+              style={{ backgroundColor: "#f2f2f2" }}
+            >
               <div className="splash-footer-top-right">
                 <h1 style={{ fontWeight: "400" }}>Never stop listening</h1>
                 <h3 style={{ fontWeight: "100", width: "60%" }}>
-                  BangerSounds is available on Web, iOS, Android, Sonos, Chromecast, and Xbox One.
+                  BangerSounds is available on Web, iOS, Android, Sonos,
+                  Chromecast, and Xbox One.
                 </h3>
                 <div className="splash-footer-top-right-buttons">
                   <button>
-                    <img src="https://a-v2.sndcdn.com/assets/images/appstore_badge@en-9e7292e6.png" alt="apple-dl" />
+                    <img
+                      src="https://a-v2.sndcdn.com/assets/images/appstore_badge@en-9e7292e6.png"
+                      alt="apple-dl"
+                    />
                   </button>
                   <button>
                     <img
@@ -134,15 +177,27 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
 
           <div className="splash-footer-bot">
             <div className="splash-footer-bot-image">
-              <div style={{ width: "50%" }} className="splash-footer-bot-content">
-                <div style={{ color: "white" }} className="splash-footer-bot-text1">
+              <div
+                style={{ width: "50%" }}
+                className="splash-footer-bot-content"
+              >
+                <div
+                  style={{ color: "white" }}
+                  className="splash-footer-bot-text1"
+                >
                   Calling all creators
                 </div>
-                <div style={{ color: "white" }} className="splash-footer-bot-text2">
-                  Get on BangerSounds to connect with fans, share your sounds, and grow your audience. What are you
-                  waiting for?
+                <div
+                  style={{ color: "white" }}
+                  className="splash-footer-bot-text2"
+                >
+                  Get on BangerSounds to connect with fans, share your sounds,
+                  and grow your audience. What are you waiting for?
                 </div>
-                <button className="splash-footer-bot-button" onClick={() => alert("Feature coming soon!")}>
+                <button
+                  className="splash-footer-bot-button"
+                  onClick={() => alert("Feature coming soon!")}
+                >
                   Find out more
                 </button>
               </div>
@@ -151,25 +206,37 @@ const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
           </div>
 
           <div className="footer-footer">
-            <div className="splash-footer-bot-text3">Thanks for listening. Now join in.</div>
+            <div className="splash-footer-bot-text3">
+              Thanks for listening. Now join in.
+            </div>
             <div className="splash-footer-bot-text4">
               Save tracks, follow artists and build playlists. All for free.
             </div>
             {/* <button>Create account</button> */}
 
-            <OpenModalButton buttonText="Create account" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
+            <OpenModalButton
+              buttonText="Create account"
+              onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            />
             <div className="already-have-an-account">
               <label>Already have an account?</label>
               {/* <button>Sign In</button> */}
-              <OpenModalButton buttonText="Sign In" onItemClick={closeMenu} modalComponent={<LoginFormModal />} />
+              <OpenModalButton
+                buttonText="Sign In"
+                onItemClick={closeMenu}
+                modalComponent={<LoginFormModal />}
+              />
             </div>
           </div>
 
           <div className="horizontal-line"></div>
 
           <div className="footer-footer-footer">
-            Directory - About us - Artist Resources - Blog - Jobs - Developers - Help - Legal - Do Not Sell or Share My
-            Personal Information - Privacy - Cookie Policy - Cookie Manager - Imprint - Charts Language: English (US)
+            Directory - About us - Artist Resources - Blog - Jobs - Developers -
+            Help - Legal - Do Not Sell or Share My Personal Information -
+            Privacy - Cookie Policy - Cookie Manager - Imprint - Charts
+            Language: English (US)
           </div>
         </div>
       </div>

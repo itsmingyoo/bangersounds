@@ -72,7 +72,8 @@ class Song(db.Model):
             "artistInfo": self.user_songs.to_dict(),
             "comments": [comment.to_dict() for comment in self.song_comments],
             "likes": {like.to_dict()['userId']: like.to_dict() for like in self.liked_by_users},
-            "reposts": {repost.to_dict()['userId']: repost.to_dict() for repost in self.reposted_by_users}
+            "reposts": {repost.to_dict()['userId']: repost.to_dict() for repost in self.reposted_by_users},
+            # "playlistIds": {playlist.to_dict()['id']: playlist.to_dict() for playlist in self.in_playlists}
             # "createdAt": self.createdAt,
             # "updatedAt": self.updatedAt,
         }

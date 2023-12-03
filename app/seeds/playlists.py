@@ -6,33 +6,78 @@ import random
 import json
 
 def seed_playlists():
+    # Create a list of song IDs for the first playlist
+    song_ids_playlist1 = [1, 2, 3]
+
     playlist = Playlist(
         title="My Sample Playlist",
         genre="Pop",
         description="A great collection of pop songs",
         private=True,
-        thumbnail="thumbnail_url",
+        thumbnail="https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg",
         tags="pop, music",
         user_id=1,
-        playlist_songs={}
-
+        playlist_songs=song_ids_playlist1  # Store song IDs as a list
     )
-    # Add songs to the playlist
-    playlist.playlist_songs = json.dumps({1: 1, 2: 2, 3: 3})
-    # song_ids = [1, 2, 3]
 
-    # Append the songs to the playlist's songs attribute
-    # for song_id in song_ids:
-    #     song = Song.query.get(song_id)
-    #     playlist.song_id = song.id
-    #     # playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
-    #     playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
+    playlist2 = Playlist(
+        title="My Sample Playlist Two",
+        genre="Electronic",
+        description="EDM Playlist Bangers Only",
+        private=True,
+        thumbnail="https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/23+-+lost.jpg",
+        tags="edm, music",
+        user_id=1,
+        playlist_songs=[4, 7, 8]  # Store song IDs as a list for the second playlist
+    )
 
-
-    # Commit the playlist and songs to the database
+    # Commit the playlists to the database
     db.session.add(playlist)
+    db.session.add(playlist2)
     db.session.commit()
 
+# def seed_playlists():
+#     playlist = Playlist(
+#         title="My Sample Playlist",
+#         genre="Pop",
+#         description="A great collection of pop songs",
+#         private=True,
+#         thumbnail="thumbnail_url",
+#         tags="pop, music",
+#         user_id=1,
+#         playlist_songs={}
+
+#     )
+#     # Add songs to the playlist
+#     playlist.playlist_songs = json.dumps({1: 1, 2: 2, 3: 3})
+#     # song_ids = [1, 2, 3]
+
+#     # Append the songs to the playlist's songs attribute
+#     # for song_id in song_ids:
+#     #     song = Song.query.get(song_id)
+#     #     playlist.song_id = song.id
+#     #     # playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
+#     #     playlist.playlist_songs[song_id] = json.dumps({"songId": song.id})
+
+#     playlist2 = Playlist(
+#         title="My Sample Playlist Two",
+#         genre="Electronic",
+#         description="EDM Playlist Bangers Only",
+#         private=True,
+#         thumbnail="thumbnail_url",
+#         tags="edm, music",
+#         user_id=1,
+#         playlist_songs={}
+
+#     )
+#     playlist2.playlist_songs = json.dumps({4: 4, 7: 7, 8: 8})
+
+#     # Commit the playlist and songs to the database
+#     db.session.add(playlist)
+#     db.session.add(playlist2)
+#     db.session.commit()
+
+# ##########################################################
 
     # OLD OLD OLD!!!!@!@!!
     # # Query all users/songs
