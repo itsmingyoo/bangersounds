@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d3dda281c28c
+Revision ID: c17b28210e9d
 Revises:
-Create Date: 2023-12-03 06:27:24.855430
+Create Date: 2023-12-03 06:52:48.285080
 
 """
 from alembic import op
@@ -16,7 +16,7 @@ from sqlalchemy import Text
 # postgresql and Text is for the 'JSON' column of 'playlist_songs' object
 
 # revision identifiers, used by Alembic.
-revision = 'd3dda281c28c'
+revision = 'c17b28210e9d'
 down_revision = None
 branch_labels = None
 depends_on = None
