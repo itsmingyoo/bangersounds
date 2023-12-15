@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoPlaySharp, IoPauseSharp } from "react-icons/io5";
-const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, songs, displayTopTransition }) => {
+const ImageContainer = ({
+  s,
+  togglePlayPause,
+  currentlyPlaying,
+  isPlayingState,
+  songs,
+  displayTopTransition,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -14,24 +21,34 @@ const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, 
 
   return (
     <>
-      <div className={`recently-played__btn-link ${isHovered ? "display-btn" : ""}`}>
+      <div
+        className={`recently-played__btn-link ${
+          isHovered ? "display-btn" : ""
+        }`}
+      >
         {/* RESPONSIVE PLAY/PAUSE BUTTON */}
-        <button
-          onClick={() => togglePlayPause(s)}
-          className={`orange-btn-white-txt play-btn centered-button ${isHovered ? "display-btn" : ""}`}
+        <div
+          className={`icon-container ${isHovered ? "display-btn" : ""}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <div
-            className={`icon-container ${isHovered ? "display-btn" : ""}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+          <button
+            onClick={() => togglePlayPause(s)}
+            className={`orange-btn-white-txt play-btn centered-button ${
+              isHovered ? "display-btn" : ""
+            }`}
           >
             {currentlyPlaying.id === s.id && isPlayingState ? (
-              <IoPauseSharp className={`song-btn ${isHovered ? "display-btn" : ""}`} />
+              <IoPauseSharp
+                className={`song-btn ${isHovered ? "display-btn" : ""}`}
+              />
             ) : (
-              <IoPlaySharp className={`song-btn ${isHovered ? "display-btn" : ""}`} />
+              <IoPlaySharp
+                className={`song-btn ${isHovered ? "display-btn" : ""}`}
+              />
             )}
-          </div>
-        </button>
+          </button>
+        </div>
 
         <div
           className={`song-image__container`}
@@ -41,7 +58,11 @@ const ImageContainer = ({ s, togglePlayPause, currentlyPlaying, isPlayingState, 
         >
           <NavLink to={`/songs/${s.id}`} onClick={displayTopTransition}>
             <img
-              src={s.thumbnail ? s.thumbnail : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"}
+              src={
+                s.thumbnail
+                  ? s.thumbnail
+                  : "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png"
+              }
               className="recently-played__images"
               alt={`p-image__${s.title}`}
             />

@@ -64,6 +64,8 @@ function App() {
   }, [dispatch]);
 
   // Grab all states and send them as props
+  const store = useSelector((s) => s);
+  console.log("this is my store", store);
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   const playlists = useSelector((s) => s.playlists);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
@@ -78,7 +80,9 @@ function App() {
   return (
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
-      {isLoaded && window.location.pathname !== "/" && <Navigation isLoaded={isLoaded} />}
+      {isLoaded && window.location.pathname !== "/" && (
+        <Navigation isLoaded={isLoaded} />
+      )}
       {isLoaded && (
         <>
           <Switch>
@@ -95,18 +99,42 @@ function App() {
 
             <Route exact path="/upload">
               <ProtectedRoute>
-                <PostNewSong {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+                <PostNewSong
+                  {...{
+                    songs,
+                    isPlayingState,
+                    currentlyPlaying,
+                    comments,
+                    userRef,
+                  }}
+                />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/profile">
               <ProtectedRoute>
-                <Profile {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+                <Profile
+                  {...{
+                    songs,
+                    isPlayingState,
+                    currentlyPlaying,
+                    comments,
+                    userRef,
+                  }}
+                />
               </ProtectedRoute>
             </Route>
             <Route exact path="/you/library">
               <ProtectedRoute>
-                <Library {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+                <Library
+                  {...{
+                    songs,
+                    isPlayingState,
+                    currentlyPlaying,
+                    comments,
+                    userRef,
+                  }}
+                />
               </ProtectedRoute>
             </Route>
 
@@ -118,27 +146,75 @@ function App() {
 
             <Route exact path="/profile/comments">
               <ProtectedRoute>
-                <AllUserComments {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+                <AllUserComments
+                  {...{
+                    songs,
+                    isPlayingState,
+                    currentlyPlaying,
+                    comments,
+                    userRef,
+                  }}
+                />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/songs/:songId">
-              <SongDetailsPage {...{ userRef, songs, isPlayingState, currentlyPlaying, comments }} />
+              <SongDetailsPage
+                {...{
+                  userRef,
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  comments,
+                }}
+              />
             </Route>
 
             <Route exact path="/discover">
-              <LandingPage {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              <LandingPage
+                {...{
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  comments,
+                  userRef,
+                }}
+              />
             </Route>
 
             <Route exact path="/">
-              <Splash {...{ songs, isPlayingState, currentlyPlaying, comments, userRef }} />
+              <Splash
+                {...{
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  comments,
+                  userRef,
+                }}
+              />
             </Route>
           </Switch>
         </>
       )}
       {/* <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} /> */}
-      <div className={isLoaded && window.location.pathname !== "/" ? "" : "hide-audio-player"}>
-        <AudioPlayer {...{ isLoaded, songs, isPlayingState, currentlyPlaying, comments, userRef, previousSong }} />
+      <div
+        className={
+          isLoaded && window.location.pathname !== "/"
+            ? ""
+            : "hide-audio-player"
+        }
+      >
+        <AudioPlayer
+          {...{
+            isLoaded,
+            songs,
+            isPlayingState,
+            currentlyPlaying,
+            comments,
+            userRef,
+            previousSong,
+          }}
+        />
       </div>
     </>
   );

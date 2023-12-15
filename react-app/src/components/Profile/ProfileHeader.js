@@ -8,25 +8,46 @@ const ProfileHeader = () => {
   return (
     <div className="profile-header-container">
       <div className="profile-header-wrapper">
-        {user.profileBackground === "" ? (
+        {user.profileBackground === "" || user.profileBackground === null ? (
           <div style={{ height: "100%" }}>
-            <div className="profile-linear-gradient" style={{ height: "240px" }}>
+            <div
+              className="profile-linear-gradient"
+              style={{ height: "240px" }}
+            >
               <div className="profile-linear-gradient-buffer backgroundGradient-hidden"></div>
               <div
                 className="profile-linear-gradient-buffer"
-                style={{ background: "linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(36, 42, 46) 100%)" }}
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(36, 42, 46) 100%)",
+                }}
               ></div>
-              <div className="profile-header-user-info-wrapper" style={{ zIndex: "999" }}>
-                <div className="profile-header-picture" style={{ zIndex: "999" }}>
+              <div
+                className="profile-header-user-info-wrapper"
+                style={{ zIndex: "999" }}
+              >
+                <div
+                  className="profile-header-picture"
+                  style={{ zIndex: "999" }}
+                >
                   <ProfilePicture user={user} />
                 </div>
-                <div className="profile-header-user-info" style={{ zIndex: "999" }}>
-                  <div>{user.displayName}</div>
+                <div
+                  className="profile-header-user-info"
+                  style={{ zIndex: "999" }}
+                >
                   <div>
-                    {user.firstName} {user.lastName}
+                    {user.displayName === null
+                      ? "Display Name"
+                      : user.displayName}
                   </div>
                   <div>
-                    {user.profileCity}, {user.profileCountry}
+                    {user.firstName ? user.firstName : "First Name"}{" "}
+                    {user.lastName ? user.lastName : "Last Name"}
+                  </div>
+                  <div>
+                    {user.profileCity ? user.profileCity : "City"},{" "}
+                    {user.profileCountry ? user.profileCountry : "Country"}
                   </div>
                 </div>
               </div>
