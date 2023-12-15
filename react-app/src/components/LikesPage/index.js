@@ -9,12 +9,13 @@ const LikesPage = ({ isPlayingState, currentlyPlaying }) => {
   const likes = useSelector((s) => Object.values(s.songs.Songs.likes));
   const user = useSelector((s) => s.session.user);
   const userLikes = likes.filter((song) => song.likes[user.id]);
-  console.log("userlikes", userLikes);
+  // console.log("userlikes", userLikes);
 
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
     if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      if (currentlyPlaying.id === song.id)
+        dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
     }
   };

@@ -343,13 +343,13 @@ export const thunkToggleLike = (songId, user) => async (dispatch) => {
       },
     });
     res = await res.json();
-    console.log("RESPONSE FROM THUNK", res);
+    // console.log("RESPONSE FROM THUNK", res);
     if (res.likeInfo) {
-      console.log("POSTING A LIKE THUNK");
+      // console.log("POSTING A LIKE THUNK");
       dispatch(postLike(songId, res.likeInfo));
       return;
     } else {
-      console.log("DELETING A LIKE THUNK");
+      // console.log("DELETING A LIKE THUNK");
       dispatch(deleteLike(songId, user.id));
       return;
     }
@@ -385,7 +385,7 @@ export const thunkToggleRepost =
           },
         });
         repostedSong = await repostedSong.json();
-        console.log(repostedSong);
+        // console.log(repostedSong);
         dispatch(toggleRepost(songId, user, isRepost, repostedSong));
         return repostedSong;
       }
