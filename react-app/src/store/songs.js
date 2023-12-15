@@ -463,7 +463,7 @@ export default function reducer(state = initialState, action) {
     // SONGS SONGS SONGS SONGS SONGS SONGS SONGS SONGS   //
     case GET_ALL_SONGS_ACTION: {
       newState = { ...state };
-      newState.Songs = { ...action.allSongs.Songs };
+      newState.Songs = { ...newState.Songs, ...action.allSongs.Songs };
       return newState;
     }
     case GET_LANDING_SONGS_ACTION: {

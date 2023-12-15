@@ -45,7 +45,6 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetLandingPageSongs()))
-      // .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
@@ -58,6 +57,7 @@ function App() {
       .then(() => {
         setIsLoaded(true);
       })
+      .then(() => dispatch(songActions.thunkGetAllSongs()))
       //! CATCH ERRORS
       .catch((e) => {
         console.error("Error fetching data:", e);
@@ -68,8 +68,8 @@ function App() {
   // Grab all states and send them as props
   const store = useSelector((s) => s);
   const tenSongs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log("this is my store", store);
-  console.log("this is my tensongs", tenSongs);
+  console.log("this is my store: ", store);
+  console.log("this is my twelve songs: ", tenSongs);
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   const playlists = useSelector((s) => s.playlists);
