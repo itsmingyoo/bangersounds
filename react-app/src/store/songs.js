@@ -1,6 +1,7 @@
 //* =====================  types ===========================//
 // ACTIONS FOR THUNKS
 const GET_ALL_SONGS_ACTION = "songs/GET_ALL_SONGS_ACTION";
+const GET_LANDING_SONGS_ACTION = "songs/GET_LANDING_SONGS_ACTION";
 const GET_SONG_BY_ID_ACTION = "songs/GET_SONG_BY_ID_ACTION";
 const POST_NEW_SONG_ACTION = "songs/POST_NEW_SONG_ACTION";
 const EDIT_SONG_BY_ID_ACTION = "songs/EDIT_SONG_BY_ID_ACTION";
@@ -31,6 +32,13 @@ const getAllSongAction = (allSongs) => {
   return {
     type: GET_ALL_SONGS_ACTION,
     allSongs,
+  };
+};
+
+const getLandingSongsAction = (landingSongs) => {
+  return {
+    type: GET_LANDING_SONGS_ACTION,
+    landingSongs,
   };
 };
 
@@ -175,6 +183,19 @@ export const thunkGetAllSongs = () => async (dispatch) => {
   return songs;
 };
 
+export const thunkGetLandingPageSongs = () => async (dispatch) => {
+  let landingSongs = await fetch(`/api/songs/landingpage`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // Can input more KVP here to grab from headers in the backend
+    },
+  });
+  landingSongs = await landingSongs.json();
+  dispatch(getLandingSongsAction(landingSongs));
+  return landingSongs;
+};
+
 export const thunkGetSongById = (songId) => async (dispatch) => {
   let song = await fetch(`/api/songs/${songId}`, {
     method: "GET",
@@ -202,15 +223,16 @@ export const thunkPostNewSong = (songFormData) => async (dispatch) => {
   }
 };
 
-export const thunkEditSongById = (songId, updatedSongFormData) => async (dispatch) => {
-  let updatedSong = await fetch(`/api/songs/${songId}`, {
-    method: "PUT",
-    body: updatedSongFormData,
-  });
-  updatedSong = await updatedSong.json();
-  dispatch(editSongByIdAction(updatedSong));
-  return updatedSong;
-};
+export const thunkEditSongById =
+  (songId, updatedSongFormData) => async (dispatch) => {
+    let updatedSong = await fetch(`/api/songs/${songId}`, {
+      method: "PUT",
+      body: updatedSongFormData,
+    });
+    updatedSong = await updatedSong.json();
+    dispatch(editSongByIdAction(updatedSong));
+    return updatedSong;
+  };
 
 export const thunkDeleteUserSong = (songId) => async (dispatch) => {
   let deleted = await fetch(`/api/songs/${songId}`, {
@@ -336,41 +358,42 @@ export const thunkToggleLike = (songId, user) => async (dispatch) => {
     console.log(e);
   }
 };
-export const thunkToggleRepost = (songId, user, isRepost) => async (dispatch) => {
-  try {
-    if (isRepost) {
-      let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          songId,
-        },
-      });
-      repostedSong = await repostedSong.json();
-      dispatch(toggleRepost(songId, user, isRepost, repostedSong));
-      return repostedSong;
-    } else {
-      let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          songId,
-        },
-      });
-      repostedSong = await repostedSong.json();
-      console.log(repostedSong);
-      dispatch(toggleRepost(songId, user, isRepost, repostedSong));
-      return repostedSong;
+export const thunkToggleRepost =
+  (songId, user, isRepost) => async (dispatch) => {
+    try {
+      if (isRepost) {
+        let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            songId,
+          },
+        });
+        repostedSong = await repostedSong.json();
+        dispatch(toggleRepost(songId, user, isRepost, repostedSong));
+        return repostedSong;
+      } else {
+        let repostedSong = await fetch(`/api/songs/${songId}/repost`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            songId,
+          },
+        });
+        repostedSong = await repostedSong.json();
+        console.log(repostedSong);
+        dispatch(toggleRepost(songId, user, isRepost, repostedSong));
+        return repostedSong;
+      }
+    } catch (e) {
+      console.log("error");
+      return e;
     }
-  } catch (e) {
-    console.log("error");
-    return e;
-  }
-};
+  };
 
 //? ================== reducer================================//
 let initialState = {
@@ -388,7 +411,8 @@ let initialState = {
       profileBio: "This is a demo account for demo users",
       profileCity: "",
       profileCountry: "",
-      profileImage: "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
+      profileImage:
+        "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
       username: "Demo",
     },
     caption: "Bangers All Around",
@@ -399,7 +423,8 @@ let initialState = {
     songURL:
       "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
     title: "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
-    thumbnail: "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
+    thumbnail:
+      "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
   },
   CurrentlyPlaying: {
     artistId: 1,
@@ -412,7 +437,8 @@ let initialState = {
       profileBio: "This is a demo account for demo users",
       profileCity: "",
       profileCountry: "",
-      profileImage: "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
+      profileImage:
+        "https://i1.sndcdn.com/artworks-R5fUpysnmuGuxcMv-5ojqxQ-t500x500.png",
       username: "Demo",
     },
     caption: "Bangers All Around",
@@ -423,7 +449,8 @@ let initialState = {
     songURL:
       "https://soundbangersbucket.s3.us-west-1.amazonaws.com/songs-to-seed/Adventure+Club+x+Said+the+Sky+-+Already+Know+(Feat.+Caly+Bevier).mp3",
     title: "Adventure Club x Said the Sky - Already Know (Feat. Caly Bevier)",
-    thumbnail: "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
+    thumbnail:
+      "https://soundbangersimagesbucket.s3.us-west-1.amazonaws.com/thumbnails-to-seed/11.jpg",
   },
   isPlaying: false,
   comments: {},
@@ -437,6 +464,11 @@ export default function reducer(state = initialState, action) {
     case GET_ALL_SONGS_ACTION: {
       newState = { ...state };
       newState.Songs = { ...action.allSongs.Songs };
+      return newState;
+    }
+    case GET_LANDING_SONGS_ACTION: {
+      newState = { ...state };
+      newState.Songs = { ...action.landingSongs.Songs };
       return newState;
     }
     case GET_SONG_BY_ID_ACTION: {
@@ -531,8 +563,11 @@ export default function reducer(state = initialState, action) {
     }
     case TOGGLE_REPOST_ACTION: {
       newState = { ...state };
-      if (action.isRepost) delete newState.Songs[action.songId].reposts[action.user.id];
-      else newState.Songs[action.songId].reposts[action.user.id] = action.res.repost;
+      if (action.isRepost)
+        delete newState.Songs[action.songId].reposts[action.user.id];
+      else
+        newState.Songs[action.songId].reposts[action.user.id] =
+          action.res.repost;
       return newState;
     }
 

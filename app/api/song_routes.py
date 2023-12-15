@@ -6,7 +6,6 @@ from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
 from .auth_routes import validation_errors_to_error_messages
 from sqlalchemy.orm import load_only, joinedload
 from pprint import pprint
-
 # PREFIX '/api/songs'
 songs_routes = Blueprint("songs", __name__)
 
@@ -37,7 +36,7 @@ songs_routes = Blueprint("songs", __name__)
 #         "Songs": all_songs_data
 #     }
 
-
+# Load the rest of the songs past the 10th song
 @songs_routes.route("/")
 def get_songs():
     songs = Song.query.options(
@@ -45,7 +44,23 @@ def get_songs():
         joinedload(Song.song_comments),
         joinedload(Song.liked_by_users),
         joinedload(Song.reposted_by_users)
-    ).all()
+    ).order_by(Song.id).slice(12, None).all()
+
+    all_songs_data = {song.id: song.to_dict() for song in songs}
+
+    return {
+        "Songs": all_songs_data
+    }
+
+# Load 10 necessary songs for landing page
+@songs_routes.route("/landingpage")
+def get_songs_landing():
+    songs = Song.query.options(
+        joinedload(Song.user_songs),
+        joinedload(Song.song_comments),
+        joinedload(Song.liked_by_users),
+        joinedload(Song.reposted_by_users)
+    ).order_by(Song.id).slice(0, 12).all()
 
     all_songs_data = {song.id: song.to_dict() for song in songs}
 

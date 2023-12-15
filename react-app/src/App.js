@@ -20,6 +20,7 @@ import LikesPage from "./components/LikesPage";
 import Library from "./components/Profile/Library";
 import "./index.css";
 
+// !! REFACTORING CODE TO INITIALLY LOAD FASTER - SONGS LOADS 23s ONRENDER & 2.3s ON LOCAL
 function App() {
   const dispatch = useDispatch();
 
@@ -43,7 +44,8 @@ function App() {
   });
   useEffect(() => {
     dispatch(authenticate())
-      .then(() => dispatch(songActions.thunkGetAllSongs()))
+      .then(() => dispatch(songActions.thunkGetLandingPageSongs()))
+      // .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
@@ -65,7 +67,10 @@ function App() {
 
   // Grab all states and send them as props
   const store = useSelector((s) => s);
+  const tenSongs = useSelector((s) => Object.values(s.songs.Songs));
   console.log("this is my store", store);
+  console.log("this is my tensongs", tenSongs);
+
   const songs = useSelector((s) => Object.values(s.songs.Songs));
   const playlists = useSelector((s) => s.playlists);
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
