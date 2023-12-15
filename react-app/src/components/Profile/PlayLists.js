@@ -58,7 +58,7 @@ const Playlists = () => {
         const playlistHasCurrentlyPlaying = playlist.songs.includes(
           currentlyPlaying.id
         );
-        console.log("bruhhhhhhhh", playlistHasCurrentlyPlaying);
+        // console.log("bruhhhhhhhh", playlistHasCurrentlyPlaying);
         return (
           <div id="playlist-container" key={playlist.id}>
             <div id="playlist">

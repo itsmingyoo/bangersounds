@@ -20,7 +20,7 @@ export const thunkGetAllPlaylists = () => async (dispatch) => {
     ...playlist,
     songs: playlist.songs.map(Number),
   }));
-  console.log("playlist thunk", playlists);
+  // console.log("playlist thunk", playlists);
   dispatch(getAllPlaylistsAction(playlists));
   return playlists;
 };
