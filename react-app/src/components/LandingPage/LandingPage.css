@@ -71,12 +71,14 @@
 
 .song-btn {
     /* display: none; */
-    font-size: 50px;
+    font-size: 40px;
     cursor: pointer;
+    text-align: center;
 }
 
 .icon-container {
     /* display: none; */
+    text-align: center;
 }
 
 .icon-container:hover {
@@ -91,6 +93,7 @@
 .recently-played__btn-link:hover .song-btn {
   opacity: 1;
 }
+
 
 .play-btn {
     display: flex;
