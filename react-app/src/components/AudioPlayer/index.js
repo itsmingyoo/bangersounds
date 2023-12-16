@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DisplaySong from "./DisplaySong";
 import ProgressBar from "./ProgressBar";
 import Controls from "./Controls";
@@ -7,8 +7,21 @@ import VolumeBar from "./VolumeBar";
 import { playUserSongAction, setPrevSongAction } from "../../store/songs";
 import "./AudioPlayer.css";
 
-function AudioPlayer({ songs, isPlayingState, currentlyPlaying, previousSong }) {
+function AudioPlayer() {
   const dispatch = useDispatch();
+
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  console.log("AUDIO - songs: ", songs);
+
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  console.log("AUDIO - isPlayingState: ", isPlayingState);
+
+  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
+  console.log("AUDIO - currentlyPlaying: ", currentlyPlaying);
+
+  const previousSong = useSelector((s) => s.songs.PreviousSong);
+  console.log("AUDIO - previousSong: ", previousSong);
+
   // USEREF
   const audioRef = useRef();
   const progressBarRef = useRef();
@@ -54,7 +67,9 @@ function AudioPlayer({ songs, isPlayingState, currentlyPlaying, previousSong }) 
             previousSong,
           }}
         />
-        <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
+        <ProgressBar
+          {...{ progressBarRef, audioRef, timeProgress, duration }}
+        />
         <VolumeBar {...{ audioRef }} />
         <DisplaySong
           {...{

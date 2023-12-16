@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import SplashCarousel from "../SlickCarousel";
 import bangerSoundsLogo from "../../images/bangersounds-logo-new.ico";
@@ -13,12 +13,31 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./SplashPage.css";
 
-const Splash = ({ userRef, songs, isPlayingState, currentlyPlaying }) => {
+const Splash = () => {
   // import login/create acc stuff here
 
   const dispatch = useDispatch();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
+
+  const user = useSelector((s) => s.session.user);
+  const userRef = useRef(user);
+  useEffect(() => {
+    userRef.current = user;
+  });
+
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  console.log("SPLASH - songs: ", songs);
+
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  console.log("SPLASH - isPlayingState: ", isPlayingState);
+
+  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
+  console.log("SPLASH - currentlyPlaying: ", currentlyPlaying);
+
+  const previousSong = useSelector((s) => s.songs.PreviousSong);
+  console.log("SPLASH - previousSong: ", previousSong);
+
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
 
