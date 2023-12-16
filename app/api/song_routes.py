@@ -69,15 +69,18 @@ def get_songs_landing():
     }
 
 @songs_routes.route("/<int:songId>")
-def get_song_id(songId):
+def get_song_by_id(songId):
     """
     This route takes you to a song's ID detail page.
     Returns a dictionary of the song's info and comments
     """
     songQuery = Song.query.get(songId)
+
     if not songQuery:
         return {"message": "Song couldn't be found."}
+
     song = songQuery.to_dict()
+
     print(
         isinstance(songId, int)
     )  # True => <int:songId> turns it into an int within the url

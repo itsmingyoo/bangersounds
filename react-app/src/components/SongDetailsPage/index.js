@@ -12,11 +12,15 @@ import CommentBox from "./Comments";
 import { thunkGetSongComments } from "../../store/songs";
 import "./SongDetailsPage.css";
 
-function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, comments }) {
+function SongDetailsPage() {
   let { songId } = useParams();
   const dispatch = useDispatch();
-
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
+  const previousSong = useSelector((s) => s.songs.PreviousSong);
   const song = useSelector((s) => s.songs.Songs[Number(songId)]);
+  const comments = song.comments;
   const user = useSelector((u) => u.session.user);
   const isUserSong = song?.artistId === user?.id;
 
@@ -27,7 +31,8 @@ function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, com
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
     if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      if (currentlyPlaying.id === song.id)
+        dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
     }
   };
@@ -37,17 +42,54 @@ function SongDetailsPage({ userRef, songs, isPlayingState, currentlyPlaying, com
       <div id="song-detail__main-container">
         <div id="song-details__top-container">
           <div id="song-details__left-side">
-            <PlayContent {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+            <PlayContent
+              {...{
+                song,
+                songs,
+                isPlayingState,
+                currentlyPlaying,
+                togglePlayPause,
+                comments,
+              }}
+            />
             <WaveForm />
           </div>
-          <Thumbnail {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+          <Thumbnail
+            {...{
+              song,
+              songs,
+              isPlayingState,
+              currentlyPlaying,
+              togglePlayPause,
+              comments,
+            }}
+          />
         </div>
 
         <div id="song-details__bot-wrapper">
           <div id="song-details__bot-container">
             <div id="song-details__song-stats-container">
-              <ProfilePicture {...{ user, song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
-              <AddComment {...{ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments }} />
+              <ProfilePicture
+                {...{
+                  user,
+                  song,
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  togglePlayPause,
+                  comments,
+                }}
+              />
+              <AddComment
+                {...{
+                  song,
+                  songs,
+                  isPlayingState,
+                  currentlyPlaying,
+                  togglePlayPause,
+                  comments,
+                }}
+              />
             </div>
             <SongStats
               {...{

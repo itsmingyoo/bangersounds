@@ -11,16 +11,9 @@ function AudioPlayer() {
   const dispatch = useDispatch();
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log("AUDIO - songs: ", songs);
-
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
-  console.log("AUDIO - isPlayingState: ", isPlayingState);
-
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
-  console.log("AUDIO - currentlyPlaying: ", currentlyPlaying);
-
   const previousSong = useSelector((s) => s.songs.PreviousSong);
-  console.log("AUDIO - previousSong: ", previousSong);
 
   // USEREF
   const audioRef = useRef();

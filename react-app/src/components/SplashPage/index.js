@@ -27,16 +27,16 @@ const Splash = () => {
   });
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log("SPLASH - songs: ", songs);
+  // console.log("SPLASH - songs: ", songs);
 
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
-  console.log("SPLASH - isPlayingState: ", isPlayingState);
+  // console.log("SPLASH - isPlayingState: ", isPlayingState);
 
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
-  console.log("SPLASH - currentlyPlaying: ", currentlyPlaying);
+  // console.log("SPLASH - currentlyPlaying: ", currentlyPlaying);
 
   const previousSong = useSelector((s) => s.songs.PreviousSong);
-  console.log("SPLASH - previousSong: ", previousSong);
+  // console.log("SPLASH - previousSong: ", previousSong);
 
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
