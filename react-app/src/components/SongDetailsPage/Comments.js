@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { thunkDeleteComment } from "../../store/songs";
 
-const CommentBox = ({ song, songs, isPlayingState, currentlyPlaying, togglePlayPause, comments, user, dispatch }) => {
+const CommentBox = ({ song, comments, user, dispatch }) => {
   let allComments = Object.values(comments);
   let songComments = allComments.filter((s) => song.id === s.songId);
 

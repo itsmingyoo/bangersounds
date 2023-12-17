@@ -45,6 +45,9 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetLandingPageSongs()))
+      .then(() => {
+        setIsLoaded(true);
+      })
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
@@ -54,32 +57,21 @@ function App() {
         }
         return Promise.resolve();
       })
-      .then(() => {
-        setIsLoaded(true);
-      })
       .then(() => dispatch(songActions.thunkGetAllSongs()))
+
       //! CATCH ERRORS
       .catch((e) => {
-        console.error("Error fetching data:", e);
-        setIsLoaded(true);
+        console.error("\n\n\n\nError fetching data:", e);
+        // setIsLoaded(true);
       });
   }, [dispatch]);
 
-  // Grab all states and send them as props
-  const store = useSelector((s) => s);
-  const tenSongs = useSelector((s) => Object.values(s.songs.Songs));
+  // const store = useSelector((s) => s);
   // console.log("this is my store: ", store);
-  // console.log("this is my twelve songs: ", tenSongs);
-
-  const songs = useSelector((s) => Object.values(s.songs.Songs));
-  const playlists = useSelector((s) => s.playlists);
-  const isPlayingState = useSelector((s) => s.songs.isPlaying);
-  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
-  const comments = useSelector((s) => s.songs.comments);
-  const previousSong = useSelector((s) => s.songs.PreviousSong);
 
   // Fix render issues
-  if (songs.length === 0 || !songs || !comments) return null; // this fixes the audio player issues because we're passing in songs as props
+  // this fixes the audio player issues because we're passing in songs as props
+  // if (songs.length === 0 || !songs || !comments) return null;
   if (isLoaded === false) return null;
 
   return (
@@ -104,99 +96,43 @@ function App() {
 
             <Route exact path="/upload">
               <ProtectedRoute>
-                <PostNewSong
-                  {...{
-                    songs,
-                    isPlayingState,
-                    currentlyPlaying,
-                    comments,
-                    userRef,
-                  }}
-                />
+                <PostNewSong />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/profile">
               <ProtectedRoute>
-                <Profile
-                  {...{
-                    songs,
-                    isPlayingState,
-                    currentlyPlaying,
-                    comments,
-                    userRef,
-                  }}
-                />
+                <Profile />
               </ProtectedRoute>
             </Route>
             <Route exact path="/you/library">
               <ProtectedRoute>
-                <Library
-                  {...{
-                    songs,
-                    isPlayingState,
-                    currentlyPlaying,
-                    comments,
-                    userRef,
-                  }}
-                />
+                <Library />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/likes">
               <ProtectedRoute>
-                <LikesPage {...{ songs, isPlayingState, currentlyPlaying }} />
+                <LikesPage />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/profile/comments">
               <ProtectedRoute>
-                <AllUserComments
-                  {...{
-                    songs,
-                    isPlayingState,
-                    currentlyPlaying,
-                    comments,
-                    userRef,
-                  }}
-                />
+                <AllUserComments />
               </ProtectedRoute>
             </Route>
 
             <Route exact path="/songs/:songId">
-              <SongDetailsPage
-                {...{
-                  userRef,
-                  songs,
-                  isPlayingState,
-                  currentlyPlaying,
-                  comments,
-                }}
-              />
+              <SongDetailsPage />
             </Route>
 
             <Route exact path="/discover">
-              <LandingPage
-                {...{
-                  songs,
-                  isPlayingState,
-                  currentlyPlaying,
-                  comments,
-                  userRef,
-                }}
-              />
+              <LandingPage />
             </Route>
 
             <Route exact path="/">
-              <Splash
-                {...{
-                  songs,
-                  isPlayingState,
-                  currentlyPlaying,
-                  comments,
-                  userRef,
-                }}
-              />
+              <Splash />
             </Route>
           </Switch>
         </>
@@ -212,12 +148,6 @@ function App() {
         <AudioPlayer
           {...{
             isLoaded,
-            songs,
-            isPlayingState,
-            currentlyPlaying,
-            comments,
-            userRef,
-            previousSong,
           }}
         />
       </div>

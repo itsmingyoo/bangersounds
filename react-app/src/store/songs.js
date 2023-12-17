@@ -473,6 +473,7 @@ export default function reducer(state = initialState, action) {
     }
     case GET_SONG_BY_ID_ACTION: {
       newState = { ...state };
+      newState.Songs = { ...newState.Songs, ...action.song };
       newState.SongDetails = action.song;
       return newState;
     }
