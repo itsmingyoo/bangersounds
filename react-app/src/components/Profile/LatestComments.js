@@ -10,6 +10,8 @@ const LatestComments = ({ user, userComments, songs }) => {
     Array(userComments.length).fill(false)
   );
 
+  console.log("THIS THIS THIS", user, userComments, songs);
+
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
@@ -87,7 +89,8 @@ const LatestComments = ({ user, userComments, songs }) => {
                 months === 1 ? "month" : "months"
               } ago`;
             }
-            const songInfo = songs.filter((s) => c.songId === s.id);
+            const songInfo = songs?.filter((s) => c.songId === s.id);
+            console.log("song info", songInfo[0].id);
 
             return (
               <div

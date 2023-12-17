@@ -62,7 +62,7 @@ function App() {
       //! CATCH ERRORS
       .catch((e) => {
         console.error("\n\n\n\nError fetching data:", e);
-        // setIsLoaded(true);
+        setIsLoaded(true);
       });
   }, [dispatch]);
 
