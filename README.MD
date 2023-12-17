@@ -4,6 +4,7 @@
 
 
 BangerSounds is an intuitive music hosting website where users can share their unique remixes and other tunes! This is a full stack web application solely inspired by SoundCloud. Nearly pixel perfect, the audio player is definitely the most intuitive portion of design in which I recreated based off of SoundCloud. Users are able to upload, like, repost, and comment on songs. They also have a customizable profile page to creatively attune to their liking.
+- Currently configured for desktop use, please wait for mobile version.
 
 # [BangerSounds Live](https://bangersounds.onrender.com)
 
@@ -69,7 +70,6 @@ Enter virtual environment
 pipenv shell
 ```
 ```
-#creates migrations folders
 flask db init
 ```
 ```
@@ -100,8 +100,6 @@ flask db upgrade
 ```
 ```
 flask seed all
-//unseed command for future use
-flask seed undo
 ```
 ```
 flask run
@@ -112,7 +110,6 @@ lsof -i :5001
 
 #kill the port(s)
 kill -9 PID
-
 ```
 
 Next run this in the terminal
