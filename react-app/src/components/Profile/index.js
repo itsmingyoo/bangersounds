@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileNavBar from "./ProfileNavBar";
 import ProfileHeader from "./ProfileHeader";
 import Likes from "./Likes";
@@ -8,20 +8,30 @@ import NavBarContent from "./NavBarContent";
 import { playUserSongAction, setPlayingState } from "../../store/songs";
 import "./Profile.css";
 
-const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRef }) => {
+const ProfilePage = () => {
   const dispatch = useDispatch();
   const [active, setActive] = useState(0);
-  // All user info
-  const user = userRef.current;
+  const user = useSelector((s) => s.session.user);
+  const userRef = useRef(user);
+  useEffect(() => {
+    userRef.current = user;
+  });
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const isPlayingState = useSelector((s) => s.songs.isPlaying);
+  const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
   const userSongs = songs.filter((s) => s.artistId === user.id);
-  const userComments = Object.values(comments).filter((c) => c.userId === user.id);
+  const comments = useSelector((s) => s.songs.comments);
+  const userComments = Object.values(comments).filter(
+    (c) => c.userId === user.id
+  );
   const userLikes = songs.filter((s) => s.likes[user.id]);
 
   // FN
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
     if (currentlyPlaying) {
-      if (currentlyPlaying.id === song.id) dispatch(setPlayingState(!isPlayingState));
+      if (currentlyPlaying.id === song.id)
+        dispatch(setPlayingState(!isPlayingState));
       else dispatch(setPlayingState(true));
     }
   };
@@ -65,7 +75,16 @@ const ProfilePage = ({ songs, isPlayingState, currentlyPlaying, comments, userRe
           </div>
 
           <div id="profile-info__container">
-            <Likes {...{ songs, isPlayingState, currentlyPlaying, comments, userRef, userLikes }} />
+            <Likes
+              {...{
+                songs,
+                isPlayingState,
+                currentlyPlaying,
+                comments,
+                userRef,
+                userLikes,
+              }}
+            />
             <LatestComments {...{ user, userComments, songs }} />
           </div>
         </div>
