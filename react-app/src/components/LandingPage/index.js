@@ -11,16 +11,16 @@ function LandingPage() {
   const dispatch = useDispatch();
 
   const songs = useSelector((s) => Object.values(s.songs.Songs));
-  console.log("LANDING - songs: ", songs);
+  // console.log("LANDING - songs: ", songs);
 
   const isPlayingState = useSelector((s) => s.songs.isPlaying);
-  console.log("LANDING - isPlayingState: ", isPlayingState);
+  // console.log("LANDING - isPlayingState: ", isPlayingState);
 
   const currentlyPlaying = useSelector((s) => s.songs.CurrentlyPlaying);
-  console.log("LANDING - currentlyPlaying: ", currentlyPlaying);
+  // console.log("LANDING - currentlyPlaying: ", currentlyPlaying);
 
   const previousSong = useSelector((s) => s.songs.PreviousSong);
-  console.log("LANDING - previousSong: ", previousSong);
+  // console.log("LANDING - previousSong: ", previousSong);
 
   const togglePlayPause = async (song) => {
     dispatch(playUserSongAction(song));
