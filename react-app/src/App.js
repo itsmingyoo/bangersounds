@@ -48,15 +48,16 @@ function App() {
       .then(() => {
         setIsLoaded(true);
       })
-
-      //! SAVING THIS CODE BLOCK - GOOD EXAMPLE OF A PROMISE ALL/RESOLVE
-      //* now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
-      // .then(() => {
-      //   if (userRef.current !== null) {
-      //     return Promise.all([dispatch(songActions.thunkGetUserComments())]);
-      //   }
-      //   return Promise.resolve();
-      // })
+      .then(() => dispatch(songActions.thunkGetAllComments()))
+      .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
+      .then(() => {
+        //* now we have the updated meta data of the user from the state after authenticating so it if user logs in, we will instantly have their data to compare within these async conditional dispatches
+        if (userRef.current !== null) {
+          return Promise.all([dispatch(songActions.thunkGetUserComments())]);
+        }
+        return Promise.resolve();
+      })
+      .then(() => dispatch(songActions.thunkGetAllSongs()))
 
       //! CATCH ERRORS
       .catch((e) => {
@@ -65,9 +66,8 @@ function App() {
       });
   }, [dispatch]);
 
-  // Grab all states and send them as props
-  const store = useSelector((s) => s);
-  console.log("this is my store: ", store);
+  // const store = useSelector((s) => s);
+  // console.log("this is my store: ", store);
 
   // Fix render issues
   // this fixes the audio player issues because we're passing in songs as props

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setPlayingState, playUserSongAction } from "../../store/songs";
@@ -9,7 +9,7 @@ import SongStats from "./SongStatsNavBar";
 import AddComment from "./AddComment";
 import Thumbnail from "./Thumbnail";
 import CommentBox from "./Comments";
-import { thunkGetSongComments } from "../../store/songs";
+import { thunkGetSongById } from "../../store/songs";
 import "./SongDetailsPage.css";
 
 function SongDetailsPage() {
@@ -25,6 +25,10 @@ function SongDetailsPage() {
   const isUserSong = song?.artistId === user?.id;
 
   songId = Number(songId);
+
+  useEffect(() => {
+    dispatch(thunkGetSongById);
+  }, [songId, dispatch]);
 
   if (!song) return null;
 

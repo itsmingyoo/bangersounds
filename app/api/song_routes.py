@@ -70,21 +70,37 @@ def get_songs_landing():
 
 @songs_routes.route("/<int:songId>")
 def get_song_by_id(songId):
-    """
-    This route takes you to a song's ID detail page.
-    Returns a dictionary of the song's info and comments
-    """
-    songQuery = Song.query.get(songId)
+    song_query = Song.query.options(
+        joinedload(Song.user_songs),
+        joinedload(Song.song_comments),
+        joinedload(Song.liked_by_users),
+        joinedload(Song.reposted_by_users)
+    ).get(songId)
 
-    if not songQuery:
-        return {"message": "Song couldn't be found."}
+    if not song_query:
+        return jsonify({"message": "Song couldn't be found."}), 404
 
-    song = songQuery.to_dict()
+    song_data = {song_query.id: song_query.to_dict()}
 
-    print(
-        isinstance(songId, int)
-    )  # True => <int:songId> turns it into an int within the url
-    return song  # Returns song as a dictionary
+    return jsonify(song_data)
+
+# @songs_routes.route("/<int:songId>")
+# def get_song_by_id(songId):
+#     """
+#     This route takes you to a song's ID detail page.
+#     Returns a dictionary of the song's info and comments
+#     """
+#     songQuery = Song.query.get(songId)
+
+#     if not songQuery:
+#         return {"message": "Song couldn't be found."}
+
+#     song = songQuery.to_dict()
+
+#     print(
+#         isinstance(songId, int)
+#     )  # True => <int:songId> turns it into an int within the url
+#     return song  # Returns song as a dictionary
 
 
 # prefix /api/songs/new
