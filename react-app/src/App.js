@@ -45,9 +45,6 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetLandingPageSongs()))
-      .then(() => {
-        setIsLoaded(true);
-      })
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
@@ -57,12 +54,15 @@ function App() {
         }
         return Promise.resolve();
       })
+      .then(() => {
+        setIsLoaded(true);
+      })
       .then(() => dispatch(songActions.thunkGetAllSongs()))
 
       //! CATCH ERRORS
       .catch((e) => {
         console.error("\n\n\n\nError fetching data:", e);
-        // setIsLoaded(true);
+        setIsLoaded(true);
       });
   }, [dispatch]);
 
