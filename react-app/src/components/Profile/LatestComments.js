@@ -16,15 +16,7 @@ const LatestComments = () => {
   const userComments = Object.values(comments).filter(
     (c) => c.userId === user.id
   );
-  console.log(
-    "user, usercomments, songs",
-    "\n",
-    user,
-    "\n",
-    userComments,
-    "\n",
-    songs
-  );
+
   const [hoveredStates, setHoveredStates] = useState(
     Array(userComments.length).fill(false)
   );
@@ -106,7 +98,7 @@ const LatestComments = () => {
               } ago`;
             }
             const songInfo = songs?.filter((s) => c.songId === s.id);
-            console.log("song info", songInfo);
+            // console.log("song info", songInfo);
 
             return (
               <div
