@@ -1,17 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { thunkDeleteComment } from "../../store/songs";
 import { FaComment } from "react-icons/fa";
 
-const LatestComments = ({ user, userComments, songs }) => {
+const LatestComments = () => {
   const dispatch = useDispatch();
+  const songs = useSelector((s) => Object.values(s.songs.Songs));
+  const user = useSelector((s) => s.session.user);
+  const userRef = useRef(user);
+  useEffect(() => {
+    userRef.current = user;
+  });
+  const comments = useSelector((s) => s.songs.comments);
+  const userComments = Object.values(comments).filter(
+    (c) => c.userId === user.id
+  );
+  console.log(
+    "user, usercomments, songs",
+    "\n",
+    user,
+    "\n",
+    userComments,
+    "\n",
+    songs
+  );
   const [hoveredStates, setHoveredStates] = useState(
     Array(userComments.length).fill(false)
   );
-
-  console.log("THIS THIS THIS", user, userComments, songs);
-
   const handleDelete = (c) => {
     dispatch(thunkDeleteComment(c.songId, c.id));
   };
@@ -90,7 +106,7 @@ const LatestComments = ({ user, userComments, songs }) => {
               } ago`;
             }
             const songInfo = songs?.filter((s) => c.songId === s.id);
-            console.log("song info", songInfo[0].id);
+            console.log("song info", songInfo);
 
             return (
               <div
