@@ -178,6 +178,33 @@ Python/React Skeleton Setup
 https://github.com/appacademy/practice-for-week-19-python-project-skeleton/tree/main
 ```
 
+# Troubleshooting
+
+## Unable to Flask Run
+- Problem: When you run command 'flask run' and it returns an error that flask_cors is not installed correctly or any type of error that prevents your project from running although it worked before.
+- Solution(s): In my experience, on MAC the issue usually revolves around moving a folder and python doesn't detect that. I.E. You moved your project folder into another folder called "side-projects" -- it will still interpret the .venv files and dependencies/packages you installed are in the previous location.
+
+- Fix:
+```
+Delete your .venv
+run 'python3 -m venv .venv'
+run 'source .venv/bin/activate'
+run 'pip install -r requirements.txt'
+```
+
+- IF the above solution doesn't work for you, try changing the install directory of your new .venv folder.
+```
+Open your mac terminal
+cd to your project
+run 'open .'
+
+now in your project terminal
+run 'export PATH="/path/to/your/virtualenv/bin:$PATH"'
+Replace /path/to/your/virtualenv/bin with the actual path to your virtual environment's bin directory.
+```
+
+- You can now try the first step over again and it should work
+
 # Deploying
 ## env.py file
 ```
