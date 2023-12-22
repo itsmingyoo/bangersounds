@@ -19,6 +19,7 @@ const Splash = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const user = useSelector((s) => s.session.user);
   const userRef = useRef(user);
@@ -53,6 +54,24 @@ const Splash = () => {
   };
 
   const closeMenu = () => setShowMenu(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 576);
+    };
+
+    // Set initial screen size
+    setIsMobile(window.innerWidth <= 576);
+
+    // Listen to window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [window.innerWidth]);
+
   return (
     <div className="splash-wrapper" style={{ width: "100%" }}>
       <div className="splash-container" style={{ width: "65%" }}>
@@ -122,7 +141,11 @@ const Splash = () => {
                   <div
                     key={s.id}
                     id="recently-played__each-song-container"
-                    style={{ flexBasis: "10%", width: "10%", padding: "20px" }}
+                    style={{
+                      flexBasis: "10%",
+                      width: "10%",
+                      padding: "20px",
+                    }}
                   >
                     <ImageContainer
                       {...{
@@ -259,6 +282,11 @@ const Splash = () => {
           </div>
         </div>
       </div>
+      {isMobile && (
+        <div className="special-div">
+          Please use the desktop version for a better experience.
+        </div>
+      )}
     </div>
   );
 };

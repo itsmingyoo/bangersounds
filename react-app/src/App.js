@@ -45,6 +45,7 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(songActions.thunkGetLandingPageSongs()))
+      .then(() => dispatch(songActions.thunkGetAllSongs()))
       .then(() => dispatch(songActions.thunkGetAllComments()))
       .then(() => dispatch(playlistActions.thunkGetAllPlaylists()))
       .then(() => {
@@ -57,7 +58,6 @@ function App() {
       .then(() => {
         setIsLoaded(true);
       })
-      .then(() => dispatch(songActions.thunkGetAllSongs()))
 
       //! CATCH ERRORS
       .catch((e) => {
