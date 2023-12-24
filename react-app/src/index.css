@@ -51,3 +51,23 @@ a {
     display: none;
     z-index: -1;
 }
+
+.special-div {
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+    .special-div {
+        display: block
+    }
+
+    .splash-wrapper {
+        background-color: black;
+    }
+
+    /* doesnt work */
+    #html {
+        background-color: #999;
+        /* background: linear-gradient(135deg, rgb(81 81 137) 0%, rgb(31 31 49) 100%) !important; */
+    }
+}

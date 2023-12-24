@@ -38,7 +38,7 @@ const ImageContainer = ({
               isHovered ? "display-btn" : ""
             }`}
           >
-            {currentlyPlaying.id === s.id && isPlayingState ? (
+            {currentlyPlaying?.id === s.id && isPlayingState ? (
               <IoPauseSharp
                 className={`song-btn ${isHovered ? "display-btn" : ""}`}
               />

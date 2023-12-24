@@ -1,3 +1,5 @@
+
+
 .splash-wrapper {
     display: flex;
     justify-content: center;
@@ -329,4 +331,38 @@
 
 .footer-footer-footer {
     margin: 10px 20px;
+}
+
+/** MEDIA QUERIES */
+
+.special-div {
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+    .special-div {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 3px gray solid ;
+        border-radius: 3px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    }
+    .splash-container {
+        display: none;
+    }
+
+    /* doesnt work */
+    .splash-wrapper {
+        background-color: black;
+        /* background: linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(36, 42, 46) 100%) !important; */
+    }
+    /* doesnt work */
+    #html {
+        background-color: #999;
+        /* background: linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(36, 42, 46) 100%) !important; */
+        
+    }
 }

@@ -19,7 +19,8 @@ const ProfileHeader = () => {
                 className="profile-linear-gradient-buffer"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(36, 42, 46) 100%)",
+                    "linear-gradient(135deg, rgb(132, 122, 145) 0%, rgb(00, 42, 46) 100%)",
+
                 }}
               ></div>
               <div
