@@ -296,3 +296,8 @@ if environment == "production":
 // Must be in the same order of tables created in your migrations file
 // Place this after the last table created
 ```
+
+## Deploy Build Command on Render
+```
+npm install --prefix react-app && npm run build --prefix react-app && pip install -r requirements.txt && pip install psycopg2 && flask db upgrade && flask seed all
+```
