@@ -7,7 +7,16 @@ import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 
 import "./DropDown.css";
 
-function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, icon1, icon2 }) {
+function DropDown({
+  iconClassName,
+  list,
+  songId,
+  isUserSong,
+  user,
+  isClassName,
+  icon1,
+  icon2,
+}) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -46,7 +55,10 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
         More
         {iconClassName ? (
           isClassName ? (
-            <i className={iconClassName} style={{ color: showMenu ? "white" : "" }} />
+            <i
+              className={iconClassName}
+              style={{ color: showMenu ? "white" : "" }}
+            />
           ) : (
             <div>
               <img src={iconClassName} alt={`this is ${iconClassName}`} />
@@ -65,7 +77,10 @@ function DropDown({ iconClassName, list, songId, isUserSong, user, isClassName, 
         <ul className="dropdown-nav">
           {list?.map((item, index) => (
             <li key={index}>
-              <NavLink to={item.to} onClick={() => alert("Feature coming soon!")}>
+              <NavLink
+                to={item.to}
+                onClick={() => alert("Feature coming soon!")}
+              >
                 {item.name}
               </NavLink>
             </li>
