@@ -4,7 +4,6 @@ import { useModal } from "../../context/Modal";
 import "./DeleteSongModal.css";
 import { useHistory } from "react-router-dom";
 import { thunkDeleteUserSong } from "../../store/songs";
-import ProfilePicture from "../SongDetailsPage/ProfilePicture";
 
 // forgot why i passed in user props... feature coming soon
 function DeleteSongModal({ songId, user }) {
